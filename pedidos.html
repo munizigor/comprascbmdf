@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatórios de Pedidos - Marketplace CBMDF</title>
+  <link rel="stylesheet" href="src/css/pedidos.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-mark">CB</div>
+        <div class="brand-title">
+          <strong>Marketplace CBMDF</strong>
+          <span>Aquisições e Serviços</span>
+      </div>
+    </div>
+    <div class="actions">
+      <a class="btn btn-secondary" href="index.html">Marketplace</a>
+      <a class="btn btn-secondary" href="pedidos.html">Excluir Pedidos</a>
+      <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
+      <a class="btn btn-secondary" href="contratacoes.html">Contratações</a>
+      <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
+      <button class="btn btn-primary" type="button" onclick="exportOrdersCsv()">Exportar CSV</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <h1>Pedidos realizados</h1>
+      <p>Gerencie os pedidos registrados em localStorage, filtre por usuário e exclua solicitações quando necessário.</p>
+    </div>
+  </section>
+    <section class="panel">
+      <h2>Filtros</h2>
+      <div class="filter-row">
+        <div class="input-group">
+          <label for="searchBox">Buscar</label>
+          <input id="searchBox" type="text" placeholder="Pesquisar por usuário, setor, observações, item..." oninput="applyFilters()">
+        </div>
+        <div class="input-group">
+          <label for="userFilter">Usuário</label>
+          <select id="userFilter" onchange="applyFilters()">
+            <option value="all">Todos os usuários</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="urgencyFilter">Urgência</label>
+          <select id="urgencyFilter" onchange="applyFilters()">
+            <option value="all">Todas</option>
+            <option value="normal">Normal</option>
+            <option value="media">Média</option>
+            <option value="alta">Alta</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Resumo dos pedidos</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span>Pedidos registrados</span>
+          <strong id="ordersCount">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Itens totais</span>
+          <strong id="itemsCount">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Valor total estimado</span>
+          <strong id="ordersTotal">R$ 0,00</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Pedidos salvos</h2>
+      <div id="ordersContainer"></div>
+    </section>
+  </main>
+
+  <script src="src/js/pedidos.js"></script>
+</body>
+</html>

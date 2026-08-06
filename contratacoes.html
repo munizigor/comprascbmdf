@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manter Contratações - Marketplace CBMDF</title>
+  <link rel="stylesheet" href="src/css/status.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-mark">CB</div>
+        <div class="brand-title">
+          <strong>Marketplace CBMDF</strong>
+          <span>Aquisições e Serviços</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-secondary" href="index.html">Marketplace</a>
+        <a class="btn btn-secondary" href="pedidos.html">Excluir Pedidos</a>
+        <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
+        <a class="btn btn-secondary" href="contratacoes.html">Contratações</a>
+        <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
+        <a class="btn btn-secondary" href="acompanhe.html">Acompanhe seu pedido</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Manter Contratações</h1>
+        <p>Gestores podem agrupar pedidos por classe, excluir grupos ou itens e incluir itens adicionais diretamente no plano de contratação.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Filtros e ações</h2>
+      <div class="filter-row">
+        <div class="input-group">
+          <label for="searchBox">Buscar</label>
+          <input id="searchBox" type="text" placeholder="Pesquisar por classe, item, usuário, setor..." oninput="applyFilters()">
+        </div>
+        <div class="input-group">
+          <label for="classFilter">Classe</label>
+          <select id="classFilter" onchange="applyFilters()">
+            <option value="all">Todas as classes</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>&nbsp;</label>
+          <button id="restoreGroupsButton" class="btn btn-secondary" type="button" onclick="restoreExcludedGroups()" style="display:none; width:100%;">Restaurar grupos excluídos</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Resumo das contratações</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span>Grupos de contratação</span>
+          <strong id="groupCount">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Itens</span>
+          <strong id="contractItemCount">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Valor total estimado</span>
+          <strong id="contractTotal">R$ 0,00</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Incluir item de contratação</h2>
+      <div class="filter-row">
+        <div class="input-group">
+          <label for="newItemName">Nome do item</label>
+          <input id="newItemName" type="text" placeholder="Nome do item" required>
+        </div>
+        <div class="input-group">
+          <label for="newItemClasse">Classe</label>
+          <input id="newItemClasse" type="text" placeholder="Classe do item" required>
+        </div>
+        <div class="input-group">
+          <label for="newItemGrupo">Grupo</label>
+          <input id="newItemGrupo" type="text" placeholder="Grupo do item">
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="input-group">
+          <label for="newItemSetor">Setor solicitante</label>
+          <input id="newItemSetor" type="text" placeholder="Setor que está pedindo">
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="input-group">
+          <label for="newItemCategoria">Categoria</label>
+          <input id="newItemCategoria" type="text" placeholder="Categoria">
+        </div>
+        <div class="input-group">
+          <label for="newItemTipo">Tipo</label>
+          <input id="newItemTipo" type="text" placeholder="MATERIAL / SERVIÇO">
+        </div>
+        <div class="input-group">
+          <label for="newItemTipoDespesa">Tipo de Despesa</label>
+          <input id="newItemTipoDespesa" type="text" placeholder="Investimento / Custeio">
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="input-group">
+          <label for="newItemNatureza">Natureza de Despesa</label>
+          <input id="newItemNatureza" type="text" placeholder="Ex: 3.3.90.30">
+        </div>
+        <div class="input-group">
+          <label for="newItemQuantidade">Quantidade</label>
+          <input id="newItemQuantidade" type="number" min="1" value="1">
+        </div>
+        <div class="input-group">
+          <label for="newItemUrgencia">Urgência</label>
+          <select id="newItemUrgencia">
+            <option value="normal">Normal</option>
+            <option value="media">Média</option>
+            <option value="alta">Alta</option>
+          </select>
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="input-group">
+          <label for="newItemPreco">Preço unitário</label>
+          <input id="newItemPreco" type="number" min="0" step="0.01" value="0.00">
+        </div>
+        <div class="input-group" style="grid-column: 1 / -1;">
+          <label for="newItemObservacoes">Observações</label>
+          <textarea id="newItemObservacoes" rows="3" placeholder="Observações adicionais"></textarea>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="button" onclick="addCustomItem()">Incluir item</button>
+    </section>
+
+    <section class="panel">
+      <h2>Contratações agrupadas por classe</h2>
+      <div id="contractContainer"></div>
+    </section>
+  </main>
+
+  <script src="src/js/contratacoes.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acompanhe seu pedido - Marketplace CBMDF</title>
+  <link rel="stylesheet" href="src/css/status.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-mark">CB</div>
+        <div class="brand-title">
+          <strong>Marketplace CBMDF</strong>
+          <span>Aquisições e Serviços</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-secondary" href="index.html">Marketplace</a>
+        <a class="btn btn-secondary" href="pedidos.html">Excluir Pedidos</a>
+        <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
+        <a class="btn btn-secondary" href="contratacoes.html">Contratações</a>
+        <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Veja a jornada do seu pedido</h1>
+        <p>Selecione um pedido e acompanhe cada etapa conforme a atualização feita na página de status.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Buscar pedido</h2>
+      <div class="filter-row">
+        <div class="input-group">
+          <label for="searchBox">Buscar</label>
+          <input id="searchBox" type="text" placeholder="Pesquisar por nome, matrícula, setor ou observações..." oninput="applyFilters()">
+        </div>
+        <div class="input-group">
+          <label for="userFilter">Usuário</label>
+          <select id="userFilter" onchange="applyFilters()">
+            <option value="all">Todos os usuários</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="statusFilter">Status atual</label>
+          <select id="statusFilter" onchange="applyFilters()">
+            <option value="all">Todos os status</option>
+            <option value="Arquivado">Arquivado</option>
+            <option value="Incluído no PCA">Incluído no PCA</option>
+            <option value="DFD">DFD</option>
+            <option value="TR">TR</option>
+            <option value="Nota de Empenho emitida">Nota de Empenho emitida</option>
+            <option value="Pedido a Caminho">Pedido a Caminho</option>
+            <option value="Recebido no CESMA">Recebido no CESMA</option>
+            <option value="Pedido Entregue">Pedido Entregue</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel stats-panel">
+      <h2>Resumo</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span>Pedidos no filtro</span>
+          <strong id="ordersCount">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Pedidos arquivados</span>
+          <strong id="archivedCount">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Pedidos entregues</span>
+          <strong id="deliveredCount">0</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Pedidos disponíveis</h2>
+      <div id="ordersContainer"></div>
+    </section>
+  </main>
+
+  <script src="src/js/acompanhe.js"></script>
+</body>
+</html>

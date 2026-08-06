@@ -1,0 +1,59 @@
+'<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planejamento - Marketplace CBMDF</title>
+  <link rel="stylesheet" href="src/css/status.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-mark">CB</div>
+        <div class="brand-title">
+          <strong>Marketplace CBMDF</strong>
+          <span>Aquisições e Serviços</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-secondary" href="index.html">Marketplace</a>
+        <a class="btn btn-secondary" href="pedidos.html">Excluir Pedidos</a>
+        <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
+        <a class="btn btn-secondary" href="contratacoes.html">Contratações</a>
+        <a class="btn btn-secondary" href="acompanhe.html">Acompanhe seu pedido</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Planejamento</h1>
+        <p>Veja os valores de pedidos agrupados por PCA e PLOA, com base nas informações registradas.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Plano de Contratações Anual (PCA)</h2>
+      <p>Valores agregados por <strong>tipo</strong> e <strong>classe</strong>.</p>
+      <div id="pcaTypeContainer"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Plano de Contratações Anual (PCA) por Setor</h2>
+      <p>Valores agregados por <strong>setor</strong>, <strong>tipo</strong> e <strong>classe</strong>.</p>
+      <div id="pcaContainer"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Projeto de Lei Orçamentária Anual (PLOA)</h2>
+      <p>Valores agregados por <strong>tipo de despesa</strong> e <strong>natureza da despesa</strong>.</p>
+      <div id="ploaContainer"></div>
+    </section>
+  </main>
+
+  <script src="src/js/planning.js"></script>
+</body>
+</html>
+'
