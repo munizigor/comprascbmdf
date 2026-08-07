@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Governança de Contratações - Central de Compras CBMDF</title>
+  <title>Indicadores - Central de Compras CBMDF</title>
   <link rel="stylesheet" href="src/css/status.css">
 </head>
 <body>
@@ -20,7 +20,7 @@
         <a class="btn btn-secondary" href="index.html" data-profiles="solicitante">Início</a>
         <a class="btn btn-secondary" href="acompanhe.html" data-profiles="solicitante">Meus pedidos</a>
         <a class="btn btn-secondary" href="status.html" data-profiles="gestor compras">Gestão de demandas</a>
-        <a class="btn btn-secondary" href="indicadores.html" data-profiles="gestor compras">Indicadores</a>
+        <a class="btn btn-secondary" href="governanca.html" data-profiles="gestor compras">Governança</a>
         <a class="btn btn-secondary" href="contratacoes.html" data-profiles="compras">Contratações</a>
         <a class="btn btn-secondary" href="planejamento.html" data-profiles="compras">Planejamento</a>
         <a class="btn btn-secondary" href="orcamento-geral.html" data-profiles="gestor compras">Orçamento</a>
@@ -31,34 +31,22 @@
   <main>
     <section class="hero">
       <div>
-        <h1>Governança de Contratações</h1>
-        <p>Fila priorizada, ciclos do PCA e contenção de urgência — onde a instituição decide entre demandas concorrentes com recurso escasso.</p>
+        <h1>Indicadores</h1>
+        <p>Os cinco KPIs da seção 8 do documento de visão, calculados sobre a trilha de auditoria e as fotografias congeladas dos ciclos do PCA.</p>
       </div>
     </section>
 
     <section class="panel">
-      <h2>Ciclo do PCA</h2>
-      <div id="cicloContainer"></div>
+      <h2>Métricas de sucesso</h2>
+      <p class="muted-note">
+        Cada indicador mostra o <strong>valor atual</strong>, a <strong>linha de base</strong> e a
+        <strong>meta com prazo</strong> lado a lado. Um número sem linha de base não permite afirmar
+        melhora, e uma meta sem prazo não permite cobrar resultado.
+      </p>
+      <div id="kpiContainer" class="kpi-grid"></div>
     </section>
 
-    <section class="panel">
-      <h2>Fila priorizada</h2>
-      <p class="muted-note">
-        A ordem vem de um score com pesos declarados: criticidade (40), risco de postergar (30),
-        obrigatoriedade legal (20) e prontidão da instrução (10). Empates são desfeitos pelo pedido
-        mais antigo e, persistindo, pelo número do protocolo.
-      </p>
-      <div id="filaContainer"></div>
-    </section>
-
-    <section class="panel">
-      <h2>Contenção de urgência</h2>
-      <p class="muted-note">
-        Toda inclusão por urgência fura a fila. Aqui ela é medida por setor, para que a exceção
-        seja contida e não apenas contabilizada.
-      </p>
-      <div id="urgenciaContainer"></div>
-    </section>
+    <section class="panel" id="coberturaRodape"></section>
   </main>
 
   <script src="src/js/cbmdf_orders_seed.js"></script>
@@ -69,5 +57,6 @@
   <script src="src/js/emptystate.js"></script>
   <script src="src/js/audit.js"></script>
   <script src="src/js/governanca.js"></script>
+  <script src="src/js/indicadores.js"></script>
 </body>
 </html>

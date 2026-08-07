@@ -402,12 +402,55 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 
 ## 8. Métricas de Sucesso do Produto (KPIs)
 
-| Métrica / KPI | Meta Estabelecida | Método de Mensuração |
+Um indicador só é cobrável quando tem **linha de base**, **meta numérica**, **prazo** e **fonte do dado**. As versões anteriores desta seção declaravam metas na forma "reduzir" ou "aumentar", que não permitem afirmar sucesso nem fracasso. A tabela abaixo fixa os quatro elementos para cada KPI.
+
+| # | KPI | Definição operacional | Linha de base | Meta | Prazo | Fonte do dado |
+| :-- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | **Tempo médio de tramitação** | Dias corridos entre o registro do DFD e o status "Pedido Entregue" | Amostra retrospectiva do SEI (ver §8.2) | ≤ **200 dias** | 12 meses | `historico[]` do pedido |
+| 2 | **Cumprimento do SLA por macro-etapa** | % das passagens por etapa concluídas dentro do prazo da §8.1 | **0%** — não mensurável antes da trilha de auditoria | ≥ **80%** (50% em 3 meses, 65% em 6 meses) | 12 meses | `historico[]` + SLA da §8.1 |
+| 3 | **Aderência do planejado ao executado** | Desvio entre a fotografia congelada no fechamento do ciclo e o valor efetivamente comprometido | 1º ciclo fechado — **não reportável no 1º ciclo** | desvio ≤ **15%** | 2º exercício | `cbmdf_pca_ciclos` |
+| 4 | **Contratações por urgência** | % do valor contratado que entrou fora da fila priorizada | Dispensas emergenciais do CBMDF no PNCP, últimos 24 meses | ≤ **10%** do ciclo e **nenhum setor acima de 20%** | 18 meses | status e `historico[]` |
+| 5 | **Adoção pelas unidades** | % das unidades do CBMDF com ao menos um pedido registrado | **0%** | ≥ **90%** das unidades e ≥ 70% do valor | 12 meses | pedidos por setor |
+
+O painel `indicadores.html` exibe, para cada KPI, o **valor atual, a linha de base e a meta lado a lado** — um número isolado não permite afirmar melhora.
+
+### 8.1 SLA por macro-etapa
+
+O KPI 2 depende de um prazo esperado por etapa, que não existia em lugar nenhum do projeto. Os prazos abaixo são a referência inicial, a ser calibrada pela CESMA e pelo Planejamento após o primeiro quadrimestre de operação:
+
+| Macro-etapa | Prazo | Justificativa |
 | :--- | :--- | :--- |
-| **Redução do tempo médio de tramitação** | Redução do tempo entre a criação do pedido e o status "Pedido Entregue" | Comparação do histórico de datas de atualização de status |
-| **Atualização tempestiva de status** | % de pedidos com status atualizado dentro do prazo esperado por etapa | Acompanhamento no painel de tramitação |
-| **Aderência do planejado ao executado** | Redução da diferença entre valores Planejado e Pago no PCA/PLOA | Indicadores do relatório de Planejamento |
-| **Redução de contratações emergenciais** | Diminuição do volume de itens contratados fora do planejamento anual (PCA) | Comparação entre itens incluídos previamente no PCA e itens contratados sem planejamento prévio |
-| **Adoção pelos setores requisitantes** | Uso recorrente da ferramenta pelos setores do CBMDF (COMOP, CESMA, DITIC, DIMAT, COMAP e demais) | Volume de pedidos registrados por setor |
+| 1 — Ideação & Necessidade | 5 dias | Triagem do DFD pela unidade |
+| 2 — Validação & PCA | 15 dias | Análise setorial e decisão de priorização |
+| 3 — Estruturação (ETP/TR) | 45 dias | Etapa mais pesada: pesquisa de preços e especificação |
+| 4 — Edital & Seleção | 60 dias | Limitado por prazos legais da Lei nº 14.133/2021 |
+| 5 — Aquisição & Fabricação | 45 dias | Depende do fornecedor e do objeto |
+| 6 — Entrega & Finalização | 30 dias | Recebimento, liquidação e pagamento |
+| **Total ponta a ponta** | **200 dias** | Meta do KPI 1 |
+
+Etapas ainda em curso contam com o tempo decorrido até a data da consulta: um pedido parado há 110 dias numa etapa de 45 já estourou o SLA, e omiti-lo do cálculo maquiaria o indicador.
+
+### 8.2 Protocolo de coleta da linha de base
+
+Os KPIs 1 e 2 não têm linha de base histórica no sistema, porque o mundo anterior a este produto são planilhas dispersas e processos no SEI. A coleta proposta:
+
+* **Amostra:** 30 processos de aquisição encerrados nos últimos 24 meses, estratificados por macro-etapa de maior recorrência.
+* **Dados por processo:** 7 datas — registro do DFD, conclusão do ETP, conclusão do TR, publicação do edital, homologação, emissão da nota de empenho e recebimento definitivo.
+* **Esforço estimado:** aproximadamente 1 semana de trabalho de 1 servidor com acesso ao SEI.
+* **KPI 4:** a linha de base vem do PNCP, pelas dispensas emergenciais publicadas pelo CBMDF nos últimos 24 meses — dado público, sem esforço de coleta interna.
+* **KPI 3:** declarado **não reportável no 1º ciclo**. Sem uma fotografia congelada anterior não existe denominador, e estimar um seria fabricar a linha de base que o produto se propõe a substituir.
+
+Há ainda um período de maturação a respeitar no KPI 3. A fotografia congela demandas que **ainda não foram executadas**, então o desvio começa próximo de 100% por construção e cai à medida que o ciclo avança. Confrontar o indicador com a meta logo após o fechamento julgaria o ciclo antes de ele acontecer. O painel exibe os números desde o primeiro dia, mas só emite veredicto contra a meta depois de um quadrimestre de execução — até lá, o valor aparece marcado com asterisco e acompanhado da explicação.
+
+### 8.3 Fonte do dado e limites de cobertura
+
+Os indicadores 1 e 2 são calculados **apenas sobre pedidos com trilha completa**. Pedidos anteriores à implementação da trilha carregam uma entrada de gênese marcada como migrada, sem datas intermediárias — que não foram fabricadas. Esses pedidos ficam fora dos cálculos de tempo, e o painel declara no rodapé quantos foram excluídos e qual a cobertura percentual da base.
+
+Essa declaração é parte do indicador: uma média calculada sobre metade da base não significa o mesmo que uma calculada sobre toda ela. À medida que a base migrada é substituída por pedidos tramitados na plataforma, a cobertura tende a 100%.
+
+Duas limitações declaradas:
+
+* A segunda metade da meta do KPI 5 (≥ 70% do valor institucional) exige o total empenhado pelo CBMDF, que só vem da **integração com o SIAFI** (RNF da §6.3). O painel calcula a adoção por unidades e marca a parcela de valor como não calculável.
+* O KPI 4 mede o valor que entrou por urgência **dentro da plataforma**. Contratações conduzidas inteiramente fora dela não aparecem, e o KPI 5 é justamente o indicador que mede essa lacuna de cobertura.
 
 ---
