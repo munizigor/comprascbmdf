@@ -1,49 +1,3 @@
-function getSavedOrders() {
-  const raw = localStorage.getItem('cbmdf_orders');
-  return raw ? JSON.parse(raw) : [];
-}
-
-function saveOrders(orders) {
-  localStorage.setItem('cbmdf_orders', JSON.stringify(orders));
-}
-
-function escapeHtml(value) {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
-
-function getItemSubtotal(item) {
-  return Number(item.subtotal ?? ((Number(item.quantidade ?? 0)) * (Number(item.precoUnitario ?? 0))));
-}
-
-function normalizeOrders(orders) {
-  let changed = false;
-  orders.forEach(order => {
-    if (!order.status) {
-      order.status = DEFAULT_STATUS;
-      changed = true;
-    }
-    if (!Array.isArray(order.itens)) {
-      order.itens = [];
-      changed = true;
-    }
-  });
-  if (changed) saveOrders(orders);
-  return orders;
-}
-
-function formatPrice(value) {
-  return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-}
-
-function formatDateTime(dateString) {
-  return dateString;
-}
-
 function renderSummary(orders) {
   const ordersCount = orders.length;
   const archivedCount = orders.filter(order => isArchivedStatus(order.status)).length;
@@ -65,12 +19,13 @@ function populateUserFilter(orders) {
   const select = document.getElementById('userFilter');
   select.innerHTML = '<option value="all">Todos os usuários</option>' +
     Array.from(users.entries())
-      .map(([id, nome]) => `<option value="${id}">${nome}</option>`)
+      .map(([id, nome]) => `<option value="${escapeAttr(id)}">${escapeHtml(nome)}</option>`)
       .join('');
 }
 
-function applyFilters() {
-  const orders = normalizeOrders(getSavedOrders());
+function applyFilters(resetPagination = false) {
+  if (resetPagination) visibleCount = PAGE_SIZE;
+  const orders = getSavedOrders();
   const search = document.getElementById('searchBox').value.trim().toLowerCase();
   const userSelect = document.getElementById('userFilter');
   const previousUserFilter = userSelect.value;
@@ -81,17 +36,18 @@ function applyFilters() {
   const statusFilter = document.getElementById('statusFilter').value;
 
   const filtered = orders
-    .map((order, originalIndex) => ({ order, originalIndex }))
+    .map(order => ({ order }))
     .filter(entry => {
       const order = entry.order;
-      const matchesUser = userFilter === 'all' || String(order.usuario.id) === userFilter;
+      const matchesUser = userFilter === 'all' || String(order.usuario?.id) === userFilter;
       const matchesStatus = statusFilter === 'all' || order.status === statusFilter;
 
       const searchFields = [
+        order.id,
         order.data,
-        order.usuario.nome,
-        order.usuario.matricula,
-        order.usuario.setor,
+        order.usuario?.nome,
+        order.usuario?.matricula,
+        order.usuario?.setor,
         order.observacoes || ''
       ].join(' ').toLowerCase();
 
@@ -108,35 +64,81 @@ function applyFilters() {
   renderOrders(filtered);
 }
 
-function updateOrderStatus(orderIndex, status) {
-  const orders = normalizeOrders(getSavedOrders());
-  if (!orders[orderIndex]) return;
-  orders[orderIndex].status = status;
-  saveOrders(orders);
-  applyFilters();
-}
+// A mudança de status não é mais imediata: escolher um destino abre o painel
+// de motivo, e só o "Registrar mudança" efetiva — passando por
+// applyStatusChange, o ponto único que grava a trilha.
+function openTransitionPanel(orderId, novoStatus) {
+  const panel = document.getElementById(`transition-panel-${orderId}`);
+  if (!panel) return;
 
-function deleteOrder(orderIndex) {
-  const orders = normalizeOrders(getSavedOrders());
-  const order = orders[orderIndex];
+  const order = findOrderById(getSavedOrders(), orderId);
   if (!order) return;
 
-  const confirmation = confirm(`Tem certeza de que deseja excluir o pedido de ${order.usuario.nome} de ${order.data}?`);
+  const excecao = document.querySelector(`[data-excecao="${CSS.escape(orderId)}"]`)?.checked || false;
+  const minimo = getJustificativaMinima(order.status, novoStatus, excecao);
+
+  panel.hidden = !novoStatus;
+  if (!novoStatus) return;
+
+  panel.querySelector('[data-transition-target]').textContent = novoStatus;
+  const hint = panel.querySelector('[data-transition-hint]');
+  hint.textContent = minimo > 0
+    ? `Motivo obrigatório (mínimo de ${minimo} caracteres).`
+    : 'Motivo opcional — se preenchido, fica registrado na trilha.';
+  panel.querySelector('textarea').value = '';
+  panel.querySelector('[data-transition-error]').textContent = '';
+}
+
+function confirmTransition(orderId) {
+  const select = document.querySelector(`[data-order-status="${CSS.escape(orderId)}"]`);
+  const panel = document.getElementById(`transition-panel-${orderId}`);
+  if (!select || !panel || !select.value) return;
+
+  const excepcional = document.querySelector(`[data-excecao="${CSS.escape(orderId)}"]`)?.checked || false;
+  const resultado = applyStatusChange(orderId, select.value, {
+    justificativa: panel.querySelector('textarea').value,
+    excepcional,
+    origem: 'status.html'
+  });
+
+  if (!resultado.ok) {
+    panel.querySelector('[data-transition-error]').textContent = resultado.motivo;
+    return;
+  }
+
+  applyFilters();
+}
+
+function cancelTransition(orderId) {
+  const select = document.querySelector(`[data-order-status="${CSS.escape(orderId)}"]`);
+  if (select) select.value = '';
+  const panel = document.getElementById(`transition-panel-${orderId}`);
+  if (panel) panel.hidden = true;
+}
+
+function deleteOrder(orderId) {
+  const orders = getSavedOrders();
+  const index = findOrderIndexById(orders, orderId);
+  if (index < 0) return;
+
+  const order = orders[index];
+  const confirmation = confirm(`Tem certeza de que deseja excluir o pedido ${order.id} de ${order.usuario?.nome || 'usuário não informado'}?`);
   if (!confirmation) return;
 
-  orders.splice(orderIndex, 1);
+  orders.splice(index, 1);
   saveOrders(orders);
   applyFilters();
 }
 
-function deleteOrderItem(orderIndex, itemIndex) {
-  const orders = normalizeOrders(getSavedOrders());
-  const order = orders[orderIndex];
-  if (!order || !Array.isArray(order.itens) || !order.itens[itemIndex]) return;
+function deleteOrderItem(orderId, itemUid) {
+  const orders = getSavedOrders();
+  const order = findOrderById(orders, orderId);
+  if (!order || !Array.isArray(order.itens)) return;
 
-  const item = order.itens[itemIndex];
-  const itemName = item.nome || item.name || `Item ${itemIndex + 1}`;
-  const confirmation = confirm(`Tem certeza de que deseja excluir o item "${itemName}" deste pedido?`);
+  const itemIndex = order.itens.findIndex(item => item.itemUid === itemUid);
+  if (itemIndex < 0) return;
+
+  const confirmation = confirm(`Tem certeza de que deseja excluir o item "${getItemName(order.itens[itemIndex])}" deste pedido?`);
   if (!confirmation) return;
 
   order.itens.splice(itemIndex, 1);
@@ -144,58 +146,51 @@ function deleteOrderItem(orderIndex, itemIndex) {
   applyFilters();
 }
 
-function toggleAddItemForm(orderIndex) {
-  const panel = document.getElementById(`add-item-panel-${orderIndex}`);
+function toggleAddItemForm(orderId) {
+  const panel = document.getElementById(`add-item-panel-${orderId}`);
   if (!panel) return;
   panel.hidden = !panel.hidden;
 }
 
-function addItemToOrder(orderIndex) {
-  const orders = normalizeOrders(getSavedOrders());
-  const order = orders[orderIndex];
+function addItemToOrder(orderId) {
+  const orders = getSavedOrders();
+  const order = findOrderById(orders, orderId);
   if (!order) return;
 
-  const nameInput = document.getElementById(`newItemName-${orderIndex}`);
-  const quantityInput = document.getElementById(`newItemQuantity-${orderIndex}`);
-  const urgencyInput = document.getElementById(`newItemUrgency-${orderIndex}`);
-  const unitPriceInput = document.getElementById(`newItemUnitPrice-${orderIndex}`);
-  const categoryInput = document.getElementById(`newItemCategory-${orderIndex}`);
-  const groupInput = document.getElementById(`newItemGroup-${orderIndex}`);
-  const classInput = document.getElementById(`newItemClass-${orderIndex}`);
-  const typeInput = document.getElementById(`newItemType-${orderIndex}`);
-  const expenseTypeInput = document.getElementById(`newItemExpenseType-${orderIndex}`);
-  const expenseNatureInput = document.getElementById(`newItemExpenseNature-${orderIndex}`);
+  const readField = suffix => document.getElementById(`${suffix}-${orderId}`);
 
-  const nome = (nameInput?.value || '').trim();
-  const quantidade = Math.max(1, Number(quantityInput?.value) || 1);
-  const urgencia = urgencyInput?.value || 'normal';
-  const precoUnitario = Math.max(0, Number(unitPriceInput?.value) || 0);
+  const nome = (readField('newItemName')?.value || '').trim();
+  const quantidade = Math.max(1, Number(readField('newItemQuantity')?.value) || 1);
+  const urgencia = readField('newItemUrgency')?.value || 'normal';
+  const precoUnitario = Math.max(0, Number(readField('newItemUnitPrice')?.value) || 0);
 
   if (!nome) {
     alert('Informe o nome do item para acrescentar ao pedido.');
     return;
   }
 
-  const newItem = {
+  order.itens.push({
     id: `item-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    itemUid: `${order.id}-I${order.itens.length + 1}-${Date.now().toString(36)}`,
     nome,
-    categoria: (categoryInput?.value || '').trim() || 'Sem categoria',
-    grupoNome: (groupInput?.value || '').trim() || 'Sem grupo',
-    classeNome: (classInput?.value || '').trim() || 'Sem classe',
-    tipo: (typeInput?.value || '').trim() || 'MATERIAL',
-    tipoDespesa: (expenseTypeInput?.value || '').trim() || 'Custeio',
-    naturezaDespesa: (expenseNatureInput?.value || '').trim(),
+    categoria: (readField('newItemCategory')?.value || '').trim() || 'Sem categoria',
+    grupoNome: (readField('newItemGroup')?.value || '').trim() || 'Sem grupo',
+    classeNome: (readField('newItemClass')?.value || '').trim() || 'Sem classe',
+    tipo: (readField('newItemType')?.value || '').trim() || 'MATERIAL',
+    tipoDespesa: (readField('newItemExpenseType')?.value || '').trim() || 'Custeio',
+    naturezaDespesa: (readField('newItemExpenseNature')?.value || '').trim(),
     quantidade,
     urgencia,
     precoUnitario,
     subtotal: quantidade * precoUnitario
-  };
+  });
 
-  order.itens.push(newItem);
   saveOrders(orders);
   applyFilters();
-  toggleAddItemForm(orderIndex);
 }
+
+const PAGE_SIZE = 20;
+let visibleCount = PAGE_SIZE;
 
 function renderOrders(entries) {
   const container = document.getElementById('ordersContainer');
@@ -209,29 +204,54 @@ function renderOrders(entries) {
     return;
   }
 
-  entries.forEach((entry, index) => {
+  const podeExcecao = getPerfilAtual() === 'compras';
+  const pagina = entries.slice(0, visibleCount);
+
+  pagina.forEach(entry => {
     const order = entry.order;
+    const id = escapeAttr(order.id);
     const items = Array.isArray(order.itens) ? order.itens : [];
+    const transicoes = getTransicoesValidas(order.status);
+    const sla = getSituacaoSla(order);
     const orderCard = document.createElement('div');
     orderCard.className = 'order-card';
     orderCard.innerHTML = `
       <div class="order-card-header">
         <div class="order-card-title-group">
-          <h3 class="order-card-title">Pedido ${index + 1}</h3>
-          <span class="status-badge status-badge--${getStatusClass(order.status)}">${getStatusLabel(order.status)}</span>
+          <h3 class="order-card-title">${escapeHtml(order.id)}</h3>
+          <span class="status-badge status-badge--${getStatusClass(order.status)}">${escapeHtml(getStatusLabel(order.status))}</span>
+          ${sla ? `<span class="sla-pill sla-pill--${sla.nivel}" title="SLA da Etapa ${sla.etapa}: ${sla.sla} dias">${sla.dias} d na etapa</span>` : ''}
         </div>
         <div class="order-card-actions">
-          <label for="status-${entry.originalIndex}">Atualizar status</label>
-          <select id="status-${entry.originalIndex}" onchange="updateOrderStatus(${entry.originalIndex}, this.value)">
-            ${STATUS_VALUES.map(status => `<option value="${status}" ${order.status === status ? 'selected' : ''}>${status}</option>`).join('')}
+          <label for="status-${id}">Atualizar status</label>
+          <select id="status-${id}" data-order-status="${id}">
+            <option value="">— manter status atual —</option>
+            ${transicoes.map(status => `<option value="${escapeAttr(status)}">${escapeHtml(status)}</option>`).join('')}
           </select>
-          <button class="btn btn-secondary btn-sm" type="button" onclick="toggleAddItemForm(${entry.originalIndex})">Acrescentar item</button>
-          <button class="btn btn-danger btn-sm" type="button" onclick="deleteOrder(${entry.originalIndex})">Excluir pedido</button>
+          ${podeExcecao ? `
+            <label class="excecao-toggle" title="Libera qualquer status do pipeline; exige motivo e fica marcado na trilha.">
+              <input type="checkbox" data-excecao="${id}"> Transição excepcional
+            </label>` : ''}
+          <button class="btn btn-secondary btn-sm" type="button" data-toggle-add-item="${id}">Acrescentar item</button>
+          <button class="btn btn-danger btn-sm" type="button" data-delete-order="${id}">Excluir pedido</button>
+        </div>
+        <div class="transition-panel" id="transition-panel-${id}" hidden>
+          <p class="transition-title">Mudar para <strong data-transition-target></strong></p>
+          <div class="input-group">
+            <label for="justificativa-${id}">Motivo da mudança</label>
+            <textarea id="justificativa-${id}" rows="2" placeholder="Descreva o motivo desta mudança de estágio."></textarea>
+            <small class="transition-hint" data-transition-hint></small>
+          </div>
+          <p class="transition-error" data-transition-error role="alert"></p>
+          <div class="transition-actions">
+            <button class="btn btn-primary btn-sm" type="button" data-confirm-transition="${id}">Registrar mudança</button>
+            <button class="btn btn-secondary btn-sm" type="button" data-cancel-transition="${id}">Cancelar</button>
+          </div>
         </div>
         <div class="order-meta">
-          <div><strong>Data:</strong> ${formatDateTime(order.data)}</div>
-          <div><strong>Usuário:</strong> ${escapeHtml(order.usuario.nome)}</div>
-          <div><strong>Setor:</strong> ${escapeHtml(order.usuario.setor)}</div>
+          <div><strong>Data:</strong> ${escapeHtml(formatDateTime(order.data))}</div>
+          <div><strong>Usuário:</strong> ${escapeHtml(order.usuario?.nome)}</div>
+          <div><strong>Setor:</strong> ${escapeHtml(order.usuario?.setor)}</div>
           <div><strong>Itens:</strong> ${items.length}</div>
         </div>
       </div>
@@ -248,15 +268,16 @@ function renderOrders(entries) {
           </tr>
         </thead>
         <tbody>
-          ${items.length ? items.map((item, itemIndex) => `
+          ${items.length ? items.map(item => `
             <tr>
-              <td>${escapeHtml(item.nome || item.name || 'Item sem nome')}</td>
-              <td>${item.quantidade ?? item.quantity ?? 0}</td>
-              <td>${escapeHtml(item.urgencia ?? item.urgency ?? 'normal')}</td>
-              <td>${formatPrice(item.precoUnitario ?? item.unitPrice ?? 0)}</td>
+              <td>${escapeHtml(getItemName(item))}</td>
+              <td>${getItemQuantity(item)}</td>
+              <td>${escapeHtml(getItemUrgency(item))}</td>
+              <td>${formatPrice(getItemUnitPrice(item))}</td>
               <td>${formatPrice(getItemSubtotal(item))}</td>
               <td>
-                <button class="btn btn-danger btn-sm table-action" type="button" onclick="deleteOrderItem(${entry.originalIndex}, ${itemIndex})">Excluir item</button>
+                <button class="btn btn-danger btn-sm table-action" type="button"
+                  data-delete-item-order="${id}" data-delete-item-uid="${escapeAttr(item.itemUid)}">Excluir item</button>
               </td>
             </tr>
           `).join('') : `
@@ -266,67 +287,125 @@ function renderOrders(entries) {
           `}
         </tbody>
       </table>
-      <div class="add-item-panel" id="add-item-panel-${entry.originalIndex}" hidden>
+      <div class="add-item-panel" id="add-item-panel-${id}" hidden>
         <h4>Acrescentar item ao pedido</h4>
         <div class="add-item-grid">
           <div class="input-group">
-            <label for="newItemName-${entry.originalIndex}">Nome do item</label>
-            <input id="newItemName-${entry.originalIndex}" type="text" placeholder="Ex: Luva de combate" />
+            <label for="newItemName-${id}">Nome do item</label>
+            <input id="newItemName-${id}" type="text" placeholder="Ex: Luva de combate" />
           </div>
           <div class="input-group">
-            <label for="newItemQuantity-${entry.originalIndex}">Quantidade</label>
-            <input id="newItemQuantity-${entry.originalIndex}" type="number" min="1" value="1" />
+            <label for="newItemQuantity-${id}">Quantidade</label>
+            <input id="newItemQuantity-${id}" type="number" min="1" value="1" />
           </div>
           <div class="input-group">
-            <label for="newItemUrgency-${entry.originalIndex}">Urgência</label>
-            <select id="newItemUrgency-${entry.originalIndex}">
+            <label for="newItemUrgency-${id}">Urgência</label>
+            <select id="newItemUrgency-${id}">
               <option value="normal">Normal</option>
               <option value="media">Média</option>
               <option value="alta">Alta</option>
             </select>
           </div>
           <div class="input-group">
-            <label for="newItemUnitPrice-${entry.originalIndex}">Preço unitário</label>
-            <input id="newItemUnitPrice-${entry.originalIndex}" type="number" min="0" step="0.01" value="0" />
+            <label for="newItemUnitPrice-${id}">Preço unitário</label>
+            <input id="newItemUnitPrice-${id}" type="number" min="0" step="0.01" value="0" />
           </div>
           <div class="input-group">
-            <label for="newItemCategory-${entry.originalIndex}">Categoria</label>
-            <input id="newItemCategory-${entry.originalIndex}" type="text" placeholder="Ex: seguranca" />
+            <label for="newItemCategory-${id}">Categoria</label>
+            <input id="newItemCategory-${id}" type="text" placeholder="Ex: seguranca" />
           </div>
           <div class="input-group">
-            <label for="newItemGroup-${entry.originalIndex}">Grupo</label>
-            <input id="newItemGroup-${entry.originalIndex}" type="text" placeholder="Grupo do item" />
+            <label for="newItemGroup-${id}">Grupo</label>
+            <input id="newItemGroup-${id}" type="text" placeholder="Grupo do item" />
           </div>
           <div class="input-group">
-            <label for="newItemClass-${entry.originalIndex}">Classe</label>
-            <input id="newItemClass-${entry.originalIndex}" type="text" placeholder="Classe do item" />
+            <label for="newItemClass-${id}">Classe</label>
+            <input id="newItemClass-${id}" type="text" placeholder="Classe do item" />
           </div>
           <div class="input-group">
-            <label for="newItemType-${entry.originalIndex}">Tipo</label>
-            <input id="newItemType-${entry.originalIndex}" type="text" placeholder="MATERIAL ou SERVIÇO" />
+            <label for="newItemType-${id}">Tipo</label>
+            <input id="newItemType-${id}" type="text" placeholder="MATERIAL ou SERVIÇO" />
           </div>
           <div class="input-group">
-            <label for="newItemExpenseType-${entry.originalIndex}">Tipo de despesa</label>
-            <input id="newItemExpenseType-${entry.originalIndex}" type="text" placeholder="Custeio ou Investimento" />
+            <label for="newItemExpenseType-${id}">Tipo de despesa</label>
+            <input id="newItemExpenseType-${id}" type="text" placeholder="Custeio ou Investimento" />
           </div>
           <div class="input-group">
-            <label for="newItemExpenseNature-${entry.originalIndex}">Natureza de despesa</label>
-            <input id="newItemExpenseNature-${entry.originalIndex}" type="text" placeholder="Ex: 3.3.90.30" />
+            <label for="newItemExpenseNature-${id}">Natureza de despesa</label>
+            <input id="newItemExpenseNature-${id}" type="text" placeholder="Ex: 3.3.90.30" />
           </div>
         </div>
         <div class="add-item-actions">
-          <button class="btn btn-primary btn-sm" type="button" onclick="addItemToOrder(${entry.originalIndex})">Salvar item</button>
-          <button class="btn btn-secondary btn-sm" type="button" onclick="toggleAddItemForm(${entry.originalIndex})">Cancelar</button>
+          <button class="btn btn-primary btn-sm" type="button" data-save-item="${id}">Salvar item</button>
+          <button class="btn btn-secondary btn-sm" type="button" data-toggle-add-item="${id}">Cancelar</button>
         </div>
       </div>
+      ${renderHistoricoHtml(order)}
     `;
     container.appendChild(orderCard);
   });
+
+  // O card ficou pesado com a trilha; carrega em blocos.
+  if (entries.length > pagina.length) {
+    const row = document.createElement('div');
+    row.className = 'load-more-row';
+    row.innerHTML = `<button class="btn btn-secondary" type="button" data-load-more>Carregar mais (${entries.length - pagina.length} restantes)</button>`;
+    container.appendChild(row);
+  }
+}
+
+function handleOrdersContainerClick(event) {
+  const target = event.target.closest('[data-delete-order], [data-toggle-add-item], [data-save-item], [data-delete-item-order], [data-confirm-transition], [data-cancel-transition], [data-load-more]');
+  if (!target) return;
+
+  if (target.dataset.deleteOrder) return deleteOrder(target.dataset.deleteOrder);
+  if (target.dataset.toggleAddItem) return toggleAddItemForm(target.dataset.toggleAddItem);
+  if (target.dataset.saveItem) return addItemToOrder(target.dataset.saveItem);
+  if (target.hasAttribute('data-load-more')) {
+    visibleCount += PAGE_SIZE;
+    return applyFilters();
+  }
+  if (target.dataset.confirmTransition) return confirmTransition(target.dataset.confirmTransition);
+  if (target.dataset.cancelTransition) return cancelTransition(target.dataset.cancelTransition);
+  if (target.dataset.deleteItemOrder) {
+    return deleteOrderItem(target.dataset.deleteItemOrder, target.dataset.deleteItemUid);
+  }
+}
+
+function handleOrdersContainerChange(event) {
+  const select = event.target.closest('[data-order-status]');
+  if (select) return openTransitionPanel(select.dataset.orderStatus, select.value);
+
+  // Marcar "transição excepcional" libera todo o pipeline no select daquele card.
+  const excecao = event.target.closest('[data-excecao]');
+  if (!excecao) return;
+
+  const orderId = excecao.dataset.excecao;
+  const statusSelect = document.querySelector(`[data-order-status="${CSS.escape(orderId)}"]`);
+  const order = findOrderById(getSavedOrders(), orderId);
+  if (!statusSelect || !order) return;
+
+  const opcoes = excecao.checked
+    ? STATUS_VALUES.filter(status => status !== order.status)
+    : getTransicoesValidas(order.status);
+
+  statusSelect.innerHTML = '<option value="">— manter status atual —</option>' +
+    opcoes.map(status => `<option value="${escapeAttr(status)}">${escapeHtml(status)}</option>`).join('');
+  cancelTransition(orderId);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (!guardPage(['gestor', 'compras'])) return;
+
   renderStatusFilterOptions(document.getElementById('statusFilter'));
-  const orders = normalizeOrders(getSavedOrders());
-  populateUserFilter(orders);
+  populateUserFilter(getSavedOrders());
   applyFilters();
+
+  const container = document.getElementById('ordersContainer');
+  container.addEventListener('click', handleOrdersContainerClick);
+  container.addEventListener('change', handleOrdersContainerChange);
+
+  const searchBox = document.getElementById('searchBox');
+  searchBox.removeAttribute('oninput');
+  searchBox.addEventListener('input', debounce(() => applyFilters(true), 200));
 });

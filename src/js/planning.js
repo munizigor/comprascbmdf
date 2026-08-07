@@ -1,28 +1,3 @@
-function getSavedOrders() {
-  const raw = localStorage.getItem('cbmdf_orders');
-  return raw ? JSON.parse(raw) : [];
-}
-
-function formatPrice(value) {
-  return Number(value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-}
-
-function formatDateTime(dateString) {
-  return dateString || '';
-}
-
-function groupBy(orders, keyFn) {
-  return orders.reduce((acc, order) => {
-    const items = Array.isArray(order.itens) ? order.itens : [];
-    items.forEach(item => {
-      const key = keyFn(item);
-      if (!acc[key]) acc[key] = 0;
-      acc[key] += Number(item.subtotal ?? item.total ?? 0);
-    });
-    return acc;
-  }, {});
-}
-
 function getCellRawValue(cell) {
   if (cell && typeof cell === 'object' && Object.prototype.hasOwnProperty.call(cell, 'value')) {
     return cell.value;
@@ -56,9 +31,11 @@ function renderRowCells(cells, numericColumns, saldoColumns = []) {
 
     const cellIsObject = cell && typeof cell === 'object' && !Array.isArray(cell);
     const rawValue = getCellRawValue(cell);
-    const value = numericColumns.includes(index) ? formatPrice(rawValue) : rawValue;
-    const rowspanAttr = cellIsObject && cell.rowspan ? ` rowspan="${cell.rowspan}"` : '';
-    const colspanAttr = cellIsObject && cell.colspan ? ` colspan="${cell.colspan}"` : '';
+    // Colunas não numéricas trazem dados digitados pelo usuário (classe, tipo,
+    // natureza de despesa) — precisam de escape antes de ir para innerHTML.
+    const value = numericColumns.includes(index) ? formatPrice(rawValue) : escapeHtml(rawValue);
+    const rowspanAttr = cellIsObject && cell.rowspan ? ` rowspan="${Number(cell.rowspan) || 1}"` : '';
+    const colspanAttr = cellIsObject && cell.colspan ? ` colspan="${Number(cell.colspan) || 1}"` : '';
     const classNames = [];
     if (cellIsObject && cell.className) {
       classNames.push(cell.className);
@@ -84,40 +61,8 @@ function renderTable(containerId, headers, rows, totalLabel, numericColumns = []
     return;
   }
 
-  const normalizedRows = rows.map(row => Array.isArray(row) ? { cells: row, className: '' } : row);
-  const resolvedNumericColumns = numericColumns.length ? numericColumns : [headers.length - 1];
-  const saldoColumns = getSaldoColumnIndexes(headers);
-  const resolvedTotalValues = totalValues ?? resolvedNumericColumns.map(columnIndex => normalizedRows.reduce((sum, row) => sum + Number(getCellRawValue(row.cells[columnIndex]) || 0), 0));
-  const totalRow = totalLabel ? `
-        <tr class="table-total-row">
-          <td colspan="${Math.max(1, headers.length - resolvedTotalValues.length)}">${totalLabel}</td>
-          ${resolvedTotalValues.map((value, idx) => {
-            const columnIndex = resolvedNumericColumns[idx];
-            const saldoClasses = saldoColumns.includes(columnIndex) ? ` class="saldo-cell ${getSaldoStateClass(value)}"` : '';
-            return `<td${saldoClasses}>${formatPrice(value)}</td>`;
-          }).join('')}
-        </tr>` : '';
-
-  const table = document.createElement('table');
-  table.className = 'report-table';
-  table.innerHTML = `
-    <thead>
-      <tr>
-        ${headers.map(header => `<th>${header}</th>`).join('')}
-      </tr>
-    </thead>
-    <tbody>
-      ${normalizedRows.map(({ cells, className }) => `
-        <tr class="${className || ''}">
-          ${renderRowCells(cells, resolvedNumericColumns, saldoColumns)}
-        </tr>
-      `).join('')}
-      ${totalRow}
-    </tbody>
-  `;
-
   container.innerHTML = '';
-  container.appendChild(table);
+  container.appendChild(createReportTable(headers, rows, totalLabel, numericColumns, totalValues));
 }
 
 function createReportTable(headers, rows, totalLabel, numericColumns = [], totalValues = null) {
@@ -127,7 +72,7 @@ function createReportTable(headers, rows, totalLabel, numericColumns = [], total
   const resolvedTotalValues = totalValues ?? resolvedNumericColumns.map(columnIndex => normalizedRows.reduce((sum, row) => sum + Number(getCellRawValue(row.cells[columnIndex]) || 0), 0));
   const totalRow = totalLabel ? `
         <tr class="table-total-row">
-          <td colspan="${Math.max(1, headers.length - resolvedTotalValues.length)}">${totalLabel}</td>
+          <td colspan="${Math.max(1, headers.length - resolvedTotalValues.length)}">${escapeHtml(totalLabel)}</td>
           ${resolvedTotalValues.map((value, idx) => {
             const columnIndex = resolvedNumericColumns[idx];
             const saldoClasses = saldoColumns.includes(columnIndex) ? ` class="saldo-cell ${getSaldoStateClass(value)}"` : '';
@@ -140,12 +85,12 @@ function createReportTable(headers, rows, totalLabel, numericColumns = [], total
   table.innerHTML = `
     <thead>
       <tr>
-        ${headers.map(header => `<th>${header}</th>`).join('')}
+        ${headers.map(header => `<th>${escapeHtml(header)}</th>`).join('')}
       </tr>
     </thead>
     <tbody>
       ${normalizedRows.map(({ cells, className }) => `
-        <tr class="${className || ''}">
+        <tr class="${escapeAttr(className || '')}">
           ${renderRowCells(cells, resolvedNumericColumns, saldoColumns)}
         </tr>
       `).join('')}
@@ -522,4 +467,11 @@ function renderPlanning() {
   renderPlanningAlerts(ordersWithItems);
 }
 
-window.addEventListener('DOMContentLoaded', renderPlanning);
+window.addEventListener('DOMContentLoaded', () => {
+  if (!guardPage(['compras'])) return;
+
+  renderPlanning();
+
+  const exportButton = document.getElementById('exportCsvButton');
+  if (exportButton) exportButton.addEventListener('click', exportOrdersCsv);
+});

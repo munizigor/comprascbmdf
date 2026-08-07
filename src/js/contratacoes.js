@@ -1,19 +1,17 @@
-function getSavedOrders() {
-  const raw = localStorage.getItem('cbmdf_orders');
-  return raw ? JSON.parse(raw) : [];
-}
-
 function getSavedContratacoes() {
-  const raw = localStorage.getItem('cbmdf_contratacoes');
-  return raw ? JSON.parse(raw) : { excludedGroups: [], excludedItemKeys: [], customItems: [] };
+  const stored = readJson('cbmdf_contratacoes', null);
+  if (!stored || typeof stored !== 'object') {
+    return { excludedGroups: [], excludedItemKeys: [], customItems: [] };
+  }
+  return {
+    excludedGroups: Array.isArray(stored.excludedGroups) ? stored.excludedGroups : [],
+    excludedItemKeys: Array.isArray(stored.excludedItemKeys) ? stored.excludedItemKeys : [],
+    customItems: Array.isArray(stored.customItems) ? stored.customItems : []
+  };
 }
 
 function saveContratacoes(contratacoes) {
   localStorage.setItem('cbmdf_contratacoes', JSON.stringify(contratacoes));
-}
-
-function formatPrice(value) {
-  return Number(value ?? 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
 function normalizeItem(item) {
@@ -28,7 +26,9 @@ function normalizeItem(item) {
     naturezaDespesa: item.naturezaDespesa || item.expenseNature || '',
     quantidade: Number(item.quantidade ?? item.quantity ?? 1),
     urgencia: item.urgencia || item.urgency || 'normal',
-    precoUnitario: Number(item.precoUnitario ?? item.unitPrice ?? 0),
+    itemUid: item.itemUid,
+    precoUnitario: getItemUnitPrice(item),
+    subtotal: getItemSubtotal(item),
     observacoes: item.observacoes || item.notes || '',
     setor: item.setor || item.usuario?.setor || item.department || '',
   };
@@ -38,8 +38,8 @@ function createContractId(classeNome) {
   return `contratacao-${String(classeNome).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
 }
 
-function getOrderItemKey(item, order, orderIndex, itemIndex) {
-  return `order:${item.id}:${order.usuario?.id ?? 'unknown'}:${order.data ?? 'unknown'}:${orderIndex}:${itemIndex}`;
+function getOrderItemKey(rawItem) {
+  return `item:${rawItem.itemUid}`;
 }
 
 function getCustomItemKey(item) {
@@ -61,10 +61,10 @@ function groupContratacoesByClasse(orders, contratacoes) {
   const excludedGroups = new Set(contratacoes.excludedGroups || []);
   const excludedItemKeys = new Set(contratacoes.excludedItemKeys || []);
 
-  orders.forEach((order, orderIndex) => {
-    (Array.isArray(order.itens) ? order.itens : []).forEach((rawItem, itemIndex) => {
+  orders.forEach(order => {
+    (Array.isArray(order.itens) ? order.itens : []).forEach(rawItem => {
       const item = normalizeItem(rawItem);
-      const key = getOrderItemKey(item, order, orderIndex, itemIndex);
+      const key = getOrderItemKey(rawItem);
       if (excludedGroups.has(item.classeNome) || excludedItemKeys.has(key)) return;
 
       if (!groups.has(item.classeNome)) {
@@ -118,7 +118,7 @@ function updateFilters(groups) {
   const classSelect = document.getElementById('classFilter');
   const classeNames = getUniqueClasseNames(groups);
   classSelect.innerHTML = '<option value="all">Todas as classes</option>' +
-    classeNames.map(name => `<option value="${name}">${name}</option>`).join('');
+    classeNames.map(name => `<option value="${escapeAttr(name)}">${escapeHtml(name)}</option>`).join('');
 }
 
 function calculateContractsSummary(groups) {
@@ -128,7 +128,7 @@ function calculateContractsSummary(groups) {
   groups.forEach(group => {
     group.items.forEach(item => {
       itemCount += item.quantidade;
-      total += item.quantidade * item.precoUnitario;
+      total += getItemSubtotal(item);
     });
   });
 
@@ -160,7 +160,7 @@ function renderContractGroups(groups) {
 
   groups.forEach(group => {
     const groupQuantity = group.items.reduce((sum, item) => sum + item.quantidade, 0);
-    const groupValue = group.items.reduce((sum, item) => sum + item.quantidade * item.precoUnitario, 0);
+    const groupValue = group.items.reduce((sum, item) => sum + getItemSubtotal(item), 0);
 
     const groupCard = document.createElement('div');
     groupCard.className = 'order-card';
@@ -176,7 +176,7 @@ function renderContractGroups(groups) {
               <div><strong>Natureza:</strong> ${escapeHtml(group.naturezaDespesa)}</div>
             </div>
           </div>
-          <button class="btn btn-danger btn-sm" type="button" onclick="excludeGroup('${escapeHtml(group.classeNome)}')">Excluir Contratação</button>
+          <button class="btn btn-danger btn-sm" type="button" data-exclude-group="${escapeAttr(group.classeNome)}">Excluir Contratação</button>
         </div>
         <div class="order-meta">
           <div><strong>Itens:</strong> ${group.items.length}</div>
@@ -197,15 +197,15 @@ function renderContractGroups(groups) {
           </tr>
         </thead>
         <tbody>
-          ${group.items.map((item, itemIndex) => `
+          ${group.items.map(item => `
             <tr>
               <td>${escapeHtml(item.nome)}</td>
               <td>${item.quantidade}</td>
               <td>${escapeHtml(item.urgencia)}</td>
               <td>${formatPrice(item.precoUnitario)}</td>
-              <td>${formatPrice(item.quantidade * item.precoUnitario)}</td>
+              <td>${formatPrice(getItemSubtotal(item))}</td>
               <td>${escapeHtml(item.usuario?.nome || '')} / ${escapeHtml(item.setor || item.usuario?.setor || '')}</td>
-              <td><button class="btn btn-danger btn-sm" type="button" onclick="excludeItem('${escapeHtml(item.key)}')">Excluir item</button></td>
+              <td><button class="btn btn-danger btn-sm" type="button" data-exclude-item="${escapeAttr(item.key)}">Excluir item</button></td>
             </tr>
           `).join('')}
         </tbody>
@@ -214,15 +214,6 @@ function renderContractGroups(groups) {
 
     container.appendChild(groupCard);
   });
-}
-
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
 }
 
 function loadContractPage() {
@@ -284,27 +275,43 @@ function excludeItem(itemKey) {
 
 function restoreExcludedGroups() {
   const contratacoes = getSavedContratacoes();
+  const groupCount = contratacoes.excludedGroups.length;
+  const itemCount = contratacoes.excludedItemKeys.length;
+
+  if (!groupCount && !itemCount) return;
+
+  const parts = [];
+  if (groupCount) parts.push(`${groupCount} ${groupCount === 1 ? 'grupo' : 'grupos'}`);
+  if (itemCount) parts.push(`${itemCount} ${itemCount === 1 ? 'item' : 'itens'}`);
+  const plural = parts.length > 1 || groupCount > 1 || itemCount > 1;
+  const verbo = plural ? 'foram excluídos' : 'foi excluído';
+  if (!confirm(`Restaurar ${parts.join(' e ')} que ${verbo} das contratações?`)) return;
+
   contratacoes.excludedGroups = [];
   contratacoes.excludedItemKeys = [];
   saveContratacoes(contratacoes);
   loadContractPage();
 }
 
+function readCustomItemField(id) {
+  return (document.getElementById(id)?.value || '').trim();
+}
+
 function addCustomItem() {
   const item = {
     id: `custom-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-    nome: document.getElementById('newItemName').value.trim(),
-    classeNome: document.getElementById('newItemClasse').value.trim(),
-    grupoNome: document.getElementById('newItemGrupo').value.trim(),
-    categoria: document.getElementById('newItemCategoria').value.trim(),
-    tipo: document.getElementById('newItemTipo').value.trim() || 'MATERIAL',
-    tipoDespesa: document.getElementById('newItemTipoDespesa').value.trim() || 'Custeio',
-    naturezaDespesa: document.getElementById('newItemNatureza').value.trim(),
-    quantidade: Number(document.getElementById('newItemQuantidade').value) || 1,
-    urgencia: document.getElementById('newItemUrgencia').value,
-    precoUnitario: Number(document.getElementById('newItemPreco').value) || 0,
-    observacoes: document.getElementById('newItemObservacoes').value.trim(),
-    setor: document.getElementById('newItemSetor').value.trim(),
+    nome: readCustomItemField('newItemName'),
+    classeNome: readCustomItemField('newItemClasse'),
+    grupoNome: readCustomItemField('newItemGrupo'),
+    categoria: readCustomItemField('newItemCategoria'),
+    tipo: readCustomItemField('newItemTipo') || 'MATERIAL',
+    tipoDespesa: readCustomItemField('newItemTipoDespesa') || 'Custeio',
+    naturezaDespesa: readCustomItemField('newItemNatureza'),
+    quantidade: Math.max(1, Number(readCustomItemField('newItemQuantidade')) || 1),
+    urgencia: readCustomItemField('newItemUrgencia') || 'normal',
+    precoUnitario: Math.max(0, Number(readCustomItemField('newItemPreco')) || 0),
+    observacoes: readCustomItemField('newItemObservacoes'),
+    setor: readCustomItemField('newItemSetor')
   };
 
   if (!item.nome || !item.classeNome) {
@@ -313,24 +320,39 @@ function addCustomItem() {
   }
 
   const contratacoes = getSavedContratacoes();
-  contratacoes.customItems = contratacoes.customItems || [];
   contratacoes.customItems.push(item);
   saveContratacoes(contratacoes);
 
-  document.getElementById('newItemName').value = '';
-  document.getElementById('newItemClasse').value = '';
-  document.getElementById('newItemGrupo').value = '';
-  document.getElementById('newItemCategoria').value = '';
-  document.getElementById('newItemTipo').value = 'MATERIAL';
-  document.getElementById('newItemTipoDespesa').value = 'Custeio';
-  document.getElementById('newItemNatureza').value = '';
-  document.getElementById('newItemQuantidade').value = '1';
-  document.getElementById('newItemUrgencia').value = 'normal';
-  document.getElementById('newItemPreco').value = '0.00';
-  document.getElementById('newItemSetor').value = '';
-  document.getElementById('newItemObservacoes').value = '';
+  ['newItemName', 'newItemClasse', 'newItemGrupo', 'newItemCategoria', 'newItemNatureza', 'newItemSetor', 'newItemObservacoes']
+    .forEach(id => { const field = document.getElementById(id); if (field) field.value = ''; });
+  const defaults = { newItemTipo: 'MATERIAL', newItemTipoDespesa: 'Custeio', newItemQuantidade: '1', newItemUrgencia: 'normal', newItemPreco: '0.00' };
+  Object.entries(defaults).forEach(([id, value]) => { const field = document.getElementById(id); if (field) field.value = value; });
 
   loadContractPage();
 }
 
-window.addEventListener('DOMContentLoaded', loadContractPage);
+function handleContractContainerClick(event) {
+  const target = event.target.closest('[data-exclude-group], [data-exclude-item]');
+  if (!target) return;
+
+  if (target.dataset.excludeGroup !== undefined) return excludeGroup(target.dataset.excludeGroup);
+  if (target.dataset.excludeItem !== undefined) return excludeItem(target.dataset.excludeItem);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (!guardPage(['compras'])) return;
+
+  loadContractPage();
+
+  document.getElementById('contractContainer').addEventListener('click', handleContractContainerClick);
+
+  const searchBox = document.getElementById('searchBox');
+  searchBox.removeAttribute('oninput');
+  searchBox.addEventListener('input', debounce(applyFilters, 200));
+
+  const restoreButton = document.getElementById('restoreGroupsButton');
+  if (restoreButton) restoreButton.addEventListener('click', restoreExcludedGroups);
+
+  const addItemButton = document.getElementById('addCustomItemButton');
+  if (addItemButton) addItemButton.addEventListener('click', addCustomItem);
+});
