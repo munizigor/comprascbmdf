@@ -145,6 +145,61 @@ header {
   font-size: 0.95rem;
 }
 
+.account-greeting {
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.account-lotacao {
+  font-weight: 600;
+  color: var(--primary-strong);
+  white-space: nowrap;
+}
+
+.prototype-banner {
+  background: #fff7ed;
+  color: #9a3412;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid #fed7aa;
+}
+
+.profile-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.profile-switcher select {
+  width: auto;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.header-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.header-identity strong {
+  color: var(--text);
+}
+
+.header-identity-lotacao {
+  font-weight: 600;
+  color: var(--primary-strong);
+}
+
 main {
   max-width: 1240px;
   margin: 32px auto 48px;
@@ -465,12 +520,70 @@ textarea {
   font-size: 0.96rem;
 }
 
+.personalization-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip-action {
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--primary-strong);
+}
+
+.chip-action:hover {
+  border-color: var(--primary);
+  background: #eef4ff;
+}
+
+.chip-count {
+  color: var(--muted);
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.recent-order-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.95);
+}
+
+.recent-order-item:last-child {
+  border-bottom: 0;
+}
+
+.recent-order-item .muted-note {
+  display: block;
+  margin-top: 2px;
+}
+
+.muted-note {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 0;
+}
+
 @media (max-width: 980px) {
   .grid-12 {
     grid-template-columns: 1fr;
   }
 
   .grid-products {
+    grid-template-columns: 1fr;
+  }
+
+  .personalization-grid {
     grid-template-columns: 1fr;
   }
 }

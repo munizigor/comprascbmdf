@@ -9,19 +9,19 @@
 <body>
   <header>
     <div class="header-inner">
-      <div class="brand">
+      <a class="brand" href="index.html">
         <div class="brand-mark">CB</div>
         <div class="brand-title">
           <strong>Marketplace CBMDF</strong>
           <span>Aquisições e Serviços</span>
         </div>
-      </div>
+      </a>
       <div class="actions">
-        <a class="btn btn-secondary" href="index.html">Marketplace</a>
-        <a class="btn btn-secondary" href="acompanhe.html">Acompanhe seu pedido</a>
-        <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
-        <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
-        <a class="btn btn-secondary" href="orcamento-geral.html">Orçamento</a>
+        <a class="btn btn-secondary" href="index.html" data-profiles="solicitante">Marketplace</a>
+        <a class="btn btn-secondary" href="acompanhe.html" data-profiles="solicitante">Meus pedidos</a>
+        <a class="btn btn-secondary" href="status.html" data-profiles="gestor compras">Gestão de demandas</a>
+        <a class="btn btn-secondary" href="planejamento.html" data-profiles="compras">Planejamento</a>
+        <a class="btn btn-secondary" href="orcamento-geral.html" data-profiles="gestor compras">Orçamento</a>
       </div>
     </div>
   </header>
@@ -146,6 +146,8 @@
   </main>
 
   <script src="src/js/cbmdf_orders_seed.js"></script>
+  <script src="src/js/users.js"></script>
+  <script src="src/js/nav.js"></script>
   <script src="src/js/contratacoes.js"></script>
 </body>
 </html>

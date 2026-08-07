@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acompanhe seu pedido - Marketplace CBMDF</title>
+  <title>Meus pedidos - Marketplace CBMDF</title>
   <link rel="stylesheet" href="src/css/status.css">
 </head>
 <body>
   <header>
     <div class="header-inner">
-      <div class="brand">
+      <a class="brand" href="index.html">
         <div class="brand-mark">CB</div>
         <div class="brand-title">
           <strong>Marketplace CBMDF</strong>
           <span>Aquisições e Serviços</span>
         </div>
-      </div>
+      </a>
       <div class="actions">
-        <a class="btn btn-secondary" href="index.html">Marketplace</a>
-        <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
-        <a class="btn btn-secondary" href="contratacoes.html">Contratações</a>
-        <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
-        <a class="btn btn-secondary" href="orcamento-geral.html">Orçamento</a>
+        <a class="btn btn-secondary" href="index.html" data-profiles="solicitante">Marketplace</a>
+        <a class="btn btn-secondary" href="status.html" data-profiles="gestor compras">Gestão de demandas</a>
+        <a class="btn btn-secondary" href="contratacoes.html" data-profiles="compras">Contratações</a>
+        <a class="btn btn-secondary" href="planejamento.html" data-profiles="compras">Planejamento</a>
+        <a class="btn btn-secondary" href="orcamento-geral.html" data-profiles="gestor compras">Orçamento</a>
       </div>
     </div>
   </header>
@@ -29,7 +29,7 @@
   <main>
     <section class="hero">
       <div>
-        <h1>Acompanhe seu pedido</h1>
+        <h1>Meus pedidos</h1>
         <!-- <p>Selecione um pedido e acompanhe cada etapa conforme a atualização feita na página de status.</p> -->
       </div>
     </section>
@@ -92,6 +92,8 @@
   </main>
 
   <script src="src/js/cbmdf_orders_seed.js"></script>
+  <script src="src/js/users.js"></script>
+  <script src="src/js/nav.js"></script>
   <script src="src/js/acompanhe.js"></script>
 </body>
 </html>
