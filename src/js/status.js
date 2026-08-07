@@ -1,17 +1,3 @@
-const statusOptions = [
-  'Aguardando Análise',
-  'Aguardando Análise Setorial',
-  'Aguardando Suplementação',
-  'Arquivado',
-  'Incluído no PCA',
-  'DFD',
-  'TR',
-  'Nota de Empenho emitida',
-  'Pedido a Caminho',
-  'Recebido no CESMA',
-  'Pedido Entregue'
-];
-
 function getSavedOrders() {
   const raw = localStorage.getItem('cbmdf_orders');
   return raw ? JSON.parse(raw) : [];
@@ -38,7 +24,7 @@ function normalizeOrders(orders) {
   let changed = false;
   orders.forEach(order => {
     if (!order.status) {
-      order.status = 'Aguardando Análise';
+      order.status = DEFAULT_STATUS;
       changed = true;
     }
     if (!Array.isArray(order.itens)) {
@@ -58,21 +44,9 @@ function formatDateTime(dateString) {
   return dateString;
 }
 
-function getStatusLabel(status) {
-  return statusOptions.includes(status) ? status : 'Aguardando Análise';
-}
-
-function getStatusClass(status) {
-  return String(status)
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .normalize('NFD')
-    .replace(/[^a-z0-9\-]/g, '');
-}
-
 function renderSummary(orders) {
   const ordersCount = orders.length;
-  const archivedCount = orders.filter(order => order.status === 'Arquivado').length;
+  const archivedCount = orders.filter(order => isArchivedStatus(order.status)).length;
   const deliveredCount = orders.filter(order => order.status === 'Pedido Entregue').length;
 
   document.getElementById('ordersCount').textContent = ordersCount;
@@ -249,7 +223,7 @@ function renderOrders(entries) {
         <div class="order-card-actions">
           <label for="status-${entry.originalIndex}">Atualizar status</label>
           <select id="status-${entry.originalIndex}" onchange="updateOrderStatus(${entry.originalIndex}, this.value)">
-            ${statusOptions.map(status => `<option value="${status}" ${order.status === status ? 'selected' : ''}>${status}</option>`).join('')}
+            ${STATUS_VALUES.map(status => `<option value="${status}" ${order.status === status ? 'selected' : ''}>${status}</option>`).join('')}
           </select>
           <button class="btn btn-secondary btn-sm" type="button" onclick="toggleAddItemForm(${entry.originalIndex})">Acrescentar item</button>
           <button class="btn btn-danger btn-sm" type="button" onclick="deleteOrder(${entry.originalIndex})">Excluir pedido</button>
@@ -351,6 +325,7 @@ function renderOrders(entries) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  renderStatusFilterOptions(document.getElementById('statusFilter'));
   const orders = normalizeOrders(getSavedOrders());
   populateUserFilter(orders);
   applyFilters();

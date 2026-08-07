@@ -6,15 +6,6 @@ const CORPORATE_DEFAULTS = {
   investimento: 220000
 };
 
-const PENDING_STATUSES = new Set([
-  'Aguardando Analise',
-  'Aguardando Análise',
-  'Aguardando Analise Setorial',
-  'Aguardando Análise Setorial',
-  'Aguardando Suplementacao',
-  'Aguardando Suplementação'
-]);
-
 function formatMoney(value) {
   return Number(value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
@@ -31,18 +22,6 @@ function parseDate(dateText) {
   const [day, month, year] = parts.map(Number);
   const dt = new Date(year, month - 1, day);
   return Number.isNaN(dt.getTime()) ? 0 : dt.getTime();
-}
-
-function normalizeStatus(status) {
-  return String(status || '').trim();
-}
-
-function isPendingStatus(status) {
-  return PENDING_STATUSES.has(normalizeStatus(status));
-}
-
-function isArchivedStatus(status) {
-  return normalizeStatus(status) === 'Arquivado';
 }
 
 function getItemSubtotal(item) {
@@ -190,8 +169,7 @@ function computeCommittedBySector(orders) {
 
   orders.forEach(order => {
     const setor = order?.usuario?.setor || 'Sem setor';
-    const status = normalizeStatus(order?.status);
-    if (isArchivedStatus(status) || isPendingStatus(status)) {
+    if (!getStatusFlags(order?.status).includeInComprometido) {
       return;
     }
 

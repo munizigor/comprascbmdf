@@ -11,23 +11,6 @@ function formatDateTime(dateString) {
   return dateString || '';
 }
 
-function getStatusFlags(status) {
-  const normalizedStatus = status || 'Aguardando Análise';
-  const includeInTotal = !['Arquivado', 'Aguardando Análise'].includes(normalizedStatus);
-  const includeInComprometido = ['TR','Nota de Empenho emitida', 'Pedido a Caminho', 'Recebido no CESMA', 'Pedido Entregue'].includes(normalizedStatus);
-  const includeInEmpenhado = ['Nota de Empenho emitida', 'Pedido a Caminho', 'Recebido no CESMA', 'Pedido Entregue'].includes(normalizedStatus);
-  const includeInLiquidado = ['Recebido no CESMA', 'Pedido Entregue'].includes(normalizedStatus);
-  const includeInPago = ['Pedido Entregue'].includes(normalizedStatus);
-
-  return {
-    includeInTotal,
-    includeInComprometido,
-    includeInEmpenhado,
-    includeInLiquidado,
-    includeInPago
-  };
-}
-
 function groupBy(orders, keyFn) {
   return orders.reduce((acc, order) => {
     const items = Array.isArray(order.itens) ? order.itens : [];
