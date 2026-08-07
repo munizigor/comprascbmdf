@@ -211,14 +211,6 @@ const products = [
   }
 ];
 
-const users = [
-  { id: 1, nome: 'Ana Beatriz', matricula: 'CBMDF-1023', setor: 'COMOP' },
-  { id: 2, nome: 'Carlos Eduardo', matricula: 'CBMDF-1047', setor: 'CESMA' },
-  { id: 3, nome: 'Fernanda Silva', matricula: 'CBMDF-1091', setor: 'DITIC' },
-  { id: 4, nome: 'João Pedro', matricula: 'CBMDF-1108', setor: 'DIMAT' },
-  { id: 5, nome: 'Maria Oliveira', matricula: 'CBMDF-1122', setor: 'COMAP' }
-];
-
 const cart = {};
 
 function getSavedOrders() {
@@ -297,15 +289,23 @@ document.addEventListener('click', event => {
 function populateUserSelect() {
   const select = document.getElementById('userSelect');
   select.innerHTML = users.map(user => `<option value="${user.id}">${user.nome}</option>`).join('');
+  const savedId = localStorage.getItem('cbmdf_current_user_id');
+  if (savedId && users.some(user => user.id === Number(savedId))) {
+    select.value = savedId;
+  }
   renderUser();
 }
 
 function renderUser() {
   const select = document.getElementById('userSelect');
+  const greeting = document.getElementById('userGreeting');
   const sector = document.getElementById('userSector');
   const userId = Number(select.value);
   const user = users.find(item => item.id === userId) || users[0];
-  sector.textContent = `${user.setor}`;
+  if (greeting) greeting.textContent = `Olá, ${user.nome}`;
+  sector.textContent = `Lotação: ${user.setor}`;
+  if (window.CBMDFNav) window.CBMDFNav.setCurrentUserId(user.id);
+  renderPersonalization(user);
 }
 
 function formatPrice(value) {
@@ -431,6 +431,39 @@ function renderCart() {
   document.getElementById('summaryTotal').textContent = formatPrice(total);
 }
 
+function renderPersonalization(user) {
+  const topItemsList = document.getElementById('topItemsList');
+  const recentOrdersList = document.getElementById('recentOrdersList');
+  if (!topItemsList || !recentOrdersList || !user) return;
+
+  const sectorOrders = getSavedOrders().filter(order => order.usuario && order.usuario.setor === user.setor);
+
+  const counts = {};
+  sectorOrders.forEach(order => {
+    order.itens.forEach(item => {
+      if (!counts[item.id]) counts[item.id] = { id: item.id, nome: item.nome, total: 0 };
+      counts[item.id].total += item.quantidade;
+    });
+  });
+  const topItems = Object.values(counts).sort((a, b) => b.total - a.total).slice(0, 5);
+  topItemsList.innerHTML = topItems.length
+    ? topItems.map(item => `<button type="button" class="chip chip-action" onclick="addToCart(${item.id})">${item.nome} <span class="chip-count">${item.total}x</span></button>`).join('')
+    : '<p class="muted-note">Sua unidade ainda não fez pedidos.</p>';
+
+  const recentOrders = sectorOrders.slice(-3).reverse();
+  recentOrdersList.innerHTML = recentOrders.length
+    ? recentOrders.map(order => `
+        <div class="recent-order-item">
+          <div>
+            <strong>${order.data}</strong>
+            <span class="muted-note">${order.itens.length} ${order.itens.length === 1 ? 'item' : 'itens'}</span>
+          </div>
+          <span class="status-pill">${order.status}</span>
+        </div>
+      `).join('')
+    : '<p class="muted-note">Nenhuma solicitação recente da sua unidade.</p>';
+}
+
 function applyFilters() {
   const search = document.getElementById('searchBox').value.trim().toLowerCase();
   const category = document.getElementById('categorySelect').value;
@@ -495,6 +528,7 @@ function submitOrder() {
   Object.keys(cart).forEach(key => delete cart[key]);
   renderCart();
   document.getElementById('notes').value = '';
+  renderPersonalization(user);
 }
 
 applyFilters();

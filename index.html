@@ -17,20 +17,34 @@
         </div>
       </div>
       <div class="actions">
-        <a class="btn btn-secondary" href="acompanhe.html">Acompanhe seu pedido</a>
-        <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
-        <a class="btn btn-secondary" href="contratacoes.html">Contratações</a>
-        <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
-        <a class="btn btn-secondary" href="orcamento-geral.html">Orçamento</a>
+        <a class="btn btn-secondary" href="acompanhe.html" data-profiles="solicitante">Meus pedidos</a>
+        <a class="btn btn-secondary" href="status.html" data-profiles="gestor compras">Gestão de demandas</a>
+        <a class="btn btn-secondary" href="contratacoes.html" data-profiles="compras">Contratações</a>
+        <a class="btn btn-secondary" href="planejamento.html" data-profiles="compras">Planejamento</a>
+        <a class="btn btn-secondary" href="orcamento-geral.html" data-profiles="gestor compras">Orçamento</a>
       </div>
       <div class="account">
+        <span id="userGreeting" class="account-greeting"></span>
         <select id="userSelect" onchange="renderUser()"></select>
-        <span id="userSector">Lotação</span>
+        <span id="userSector" class="account-lotacao">Lotação</span>
       </div>
     </div>
   </header>
 
   <main>
+    <section class="panel personalization" id="personalization" data-profiles="solicitante">
+      <div class="personalization-grid">
+        <div>
+          <h2>Itens mais solicitados pela sua unidade</h2>
+          <div class="chip-list" id="topItemsList"></div>
+        </div>
+        <div>
+          <h2>Últimas solicitações</h2>
+          <div id="recentOrdersList"></div>
+        </div>
+      </div>
+    </section>
+
     <div class="grid-12">
       <article class="panel" id="search">
         <h2>Catálogo de materiais</h2>
@@ -86,6 +100,8 @@
     </div>
   </main>
   <script src="src/js/cbmdf_orders_seed.js"></script>
+  <script src="src/js/users.js"></script>
+  <script src="src/js/nav.js"></script>
   <script src="src/js/script.js"></script>
 </body>
 </html>
