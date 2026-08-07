@@ -34,6 +34,28 @@
       </div>
     </section>
 
+    <section class="panel stats-panel">
+      <h2>Resumo executivo</h2>
+      <div class="planning-kpi-grid">
+        <div class="planning-kpi-card">
+          <span class="planning-kpi-label">PCA Geral</span>
+          <strong id="kpiPcaGeralValor">R$ 0,00</strong>
+          <span class="planning-kpi-meta"><span id="kpiPcaGeralContratacoes">0</span> contratações · <span id="kpiPcaGeralPercent">0%</span> planejadas</span>
+        </div>
+        <div class="planning-kpi-card">
+          <span class="planning-kpi-label">PCA Setorial</span>
+          <strong id="kpiPcaSetorUnidades">0</strong>
+          <span class="planning-kpi-meta"><span id="kpiPcaSetorDemandas">0</span> demandas</span>
+        </div>
+        <div class="planning-kpi-card">
+          <span class="planning-kpi-label">PLOA</span>
+          <strong id="kpiPloaValor">R$ 0,00</strong>
+          <span class="planning-kpi-meta">valor solicitado</span>
+        </div>
+      </div>
+      <div class="planning-alerts" id="planningAlerts"></div>
+    </section>
+
     <section class="panel">
       <h2>Plano de Contratações Anual (PCA) Geral</h2>
       <!-- <p>Valores agregados por <strong>tipo</strong> e <strong>classe</strong>.</p> -->
@@ -57,6 +79,7 @@
   <script src="src/js/users.js"></script>
   <script src="src/js/nav.js"></script>
   <script src="src/js/emptystate.js"></script>
+  <script src="src/js/budget.js"></script>
   <script src="src/js/planning.js"></script>
 </body>
 </html>
