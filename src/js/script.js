@@ -506,6 +506,13 @@ function renderReview() {
     </div>
   `;
   document.getElementById('reviewNotes').textContent = notes ? `Justificativa: ${notes}` : 'Nenhuma justificativa informada.';
+
+  const criticidade = document.getElementById('criticidadeSelect');
+  const risco = document.getElementById('riscoSelect');
+  const reviewPrioridade = document.getElementById('reviewPrioridade');
+  if (reviewPrioridade && criticidade && risco) {
+    reviewPrioridade.textContent = `Prioridade declarada: criticidade ${criticidade.value}/5, risco de postergar ${risco.value}/5.`;
+  }
 }
 
 function confirmSubmitOrder() {
@@ -611,7 +618,11 @@ function submitOrder() {
   createOrder({
     usuario: { id: user.id, nome: user.nome, matricula: user.matricula, setor: user.setor },
     itens: items,
-    observacoes: notes
+    observacoes: notes,
+    priorizacao: {
+      criticidade: Number(document.getElementById('criticidadeSelect')?.value) || 3,
+      risco: Number(document.getElementById('riscoSelect')?.value) || 3
+    }
   });
 
   Object.keys(cart).forEach(key => delete cart[key]);

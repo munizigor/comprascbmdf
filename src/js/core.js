@@ -370,7 +370,7 @@ function findOrderIndexById(orders, orderId) {
 
 /* ---------- criação ---------- */
 
-function createOrder({ usuario, itens, observacoes }) {
+function createOrder({ usuario, itens, observacoes, priorizacao }) {
   const orders = getSavedOrders();
   const now = new Date();
   const id = nextOrderId(orders, now.getFullYear());
@@ -384,6 +384,15 @@ function createOrder({ usuario, itens, observacoes }) {
     observacoes: observacoes || '',
     usuario,
     itens: (itens || []).map((item, index) => ({ ...item, itemUid: makeItemUid(id, index) })),
+    // Criticidade e risco vêm do requisitante; obrigatoriedade legal e
+    // prontidão são preenchidas depois pelo Planejamento (Épico 08).
+    priorizacao: {
+      criticidade: priorizacao?.criticidade ?? null,
+      risco: priorizacao?.risco ?? null,
+      obrigatoriedadeLegal: false,
+      prontidao: 1,
+      declaradoEm: priorizacao ? criadoEm : null
+    },
     avaliacao: {
       criterios: createEmptyRatingCriteria(),
       finalizada: false,

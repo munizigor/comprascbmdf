@@ -367,11 +367,18 @@ function openSectorCapEditor(sectorName) {
   renderGeneralView();
 }
 
+// A fila de aprovação setorial existia sem ordenação por prioridade: a ordem
+// era a de inserção no array. Passa a seguir o mesmo score da governança, para
+// que setor e comitê não decidam por critérios diferentes.
 function getSectorPendingRequests(orders, setor) {
-  return orders
+  const entries = orders
     .map((order, index) => ({ order, index }))
     .filter(entry => (entry.order?.usuario?.setor || 'Sem setor') === setor)
     .filter(entry => isPendingStatus(entry.order?.status));
+
+  return typeof ordenarPorPrioridade === 'function'
+    ? ordenarPorPrioridade(entries, entry => entry.order)
+    : entries;
 }
 
 function getProgressLevel(percentage) {
@@ -408,6 +415,62 @@ function requestFitsSectorBudget(sector, requestCosts) {
     overflowCusteio: Math.max(0, requestCosts.custeio - saldoCusteio),
     overflowInvestimento: Math.max(0, requestCosts.investimento - saldoInvestimento)
   };
+}
+
+// A urgência é a decisão de furar a fila; ela pertence à tela onde a fila é
+// julgada. As regras (motivo de 30 caracteres e segundo aprovador) são as
+// mesmas da governança — quem valida é applyStatusChange, não esta tela.
+function renderUrgenciaFormHtml(orderId) {
+  if (typeof incluirPorUrgencia !== 'function') return '';
+
+  const atual = window.CBMDFNav ? window.CBMDFNav.getCurrentUser() : null;
+  const aprovadores = users
+    .filter(user => !atual || user.id !== atual.id)
+    .map(user => `<option value="${escapeAttr(user.id)}">${escapeHtml(user.nome)} (${escapeHtml(user.setor)})</option>`)
+    .join('');
+
+  return `
+    <details class="governanca-form governanca-form--urgencia">
+      <summary>Incluir por urgência</summary>
+      <div class="governanca-campos">
+        <p class="muted-note">Fura a fila priorizada. Exige motivo de 30 caracteres e um segundo aprovador, e passa a contar no painel de contenção da governança.</p>
+        <div class="input-group">
+          <label for="aprovador-setor-${escapeAttr(orderId)}">Aprovador</label>
+          <select id="aprovador-setor-${escapeAttr(orderId)}" data-aprovador-setor="${escapeAttr(orderId)}">${aprovadores}</select>
+        </div>
+        <div class="input-group">
+          <label for="motivo-urgencia-setor-${escapeAttr(orderId)}">Motivo da urgência</label>
+          <textarea id="motivo-urgencia-setor-${escapeAttr(orderId)}" rows="2" data-motivo-urgencia-setor="${escapeAttr(orderId)}"></textarea>
+        </div>
+        <p class="transition-error" data-erro-urgencia-setor="${escapeAttr(orderId)}"></p>
+        <button class="btn btn-danger btn-sm" type="button" data-urgencia-order="${escapeAttr(orderId)}">Incluir por Urgência</button>
+      </div>
+    </details>`;
+}
+
+function getPosicaoTexto(orderId) {
+  const entrada = typeof getPosicaoNaFila === 'function' ? getPosicaoNaFila(orderId) : null;
+  return entrada ? `${entrada.posicao}º na fila institucional` : 'fora da fila';
+}
+
+function includeOrderByUrgency(orderId) {
+  const aprovadorId = Number(document.querySelector(`[data-aprovador-setor="${CSS.escape(orderId)}"]`)?.value);
+  const aprovador = users.find(user => user.id === aprovadorId) || null;
+  const motivo = document.querySelector(`[data-motivo-urgencia-setor="${CSS.escape(orderId)}"]`)?.value;
+
+  const resultado = incluirPorUrgencia(orderId, {
+    justificativa: motivo,
+    aprovador: aprovador ? { id: aprovador.id, nome: aprovador.nome, matricula: aprovador.matricula } : null,
+    origem: 'orcamento-setorial.html'
+  });
+
+  if (!resultado.ok) {
+    const erro = document.querySelector(`[data-erro-urgencia-setor="${CSS.escape(orderId)}"]`);
+    if (erro) erro.textContent = resultado.motivo;
+    return;
+  }
+
+  renderSectorView();
 }
 
 function renderPendingRequests(setorData, pendingEntries) {
@@ -459,6 +522,8 @@ function renderPendingRequests(setorData, pendingEntries) {
         <span class="budget-status-pill ${statusClass}">${statusLabel}</span>
       </div>
 
+      ${typeof getScore === 'function' ? `<div class="budget-request-prioridade">Prioridade ${formatScore(getScore(entry.order).total)} de 100 · ${escapeHtml(getPosicaoTexto(orderId))}</div>` : ''}
+
       <div class="budget-request-summary">
         <div><strong>Custeio da solicitacao:</strong> ${formatPrice(requestCosts.custeio)}</div>
         <div><strong>Investimento da solicitacao:</strong> ${formatPrice(requestCosts.investimento)}</div>
@@ -486,6 +551,8 @@ function renderPendingRequests(setorData, pendingEntries) {
         <button class="btn btn-primary btn-sm" type="button" data-approve-order="${escapeAttr(orderId)}" ${validation.fits ? '' : 'disabled'}>Aprovar no Setor</button>
         <button class="btn btn-secondary btn-sm" type="button" data-supplement-order="${escapeAttr(orderId)}">Solicitar Suplementacao</button>
       </div>
+
+      ${renderUrgenciaFormHtml(orderId)}
     `;
 
     container.appendChild(card);
@@ -509,6 +576,10 @@ function bindPendingRequestActions() {
     button.onclick = () => {
       markOrderAsSupplementRequest(button.getAttribute('data-supplement-order'));
     };
+  });
+
+  document.querySelectorAll('[data-urgencia-order]').forEach(button => {
+    button.onclick = () => includeOrderByUrgency(button.getAttribute('data-urgencia-order'));
   });
 }
 

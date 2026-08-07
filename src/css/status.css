@@ -1016,3 +1016,268 @@ textarea {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- Épico 08 — governança, fila e ciclos ---------- */
+
+.planning-alert--danger {
+  border-left: 4px solid #dc2626;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.governanca-subtitle {
+  margin: 28px 0 12px;
+  font-size: 1rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.governanca-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.governanca-form {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.governanca-form > summary {
+  cursor: pointer;
+  padding: 10px 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.governanca-form--urgencia > summary {
+  color: #b91c1c;
+}
+
+.governanca-campos {
+  padding: 0 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.governanca-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+/* ---------- ciclos do PCA ---------- */
+
+.ciclo-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  background: var(--surface);
+  margin-bottom: 12px;
+}
+
+.ciclo-card--aberto {
+  border-left: 4px solid var(--accent);
+}
+
+.ciclo-card--fechado > summary {
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.ciclo-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ciclo-card-top h3 {
+  margin: 0 0 4px;
+}
+
+.ciclo-meta {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.ciclo-pill {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ciclo-pill--aberto {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+
+.ciclo-ata {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-left: 3px solid var(--border);
+  color: var(--text);
+  font-style: italic;
+}
+
+/* ---------- fila priorizada ---------- */
+
+.fila-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  background: var(--surface);
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+
+.fila-card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.fila-posicao {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+}
+
+.fila-identificacao {
+  flex: 1 1 200px;
+}
+
+.fila-identificacao h3 {
+  margin: 0 0 2px;
+  font-size: 1rem;
+}
+
+.fila-meta {
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.fila-override {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-left: 4px solid var(--accent);
+  background: #fffbeb;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.88rem;
+}
+
+.fila-posicao-aviso {
+  margin: 10px 0;
+  padding: 10px 14px;
+  border-left: 4px solid var(--primary);
+  background: #eff6ff;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.88rem;
+}
+
+.fila-posicao-aviso span {
+  color: var(--muted);
+}
+
+/* ---------- decomposição do score ---------- */
+
+.score-panel {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.score-panel > summary {
+  cursor: pointer;
+  padding: 10px 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.score-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0 14px 8px;
+}
+
+.score-lista li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+
+.score-linha-rotulo {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.score-linha-valor {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.score-linha-valor small {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.score-linha-detalhe {
+  grid-column: 1 / -1;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.score-origem {
+  margin: 0;
+  padding: 10px 14px 14px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ---------- painel de urgência ---------- */
+
+.urgencia-resumo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.budget-request-prioridade {
+  margin: 8px 0 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+}

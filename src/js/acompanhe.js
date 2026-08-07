@@ -258,6 +258,31 @@ function renderOrderTimeline(order) {
   return `<ul class="timeline-stages">${stagesHtml}</ul>`;
 }
 
+// HU08.6 — o requisitante vê a própria posição e a conta que a produziu. A
+// transparência do score é a contrapartida de decidir por fila: quem foi
+// preterido consegue ver por quê.
+function renderPosicaoFilaHtml(order) {
+  if (typeof getPosicaoNaFila !== 'function' || !isPendingStatus(order.status)) return '';
+
+  const entrada = getPosicaoNaFila(order.id);
+  if (!entrada) return '';
+
+  const { score, priorizacao, posicao } = entrada;
+  const criterios = [
+    `criticidade ${priorizacao.criticidade}/5`,
+    `risco ${priorizacao.risco}/5`,
+    priorizacao.obrigatoriedadeLegal ? 'exigência legal' : 'sem exigência legal',
+    `prontidão ${priorizacao.prontidao}/5`
+  ].join(' · ');
+
+  return `
+    <div class="fila-posicao-aviso">
+      <strong>${posicao}º na fila de priorização</strong>
+      <span>score ${formatScore(score.total)} de 100 — ${escapeHtml(criterios)}</span>
+      ${priorizacao.override ? '<span class="historico-tag historico-tag--excecao">posição ajustada manualmente pelo comitê</span>' : ''}
+    </div>`;
+}
+
 function renderOrderList(entries) {
   const container = document.getElementById('ordersContainer');
   container.innerHTML = '';
@@ -291,6 +316,7 @@ function renderOrderList(entries) {
         <div><strong>Usuário:</strong> ${escapeHtml(order.usuario?.nome || 'Desconhecido')}</div>
         <div><strong>Setor:</strong> ${escapeHtml(order.usuario?.setor || '—')}</div>
       </div>
+      ${renderPosicaoFilaHtml(order)}
       <table class="report-table">
         <thead>
           <tr>
