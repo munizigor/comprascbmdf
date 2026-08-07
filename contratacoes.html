@@ -47,10 +47,10 @@
             <option value="all">Todas as classes</option>
           </select>
         </div>
-        <!-- <div class="input-group">
+        <div class="input-group">
           <label>&nbsp;</label>
-          <button id="restoreGroupsButton" class="btn btn-secondary" type="button" onclick="restoreExcludedGroups()" style="display:none; width:100%;">Restaurar grupos excluídos</button>
-        </div> -->
+          <button id="restoreGroupsButton" class="btn btn-secondary" type="button" style="display:none; width:100%;">Restaurar exclusões</button>
+        </div>
       </div>
     </section>
 
@@ -72,7 +72,7 @@
       </div>
     </section>
 
-    <!-- <section class="panel">
+    <section class="panel">
       <h2>Incluir item de contratação</h2>
       <div class="filter-row">
         <div class="input-group">
@@ -136,8 +136,8 @@
           <textarea id="newItemObservacoes" rows="3" placeholder="Observações adicionais"></textarea>
         </div>
       </div>
-      <button class="btn btn-primary" type="button" onclick="addCustomItem()">Incluir item</button>
-    </section> -->
+      <button id="addCustomItemButton" class="btn btn-primary" type="button">Incluir item</button>
+    </section>
 
     <section class="panel">
       <h2>Contratações agrupadas por classe</h2>
@@ -146,6 +146,8 @@
   </main>
 
   <script src="src/js/cbmdf_orders_seed.js"></script>
+  <script src="src/js/status-pipeline.js"></script>
+  <script src="src/js/core.js"></script>
   <script src="src/js/users.js"></script>
   <script src="src/js/nav.js"></script>
   <script src="src/js/emptystate.js"></script>

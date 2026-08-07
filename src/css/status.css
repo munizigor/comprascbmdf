@@ -742,6 +742,13 @@ textarea {
   gap: 10px;
 }
 
+.planning-actions {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .planning-alert {
   display: flex;
   align-items: center;

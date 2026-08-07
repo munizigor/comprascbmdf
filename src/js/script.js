@@ -227,64 +227,9 @@ const products = [
 
 const cart = {};
 
-function getSavedOrders() {
-  const raw = localStorage.getItem('cbmdf_orders');
-  return raw ? JSON.parse(raw) : [];
-}
-
-function saveOrders(orders) {
-  localStorage.setItem('cbmdf_orders', JSON.stringify(orders));
-}
-
-function exportOrdersCsv() {
-  const orders = getSavedOrders();
-  if (!orders.length) {
-    alert('Não há pedidos para exportar.');
-    return;
-  }
-
-  const header = ['Data', 'Nome', 'Matrícula', 'Setor', 'Observações', 'Item ID', 'Item Nome', 'Categoria', 'Grupo', 'Classe', 'Categoria', 'Tipo', 'Natureza Despesa', 'Quantidade', 'Urgência', 'Preço Unitário', 'Subtotal'];
-  const rows = [header];
-
-  orders.forEach(order => {
-    order.itens.forEach(item => {
-      rows.push([
-        order.data,
-        order.usuario.nome,
-        order.usuario.matricula,
-        order.usuario.setor,
-        order.observacoes,
-        item.id,
-        item.nome,
-        item.categoria,
-        item.grupoNome,
-        item.classeNome,
-        item.tipo,
-        item.tipoDespesa,
-        item.naturezaDespesa,
-        item.quantidade,
-        item.urgencia,
-        item.precoUnitario,
-        item.subtotal
-      ]);
-    });
-  });
-
-  const csv = rows.map(row => row.map(value => `"${String(value ?? '').replace(/"/g, '""')}"`).join(',')).join('\r\n');
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `pedidos_${new Date().toISOString().slice(0,10)}.csv`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-}
-
 function populateUserSelect() {
   const select = document.getElementById('userSelect');
-  select.innerHTML = users.map(user => `<option value="${user.id}">${user.nome}</option>`).join('');
+  select.innerHTML = users.map(user => `<option value="${escapeAttr(user.id)}">${escapeHtml(user.nome)}</option>`).join('');
   const savedId = localStorage.getItem('cbmdf_current_user_id');
   if (savedId && users.some(user => user.id === Number(savedId))) {
     select.value = savedId;
@@ -303,10 +248,6 @@ function renderUser() {
   if (window.CBMDFNav) window.CBMDFNav.setCurrentUserId(user.id);
   renderPersonalization(user);
   applyFilters();
-}
-
-function formatPrice(value) {
-  return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
 function categoryLabel(category) {
@@ -592,7 +533,7 @@ function renderPersonalization(user) {
   });
   const topItems = Object.values(counts).sort((a, b) => b.total - a.total).slice(0, 5);
   topItemsList.innerHTML = topItems.length
-    ? topItems.map(item => `<button type="button" class="chip chip-action" onclick="addToCart(${item.id})">${item.nome} <span class="chip-count">${item.total}x</span></button>`).join('')
+    ? topItems.map(item => `<button type="button" class="chip chip-action" data-add-product="${escapeAttr(item.id)}">${escapeHtml(item.nome)} <span class="chip-count">${item.total}x</span></button>`).join('')
     : '<p class="muted-note">Sua unidade ainda não fez pedidos.</p>';
 
   const recentOrders = sectorOrders.slice(-3).reverse();
@@ -600,10 +541,10 @@ function renderPersonalization(user) {
     ? recentOrders.map(order => `
         <div class="recent-order-item">
           <div>
-            <strong>${order.data}</strong>
+            <strong>${escapeHtml(order.id)} — ${escapeHtml(order.data)}</strong>
             <span class="muted-note">${order.itens.length} ${order.itens.length === 1 ? 'item' : 'itens'}</span>
           </div>
-          <span class="status-pill">${order.status}</span>
+          <span class="status-pill">${escapeHtml(order.status)}</span>
         </div>
       `).join('')
     : '<p class="muted-note">Nenhuma solicitação recente da sua unidade.</p>';
@@ -644,7 +585,6 @@ function submitOrder() {
     return;
   }
   const notes = document.getElementById('notes').value.trim();
-  const orderDate = new Date().toLocaleString('pt-BR');
   const items = ids.map(id => {
     const productId = Number(id);
     const item = products.find(p => p.id === productId);
@@ -668,28 +608,30 @@ function submitOrder() {
   const userId = Number(select.value);
   const user = users.find(item => item.id === userId) || users[0];
 
-  const savedOrders = getSavedOrders();
-  savedOrders.push({
-    data: orderDate,
-    status: 'DFD Registrado',
-    observacoes: notes,
-    usuario: {
-      id: user.id,
-      nome: user.nome,
-      matricula: user.matricula,
-      setor: user.setor
-    },
-    itens: items
+  createOrder({
+    usuario: { id: user.id, nome: user.nome, matricula: user.matricula, setor: user.setor },
+    itens: items,
+    observacoes: notes
   });
-  saveOrders(savedOrders);
 
-  console.log('Pedidos armazenados no localStorage:', savedOrders);
   Object.keys(cart).forEach(key => delete cart[key]);
   renderCart();
   document.getElementById('notes').value = '';
   renderPersonalization(user);
 }
 
+function handlePersonalizationClick(event) {
+  const chip = event.target.closest('[data-add-product]');
+  if (!chip) return;
+  addToCart(Number(chip.dataset.addProduct));
+}
+
 applyFilters();
 renderCart();
 populateUserSelect();
+
+document.getElementById('personalization').addEventListener('click', handlePersonalizationClick);
+
+const catalogSearchBox = document.getElementById('searchBox');
+catalogSearchBox.removeAttribute('oninput');
+catalogSearchBox.addEventListener('input', debounce(applyFilters, 200));

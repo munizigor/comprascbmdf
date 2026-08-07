@@ -1,138 +1,3 @@
-const ratingCriteria = [
-  { id: 'qualidadeProduto', label: 'Como você avalia a qualidade do material ou serviço entregue?' },
-  { id: 'fornecedor', label: 'Como você avalia o desempenho do fornecedor?' },
-  { id: 'tempoProjeto', label: 'O tempo de tramitação do processo foi adequado?' },
-  { id: 'comunicacaoSuporte', label: 'Como você avalia a atuação da equipe de compras?' },
-  { id: 'atendeuExpectativa', label: 'A contratação atendeu à necessidade da sua unidade?' }
-];
-
-function getSavedOrders() {
-  const raw = localStorage.getItem('cbmdf_orders');
-  return raw ? JSON.parse(raw) : [];
-}
-
-function saveOrders(orders) {
-  localStorage.setItem('cbmdf_orders', JSON.stringify(orders));
-}
-
-function isValidRatingValue(value) {
-  return Number.isInteger(value) && value >= 1 && value <= 5;
-}
-
-function createEmptyRatingCriteria() {
-  const criteria = {};
-  ratingCriteria.forEach(criterion => {
-    criteria[criterion.id] = null;
-  });
-  return criteria;
-}
-
-function normalizeOrderRating(order) {
-  let changed = false;
-
-  if (!order.avaliacao || typeof order.avaliacao !== 'object') {
-    order.avaliacao = {
-      criterios: createEmptyRatingCriteria(),
-      finalizada: false,
-      atualizadoEm: null,
-      finalizadoEm: null
-    };
-    return true;
-  }
-
-  if (!order.avaliacao.criterios || typeof order.avaliacao.criterios !== 'object') {
-    order.avaliacao.criterios = createEmptyRatingCriteria();
-    changed = true;
-  }
-
-  ratingCriteria.forEach(criterion => {
-    const rawValue = Number(order.avaliacao.criterios[criterion.id]);
-    const normalizedValue = isValidRatingValue(rawValue) ? rawValue : null;
-    if (order.avaliacao.criterios[criterion.id] !== normalizedValue) {
-      order.avaliacao.criterios[criterion.id] = normalizedValue;
-      changed = true;
-    }
-  });
-
-  if (typeof order.avaliacao.finalizada !== 'boolean') {
-    order.avaliacao.finalizada = false;
-    changed = true;
-  }
-
-  if (!Object.prototype.hasOwnProperty.call(order.avaliacao, 'atualizadoEm')) {
-    order.avaliacao.atualizadoEm = null;
-    changed = true;
-  }
-
-  if (!Object.prototype.hasOwnProperty.call(order.avaliacao, 'finalizadoEm')) {
-    order.avaliacao.finalizadoEm = null;
-    changed = true;
-  }
-
-  const isComplete = ratingCriteria.every(criterion => isValidRatingValue(order.avaliacao.criterios[criterion.id]));
-  if (order.avaliacao.finalizada !== isComplete) {
-    order.avaliacao.finalizada = isComplete;
-    if (!isComplete) {
-      order.avaliacao.finalizadoEm = null;
-    }
-    changed = true;
-  }
-
-  return changed;
-}
-
-function normalizeOrders(orders) {
-  let changed = false;
-  orders.forEach(order => {
-    if (!order.status) {
-      order.status = DEFAULT_STATUS;
-      changed = true;
-    }
-    if (normalizeOrderRating(order)) {
-      changed = true;
-    }
-  });
-  if (changed) saveOrders(orders);
-  return orders;
-}
-
-function formatPrice(value) {
-  return Number(value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-}
-
-function formatDateTime(dateString) {
-  return dateString || '';
-}
-
-function escapeHtml(value) {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
-
-function getItemName(item) {
-  return item.nome || item.name || 'Item sem nome';
-}
-
-function getItemQuantity(item) {
-  return Number(item.quantidade ?? item.quantity ?? 0);
-}
-
-function getItemUrgency(item) {
-  return item.urgencia || item.urgency || 'normal';
-}
-
-function getItemUnitPrice(item) {
-  return Number(item.precoUnitario ?? item.unitPrice ?? 0);
-}
-
-function getItemSubtotal(item) {
-  return Number(item.subtotal ?? item.total ?? (getItemQuantity(item) * getItemUnitPrice(item)));
-}
-
 function collectUsers(orders) {
   const users = new Map();
   orders.forEach(order => {
@@ -174,21 +39,29 @@ function renderSummary(orders) {
   document.getElementById('deliveredCount').textContent = deliveredCount;
 }
 
+// "Meus pedidos" é a tela do requisitante: nasce filtrada no usuário corrente.
+// Gestão e Compras precisam enxergar a corporação inteira, então para esses
+// perfis a opção "todos" continua disponível.
+function canSeeAllUsers() {
+  const profile = window.CBMDFNav ? window.CBMDFNav.getProfile() : 'solicitante';
+  return profile === 'gestor' || profile === 'compras';
+}
+
 function populateUserFilter(orders) {
   const select = document.getElementById('userFilter');
   const users = collectUsers(orders);
-  select.innerHTML = '<option value="all">Todos os usuários</option>' +
-    users.map(user => `<option value="${user.id}">${user.nome}</option>`).join('');
+  const options = users.map(user => `<option value="${escapeAttr(user.id)}">${escapeHtml(user.nome)}</option>`);
+  select.innerHTML = (canSeeAllUsers() ? '<option value="all">Todos os usuários</option>' : '') + options.join('');
 }
 
 function applyFilters() {
-  const orders = normalizeOrders(getSavedOrders());
+  const orders = getSavedOrders();
   const search = document.getElementById('searchBox').value.trim().toLowerCase();
   const userFilter = document.getElementById('userFilter').value;
   const statusFilter = document.getElementById('statusFilter').value;
 
   const filtered = orders
-    .map((order, originalIndex) => ({ order, originalIndex }))
+    .map(order => ({ order }))
     .filter(entry => {
       const order = entry.order;
       const matchesUser = userFilter === 'all' || String(order.usuario?.id) === userFilter;
@@ -211,7 +84,7 @@ function applyFilters() {
   renderOrderList(filtered);
 }
 
-function renderRatingStars(orderIndex, criterionId, currentValue, isLocked) {
+function renderRatingStars(orderId, criterionId, currentValue, isLocked) {
   return Array.from({ length: 5 }, (_, index) => {
     const value = index + 1;
     const isActive = currentValue >= value;
@@ -221,8 +94,8 @@ function renderRatingStars(orderIndex, criterionId, currentValue, isLocked) {
       type="button"
       class="star-btn${activeClass}"
       data-rating-star="true"
-      data-order-index="${orderIndex}"
-      data-criterion-id="${criterionId}"
+      data-order-id="${escapeAttr(orderId)}"
+      data-criterion-id="${escapeAttr(criterionId)}"
       data-rating-value="${value}"
       aria-label="Avaliar com ${value} estrela${value > 1 ? 's' : ''}"
       ${disabledAttr}
@@ -230,7 +103,7 @@ function renderRatingStars(orderIndex, criterionId, currentValue, isLocked) {
   }).join('');
 }
 
-function renderOrderRatingSection(order, orderIndex) {
+function renderOrderRatingSection(order) {
   const isDelivered = order.status === 'Pedido Entregue';
 
   if (!isDelivered) {
@@ -252,9 +125,9 @@ function renderOrderRatingSection(order, orderIndex) {
     const value = Number(criteriaValues[criterion.id]) || 0;
     return `
       <div class="rating-row">
-        <span class="rating-label">${criterion.label}</span>
-        <div class="rating-stars" role="group" aria-label="${criterion.label}">
-          ${renderRatingStars(orderIndex, criterion.id, value, false)}
+        <span class="rating-label">${escapeHtml(criterion.label)}</span>
+        <div class="rating-stars" role="group" aria-label="${escapeAttr(criterion.label)}">
+          ${renderRatingStars(order.id, criterion.id, value, false)}
         </div>
       </div>
     `;
@@ -285,9 +158,9 @@ function renderOrderRatingSection(order, orderIndex) {
   `;
 }
 
-function setOrderRating(orderIndex, criterionId, value) {
-  const orders = normalizeOrders(getSavedOrders());
-  const order = orders[orderIndex];
+function setOrderRating(orderId, criterionId, value) {
+  const orders = getSavedOrders();
+  const order = findOrderById(orders, orderId);
   if (!order || order.status !== 'Pedido Entregue') {
     return;
   }
@@ -334,15 +207,15 @@ function handleRatingClick(event) {
     return;
   }
 
-  const orderIndex = Number(button.getAttribute('data-order-index'));
+  const orderId = button.getAttribute('data-order-id');
   const criterionId = button.getAttribute('data-criterion-id');
   const value = Number(button.getAttribute('data-rating-value'));
 
-  if (!Number.isInteger(orderIndex) || !criterionId || !isValidRatingValue(value)) {
+  if (!orderId || !criterionId || !isValidRatingValue(value)) {
     return;
   }
 
-  setOrderRating(orderIndex, criterionId, value);
+  setOrderRating(orderId, criterionId, value);
 }
 
 function renderOrderTimeline(order) {
@@ -409,12 +282,12 @@ function renderOrderList(entries) {
     orderCard.innerHTML = `
       <div class="order-card-header">
         <div class="order-card-title-group">
-          <h3 class="order-card-title">Pedido ${entry.originalIndex + 1}</h3>
-          <span class="status-badge status-badge--${getStatusClass(order.status)}">${order.status}</span>
+          <h3 class="order-card-title">${escapeHtml(order.id)}</h3>
+          <span class="status-badge status-badge--${getStatusClass(order.status)}">${escapeHtml(order.status)}</span>
         </div>
       </div>
       <div class="order-meta">
-        <div><strong>Data:</strong> ${formatDateTime(order.data)}</div>
+        <div><strong>Data:</strong> ${escapeHtml(formatDateTime(order.data))}</div>
         <div><strong>Usuário:</strong> ${escapeHtml(order.usuario?.nome || 'Desconhecido')}</div>
         <div><strong>Setor:</strong> ${escapeHtml(order.usuario?.setor || '—')}</div>
       </div>
@@ -450,7 +323,7 @@ function renderOrderList(entries) {
         </tbody>
       </table>
       ${renderOrderTimeline(order)}
-      ${renderOrderRatingSection(order, entry.originalIndex)}
+      ${renderOrderRatingSection(order)}
     `;
     container.appendChild(orderCard);
   });
@@ -458,13 +331,24 @@ function renderOrderList(entries) {
 
 function initializePage() {
   renderStatusFilterOptions(document.getElementById('statusFilter'));
-  const orders = normalizeOrders(getSavedOrders());
+  const orders = getSavedOrders();
   populateUserFilter(orders);
-  renderSummary(orders);
-  renderOrderList(orders.map((order, originalIndex) => ({ order, originalIndex })));
+
+  // A tela é "Meus pedidos": abre no usuário corrente, não no acervo inteiro.
+  const userSelect = document.getElementById('userFilter');
+  const currentUser = window.CBMDFNav ? window.CBMDFNav.getCurrentUser() : null;
+  if (currentUser && Array.from(userSelect.options).some(option => option.value === String(currentUser.id))) {
+    userSelect.value = String(currentUser.id);
+  }
+
+  applyFilters();
 
   const ordersContainer = document.getElementById('ordersContainer');
   ordersContainer.addEventListener('click', handleRatingClick);
+
+  const searchBox = document.getElementById('searchBox');
+  searchBox.removeAttribute('oninput');
+  searchBox.addEventListener('input', debounce(applyFilters, 200));
 }
 
 window.addEventListener('DOMContentLoaded', initializePage);

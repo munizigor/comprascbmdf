@@ -6,15 +6,6 @@ const CORPORATE_DEFAULTS = {
   investimento: 220000
 };
 
-function formatMoney(value) {
-  return Number(value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-}
-
-function toNumber(value, fallback = 0) {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : fallback;
-}
-
 function parseDate(dateText) {
   if (!dateText || typeof dateText !== 'string') return 0;
   const parts = dateText.split(',')[0]?.trim().split('/');
@@ -22,27 +13,6 @@ function parseDate(dateText) {
   const [day, month, year] = parts.map(Number);
   const dt = new Date(year, month - 1, day);
   return Number.isNaN(dt.getTime()) ? 0 : dt.getTime();
-}
-
-function getItemSubtotal(item) {
-  const qty = toNumber(item?.quantidade ?? item?.quantity, 0);
-  const unit = toNumber(item?.precoUnitario ?? item?.unitPrice, 0);
-  return toNumber(item?.subtotal, qty * unit);
-}
-
-function getOrders() {
-  const raw = localStorage.getItem(ORDER_STORAGE_KEY);
-  if (!raw) return [];
-  try {
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (_error) {
-    return [];
-  }
-}
-
-function saveOrders(orders) {
-  localStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify(orders));
 }
 
 function buildSectorDirectory(orders) {
@@ -93,7 +63,7 @@ function buildDefaultBudgetConfig(orders) {
 }
 
 function loadBudgetConfig() {
-  const orders = getOrders();
+  const orders = getSavedOrders();
   const raw = localStorage.getItem(BUDGET_STORAGE_KEY);
   if (!raw) {
     const defaults = buildDefaultBudgetConfig(orders);
@@ -187,7 +157,7 @@ function computeCommittedBySector(orders) {
 }
 
 function computeBudgetSnapshot() {
-  const orders = getOrders();
+  const orders = getSavedOrders();
   const config = loadBudgetConfig();
   const committedMap = computeCommittedBySector(orders);
 
@@ -273,14 +243,14 @@ function renderBudgetChart(snapshot) {
         legend: { display: false },
         tooltip: {
           callbacks: {
-            label: context => formatMoney(context.parsed.y)
+            label: context => formatPrice(context.parsed.y)
           }
         }
       },
       scales: {
         y: {
           ticks: {
-            callback: value => formatMoney(value)
+            callback: value => formatPrice(value)
           }
         }
       }
@@ -298,10 +268,10 @@ function renderGeneralView() {
     corpInvestInput.value = snapshot.corporate.investimento;
   }
 
-  document.getElementById('kpiTotalGeral').textContent = formatMoney(snapshot.corporate.total);
-  document.getElementById('kpiTotalAlocado').textContent = formatMoney(snapshot.allocated.total);
+  document.getElementById('kpiTotalGeral').textContent = formatPrice(snapshot.corporate.total);
+  document.getElementById('kpiTotalAlocado').textContent = formatPrice(snapshot.allocated.total);
   const saldoNode = document.getElementById('kpiTotalSaldo');
-  saldoNode.textContent = formatMoney(snapshot.nonAllocated.total);
+  saldoNode.textContent = formatPrice(snapshot.nonAllocated.total);
   saldoNode.classList.toggle('is-negative', snapshot.nonAllocated.total < 0);
 
   const tbody = document.getElementById('sectorBudgetTableBody');
@@ -310,15 +280,15 @@ function renderGeneralView() {
   snapshot.sectors.forEach(sector => {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${sector.setor}</td>
-      <td>${sector.gestor}</td>
-      <td>${formatMoney(sector.capCusteio)}</td>
-      <td>${formatMoney(sector.committedCusteio)}</td>
-      <td class="${getSaldoClass(sector.saldoCusteio)}">${formatMoney(sector.saldoCusteio)}</td>
-      <td>${formatMoney(sector.capInvestimento)}</td>
-      <td>${formatMoney(sector.committedInvestimento)}</td>
-      <td class="${getSaldoClass(sector.saldoInvestimento)}">${formatMoney(sector.saldoInvestimento)}</td>
-      <td><button class="btn btn-secondary btn-sm budget-edit-btn" type="button" data-sector-name="${sector.setor}">Editar teto</button></td>
+      <td>${escapeHtml(sector.setor)}</td>
+      <td>${escapeHtml(sector.gestor)}</td>
+      <td>${formatPrice(sector.capCusteio)}</td>
+      <td>${formatPrice(sector.committedCusteio)}</td>
+      <td class="${getSaldoClass(sector.saldoCusteio)}">${formatPrice(sector.saldoCusteio)}</td>
+      <td>${formatPrice(sector.capInvestimento)}</td>
+      <td>${formatPrice(sector.committedInvestimento)}</td>
+      <td class="${getSaldoClass(sector.saldoInvestimento)}">${formatPrice(sector.saldoInvestimento)}</td>
+      <td><button class="btn btn-secondary btn-sm budget-edit-btn" type="button" data-sector-name="${escapeAttr(sector.setor)}">Editar teto</button></td>
     `;
     tbody.appendChild(row);
   });
@@ -424,7 +394,7 @@ function updateProgressMeter(prefix, committed, cap) {
   meterFill.classList.remove('level-green', 'level-yellow', 'level-red');
   meterFill.classList.add(`level-${level}`);
 
-  metaNode.textContent = `Comprometido ${formatMoney(committed)} de ${formatMoney(cap)}`;
+  metaNode.textContent = `Comprometido ${formatPrice(committed)} de ${formatPrice(cap)}`;
 }
 
 function requestFitsSectorBudget(sector, requestCosts) {
@@ -456,7 +426,8 @@ function renderPendingRequests(setorData, pendingEntries) {
   pendingEntries.forEach(entry => {
     const requestCosts = extractOrderCosts(entry.order);
     const validation = requestFitsSectorBudget(setorData, requestCosts);
-    const orderLabel = entry.order?.data || `Pedido ${entry.index + 1}`;
+    const orderId = entry.order?.id || '';
+    const orderLabel = `${orderId} — ${entry.order?.data || ''}`;
     const userName = entry.order?.usuario?.nome || 'Usuario nao informado';
     const statusClass = validation.fits ? 'fit' : 'overflow';
     const statusLabel = validation.fits ? 'Dentro do Orcamento' : 'Orcamento Insuficiente';
@@ -465,34 +436,34 @@ function renderPendingRequests(setorData, pendingEntries) {
     card.className = 'budget-request-card';
 
     const rows = (Array.isArray(entry.order?.itens) ? entry.order.itens : [])
-      .map((item, itemIndex) => `
+      .map(item => `
         <tr>
-          <td>${item.nome || item.name || 'Item sem nome'}</td>
-          <td>${item.tipoDespesa || 'Custeio'}</td>
-          <td>${formatMoney(getItemSubtotal(item))}</td>
-          <td><button class="btn btn-danger btn-sm" type="button" data-remove-item-order="${entry.index}" data-remove-item-index="${itemIndex}">Excluir</button></td>
+          <td>${escapeHtml(getItemName(item))}</td>
+          <td>${escapeHtml(item.tipoDespesa || 'Custeio')}</td>
+          <td>${formatPrice(getItemSubtotal(item))}</td>
+          <td><button class="btn btn-danger btn-sm" type="button" data-remove-item-order="${escapeAttr(orderId)}" data-remove-item-uid="${escapeAttr(item.itemUid)}">Excluir</button></td>
         </tr>
       `)
       .join('');
 
     const warningText = !validation.fits
-      ? `<div class="budget-warning">Orcamento Insuficiente. Excesso em Custeio: ${formatMoney(validation.overflowCusteio)} | Excesso em Investimento: ${formatMoney(validation.overflowInvestimento)}.</div>`
+      ? `<div class="budget-warning">Orcamento Insuficiente. Excesso em Custeio: ${formatPrice(validation.overflowCusteio)} | Excesso em Investimento: ${formatPrice(validation.overflowInvestimento)}.</div>`
       : '';
 
     card.innerHTML = `
       <div class="budget-request-top">
         <div>
-          <h3 class="budget-request-title">${orderLabel}</h3>
-          <small>Solicitante: ${userName}</small>
+          <h3 class="budget-request-title">${escapeHtml(orderLabel)}</h3>
+          <small>Solicitante: ${escapeHtml(userName)}</small>
         </div>
         <span class="budget-status-pill ${statusClass}">${statusLabel}</span>
       </div>
 
       <div class="budget-request-summary">
-        <div><strong>Custeio da solicitacao:</strong> ${formatMoney(requestCosts.custeio)}</div>
-        <div><strong>Investimento da solicitacao:</strong> ${formatMoney(requestCosts.investimento)}</div>
-        <div><strong>Saldo atual Custeio:</strong> ${formatMoney(validation.saldoCusteio)}</div>
-        <div><strong>Saldo atual Investimento:</strong> ${formatMoney(validation.saldoInvestimento)}</div>
+        <div><strong>Custeio da solicitacao:</strong> ${formatPrice(requestCosts.custeio)}</div>
+        <div><strong>Investimento da solicitacao:</strong> ${formatPrice(requestCosts.investimento)}</div>
+        <div><strong>Saldo atual Custeio:</strong> ${formatPrice(validation.saldoCusteio)}</div>
+        <div><strong>Saldo atual Investimento:</strong> ${formatPrice(validation.saldoInvestimento)}</div>
       </div>
 
       ${warningText}
@@ -512,8 +483,8 @@ function renderPendingRequests(setorData, pendingEntries) {
       </div>
 
       <div class="budget-request-actions">
-        <button class="btn btn-primary btn-sm" type="button" data-approve-order="${entry.index}" ${validation.fits ? '' : 'disabled'}>Aprovar no Setor</button>
-        <button class="btn btn-secondary btn-sm" type="button" data-supplement-order="${entry.index}">Solicitar Suplementacao</button>
+        <button class="btn btn-primary btn-sm" type="button" data-approve-order="${escapeAttr(orderId)}" ${validation.fits ? '' : 'disabled'}>Aprovar no Setor</button>
+        <button class="btn btn-secondary btn-sm" type="button" data-supplement-order="${escapeAttr(orderId)}">Solicitar Suplementacao</button>
       </div>
     `;
 
@@ -526,66 +497,62 @@ function renderPendingRequests(setorData, pendingEntries) {
 function bindPendingRequestActions() {
   document.querySelectorAll('[data-remove-item-order]').forEach(button => {
     button.onclick = () => {
-      const orderIndex = Number(button.getAttribute('data-remove-item-order'));
-      const itemIndex = Number(button.getAttribute('data-remove-item-index'));
-      removeItemFromOrder(orderIndex, itemIndex);
+      removeItemFromOrder(button.getAttribute('data-remove-item-order'), button.getAttribute('data-remove-item-uid'));
     };
   });
 
   document.querySelectorAll('[data-approve-order]').forEach(button => {
-    button.onclick = () => {
-      const orderIndex = Number(button.getAttribute('data-approve-order'));
-      approveOrderInSector(orderIndex);
-    };
+    button.onclick = () => approveOrderInSector(button.getAttribute('data-approve-order'));
   });
 
   document.querySelectorAll('[data-supplement-order]').forEach(button => {
     button.onclick = () => {
-      const orderIndex = Number(button.getAttribute('data-supplement-order'));
-      markOrderAsSupplementRequest(orderIndex);
+      markOrderAsSupplementRequest(button.getAttribute('data-supplement-order'));
     };
   });
 }
 
-function removeItemFromOrder(orderIndex, itemIndex) {
-  const orders = getOrders();
-  const order = orders[orderIndex];
-  if (!order || !Array.isArray(order.itens) || !order.itens[itemIndex]) {
-    return;
-  }
+function removeItemFromOrder(orderId, itemUid) {
+  const orders = getSavedOrders();
+  const order = findOrderById(orders, orderId);
+  if (!order || !Array.isArray(order.itens)) return;
+
+  const itemIndex = order.itens.findIndex(item => item.itemUid === itemUid);
+  if (itemIndex < 0) return;
 
   order.itens.splice(itemIndex, 1);
   saveOrders(orders);
   renderSectorView();
 }
 
-function approveOrderInSector(orderIndex) {
-  const orders = getOrders();
-  if (!orders[orderIndex]) return;
+function approveOrderInSector(orderId) {
+  const orders = getSavedOrders();
+  const order = findOrderById(orders, orderId);
+  if (!order) return;
 
   const selectedSector = document.getElementById('sectorSelect')?.value;
   const snapshot = computeBudgetSnapshot();
   const setorData = snapshot.sectors.find(item => item.setor === selectedSector);
   if (!setorData) return;
 
-  const requestCosts = extractOrderCosts(orders[orderIndex]);
-  const validation = requestFitsSectorBudget(setorData, requestCosts);
+  const validation = requestFitsSectorBudget(setorData, extractOrderCosts(order));
 
   if (!validation.fits) {
     alert('Orcamento Insuficiente. Ajuste itens ou solicite suplementacao.');
     return;
   }
 
-  orders[orderIndex].status = 'Incluído no PCA';
+  order.status = 'Incluído no PCA';
   saveOrders(orders);
   renderSectorView();
 }
 
-function markOrderAsSupplementRequest(orderIndex) {
-  const orders = getOrders();
-  if (!orders[orderIndex]) return;
+function markOrderAsSupplementRequest(orderId) {
+  const orders = getSavedOrders();
+  const order = findOrderById(orders, orderId);
+  if (!order) return;
 
-  orders[orderIndex].status = 'Aguardando Suplementação';
+  order.status = 'Aguardando Suplementação';
   saveOrders(orders);
   renderSectorView();
 }
@@ -595,7 +562,7 @@ function renderSectorSelector(sectors, selected) {
   if (!select) return;
 
   select.innerHTML = sectors
-    .map(sector => `<option value="${sector.setor}" ${sector.setor === selected ? 'selected' : ''}>${sector.setor} - ${sector.gestor}</option>`)
+    .map(sector => `<option value="${escapeAttr(sector.setor)}" ${sector.setor === selected ? 'selected' : ''}>${escapeHtml(sector.setor)} - ${escapeHtml(sector.gestor)}</option>`)
     .join('');
 
   select.onchange = () => renderSectorView();
