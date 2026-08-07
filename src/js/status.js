@@ -19,11 +19,12 @@ function populateUserFilter(orders) {
   const select = document.getElementById('userFilter');
   select.innerHTML = '<option value="all">Todos os usuários</option>' +
     Array.from(users.entries())
-      .map(([id, nome]) => `<option value="${id}">${nome}</option>`)
+      .map(([id, nome]) => `<option value="${escapeAttr(id)}">${escapeHtml(nome)}</option>`)
       .join('');
 }
 
-function applyFilters() {
+function applyFilters(resetPagination = false) {
+  if (resetPagination) visibleCount = PAGE_SIZE;
   const orders = getSavedOrders();
   const search = document.getElementById('searchBox').value.trim().toLowerCase();
   const userSelect = document.getElementById('userFilter');
@@ -63,13 +64,56 @@ function applyFilters() {
   renderOrders(filtered);
 }
 
-function updateOrderStatus(orderId, status) {
-  const orders = getSavedOrders();
-  const order = findOrderById(orders, orderId);
+// A mudança de status não é mais imediata: escolher um destino abre o painel
+// de motivo, e só o "Registrar mudança" efetiva — passando por
+// applyStatusChange, o ponto único que grava a trilha.
+function openTransitionPanel(orderId, novoStatus) {
+  const panel = document.getElementById(`transition-panel-${orderId}`);
+  if (!panel) return;
+
+  const order = findOrderById(getSavedOrders(), orderId);
   if (!order) return;
-  order.status = status;
-  saveOrders(orders);
+
+  const excecao = document.querySelector(`[data-excecao="${CSS.escape(orderId)}"]`)?.checked || false;
+  const minimo = getJustificativaMinima(order.status, novoStatus, excecao);
+
+  panel.hidden = !novoStatus;
+  if (!novoStatus) return;
+
+  panel.querySelector('[data-transition-target]').textContent = novoStatus;
+  const hint = panel.querySelector('[data-transition-hint]');
+  hint.textContent = minimo > 0
+    ? `Motivo obrigatório (mínimo de ${minimo} caracteres).`
+    : 'Motivo opcional — se preenchido, fica registrado na trilha.';
+  panel.querySelector('textarea').value = '';
+  panel.querySelector('[data-transition-error]').textContent = '';
+}
+
+function confirmTransition(orderId) {
+  const select = document.querySelector(`[data-order-status="${CSS.escape(orderId)}"]`);
+  const panel = document.getElementById(`transition-panel-${orderId}`);
+  if (!select || !panel || !select.value) return;
+
+  const excepcional = document.querySelector(`[data-excecao="${CSS.escape(orderId)}"]`)?.checked || false;
+  const resultado = applyStatusChange(orderId, select.value, {
+    justificativa: panel.querySelector('textarea').value,
+    excepcional,
+    origem: 'status.html'
+  });
+
+  if (!resultado.ok) {
+    panel.querySelector('[data-transition-error]').textContent = resultado.motivo;
+    return;
+  }
+
   applyFilters();
+}
+
+function cancelTransition(orderId) {
+  const select = document.querySelector(`[data-order-status="${CSS.escape(orderId)}"]`);
+  if (select) select.value = '';
+  const panel = document.getElementById(`transition-panel-${orderId}`);
+  if (panel) panel.hidden = true;
 }
 
 function deleteOrder(orderId) {
@@ -145,6 +189,9 @@ function addItemToOrder(orderId) {
   applyFilters();
 }
 
+const PAGE_SIZE = 20;
+let visibleCount = PAGE_SIZE;
+
 function renderOrders(entries) {
   const container = document.getElementById('ordersContainer');
   container.innerHTML = '';
@@ -157,10 +204,15 @@ function renderOrders(entries) {
     return;
   }
 
-  entries.forEach(entry => {
+  const podeExcecao = getPerfilAtual() === 'compras';
+  const pagina = entries.slice(0, visibleCount);
+
+  pagina.forEach(entry => {
     const order = entry.order;
     const id = escapeAttr(order.id);
     const items = Array.isArray(order.itens) ? order.itens : [];
+    const transicoes = getTransicoesValidas(order.status);
+    const sla = getSituacaoSla(order);
     const orderCard = document.createElement('div');
     orderCard.className = 'order-card';
     orderCard.innerHTML = `
@@ -168,14 +220,33 @@ function renderOrders(entries) {
         <div class="order-card-title-group">
           <h3 class="order-card-title">${escapeHtml(order.id)}</h3>
           <span class="status-badge status-badge--${getStatusClass(order.status)}">${escapeHtml(getStatusLabel(order.status))}</span>
+          ${sla ? `<span class="sla-pill sla-pill--${sla.nivel}" title="SLA da Etapa ${sla.etapa}: ${sla.sla} dias">${sla.dias} d na etapa</span>` : ''}
         </div>
         <div class="order-card-actions">
           <label for="status-${id}">Atualizar status</label>
           <select id="status-${id}" data-order-status="${id}">
-            ${STATUS_VALUES.map(status => `<option value="${escapeAttr(status)}" ${order.status === status ? 'selected' : ''}>${escapeHtml(status)}</option>`).join('')}
+            <option value="">— manter status atual —</option>
+            ${transicoes.map(status => `<option value="${escapeAttr(status)}">${escapeHtml(status)}</option>`).join('')}
           </select>
+          ${podeExcecao ? `
+            <label class="excecao-toggle" title="Libera qualquer status do pipeline; exige motivo e fica marcado na trilha.">
+              <input type="checkbox" data-excecao="${id}"> Transição excepcional
+            </label>` : ''}
           <button class="btn btn-secondary btn-sm" type="button" data-toggle-add-item="${id}">Acrescentar item</button>
           <button class="btn btn-danger btn-sm" type="button" data-delete-order="${id}">Excluir pedido</button>
+        </div>
+        <div class="transition-panel" id="transition-panel-${id}" hidden>
+          <p class="transition-title">Mudar para <strong data-transition-target></strong></p>
+          <div class="input-group">
+            <label for="justificativa-${id}">Motivo da mudança</label>
+            <textarea id="justificativa-${id}" rows="2" placeholder="Descreva o motivo desta mudança de estágio."></textarea>
+            <small class="transition-hint" data-transition-hint></small>
+          </div>
+          <p class="transition-error" data-transition-error role="alert"></p>
+          <div class="transition-actions">
+            <button class="btn btn-primary btn-sm" type="button" data-confirm-transition="${id}">Registrar mudança</button>
+            <button class="btn btn-secondary btn-sm" type="button" data-cancel-transition="${id}">Cancelar</button>
+          </div>
         </div>
         <div class="order-meta">
           <div><strong>Data:</strong> ${escapeHtml(formatDateTime(order.data))}</div>
@@ -269,18 +340,33 @@ function renderOrders(entries) {
           <button class="btn btn-secondary btn-sm" type="button" data-toggle-add-item="${id}">Cancelar</button>
         </div>
       </div>
+      ${renderHistoricoHtml(order)}
     `;
     container.appendChild(orderCard);
   });
+
+  // O card ficou pesado com a trilha; carrega em blocos.
+  if (entries.length > pagina.length) {
+    const row = document.createElement('div');
+    row.className = 'load-more-row';
+    row.innerHTML = `<button class="btn btn-secondary" type="button" data-load-more>Carregar mais (${entries.length - pagina.length} restantes)</button>`;
+    container.appendChild(row);
+  }
 }
 
 function handleOrdersContainerClick(event) {
-  const target = event.target.closest('[data-delete-order], [data-toggle-add-item], [data-save-item], [data-delete-item-order]');
+  const target = event.target.closest('[data-delete-order], [data-toggle-add-item], [data-save-item], [data-delete-item-order], [data-confirm-transition], [data-cancel-transition], [data-load-more]');
   if (!target) return;
 
   if (target.dataset.deleteOrder) return deleteOrder(target.dataset.deleteOrder);
   if (target.dataset.toggleAddItem) return toggleAddItemForm(target.dataset.toggleAddItem);
   if (target.dataset.saveItem) return addItemToOrder(target.dataset.saveItem);
+  if (target.hasAttribute('data-load-more')) {
+    visibleCount += PAGE_SIZE;
+    return applyFilters();
+  }
+  if (target.dataset.confirmTransition) return confirmTransition(target.dataset.confirmTransition);
+  if (target.dataset.cancelTransition) return cancelTransition(target.dataset.cancelTransition);
   if (target.dataset.deleteItemOrder) {
     return deleteOrderItem(target.dataset.deleteItemOrder, target.dataset.deleteItemUid);
   }
@@ -288,11 +374,29 @@ function handleOrdersContainerClick(event) {
 
 function handleOrdersContainerChange(event) {
   const select = event.target.closest('[data-order-status]');
-  if (!select) return;
-  updateOrderStatus(select.dataset.orderStatus, select.value);
+  if (select) return openTransitionPanel(select.dataset.orderStatus, select.value);
+
+  // Marcar "transição excepcional" libera todo o pipeline no select daquele card.
+  const excecao = event.target.closest('[data-excecao]');
+  if (!excecao) return;
+
+  const orderId = excecao.dataset.excecao;
+  const statusSelect = document.querySelector(`[data-order-status="${CSS.escape(orderId)}"]`);
+  const order = findOrderById(getSavedOrders(), orderId);
+  if (!statusSelect || !order) return;
+
+  const opcoes = excecao.checked
+    ? STATUS_VALUES.filter(status => status !== order.status)
+    : getTransicoesValidas(order.status);
+
+  statusSelect.innerHTML = '<option value="">— manter status atual —</option>' +
+    opcoes.map(status => `<option value="${escapeAttr(status)}">${escapeHtml(status)}</option>`).join('');
+  cancelTransition(orderId);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (!guardPage(['gestor', 'compras'])) return;
+
   renderStatusFilterOptions(document.getElementById('statusFilter'));
   populateUserFilter(getSavedOrders());
   applyFilters();
@@ -303,5 +407,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const searchBox = document.getElementById('searchBox');
   searchBox.removeAttribute('oninput');
-  searchBox.addEventListener('input', debounce(applyFilters, 200));
+  searchBox.addEventListener('input', debounce(() => applyFilters(true), 200));
 });

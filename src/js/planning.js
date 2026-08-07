@@ -468,6 +468,8 @@ function renderPlanning() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  if (!guardPage(['compras'])) return;
+
   renderPlanning();
 
   const exportButton = document.getElementById('exportCsvButton');

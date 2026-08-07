@@ -340,6 +340,8 @@ function handleContractContainerClick(event) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  if (!guardPage(['compras'])) return;
+
   loadContractPage();
 
   document.getElementById('contractContainer').addEventListener('click', handleContractContainerClick);

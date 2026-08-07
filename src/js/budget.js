@@ -526,8 +526,7 @@ function removeItemFromOrder(orderId, itemUid) {
 }
 
 function approveOrderInSector(orderId) {
-  const orders = getSavedOrders();
-  const order = findOrderById(orders, orderId);
+  const order = findOrderById(getSavedOrders(), orderId);
   if (!order) return;
 
   const selectedSector = document.getElementById('sectorSelect')?.value;
@@ -542,18 +541,47 @@ function approveOrderInSector(orderId) {
     return;
   }
 
-  order.status = 'Incluído no PCA';
-  saveOrders(orders);
+  // A justificativa é derivada da validação que acabou de rodar — verdadeira
+  // e verificável, sem depender de digitação.
+  const resultado = applyStatusChange(orderId, 'Incluído no PCA', {
+    origem: 'orcamento-setorial.html',
+    justificativa: `Aprovado no setor ${selectedSector}: cabe no saldo disponível (Custeio ${formatPrice(validation.saldoCusteio)} / Investimento ${formatPrice(validation.saldoInvestimento)}).`
+  });
+
+  if (!resultado.ok) {
+    alert(resultado.motivo);
+    return;
+  }
+
   renderSectorView();
 }
 
 function markOrderAsSupplementRequest(orderId) {
-  const orders = getSavedOrders();
-  const order = findOrderById(orders, orderId);
+  const order = findOrderById(getSavedOrders(), orderId);
   if (!order) return;
 
-  order.status = 'Aguardando Suplementação';
-  saveOrders(orders);
+  const selectedSector = document.getElementById('sectorSelect')?.value;
+  const snapshot = computeBudgetSnapshot();
+  const setorData = snapshot.sectors.find(item => item.setor === selectedSector);
+  const validation = setorData ? requestFitsSectorBudget(setorData, extractOrderCosts(order)) : null;
+
+  // Só afirma déficit quando ele existe de fato — a suplementação também pode
+  // ser pedida preventivamente, por um pedido que ainda cabe no saldo.
+  const temDeficit = validation && (validation.overflowCusteio > 0 || validation.overflowInvestimento > 0);
+  const deficit = temDeficit
+    ? ` Déficit apurado: Custeio ${formatPrice(validation.overflowCusteio)} / Investimento ${formatPrice(validation.overflowInvestimento)}.`
+    : ' Solicitação preventiva: o pedido ainda cabe no saldo atual do setor.';
+
+  const resultado = applyStatusChange(orderId, 'Aguardando Suplementação', {
+    origem: 'orcamento-setorial.html',
+    justificativa: `Suplementação solicitada pelo setor ${selectedSector || 'não informado'}.${deficit}`
+  });
+
+  if (!resultado.ok) {
+    alert(resultado.motivo);
+    return;
+  }
+
   renderSectorView();
 }
 

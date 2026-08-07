@@ -323,6 +323,7 @@ function renderOrderList(entries) {
         </tbody>
       </table>
       ${renderOrderTimeline(order)}
+      ${renderHistoricoHtml(order)}
       ${renderOrderRatingSection(order)}
     `;
     container.appendChild(orderCard);
