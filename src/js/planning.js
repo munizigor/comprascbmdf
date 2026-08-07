@@ -12,8 +12,8 @@ function formatDateTime(dateString) {
 }
 
 function getStatusFlags(status) {
-  const normalizedStatus = status || 'Arquivado';
-  const includeInTotal = normalizedStatus !== 'Arquivado';
+  const normalizedStatus = status || 'Aguardando Análise';
+  const includeInTotal = !['Arquivado', 'Aguardando Análise'].includes(normalizedStatus);
   const includeInComprometido = ['TR','Nota de Empenho emitida', 'Pedido a Caminho', 'Recebido no CESMA', 'Pedido Entregue'].includes(normalizedStatus);
   const includeInEmpenhado = ['Nota de Empenho emitida', 'Pedido a Caminho', 'Recebido no CESMA', 'Pedido Entregue'].includes(normalizedStatus);
   const includeInLiquidado = ['Recebido no CESMA', 'Pedido Entregue'].includes(normalizedStatus);
@@ -40,6 +40,55 @@ function groupBy(orders, keyFn) {
   }, {});
 }
 
+function getCellRawValue(cell) {
+  if (cell && typeof cell === 'object' && Object.prototype.hasOwnProperty.call(cell, 'value')) {
+    return cell.value;
+  }
+  return cell;
+}
+
+function getSaldoColumnIndexes(headers) {
+  return headers
+    .map((header, index) => ({ header: String(header || '').trim().toLowerCase(), index }))
+    .filter(item => item.header === 'saldo')
+    .map(item => item.index);
+}
+
+function getSaldoStateClass(value) {
+  const numericValue = Number(value || 0);
+  if (numericValue > 0) {
+    return 'saldo-cell--available';
+  }
+  if (numericValue < 0) {
+    return 'saldo-cell--negative';
+  }
+  return 'saldo-cell--empty';
+}
+
+function renderRowCells(cells, numericColumns, saldoColumns = []) {
+  return cells.map((cell, index) => {
+    if (cell === null) {
+      return '';
+    }
+
+    const cellIsObject = cell && typeof cell === 'object' && !Array.isArray(cell);
+    const rawValue = getCellRawValue(cell);
+    const value = numericColumns.includes(index) ? formatPrice(rawValue) : rawValue;
+    const rowspanAttr = cellIsObject && cell.rowspan ? ` rowspan="${cell.rowspan}"` : '';
+    const colspanAttr = cellIsObject && cell.colspan ? ` colspan="${cell.colspan}"` : '';
+    const classNames = [];
+    if (cellIsObject && cell.className) {
+      classNames.push(cell.className);
+    }
+    if (saldoColumns.includes(index)) {
+      classNames.push('saldo-cell', getSaldoStateClass(rawValue));
+    }
+    const classAttr = classNames.length ? ` class="${classNames.join(' ')}"` : '';
+
+    return `<td${rowspanAttr}${colspanAttr}${classAttr}>${value}</td>`;
+  }).join('');
+}
+
 function renderTable(containerId, headers, rows, totalLabel, numericColumns = [], totalValues = null) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -51,11 +100,16 @@ function renderTable(containerId, headers, rows, totalLabel, numericColumns = []
 
   const normalizedRows = rows.map(row => Array.isArray(row) ? { cells: row, className: '' } : row);
   const resolvedNumericColumns = numericColumns.length ? numericColumns : [headers.length - 1];
-  const resolvedTotalValues = totalValues ?? resolvedNumericColumns.map(columnIndex => normalizedRows.reduce((sum, row) => sum + Number(row.cells[columnIndex] || 0), 0));
+  const saldoColumns = getSaldoColumnIndexes(headers);
+  const resolvedTotalValues = totalValues ?? resolvedNumericColumns.map(columnIndex => normalizedRows.reduce((sum, row) => sum + Number(getCellRawValue(row.cells[columnIndex]) || 0), 0));
   const totalRow = totalLabel ? `
         <tr class="table-total-row">
           <td colspan="${Math.max(1, headers.length - resolvedTotalValues.length)}">${totalLabel}</td>
-          ${resolvedTotalValues.map(value => `<td>${formatPrice(value)}</td>`).join('')}
+          ${resolvedTotalValues.map((value, idx) => {
+            const columnIndex = resolvedNumericColumns[idx];
+            const saldoClasses = saldoColumns.includes(columnIndex) ? ` class="saldo-cell ${getSaldoStateClass(value)}"` : '';
+            return `<td${saldoClasses}>${formatPrice(value)}</td>`;
+          }).join('')}
         </tr>` : '';
 
   const table = document.createElement('table');
@@ -69,9 +123,7 @@ function renderTable(containerId, headers, rows, totalLabel, numericColumns = []
     <tbody>
       ${normalizedRows.map(({ cells, className }) => `
         <tr class="${className || ''}">
-          ${cells.map((cell, index) => `
-            <td>${resolvedNumericColumns.includes(index) ? formatPrice(cell) : cell}</td>
-          `).join('')}
+          ${renderRowCells(cells, resolvedNumericColumns, saldoColumns)}
         </tr>
       `).join('')}
       ${totalRow}
@@ -80,6 +132,76 @@ function renderTable(containerId, headers, rows, totalLabel, numericColumns = []
 
   container.innerHTML = '';
   container.appendChild(table);
+}
+
+function createReportTable(headers, rows, totalLabel, numericColumns = [], totalValues = null) {
+  const normalizedRows = rows.map(row => Array.isArray(row) ? { cells: row, className: '' } : row);
+  const resolvedNumericColumns = numericColumns.length ? numericColumns : [headers.length - 1];
+  const saldoColumns = getSaldoColumnIndexes(headers);
+  const resolvedTotalValues = totalValues ?? resolvedNumericColumns.map(columnIndex => normalizedRows.reduce((sum, row) => sum + Number(getCellRawValue(row.cells[columnIndex]) || 0), 0));
+  const totalRow = totalLabel ? `
+        <tr class="table-total-row">
+          <td colspan="${Math.max(1, headers.length - resolvedTotalValues.length)}">${totalLabel}</td>
+          ${resolvedTotalValues.map((value, idx) => {
+            const columnIndex = resolvedNumericColumns[idx];
+            const saldoClasses = saldoColumns.includes(columnIndex) ? ` class="saldo-cell ${getSaldoStateClass(value)}"` : '';
+            return `<td${saldoClasses}>${formatPrice(value)}</td>`;
+          }).join('')}
+        </tr>` : '';
+
+  const table = document.createElement('table');
+  table.className = 'report-table';
+  table.innerHTML = `
+    <thead>
+      <tr>
+        ${headers.map(header => `<th>${header}</th>`).join('')}
+      </tr>
+    </thead>
+    <tbody>
+      ${normalizedRows.map(({ cells, className }) => `
+        <tr class="${className || ''}">
+          ${renderRowCells(cells, resolvedNumericColumns, saldoColumns)}
+        </tr>
+      `).join('')}
+      ${totalRow}
+    </tbody>
+  `;
+
+  return table;
+}
+
+function renderPcaBySetorTables(containerId, setorGroups) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  if (!setorGroups.length) {
+    container.innerHTML = '<div class="empty-state">Nenhum valor registrado para este plano.</div>';
+    return;
+  }
+
+  container.innerHTML = '';
+
+  setorGroups.forEach(group => {
+    const section = document.createElement('section');
+    section.className = 'setor-table-section';
+
+    const title = document.createElement('h3');
+    title.className = 'setor-table-title';
+    title.textContent = `Setor: ${group.setor}`;
+
+    const totals = group.totals;
+    const table = createReportTable(
+      ['Tipo', 'Classe', 'Planejado', 'Comprometido', 'Empenhado', 'Liquidado', 'Pago', 'Saldo'],
+      group.rows,
+      `TOTAL ${group.setor}`,
+      [2, 3, 4, 5, 6, 7],
+      [totals.total, totals.comprometido, totals.empenhado, totals.liquidado, totals.pago, totals.total - totals.comprometido]
+    );
+
+    section.appendChild(title);
+    section.appendChild(table);
+    container.appendChild(section);
+  });
 }
 
 function renderPlanning() {
@@ -162,22 +284,33 @@ function renderPlanning() {
     return acc;
   }, {});
 
-  let currentPcaType = null;
-  pcaTypeDetailRows.forEach(row => {
-    if (row.tipo !== currentPcaType) {
-      if (currentPcaType) {
-        const subtotal = pcaTypeTotals[currentPcaType];
-        pcaTypeRows.push({ cells: [`TOTAL EM ${currentPcaType}`, '', subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
-      }
-      currentPcaType = row.tipo;
+  let pcaTypeIndex = 0;
+  while (pcaTypeIndex < pcaTypeDetailRows.length) {
+    const currentType = pcaTypeDetailRows[pcaTypeIndex].tipo;
+    const typeStartIndex = pcaTypeIndex;
+    while (pcaTypeIndex < pcaTypeDetailRows.length && pcaTypeDetailRows[pcaTypeIndex].tipo === currentType) {
+      pcaTypeIndex += 1;
     }
 
-    pcaTypeRows.push({ cells: [row.tipo, row.classe, row.total, row.comprometido, row.empenhado, row.liquidado, row.pago, row.total - row.comprometido], className: '' });
-  });
+    const typeRows = pcaTypeDetailRows.slice(typeStartIndex, pcaTypeIndex);
+    typeRows.forEach((row, rowIndex) => {
+      pcaTypeRows.push({
+        cells: [
+          rowIndex === 0 ? { value: row.tipo, rowspan: typeRows.length } : null,
+          row.classe,
+          row.total,
+          row.comprometido,
+          row.empenhado,
+          row.liquidado,
+          row.pago,
+          row.total - row.comprometido
+        ],
+        className: ''
+      });
+    });
 
-  if (currentPcaType) {
-    const subtotal = pcaTypeTotals[currentPcaType];
-    pcaTypeRows.push({ cells: [`TOTAL EM ${currentPcaType}`, '', subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
+    const subtotal = pcaTypeTotals[currentType];
+    pcaTypeRows.push({ cells: [{ value: `TOTAL EM ${currentType}`, colspan: 2 }, null, subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
   }
 
   const pcaTypeTotalsSummary = pcaTypeDetailRows.reduce((acc, row) => {
@@ -191,7 +324,6 @@ function renderPlanning() {
 
   renderTable('pcaTypeContainer', ['Tipo', 'Classe', 'Planejado', 'Comprometido', 'Empenhado', 'Liquidado', 'Pago', 'Saldo'], pcaTypeRows, 'TOTAL', [2, 3, 4, 5, 6, 7], [pcaTypeTotalsSummary.total, pcaTypeTotalsSummary.comprometido, pcaTypeTotalsSummary.empenhado, pcaTypeTotalsSummary.liquidado, pcaTypeTotalsSummary.pago, pcaTypeTotalsSummary.total - pcaTypeTotalsSummary.comprometido]);
 
-  const pcaRows = [];
   const pcaDetailRows = Object.entries(pcaAggregation).map(([key, values]) => {
     const [setor, tipo, classe] = key.split('|||');
     return { setor, tipo, classe, ...values };
@@ -227,55 +359,57 @@ function renderPlanning() {
     return acc;
   }, {});
 
-  let currentSetor = null;
-  let currentTipo = null;
-  pcaDetailRows.forEach(row => {
-    if (row.setor !== currentSetor) {
-      if (currentSetor && currentTipo) {
-        const subtotal = pcaTypeTotalsBySetor[currentSetor][currentTipo];
-        pcaRows.push({ cells: [currentSetor, `TOTAL EM ${currentTipo}`, '', subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
-      }
-
-      if (currentSetor) {
-        const subtotal = pcaSetorTotals[currentSetor];
-        pcaRows.push({ cells: [`TOTAL ${currentSetor}`, '', '', subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
-      }
-
-      currentSetor = row.setor;
-      currentTipo = null;
+  const pcaRowsBySetor = pcaDetailRows.reduce((acc, row) => {
+    if (!acc[row.setor]) {
+      acc[row.setor] = [];
     }
-
-    if (row.tipo !== currentTipo) {
-      if (currentTipo) {
-        const subtotal = pcaTypeTotalsBySetor[currentSetor][currentTipo];
-        pcaRows.push({ cells: [row.setor, `TOTAL EM ${currentTipo}`, '', subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
-      }
-      currentTipo = row.tipo;
-    }
-
-    pcaRows.push({ cells: [row.setor, row.tipo, row.classe, row.total, row.comprometido, row.empenhado, row.liquidado, row.pago, row.total - row.comprometido], className: '' });
-  });
-
-  if (currentSetor && currentTipo) {
-    const subtotal = pcaTypeTotalsBySetor[currentSetor][currentTipo];
-    pcaRows.push({ cells: [currentSetor, `TOTAL EM ${currentTipo}`, '', subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
-  }
-
-  if (currentSetor) {
-    const subtotal = pcaSetorTotals[currentSetor];
-    pcaRows.push({ cells: [`TOTAL ${currentSetor}`, '', '', subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
-  }
-
-  const pcaTotals = pcaDetailRows.reduce((acc, row) => {
-    acc.total += Number(row.total || 0);
-    acc.comprometido += Number(row.comprometido || 0);
-    acc.empenhado += Number(row.empenhado || 0);
-    acc.liquidado += Number(row.liquidado || 0);
-    acc.pago += Number(row.pago || 0);
+    acc[row.setor].push(row);
     return acc;
-  }, { total: 0, comprometido: 0, empenhado: 0, liquidado: 0, pago: 0 });
+  }, {});
 
-  renderTable('pcaContainer', ['Setor', 'Tipo', 'Classe', 'Planejado', 'Comprometido', 'Empenhado', 'Liquidado', 'Pago', 'Saldo'], pcaRows, 'TOTAL', [3, 4, 5, 6, 7, 8], [pcaTotals.total, pcaTotals.comprometido, pcaTotals.empenhado, pcaTotals.liquidado, pcaTotals.pago, pcaTotals.total - pcaTotals.comprometido]);
+  const pcaSetorGroups = Object.keys(pcaRowsBySetor)
+    .sort((a, b) => a.localeCompare(b, 'pt-BR'))
+    .map(setor => {
+      const rows = [];
+      const setorRows = pcaRowsBySetor[setor];
+      let setorIndex = 0;
+
+      while (setorIndex < setorRows.length) {
+        const currentTipo = setorRows[setorIndex].tipo;
+        const tipoStartIndex = setorIndex;
+        while (setorIndex < setorRows.length && setorRows[setorIndex].tipo === currentTipo) {
+          setorIndex += 1;
+        }
+
+        const tipoRows = setorRows.slice(tipoStartIndex, setorIndex);
+        tipoRows.forEach((row, rowIndex) => {
+          rows.push({
+            cells: [
+              rowIndex === 0 ? { value: row.tipo, rowspan: tipoRows.length } : null,
+              row.classe,
+              row.total,
+              row.comprometido,
+              row.empenhado,
+              row.liquidado,
+              row.pago,
+              row.total - row.comprometido
+            ],
+            className: ''
+          });
+        });
+
+        const subtotal = pcaTypeTotalsBySetor[setor][currentTipo];
+        rows.push({ cells: [{ value: `TOTAL EM ${currentTipo}`, colspan: 2 }, null, subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
+      }
+
+      return {
+        setor,
+        rows,
+        totals: pcaSetorTotals[setor] || { total: 0, comprometido: 0, empenhado: 0, liquidado: 0, pago: 0 }
+      };
+    });
+
+  renderPcaBySetorTables('pcaContainer', pcaSetorGroups);
 
   const ploaRows = [];
   const ploaDetailRows = Object.entries(ploaAggregation).map(([key, values]) => {
@@ -296,22 +430,33 @@ function renderPlanning() {
     return acc;
   }, {});
 
-  let currentTipoDespesa = null;
-  ploaDetailRows.forEach(row => {
-    if (row.tipoDespesa !== currentTipoDespesa) {
-      if (currentTipoDespesa) {
-        const subtotal = ploaTypeTotals[currentTipoDespesa];
-        ploaRows.push({ cells: [`Total em ${currentTipoDespesa}`, '', subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
-      }
-      currentTipoDespesa = row.tipoDespesa;
+  let ploaIndex = 0;
+  while (ploaIndex < ploaDetailRows.length) {
+    const currentTipoDespesa = ploaDetailRows[ploaIndex].tipoDespesa;
+    const tipoStartIndex = ploaIndex;
+    while (ploaIndex < ploaDetailRows.length && ploaDetailRows[ploaIndex].tipoDespesa === currentTipoDespesa) {
+      ploaIndex += 1;
     }
 
-    ploaRows.push({ cells: [row.tipoDespesa, row.natureza, row.total, row.comprometido, row.empenhado, row.liquidado, row.pago, row.total - row.comprometido], className: '' });
-  });
+    const tipoRows = ploaDetailRows.slice(tipoStartIndex, ploaIndex);
+    tipoRows.forEach((row, rowIndex) => {
+      ploaRows.push({
+        cells: [
+          rowIndex === 0 ? { value: row.tipoDespesa, rowspan: tipoRows.length } : null,
+          row.natureza,
+          row.total,
+          row.comprometido,
+          row.empenhado,
+          row.liquidado,
+          row.pago,
+          row.total - row.comprometido
+        ],
+        className: ''
+      });
+    });
 
-  if (currentTipoDespesa) {
     const subtotal = ploaTypeTotals[currentTipoDespesa];
-    ploaRows.push({ cells: [`Total em ${currentTipoDespesa}`, '', subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
+    ploaRows.push({ cells: [{ value: `Total em ${currentTipoDespesa}`, colspan: 2 }, null, subtotal.total, subtotal.comprometido, subtotal.empenhado, subtotal.liquidado, subtotal.pago, subtotal.total - subtotal.comprometido], className: 'table-subtotal-row' });
   }
 
   const ploaTotals = ploaDetailRows.reduce((acc, row) => {

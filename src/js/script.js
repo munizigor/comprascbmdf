@@ -478,6 +478,7 @@ function submitOrder() {
   const savedOrders = getSavedOrders();
   savedOrders.push({
     data: orderDate,
+    status: 'Aguardando Análise',
     observacoes: notes,
     usuario: {
       id: user.id,

@@ -18,7 +18,6 @@
       </div>
       <div class="actions">
         <a class="btn btn-secondary" href="index.html">Marketplace</a>
-        <a class="btn btn-secondary" href="pedidos.html">Excluir Pedidos</a>
         <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
         <a class="btn btn-secondary" href="contratacoes.html">Contratações</a>
         <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
@@ -29,8 +28,8 @@
   <main>
     <section class="hero">
       <div>
-        <h1>Veja a jornada do seu pedido</h1>
-        <p>Selecione um pedido e acompanhe cada etapa conforme a atualização feita na página de status.</p>
+        <h1>Acompanhe seu pedido</h1>
+        <!-- <p>Selecione um pedido e acompanhe cada etapa conforme a atualização feita na página de status.</p> -->
       </div>
     </section>
 
@@ -51,6 +50,7 @@
           <label for="statusFilter">Status atual</label>
           <select id="statusFilter" onchange="applyFilters()">
             <option value="all">Todos os status</option>
+            <option value="Aguardando Análise">Aguardando Análise</option>
             <option value="Arquivado">Arquivado</option>
             <option value="Incluído no PCA">Incluído no PCA</option>
             <option value="DFD">DFD</option>
@@ -88,6 +88,7 @@
     </section>
   </main>
 
+  <script src="src/js/cbmdf_orders_seed.js"></script>
   <script src="src/js/acompanhe.js"></script>
 </body>
 </html>

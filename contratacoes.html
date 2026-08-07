@@ -18,11 +18,9 @@
       </div>
       <div class="actions">
         <a class="btn btn-secondary" href="index.html">Marketplace</a>
-        <a class="btn btn-secondary" href="pedidos.html">Excluir Pedidos</a>
-        <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
-        <a class="btn btn-secondary" href="contratacoes.html">Contratações</a>
-        <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
         <a class="btn btn-secondary" href="acompanhe.html">Acompanhe seu pedido</a>
+        <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
+        <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
       </div>
     </div>
   </header>
@@ -30,8 +28,8 @@
   <main>
     <section class="hero">
       <div>
-        <h1>Manter Contratações</h1>
-        <p>Gestores podem agrupar pedidos por classe, excluir grupos ou itens e incluir itens adicionais diretamente no plano de contratação.</p>
+        <h1>Contratações</h1>
+        <!-- <p>Gestores podem agrupar pedidos por classe, excluir grupos ou itens e incluir itens adicionais diretamente no plano de contratação.</p> -->
       </div>
     </section>
 
@@ -48,10 +46,10 @@
             <option value="all">Todas as classes</option>
           </select>
         </div>
-        <div class="input-group">
+        <!-- <div class="input-group">
           <label>&nbsp;</label>
           <button id="restoreGroupsButton" class="btn btn-secondary" type="button" onclick="restoreExcludedGroups()" style="display:none; width:100%;">Restaurar grupos excluídos</button>
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -73,7 +71,7 @@
       </div>
     </section>
 
-    <section class="panel">
+    <!-- <section class="panel">
       <h2>Incluir item de contratação</h2>
       <div class="filter-row">
         <div class="input-group">
@@ -138,7 +136,7 @@
         </div>
       </div>
       <button class="btn btn-primary" type="button" onclick="addCustomItem()">Incluir item</button>
-    </section>
+    </section> -->
 
     <section class="panel">
       <h2>Contratações agrupadas por classe</h2>
@@ -146,6 +144,7 @@
     </section>
   </main>
 
+  <script src="src/js/cbmdf_orders_seed.js"></script>
   <script src="src/js/contratacoes.js"></script>
 </body>
 </html>

@@ -17,21 +17,14 @@
         </div>
       </div>
       <div class="actions">
-        <a class="btn btn-secondary" href="pedidos.html">Excluir Pedidos</a>
+        <a class="btn btn-secondary" href="acompanhe.html">Acompanhe seu pedido</a>
         <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
         <a class="btn btn-secondary" href="contratacoes.html">Contratações</a>
         <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
-        <a class="btn btn-secondary" href="acompanhe.html">Acompanhe seu pedido</a>
       </div>
       <div class="account">
         <select id="userSelect" onchange="renderUser()"></select>
         <span id="userSector">Lotação</span>
-        <button class="menu-button" id="menuButton" onclick="toggleMenu()" aria-label="Menu">☰</button>
-        <div class="menu-dropdown" id="menuDropdown">
-            <button type="button" onclick="window.location.href='pedidos.html'">Ver Pedidos Realizados</button>
-          <button type="button" onclick="window.location.href='contratacoes.html'">Gerir Contratações</button>
-          <button type="button" onclick="exportOrdersCsv()">Extrair Pedidos</button>
-        </div>
       </div>
     </div>
   </header>
@@ -91,6 +84,7 @@
       </aside>
     </div>
   </main>
+  <script src="src/js/cbmdf_orders_seed.js"></script>
   <script src="src/js/script.js"></script>
 </body>
 </html>

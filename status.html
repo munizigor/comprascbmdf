@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acompanhamento de Pedidos - Marketplace CBMDF</title>
+  <title>Gerir Pedidos - Marketplace CBMDF</title>
   <link rel="stylesheet" href="src/css/status.css">
 </head>
 <body>
@@ -18,9 +18,8 @@
       </div>
       <div class="actions">
         <a class="btn btn-secondary" href="index.html">Marketplace</a>
-        <a class="btn btn-secondary" href="pedidos.html">Excluir Pedidos</a>
-        <a class="btn btn-secondary" href="contratacoes.html">Contratações</a>
         <a class="btn btn-secondary" href="acompanhe.html">Acompanhe seu pedido</a>
+        <a class="btn btn-secondary" href="contratacoes.html">Contratações</a>
         <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
       </div>
     </div>
@@ -29,8 +28,8 @@
   <main>
     <section class="hero">
       <div>
-        <h1>Acompanhar o status dos pedidos</h1>
-        <p>Veja o andamento de cada solicitação por usuário e atualize o status quando necessário.</p>
+        <h1>Gerir pedidos</h1>
+        <!-- <p>Veja o andamento de cada solicitação por usuário e atualize o status quando necessário.</p> -->
       </div>
     </section>
 
@@ -51,6 +50,7 @@
           <label for="statusFilter">Status</label>
           <select id="statusFilter" onchange="applyFilters()">
             <option value="all">Todos os status</option>
+            <option value="Aguardando Análise">Aguardando Análise</option>
             <option value="Arquivado">Arquivado</option>
             <option value="Incluído no PCA">Incluído no PCA</option>
             <option value="DFD">DFD</option>
@@ -88,6 +88,7 @@
     </section>
   </main>
 
+  <script src="src/js/cbmdf_orders_seed.js"></script>
   <script src="src/js/status.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 const statusSteps = [
+  'Aguardando Análise',
   'Arquivado',
   'Incluído no PCA',
   'DFD',
@@ -10,11 +11,11 @@ const statusSteps = [
 ];
 
 const ratingCriteria = [
-  { id: 'qualidadeProduto', label: 'Como você avalia a qualidade do produto?' },
-  { id: 'fornecedor', label: 'Qual é a sua avaliação sobre o fornecedor?' },
-  { id: 'tempoProjeto', label: 'Como você avalia o tempo que levou para receber o pedido?' },
-  { id: 'comunicacaoSuporte', label: 'Como foi a comunicação e o suporte prestado?' },
-  { id: 'atendeuExpectativa', label: 'O pedido atendeu às suas expectativas?' }
+  { id: 'qualidadeProduto', label: 'Como você avalia a qualidade do material ou serviço entregue?' },
+  { id: 'fornecedor', label: 'Como você avalia o desempenho do fornecedor?' },
+  { id: 'tempoProjeto', label: 'O tempo de tramitação do processo foi adequado?' },
+  { id: 'comunicacaoSuporte', label: 'Como você avalia a atuação da equipe de compras?' },
+  { id: 'atendeuExpectativa', label: 'A contratação atendeu à necessidade da sua unidade?' }
 ];
 
 function getSavedOrders() {
@@ -96,7 +97,7 @@ function normalizeOrders(orders) {
   let changed = false;
   orders.forEach(order => {
     if (!order.status) {
-      order.status = 'Arquivado';
+      order.status = 'Aguardando Análise';
       changed = true;
     }
     if (normalizeOrderRating(order)) {
@@ -113,6 +114,35 @@ function formatPrice(value) {
 
 function formatDateTime(dateString) {
   return dateString || '';
+}
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function getItemName(item) {
+  return item.nome || item.name || 'Item sem nome';
+}
+
+function getItemQuantity(item) {
+  return Number(item.quantidade ?? item.quantity ?? 0);
+}
+
+function getItemUrgency(item) {
+  return item.urgencia || item.urgency || 'normal';
+}
+
+function getItemUnitPrice(item) {
+  return Number(item.precoUnitario ?? item.unitPrice ?? 0);
+}
+
+function getItemSubtotal(item) {
+  return Number(item.subtotal ?? item.total ?? (getItemQuantity(item) * getItemUnitPrice(item)));
 }
 
 function getStatusClass(status) {
@@ -351,6 +381,8 @@ function renderOrderList(entries) {
 
   entries.forEach(entry => {
     const order = entry.order;
+    const items = Array.isArray(order.itens) ? order.itens : [];
+    const orderTotal = items.reduce((sum, item) => sum + getItemSubtotal(item), 0);
     const orderStatusIndex = getStatusIndex(order.status);
     const timelineHtml = statusSteps.slice(1).map(status => {
       const stepIndex = getStatusIndex(status);
@@ -376,9 +408,40 @@ function renderOrderList(entries) {
       </div>
       <div class="order-meta">
         <div><strong>Data:</strong> ${formatDateTime(order.data)}</div>
-        <div><strong>Usuário:</strong> ${order.usuario?.nome || 'Desconhecido'}</div>
-        <div><strong>Setor:</strong> ${order.usuario?.setor || '—'}</div>
+        <div><strong>Usuário:</strong> ${escapeHtml(order.usuario?.nome || 'Desconhecido')}</div>
+        <div><strong>Setor:</strong> ${escapeHtml(order.usuario?.setor || '—')}</div>
       </div>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Qtd</th>
+            <th>Urgência</th>
+            <th>Preço unit.</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${items.length ? items.map(item => `
+            <tr>
+              <td>${escapeHtml(getItemName(item))}</td>
+              <td>${getItemQuantity(item)}</td>
+              <td>${escapeHtml(getItemUrgency(item))}</td>
+              <td>${formatPrice(getItemUnitPrice(item))}</td>
+              <td>${formatPrice(getItemSubtotal(item))}</td>
+            </tr>
+          `).join('') + `
+            <tr class="table-total-row">
+              <td colspan="4" style="text-align:right;"><strong>Total do pedido</strong></td>
+              <td><strong>${formatPrice(orderTotal)}</strong></td>
+            </tr>
+          ` : `
+            <tr>
+              <td colspan="5" style="text-align:center;color:var(--muted);padding:18px;">Nenhum item registrado neste pedido.</td>
+            </tr>
+          `}
+        </tbody>
+      </table>
       <ul class="timeline">
         ${timelineHtml}
       </ul>
