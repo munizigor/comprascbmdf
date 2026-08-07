@@ -1,5 +1,7 @@
 const statusOptions = [
   'Aguardando Análise',
+  'Aguardando Análise Setorial',
+  'Aguardando Suplementação',
   'Arquivado',
   'Incluído no PCA',
   'DFD',

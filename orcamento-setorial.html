@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestao Orcamentaria Setorial - Marketplace CBMDF</title>
+  <link rel="stylesheet" href="src/css/status.css">
+  <link rel="stylesheet" href="src/css/budget.css">
+</head>
+<body data-budget-view="sector">
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-mark">CB</div>
+        <div class="brand-title">
+          <strong>Marketplace CBMDF</strong>
+          <span>Aquisicoes e Servicos</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-secondary" href="index.html">Marketplace</a>
+        <a class="btn btn-secondary" href="acompanhe.html">Acompanhe seu pedido</a>
+        <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
+        <a class="btn btn-secondary" href="contratacoes.html">Contratacoes</a>
+        <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
+        <a class="btn btn-primary" href="orcamento-geral.html">Visao Geral</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero budget-hero budget-hero-alt">
+      <div>
+        <h1>Painel do Gestor Setorial</h1>
+        <!-- <p>Acompanhe consumo de Custeio e Investimento e valide solicitacoes pendentes de aprovacao sem estourar o saldo.</p> -->
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Selecionar Setor</h2>
+      <div class="filter-row">
+        <div class="input-group">
+          <label for="sectorSelect">Setor</label>
+          <select id="sectorSelect"></select>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel stats-panel">
+      <h2>Consumo Orcamentario</h2>
+      <div class="budget-progress-grid">
+        <article class="budget-progress-card">
+          <header>
+            <h3>Custeio</h3>
+            <strong id="custeioPercent">0%</strong>
+          </header>
+          <div class="budget-meter" aria-hidden="true">
+            <div class="budget-meter-fill" id="custeioMeterFill"></div>
+          </div>
+          <p id="custeioMeta" class="budget-meta">Comprometido R$ 0,00 de R$ 0,00</p>
+        </article>
+
+        <article class="budget-progress-card">
+          <header>
+            <h3>Investimento</h3>
+            <strong id="investPercent">0%</strong>
+          </header>
+          <div class="budget-meter" aria-hidden="true">
+            <div class="budget-meter-fill" id="investMeterFill"></div>
+          </div>
+          <p id="investMeta" class="budget-meta">Comprometido R$ 0,00 de R$ 0,00</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Solicitacoes Pendentes de Aprovacao</h2>
+      <div id="pendingRequestsContainer"></div>
+    </section>
+  </main>
+
+  <script src="src/js/cbmdf_orders_seed.js"></script>
+  <script src="src/js/budget.js"></script>
+</body>
+</html>

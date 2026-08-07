@@ -283,6 +283,8 @@ textarea {
 
 .status-badge--arquivado { background: #6b7280; }
 .status-badge--aguardando-analise { background: #475569; }
+.status-badge--aguardando-analise-setorial { background: #334155; }
+.status-badge--aguardando-suplementacao { background: #b45309; }
 .status-badge--incluido-no-pca { background: #2563eb; }
 .status-badge--dfd { background: #7c3aed; }
 .status-badge--tr { background: #059669; }

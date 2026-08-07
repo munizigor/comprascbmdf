@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestao Orcamentaria Geral - Marketplace CBMDF</title>
+  <link rel="stylesheet" href="src/css/status.css">
+  <link rel="stylesheet" href="src/css/budget.css">
+</head>
+<body data-budget-view="general">
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-mark">CB</div>
+        <div class="brand-title">
+          <strong>Marketplace CBMDF</strong>
+          <span>Aquisicoes e Servicos</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-secondary" href="index.html">Marketplace</a>
+        <a class="btn btn-secondary" href="acompanhe.html">Acompanhe seu pedido</a>
+        <a class="btn btn-secondary" href="status.html">Gerir Pedidos</a>
+        <a class="btn btn-secondary" href="contratacoes.html">Contratacoes</a>
+        <a class="btn btn-secondary" href="planejamento.html">Planejamento</a>
+        <a class="btn btn-primary" href="orcamento-setorial.html">Visao Setorial</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero budget-hero">
+      <div>
+        <h1>Gestao Setorial de Orcamento</h1>
+        <!-- <p>Controle os tetos de Custeio e Investimento por setor e acompanhe o saldo geral nao alocado em tempo real.</p> -->
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Orcamento Corporativo</h2>
+      <div class="filter-row budget-config-row">
+        <div class="input-group">
+          <label for="corpCusteioInput">Teto Corporativo de Custeio</label>
+          <input id="corpCusteioInput" type="number" min="0" step="0.01" />
+        </div>
+        <div class="input-group">
+          <label for="corpInvestInput">Teto Corporativo de Investimento</label>
+          <input id="corpInvestInput" type="number" min="0" step="0.01" />
+        </div>
+        <div class="input-group budget-actions-group">
+          <label>&nbsp;</label>
+          <button class="btn btn-primary" type="button" id="saveCorpBudgetButton">Salvar Tetos Corporativos</button>
+        </div>
+      </div>
+      <p class="budget-note">Cada teto setorial alocado e automaticamente deduzido do teto corporativo da mesma categoria.</p>
+    </section>
+
+    <section class="panel stats-panel">
+      <h2>KPIs Gerais</h2>
+      <div class="stats-grid budget-kpi-grid">
+        <div class="stat-card">
+          <span>Orcamento Geral Total</span>
+          <strong id="kpiTotalGeral">R$ 0,00</strong>
+        </div>
+        <div class="stat-card">
+          <span>Total Alocado nos Setores</span>
+          <strong id="kpiTotalAlocado">R$ 0,00</strong>
+        </div>
+        <div class="stat-card">
+          <span>Saldo Geral Nao Alocado</span>
+          <strong id="kpiTotalSaldo">R$ 0,00</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Painel Principal por Setor</h2>
+      <div class="table-scroll">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>Setor</th>
+              <th>Gestor</th>
+              <th>Custeio: Teto</th>
+              <th>Custeio: Comprometido/Gasto</th>
+              <th>Custeio: Saldo</th>
+              <th>Investimento: Teto</th>
+              <th>Investimento: Comprometido/Gasto</th>
+              <th>Investimento: Saldo</th>
+              <th>Acao</th>
+            </tr>
+          </thead>
+          <tbody id="sectorBudgetTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="src/js/cbmdf_orders_seed.js"></script>
+  <script src="src/js/budget.js"></script>
+</body>
+</html>
