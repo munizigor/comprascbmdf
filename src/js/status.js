@@ -228,7 +228,10 @@ function renderOrders(entries) {
   container.innerHTML = '';
 
   if (!entries.length) {
-    container.innerHTML = '<div class="empty-state">Nenhum pedido encontrado. Ajuste os filtros ou carregue pedidos no marketplace.</div>';
+    container.innerHTML = emptyStateHtml({
+      title: 'Nenhuma demanda encontrada',
+      description: 'Não há pedidos que correspondam aos filtros atuais. Ajuste a busca, o usuário ou o status selecionado.'
+    });
     return;
   }
 

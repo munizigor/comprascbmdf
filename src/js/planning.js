@@ -94,7 +94,10 @@ function renderTable(containerId, headers, rows, totalLabel, numericColumns = []
   if (!container) return;
 
   if (!rows.length) {
-    container.innerHTML = '<div class="empty-state">Nenhum valor registrado para este plano.</div>';
+    container.innerHTML = emptyStateHtml({
+      title: 'Nenhum valor registrado',
+      description: 'Ainda não há pedidos suficientes para compor este plano.'
+    });
     return;
   }
 
@@ -175,7 +178,10 @@ function renderPcaBySetorTables(containerId, setorGroups) {
   if (!container) return;
 
   if (!setorGroups.length) {
-    container.innerHTML = '<div class="empty-state">Nenhum valor registrado para este plano.</div>';
+    container.innerHTML = emptyStateHtml({
+      title: 'Nenhum valor registrado por setor',
+      description: 'Ainda não há pedidos suficientes para compor o PCA setorial.'
+    });
     return;
   }
 

@@ -417,7 +417,11 @@ function renderPendingRequests(setorData, pendingEntries) {
   container.innerHTML = '';
 
   if (!pendingEntries.length) {
-    container.innerHTML = '<div class="empty-state empty-state--compact">Nao ha solicitacoes pendentes para este setor.</div>';
+    container.innerHTML = emptyStateHtml({
+      title: 'Nenhuma solicitação pendente',
+      description: 'Não há solicitações aguardando aprovação para este setor no momento.',
+      compact: true
+    });
     return;
   }
 
@@ -580,7 +584,11 @@ function renderSectorView() {
   const setorData = snapshot.sectors.find(item => item.setor === activeSectorName);
 
   if (!setorData) {
-    document.getElementById('pendingRequestsContainer').innerHTML = '<div class="empty-state empty-state--compact">Setor nao encontrado.</div>';
+    document.getElementById('pendingRequestsContainer').innerHTML = emptyStateHtml({
+      title: 'Setor não encontrado',
+      description: 'Selecione um setor válido para visualizar as solicitações pendentes.',
+      compact: true
+    });
     return;
   }
 

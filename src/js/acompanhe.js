@@ -377,7 +377,12 @@ function renderOrderList(entries) {
   container.innerHTML = '';
 
   if (!entries.length) {
-    container.innerHTML = '<div class="empty-state">Nenhum pedido encontrado. Ajuste os filtros ou volte após registrar pedidos no marketplace.</div>';
+    container.innerHTML = emptyStateHtml({
+      title: 'Nenhum pedido encontrado',
+      description: 'Você ainda não realizou solicitações, ou nenhum pedido corresponde aos filtros atuais.',
+      ctaLabel: 'Nova solicitação',
+      ctaHref: 'index.html'
+    });
     return;
   }
 

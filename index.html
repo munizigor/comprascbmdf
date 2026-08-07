@@ -66,7 +66,7 @@
       </div>
     </section>
 
-    <div class="grid-12" id="stepSelectItems">
+    <div class="grid-12" id="stepSelectItems" tabindex="-1">
       <article class="panel" id="search">
         <h2>Catálogo de materiais</h2>
         <div class="filter-row">
@@ -129,7 +129,7 @@
       </aside>
     </div>
 
-    <section class="panel checkout-step" id="stepNecessidade" style="display:none;">
+    <section class="panel checkout-step" id="stepNecessidade" style="display:none;" tabindex="-1">
       <h2>Informe a necessidade</h2>
       <div class="input-group">
         <label for="notes">Justificativa / Observações</label>
@@ -141,7 +141,7 @@
       </div>
     </section>
 
-    <section class="panel checkout-step" id="stepRevisar" style="display:none;">
+    <section class="panel checkout-step" id="stepRevisar" style="display:none;" tabindex="-1">
       <h2>Revisar solicitação</h2>
       <div id="reviewItems"></div>
       <div class="summary" id="reviewSummary"></div>
@@ -152,7 +152,7 @@
       </div>
     </section>
 
-    <section class="panel checkout-step" id="stepConfirmado" style="display:none;">
+    <section class="panel checkout-step" id="stepConfirmado" style="display:none;" tabindex="-1">
       <h2>Solicitação enviada</h2>
       <p>Sua requisição foi registrada e está aguardando análise.</p>
       <div class="step-actions">
@@ -164,6 +164,7 @@
   <script src="src/js/cbmdf_orders_seed.js"></script>
   <script src="src/js/users.js"></script>
   <script src="src/js/nav.js"></script>
+  <script src="src/js/emptystate.js"></script>
   <script src="src/js/script.js"></script>
 </body>
 </html>

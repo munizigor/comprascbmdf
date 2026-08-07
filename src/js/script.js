@@ -361,7 +361,10 @@ function renderProducts(list, favorites) {
   const container = document.getElementById('products');
   container.innerHTML = '';
   if (!list.length) {
-    container.innerHTML = '<p style="color: var(--muted);">Nenhum material encontrado. Ajuste a busca ou filtros.</p>';
+    container.innerHTML = emptyStateHtml({
+      title: 'Nenhum material encontrado',
+      description: 'Ajuste a busca ou os filtros para ver outros itens do catálogo.'
+    });
     return;
   }
   list.forEach(item => {
@@ -428,7 +431,11 @@ function renderCart() {
   cartItems.innerHTML = '';
   const ids = Object.keys(cart);
   if (!ids.length) {
-    cartItems.innerHTML = '<p style="color: var(--muted);">Seu carrinho está vazio. Adicione materiais para montar a requisição.</p>';
+    cartItems.innerHTML = emptyStateHtml({
+      title: 'Seu carrinho está vazio',
+      description: 'Adicione materiais do catálogo para montar sua requisição.',
+      compact: true
+    });
   }
   let total = 0;
   let quantity = 0;
@@ -482,11 +489,19 @@ function renderCart() {
 
 let currentStep = 1;
 
+const stepPanelIds = { 1: 'stepSelectItems', 2: 'stepNecessidade', 3: 'stepRevisar', 4: 'stepConfirmado' };
+
 function updateStepsNav() {
   document.querySelectorAll('#stepsNav .step').forEach(el => {
     const step = Number(el.dataset.step);
-    el.classList.toggle('step--active', step === currentStep);
+    const isActive = step === currentStep;
+    el.classList.toggle('step--active', isActive);
     el.classList.toggle('step--completed', step < currentStep);
+    if (isActive) {
+      el.setAttribute('aria-current', 'step');
+    } else {
+      el.removeAttribute('aria-current');
+    }
   });
 }
 
@@ -499,12 +514,13 @@ function goToStep(step) {
     renderReview();
   }
   currentStep = step;
-  document.getElementById('stepSelectItems').style.display = step === 1 ? '' : 'none';
-  document.getElementById('stepNecessidade').style.display = step === 2 ? '' : 'none';
-  document.getElementById('stepRevisar').style.display = step === 3 ? '' : 'none';
-  document.getElementById('stepConfirmado').style.display = step === 4 ? '' : 'none';
+  Object.entries(stepPanelIds).forEach(([key, id]) => {
+    document.getElementById(id).style.display = Number(key) === step ? '' : 'none';
+  });
   updateStepsNav();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  const activePanel = document.getElementById(stepPanelIds[step]);
+  if (activePanel) activePanel.focus();
 }
 
 function renderReview() {
