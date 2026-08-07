@@ -261,6 +261,55 @@ function getSaldoClass(value) {
   return 'saldo-cell saldo-cell--available';
 }
 
+let budgetOverviewChart = null;
+
+function renderBudgetChart(snapshot) {
+  const canvas = document.getElementById('budgetOverviewChart');
+  if (!canvas || typeof Chart === 'undefined') return;
+
+  const totalCommitted = snapshot.sectors.reduce((sum, sector) => sum + sector.committedCusteio + sector.committedInvestimento, 0);
+  const disponivel = snapshot.corporate.total - totalCommitted;
+
+  const chartData = {
+    labels: ['Orçamento', 'Planejado', 'Contratado', 'Disponível'],
+    datasets: [{
+      label: 'Valores (R$)',
+      data: [snapshot.corporate.total, snapshot.allocated.total, totalCommitted, disponivel],
+      backgroundColor: ['#003366', '#2563eb', '#ff8c00', '#16a34a']
+    }]
+  };
+
+  if (budgetOverviewChart) {
+    budgetOverviewChart.data = chartData;
+    budgetOverviewChart.update();
+    return;
+  }
+
+  budgetOverviewChart = new Chart(canvas, {
+    type: 'bar',
+    data: chartData,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: context => formatMoney(context.parsed.y)
+          }
+        }
+      },
+      scales: {
+        y: {
+          ticks: {
+            callback: value => formatMoney(value)
+          }
+        }
+      }
+    }
+  });
+}
+
 function renderGeneralView() {
   const snapshot = computeBudgetSnapshot();
 
@@ -296,6 +345,7 @@ function renderGeneralView() {
     tbody.appendChild(row);
   });
 
+  renderBudgetChart(snapshot);
   bindGeneralActions(snapshot);
 }
 
@@ -417,7 +467,11 @@ function renderPendingRequests(setorData, pendingEntries) {
   container.innerHTML = '';
 
   if (!pendingEntries.length) {
-    container.innerHTML = '<div class="empty-state empty-state--compact">Nao ha solicitacoes pendentes para este setor.</div>';
+    container.innerHTML = emptyStateHtml({
+      title: 'Nenhuma solicitação pendente',
+      description: 'Não há solicitações aguardando aprovação para este setor no momento.',
+      compact: true
+    });
     return;
   }
 
@@ -580,7 +634,11 @@ function renderSectorView() {
   const setorData = snapshot.sectors.find(item => item.setor === activeSectorName);
 
   if (!setorData) {
-    document.getElementById('pendingRequestsContainer').innerHTML = '<div class="empty-state empty-state--compact">Setor nao encontrado.</div>';
+    document.getElementById('pendingRequestsContainer').innerHTML = emptyStateHtml({
+      title: 'Setor não encontrado',
+      description: 'Selecione um setor válido para visualizar as solicitações pendentes.',
+      compact: true
+    });
     return;
   }
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Planejamento - Marketplace CBMDF</title>
+  <title>Planejamento - Central de Compras CBMDF</title>
   <link rel="stylesheet" href="src/css/status.css">
 </head>
 <body>
@@ -12,12 +12,12 @@
       <a class="brand" href="index.html">
         <div class="brand-mark">CB</div>
         <div class="brand-title">
-          <strong>Marketplace CBMDF</strong>
+          <strong>Central de Compras CBMDF</strong>
           <span>Aquisições e Serviços</span>
         </div>
       </a>
       <div class="actions">
-        <a class="btn btn-secondary" href="index.html" data-profiles="solicitante">Marketplace</a>
+        <a class="btn btn-secondary" href="index.html" data-profiles="solicitante">Início</a>
         <a class="btn btn-secondary" href="acompanhe.html" data-profiles="solicitante">Meus pedidos</a>
         <a class="btn btn-secondary" href="status.html" data-profiles="gestor compras">Gestão de demandas</a>
         <a class="btn btn-secondary" href="contratacoes.html" data-profiles="compras">Contratações</a>
@@ -32,6 +32,28 @@
         <h1>Planejamento</h1>
         <!-- <p>Veja os valores de pedidos agrupados por PCA e PLOA, com base nas informações registradas.</p> -->
       </div>
+    </section>
+
+    <section class="panel stats-panel">
+      <h2>Resumo executivo</h2>
+      <div class="planning-kpi-grid">
+        <div class="planning-kpi-card">
+          <span class="planning-kpi-label">PCA Geral</span>
+          <strong id="kpiPcaGeralValor">R$ 0,00</strong>
+          <span class="planning-kpi-meta"><span id="kpiPcaGeralContratacoes">0</span> contratações · <span id="kpiPcaGeralPercent">0%</span> planejadas</span>
+        </div>
+        <div class="planning-kpi-card">
+          <span class="planning-kpi-label">PCA Setorial</span>
+          <strong id="kpiPcaSetorUnidades">0</strong>
+          <span class="planning-kpi-meta"><span id="kpiPcaSetorDemandas">0</span> demandas</span>
+        </div>
+        <div class="planning-kpi-card">
+          <span class="planning-kpi-label">PLOA</span>
+          <strong id="kpiPloaValor">R$ 0,00</strong>
+          <span class="planning-kpi-meta">valor solicitado</span>
+        </div>
+      </div>
+      <div class="planning-alerts" id="planningAlerts"></div>
     </section>
 
     <section class="panel">
@@ -56,6 +78,8 @@
   <script src="src/js/cbmdf_orders_seed.js"></script>
   <script src="src/js/users.js"></script>
   <script src="src/js/nav.js"></script>
+  <script src="src/js/emptystate.js"></script>
+  <script src="src/js/budget.js"></script>
   <script src="src/js/planning.js"></script>
 </body>
 </html>

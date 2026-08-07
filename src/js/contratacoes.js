@@ -151,7 +151,10 @@ function renderContractGroups(groups) {
   container.innerHTML = '';
 
   if (!groups.length) {
-    container.innerHTML = '<div class="empty-state">Nenhum grupo de contratação encontrado. Verifique se há pedidos registrados ou adicione itens manualmente.</div>';
+    container.innerHTML = emptyStateHtml({
+      title: 'Nenhum grupo de contratação encontrado',
+      description: 'Ainda não há pedidos suficientes para formar grupos de contratação, ou os filtros atuais não retornaram resultados.'
+    });
     return;
   }
 
@@ -260,6 +263,7 @@ function applyFilters() {
 
 function updateRestoreButton(contratacoes) {
   const button = document.getElementById('restoreGroupsButton');
+  if (!button) return;
   const hasExclusions = (contratacoes.excludedGroups && contratacoes.excludedGroups.length) || (contratacoes.excludedItemKeys && contratacoes.excludedItemKeys.length);
   button.style.display = hasExclusions ? 'block' : 'none';
 }

@@ -94,7 +94,10 @@ function renderTable(containerId, headers, rows, totalLabel, numericColumns = []
   if (!container) return;
 
   if (!rows.length) {
-    container.innerHTML = '<div class="empty-state">Nenhum valor registrado para este plano.</div>';
+    container.innerHTML = emptyStateHtml({
+      title: 'Nenhum valor registrado',
+      description: 'Ainda não há pedidos suficientes para compor este plano.'
+    });
     return;
   }
 
@@ -175,7 +178,10 @@ function renderPcaBySetorTables(containerId, setorGroups) {
   if (!container) return;
 
   if (!setorGroups.length) {
-    container.innerHTML = '<div class="empty-state">Nenhum valor registrado para este plano.</div>';
+    container.innerHTML = emptyStateHtml({
+      title: 'Nenhum valor registrado por setor',
+      description: 'Ainda não há pedidos suficientes para compor o PCA setorial.'
+    });
     return;
   }
 
@@ -202,6 +208,54 @@ function renderPcaBySetorTables(containerId, setorGroups) {
     section.appendChild(table);
     container.appendChild(section);
   });
+}
+
+function renderPlanningSummary({ pcaGeralTotal, pcaGeralCount, totalAllValue, setorCount, demandaCount, ploaTotal }) {
+  const pcaGeralPercent = totalAllValue > 0 ? Math.round((pcaGeralTotal / totalAllValue) * 100) : 0;
+
+  document.getElementById('kpiPcaGeralValor').textContent = formatPrice(pcaGeralTotal);
+  document.getElementById('kpiPcaGeralContratacoes').textContent = pcaGeralCount;
+  document.getElementById('kpiPcaGeralPercent').textContent = `${pcaGeralPercent}%`;
+  document.getElementById('kpiPcaSetorUnidades').textContent = setorCount;
+  document.getElementById('kpiPcaSetorDemandas').textContent = demandaCount;
+  document.getElementById('kpiPloaValor').textContent = formatPrice(ploaTotal);
+}
+
+function renderPlanningAlerts(ordersWithItems) {
+  const container = document.getElementById('planningAlerts');
+  if (!container) return;
+
+  let unclassifiedCount = 0;
+  ordersWithItems.forEach(order => {
+    order.itens.forEach(item => {
+      if (!item.classeNome || !item.tipo) unclassifiedCount += 1;
+    });
+  });
+
+  let sectorsOverBudget = 0;
+  if (typeof computeBudgetSnapshot === 'function') {
+    const snapshot = computeBudgetSnapshot();
+    sectorsOverBudget = snapshot.sectors.filter(sector => sector.saldoCusteio < 0 || sector.saldoInvestimento < 0).length;
+  }
+
+  const advancedOrders = ordersWithItems.filter(order => getStatusFlags(order.status).includeInTotal).length;
+  const advancedPercent = ordersWithItems.length ? Math.round((advancedOrders / ordersWithItems.length) * 100) : 0;
+
+  const alerts = [];
+  if (unclassifiedCount > 0) {
+    alerts.push({ type: 'warning', text: `${unclassifiedCount} ${unclassifiedCount === 1 ? 'item ainda não classificado' : 'itens ainda não classificados'} (sem tipo ou classe definidos).` });
+  }
+  if (sectorsOverBudget > 0) {
+    alerts.push({ type: 'warning', text: `${sectorsOverBudget} ${sectorsOverBudget === 1 ? 'unidade ultrapassou' : 'unidades ultrapassaram'} o limite orçamentário previsto.` });
+  }
+  alerts.push({ type: 'success', text: `${advancedPercent}% das demandas já possuem contratação correspondente em andamento.` });
+
+  container.innerHTML = alerts.map(alert => `
+    <div class="planning-alert planning-alert--${alert.type}">
+      <span class="planning-alert-icon" aria-hidden="true">${alert.type === 'warning' ? '⚠️' : '✅'}</span>
+      <span>${alert.text}</span>
+    </div>
+  `).join('');
 }
 
 function renderPlanning() {
@@ -469,6 +523,20 @@ function renderPlanning() {
   }, { total: 0, comprometido: 0, empenhado: 0, liquidado: 0, pago: 0 });
 
   renderTable('ploaContainer', ['Tipo de Despesa', 'Natureza', 'Planejado', 'Comprometido', 'Empenhado', 'Liquidado', 'Pago', 'Saldo'], ploaRows, 'TOTAL', [2, 3, 4, 5, 6, 7], [ploaTotals.total, ploaTotals.comprometido, ploaTotals.empenhado, ploaTotals.liquidado, ploaTotals.pago, ploaTotals.total - ploaTotals.comprometido]);
+
+  const totalAllValue = ordersWithItems.reduce((sum, order) => (
+    sum + order.itens.reduce((itemSum, item) => itemSum + Number(item.subtotal ?? item.total ?? 0), 0)
+  ), 0);
+
+  renderPlanningSummary({
+    pcaGeralTotal: pcaTypeTotalsSummary.total,
+    pcaGeralCount: pcaTypeDetailRows.length,
+    totalAllValue,
+    setorCount: pcaSetorGroups.length,
+    demandaCount: ordersWithItems.length,
+    ploaTotal: ploaTotals.total
+  });
+  renderPlanningAlerts(ordersWithItems);
 }
 
 window.addEventListener('DOMContentLoaded', renderPlanning);

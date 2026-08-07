@@ -33,6 +33,11 @@
   overflow-x: auto;
 }
 
+.chart-container {
+  position: relative;
+  height: 320px;
+}
+
 .budget-edit-btn {
   white-space: nowrap;
 }

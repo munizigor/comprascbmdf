@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestao Orcamentaria Geral - Marketplace CBMDF</title>
+  <title>Gestao Orcamentaria Geral - Central de Compras CBMDF</title>
   <link rel="stylesheet" href="src/css/status.css">
   <link rel="stylesheet" href="src/css/budget.css">
 </head>
@@ -13,12 +13,12 @@
       <a class="brand" href="index.html">
         <div class="brand-mark">CB</div>
         <div class="brand-title">
-          <strong>Marketplace CBMDF</strong>
+          <strong>Central de Compras CBMDF</strong>
           <span>Aquisicoes e Servicos</span>
         </div>
       </a>
       <div class="actions">
-        <a class="btn btn-secondary" href="index.html" data-profiles="solicitante">Marketplace</a>
+        <a class="btn btn-secondary" href="index.html" data-profiles="solicitante">Início</a>
         <a class="btn btn-secondary" href="acompanhe.html" data-profiles="solicitante">Meus pedidos</a>
         <a class="btn btn-secondary" href="status.html" data-profiles="gestor compras">Gestão de demandas</a>
         <a class="btn btn-secondary" href="contratacoes.html" data-profiles="compras">Contratacoes</a>
@@ -74,6 +74,13 @@
     </section>
 
     <section class="panel">
+      <h2>Orçamento × Planejado × Contratado × Disponível</h2>
+      <div class="chart-container">
+        <canvas id="budgetOverviewChart" role="img" aria-label="Gráfico de barras comparando orçamento total, valor planejado, valor contratado e saldo disponível"></canvas>
+      </div>
+    </section>
+
+    <section class="panel">
       <h2>Painel Principal por Setor</h2>
       <div class="table-scroll">
         <table class="report-table">
@@ -99,6 +106,8 @@
   <script src="src/js/cbmdf_orders_seed.js"></script>
   <script src="src/js/users.js"></script>
   <script src="src/js/nav.js"></script>
+  <script src="src/js/emptystate.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="src/js/budget.js"></script>
 </body>
 </html>
