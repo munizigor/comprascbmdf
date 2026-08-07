@@ -16,13 +16,17 @@ O **CBMDF Marketplace** é uma ferramenta de gestão logística e financeira das
 * **PCA:** Plano de Contratações Anual.
 * **PLOA:** Projeto de Lei Orçamentária Anual.
 * **DFD:** Documento de Formalização de Demanda.
+* **ETP:** Estudo Técnico Preliminar, que avalia a melhor solução para atender à necessidade (compra, aluguel, outsourcing) e o padrão de qualidade de mercado.
 * **TR:** Termo de Referência.
+* **Edital de Licitação:** Instrumento de convocação de fornecedores (Pregão, Concorrência) ou, alternativamente, processo de Contratação Direta (Dispensa/Inexigibilidade).
 * **Nota de Empenho:** Documento que registra o comprometimento orçamentário de uma despesa.
+* **Recebimento Provisório / Recebimento Definitivo:** Etapas sucessivas de conferência do material entregue — a primeira sumária (quantidade/volumes), a segunda com vistoria e testes detalhados que resultam em aceite ou rejeição.
+* **Destino Final:** Encerramento do ciclo de vida do item recebido — tombamento no patrimônio (bem permanente), entrega ao estoque/almoxarifado (bem de consumo) ou entrada em operação contínua (serviço).
 * **CESMA:** Central de Suprimentos e Material, unidade responsável pelo recebimento e distribuição de materiais.
 * **Grupo/Classe:** Classificação do material segundo o Padrão Descritivo de Materiais (PDM), usada para categorizar e agrupar itens de contratação.
 * **Tipo de Despesa:** Classificação orçamentária do item (Investimento ou Custeio).
 * **Natureza de Despesa:** Código orçamentário associado ao item (ex.: 3.3.90.30, 4.4.90.52).
-* **Comprometido / Empenhado / Liquidado / Pago:** Estágios sucessivos da execução orçamentária de uma despesa pública.
+* **Comprometido / Empenhado / Liquidado / Pago:** Estágios sucessivos da execução orçamentária de uma despesa pública. `Liquidado` e `Pago` são status reais do pedido (não apenas colunas derivadas dos relatórios de planejamento), atingidos ao final da Etapa 6 (Entrega & Finalização).
 * **Setores:** unidades do CBMDF que originam ou tramitam pedidos, como COMOP, CESMA, DITIC, DIMAT e COMAP.
 * **Grifo:** Sistema corporativo legado/existente do CBMDF utilizado para gestão de materiais, cujo catálogo será reaproveitado pelo CBMDF Marketplace.
 * **SEI (Sistema Eletrônico de Informações):** Sistema de gestão de processos e documentos administrativos do Distrito Federal.
@@ -80,7 +84,7 @@ Essa causa-raiz orienta a proposta de solução: o CBMDF Marketplace não deve s
 | Usuário | Descrição | Principais Necessidades |
 | :--- | :--- | :--- |
 | **Requisitante** | Militar/servidor de um setor (ex.: COMOP, DITIC, DIMAT, COMAP) que monta pedidos no catálogo. | Buscar e filtrar materiais/serviços por categoria, montar um carrinho com quantidade e urgência por item, enviar a requisição vinculada ao seu setor e, ao final, avaliar a qualidade do pedido recebido (produto, fornecedor, contratação e especificação do material). |
-| **Gestor de Tramitação** | Responsável por atualizar o status de cada pedido conforme avança no processo administrativo. | Visualizar todos os pedidos, filtrar por usuário/status e atualizar o estágio (DFD, TR, Nota de Empenho, recebimento, entrega). |
+| **Gestor de Tramitação** | Responsável por atualizar o status de cada pedido conforme avança no processo administrativo. | Visualizar todos os pedidos, filtrar por usuário/status e atualizar o estágio ao longo das 6 macro-etapas de tramitação (ver seção 4.2, item 2), da formalização da demanda (DFD) até a finalização (recebimento, liquidação e pagamento). |
 | **Gestor de Contratações** | Responsável por agrupar pedidos em contratações por classe e complementar itens manualmente. | Visualizar pedidos agrupados por classe, incluir itens adicionais com classificação orçamentária completa, excluir/restaurar grupos ou itens. |
 | **Gestor do Catálogo e Atas (CESMA/DIMAT)** | Responsável pela manutenção do catálogo padronizado e pela gestão das Atas de Registro de Preços. | Homologar novos itens, sincronizar o catálogo com o sistema Grifo, cadastrar/atualizar ARPs, controlar saldos de atas e disponibilizar itens vinculados a atas vigentes. |
 | **Planejamento/Diretoria** | Consome os relatórios consolidados de PCA e PLOA. | Visão agregada dos valores planejado, comprometido, empenhado, liquidado e pago, por setor, tipo, classe e natureza de despesa. |
@@ -100,7 +104,15 @@ Na visão de evolução, o produto deve interoperar com sistemas já usados pelo
 
 ### 4.2 Resumo dos Principais Recursos
 1. **Catálogo e Carrinho de Requisição:** Busca e filtro de materiais/serviços por categoria, definição de quantidade e urgência por item, envio do pedido vinculado a um usuário e setor.
-2. **Painel de Tramitação de Status:** Atualização do estágio de cada pedido ao longo do fluxo Arquivado → Incluído no PCA → DFD → TR → Nota de Empenho emitida → Pedido a Caminho → Recebido no CESMA → Pedido Entregue.
+2. **Painel de Tramitação de Status:** Atualização do estágio de cada pedido ao longo de um pipeline granular organizado em 6 macro-etapas, refletindo a jornada real de uma contratação pública:
+   1. **Ideação & Necessidade:** `DFD Registrado`.
+   2. **Validação & PCA:** `Em Análise Setorial` → `Aguardando Suplementação` (se necessário) → `Incluído no PCA` (via regular) ou `Incluído no PCA (Urgência)` (inclusão extraordinária); pedidos reprovados vão para `Arquivado`.
+   3. **Estruturação no Processo (ETP/TR):** `ETP em Elaboração` → `Pesquisa de Preços` → `TR Elaborado` → `Reserva Orçamentária Confirmada`.
+   4. **Edital & Seleção:** `Edital Publicado` → `Em Seleção de Fornecedor` → `Nota de Empenho Emitida`.
+   5. **Aquisição & Fabricação:** `Ordem de Fornecimento Emitida` → `Em Trânsito ou Fabricação`.
+   6. **Entrega & Finalização:** `Recebimento Provisório` → `Recebimento Definitivo` (ou `Recebimento Rejeitado (Aguardando Substituição)`, se o material apresentar defeito) → `Liquidado` → `Pago` → `Pedido Entregue`.
+
+   `Arquivado` e `Recebimento Rejeitado (Aguardando Substituição)` são estados de exceção fora do caminho principal, não etapas de progresso.
 3. **Acompanhamento do Pedido pelo Requisitante:** Consulta do andamento de cada solicitação, com filtros por usuário e status.
 4. **Gestão de Contratações:** Agrupamento automático dos itens pedidos por classe, com possibilidade de inclusão manual de itens e exclusão/restauração de grupos.
 5. **Relatórios de Planejamento Orçamentário (PCA/PLOA):** Consolidação automática dos valores planejado, comprometido, empenhado, liquidado e pago, agregados por setor/tipo/classe (PCA) e por tipo de despesa/natureza de despesa (PLOA), com exportação dos pedidos em CSV.
@@ -144,7 +156,7 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 
 #### **HU02.1 — Atualização do Status do Pedido**
 * **Como:** Gestor de Tramitação
-* **Eu quero:** Atualizar o status de cada pedido ao longo do fluxo (Arquivado, Incluído no PCA, DFD, TR, Nota de Empenho emitida, Pedido a Caminho, Recebido no CESMA, Pedido Entregue)
+* **Eu quero:** Atualizar o status de cada pedido ao longo das 6 macro-etapas de tramitação descritas na seção 4.2 (item 2) — Ideação & Necessidade, Validação & PCA, Estruturação no Processo (ETP/TR), Edital & Seleção, Aquisição & Fabricação, Entrega & Finalização
 * **Para que:** O andamento real do processo de aquisição fique refletido no sistema.
 * **Critérios de Aceite:**
   * Deve ser possível filtrar pedidos por usuário e por status antes de atualizar.
@@ -192,7 +204,7 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 * **Para que:** Eu tenha visão consolidada do que cada setor planeja contratar e em que classe de material/serviço.
 * **Critérios de Aceite:**
   * Cada linha deve exibir os valores de Planejado, Comprometido, Empenhado, Liquidado, Pago e Saldo.
-  * Os valores devem ser calculados automaticamente a partir do status de cada pedido (pedidos "Arquivado" não entram no total planejado).
+  * Os valores devem ser calculados automaticamente a partir do status de cada pedido (pedidos em status pendente de aprovação — `DFD Registrado`, `Em Análise Setorial`, `Aguardando Suplementação` — ou `Arquivado` não entram no total planejado).
   * Deve haver subtotais por tipo e por setor, além do total geral.
 
 #### **HU04.2 — Relatório de PLOA por Tipo e Natureza de Despesa**
@@ -315,7 +327,7 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 ### 7.1 Restrições
 * **Técnica (estado atual):** O protótipo atual não possui backend nem banco de dados — os pedidos são armazenados apenas no `localStorage` do navegador de cada usuário, sem autenticação. A evolução do produto requer a implementação de um backend com banco de dados centralizado e autenticação corporativa.
 * **Legal:** Os dados e classificações orçamentárias (tipo de despesa, natureza de despesa, grupo/classe) devem seguir os padrões orçamentários públicos vigentes e a Lei nº 14.133/2021.
-* **Organizacional:** A nomenclatura de status do pedido (Arquivado, Incluído no PCA, DFD, TR, Nota de Empenho emitida, Pedido a Caminho, Recebido no CESMA, Pedido Entregue) deve continuar refletindo o fluxo real de tramitação do CBMDF.
+* **Organizacional:** A nomenclatura de status do pedido — organizada nas 6 macro-etapas descritas na seção 4.2 (item 2): Ideação & Necessidade, Validação & PCA, Estruturação no Processo (ETP/TR), Edital & Seleção, Aquisição & Fabricação, Entrega & Finalização — deve continuar refletindo o fluxo real de tramitação do CBMDF.
 * **IA como componente incremental:** o desenvolvimento dos recursos baseados em Inteligência Artificial para sugestões avançadas de compras (Épico 06) é opcional/incremental. A primeira versão operacional (Go-Live) do CBMDF Marketplace deve funcionar plenamente com regras de negócio determinísticas (kits correlatos pré-configurados e validação por regras), garantindo que a entrega principal não fique refém do módulo de IA.
 
 ### 7.2 Suposições

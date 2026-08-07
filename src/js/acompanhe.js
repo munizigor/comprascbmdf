@@ -1,17 +1,3 @@
-const statusSteps = [
-  'Aguardando Análise',
-  'Aguardando Análise Setorial',
-  'Aguardando Suplementação',
-  'Arquivado',
-  'Incluído no PCA',
-  'DFD',
-  'TR',
-  'Nota de Empenho emitida',
-  'Pedido a Caminho',
-  'Recebido no CESMA',
-  'Pedido Entregue'
-];
-
 const ratingCriteria = [
   { id: 'qualidadeProduto', label: 'Como você avalia a qualidade do material ou serviço entregue?' },
   { id: 'fornecedor', label: 'Como você avalia o desempenho do fornecedor?' },
@@ -99,7 +85,7 @@ function normalizeOrders(orders) {
   let changed = false;
   orders.forEach(order => {
     if (!order.status) {
-      order.status = 'Aguardando Análise';
+      order.status = DEFAULT_STATUS;
       changed = true;
     }
     if (normalizeOrderRating(order)) {
@@ -147,19 +133,6 @@ function getItemSubtotal(item) {
   return Number(item.subtotal ?? item.total ?? (getItemQuantity(item) * getItemUnitPrice(item)));
 }
 
-function getStatusClass(status) {
-  return String(status)
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .normalize('NFD')
-    .replace(/[^a-z0-9\-]/g, '');
-}
-
-function getStatusIndex(status) {
-  const index = statusSteps.indexOf(status);
-  return index >= 0 ? index : 0;
-}
-
 function collectUsers(orders) {
   const users = new Map();
   orders.forEach(order => {
@@ -193,7 +166,7 @@ function getOrderRatingSummary(order) {
 
 function renderSummary(orders) {
   const ordersCount = orders.length;
-  const archivedCount = orders.filter(order => order.status === 'Arquivado').length;
+  const archivedCount = orders.filter(order => isArchivedStatus(order.status)).length;
   const deliveredCount = orders.filter(order => order.status === 'Pedido Entregue').length;
 
   document.getElementById('ordersCount').textContent = ordersCount;
@@ -372,6 +345,46 @@ function handleRatingClick(event) {
   setOrderRating(orderIndex, criterionId, value);
 }
 
+function renderOrderTimeline(order) {
+  if (isBranchStatus(order.status)) {
+    const archived = isArchivedStatus(order.status);
+    const variant = archived ? 'archived' : 'rejected';
+    const message = archived
+      ? `Processo arquivado durante a Etapa ${getStatusStage(order.status)} de 6 — ${getStatusStageLabel(order.status)}.`
+      : `Recebimento rejeitado na Etapa ${getStatusStage(order.status)} de 6 — ${getStatusStageLabel(order.status)}. Aguardando substituição pelo fornecedor.`;
+    return `
+      <div class="timeline-branch-alert timeline-branch-alert--${variant}">
+        <strong>${order.status}</strong>
+        <p>${message}</p>
+      </div>
+    `;
+  }
+
+  const orderStatusIndex = getStatusIndex(order.status);
+  const stagesHtml = getStagesWithStatuses().map(stageGroup => {
+    const stepsHtml = stageGroup.statuses.map(status => {
+      const stepIndex = getStatusIndex(status);
+      const state = orderStatusIndex > stepIndex ? 'completed' : orderStatusIndex === stepIndex ? 'current' : 'pending';
+      return `
+        <li class="timeline-step timeline-step--${state}">
+          <span class="timeline-step-marker"></span>
+          <div class="timeline-step-content">
+            <strong>${status}</strong>
+            ${state === 'current' ? '<span class="timeline-step-note">Status atual</span>' : ''}
+          </div>
+        </li>`;
+    }).join('');
+    return `
+      <li class="timeline-stage-group">
+        <h4 class="timeline-stage-title">Etapa ${stageGroup.stage} — ${stageGroup.label}</h4>
+        <ul class="timeline">${stepsHtml}</ul>
+      </li>
+    `;
+  }).join('');
+
+  return `<ul class="timeline-stages">${stagesHtml}</ul>`;
+}
+
 function renderOrderList(entries) {
   const container = document.getElementById('ordersContainer');
   container.innerHTML = '';
@@ -390,19 +403,6 @@ function renderOrderList(entries) {
     const order = entry.order;
     const items = Array.isArray(order.itens) ? order.itens : [];
     const orderTotal = items.reduce((sum, item) => sum + getItemSubtotal(item), 0);
-    const orderStatusIndex = getStatusIndex(order.status);
-    const timelineHtml = statusSteps.slice(1).map(status => {
-      const stepIndex = getStatusIndex(status);
-      const state = orderStatusIndex > stepIndex ? 'completed' : orderStatusIndex === stepIndex ? 'current' : 'pending';
-      return `
-        <li class="timeline-step timeline-step--${state}">
-          <span class="timeline-step-marker"></span>
-          <div class="timeline-step-content">
-            <strong>${status}</strong>
-            ${state === 'current' ? '<span class="timeline-step-note">Status atual</span>' : ''}
-          </div>
-        </li>`;
-    }).join('');
 
     const orderCard = document.createElement('div');
     orderCard.className = 'order-card';
@@ -449,9 +449,7 @@ function renderOrderList(entries) {
           `}
         </tbody>
       </table>
-      <ul class="timeline">
-        ${timelineHtml}
-      </ul>
+      ${renderOrderTimeline(order)}
       ${renderOrderRatingSection(order, entry.originalIndex)}
     `;
     container.appendChild(orderCard);
@@ -459,6 +457,7 @@ function renderOrderList(entries) {
 }
 
 function initializePage() {
+  renderStatusFilterOptions(document.getElementById('statusFilter'));
   const orders = normalizeOrders(getSavedOrders());
   populateUserFilter(orders);
   renderSummary(orders);
