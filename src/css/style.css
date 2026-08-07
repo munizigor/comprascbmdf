@@ -736,3 +736,23 @@ textarea {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- Épico 08 — prioridade declarada pelo requisitante ---------- */
+
+.priorizacao-fieldset {
+  margin: 18px 0 6px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.priorizacao-fieldset legend {
+  padding: 0 8px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.priorizacao-fieldset .muted-note {
+  margin-top: 0;
+}

@@ -79,6 +79,7 @@ Essa causa-raiz orienta a proposta de solução: o CBMDF Marketplace não deve s
 | **Comando/Direção do CBMDF** | Patrocínio institucional | Aprovação da adoção da ferramenta e alinhamento com a estratégia de gestão de suprimentos. |
 | **Central de Suprimentos e Material (CESMA)** | Recebimento e distribuição de materiais | Validação do fluxo de tramitação e recebimento dos pedidos. |
 | **Área de Planejamento/Orçamento** | Gestão orçamentária | Validação dos relatórios de PCA/PLOA e da correta classificação de despesas. |
+| **Comitê de Governança de Contratações** | Priorização institucional e rito de revisão do PCA | Definição dos pesos do critério de priorização, condução dos ciclos quadrimestrais e contenção das contratações por urgência. |
 
 ### 3.2 Perfil dos Usuários
 | Usuário | Descrição | Principais Necessidades |
@@ -88,6 +89,7 @@ Essa causa-raiz orienta a proposta de solução: o CBMDF Marketplace não deve s
 | **Gestor de Contratações** | Responsável por agrupar pedidos em contratações por classe e complementar itens manualmente. | Visualizar pedidos agrupados por classe, incluir itens adicionais com classificação orçamentária completa, excluir/restaurar grupos ou itens. |
 | **Gestor do Catálogo e Atas (CESMA/DIMAT)** | Responsável pela manutenção do catálogo padronizado e pela gestão das Atas de Registro de Preços. | Homologar novos itens, sincronizar o catálogo com o sistema Grifo, cadastrar/atualizar ARPs, controlar saldos de atas e disponibilizar itens vinculados a atas vigentes. |
 | **Planejamento/Diretoria** | Consome os relatórios consolidados de PCA e PLOA. | Visão agregada dos valores planejado, comprometido, empenhado, liquidado e pago, por setor, tipo, classe e natureza de despesa. |
+| **Comitê de Governança de Contratações** | Instância colegiada que decide a ordem de atendimento das demandas concorrentes e conduz o rito quadrimestral de revisão do PCA. | Ver a fila priorizada com o critério explícito que a ordenou, ajustar posições em caráter excepcional mediante justificativa registrada, abrir e fechar ciclos com ata e fotografia do planejado, e acompanhar o percentual de contratações que entraram por urgência em cada setor. |
 
 ---
 
@@ -300,6 +302,68 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 
 ---
 
+### **ÉPICO 08: Priorização e Governança Contínua**
+> **Descrição:** Fechar a lacuna entre tornar demandas **visíveis** e fazer a instituição **escolher** entre elas. A seção 2.2 lista cinco efeitos da causa-raiz; a *fragilidade da priorização institucional entre pedidos concorrentes* não era endereçada por nenhum épico, e o *aumento das contratações emergenciais* era apenas contabilizado, nunca contido. Governança é decidir entre demandas concorrentes com recurso escasso — sem um critério explícito de priorização, o produto se reduz a "mais um formulário".
+
+#### **HU08.1 — Fila Priorizada por Score Transparente**
+* **Como:** Comitê de Governança de Contratações
+* **Eu quero:** Ver as demandas pendentes ordenadas por um score com pesos declarados — criticidade (40), risco de postergar (30), obrigatoriedade legal (20) e prontidão da instrução (10)
+* **Para que:** A ordem de atendimento seja explicável ao setor preterido e auditável depois, em vez de depender da ordem de chegada ou de articulação informal.
+* **Critérios de Aceite:**
+  * A tela deve exibir a decomposição do score ("Por quê?"), e as parcelas exibidas devem somar exatamente o total apresentado.
+  * Criticidade e risco são declarados pelo **requisitante**; obrigatoriedade legal e prontidão da instrução, pelo **Planejamento** — nenhum ator pontua a própria demanda em todos os critérios.
+  * Empates devem ser desfeitos de forma estável: score decrescente, depois data de criação crescente, depois número do protocolo.
+  * Pedidos anteriores ao épico, sem criticidade declarada, devem ter a nota derivada da urgência já informada nos itens, e a fila deve indicar que se trata de valor derivado, não declarado.
+
+#### **HU08.2 — Decisão de Exceção com Custo Político**
+* **Como:** Comitê de Governança de Contratações
+* **Eu quero:** Poder mover manualmente um pedido na fila, informando o motivo
+* **Para que:** A realidade administrativa que o score não captura possa ser acomodada sem que a exceção se torne invisível.
+* **Critérios de Aceite:**
+  * O ajuste manual exige motivo com no mínimo 20 caracteres; sem ele, a operação é recusada.
+  * O pedido ajustado exibe, na fila, o nome de quem ajustou e o motivo declarado.
+  * O ajuste **expira ao fechar o ciclo** — o arbítrio vale para o ciclo em que foi exercido e não se torna permanente.
+
+#### **HU08.3 — Rito de Ciclo Quadrimestral do PCA**
+* **Como:** Comitê de Governança de Contratações
+* **Eu quero:** Abrir e fechar ciclos quadrimestrais, registrando uma ata no fechamento
+* **Para que:** O PCA deixe de ser uma atualização anual e passe a ser revisto em rito periódico com autor e data.
+* **Critérios de Aceite:**
+  * Apenas um ciclo pode estar aberto por vez.
+  * O fechamento exige ata com no mínimo 20 caracteres e registra autor e data.
+  * O fechamento **congela uma fotografia imutável** da fila (protocolo, setor, valor, score, posição, status e marca de urgência). Alterar o status de um pedido depois **não** altera a fotografia.
+  * Congelar não trava a tramitação: os pedidos seguem avançando normalmente.
+
+#### **HU08.4 — Contenção da Contratação por Urgência**
+* **Como:** Gestor Setorial / Comitê de Governança
+* **Eu quero:** Que a inclusão de um pedido por urgência exija motivo robusto e um segundo aprovador
+* **Para que:** Furar a fila seja possível, mas nunca silencioso nem unilateral.
+* **Critérios de Aceite:**
+  * A inclusão por urgência exige justificativa com no mínimo 30 caracteres.
+  * O aprovador deve ser **diferente** de quem solicita a inclusão; a operação é recusada em caso contrário.
+  * A ação deve estar disponível na tela onde a fila setorial é julgada, ao lado de "Aprovar no Setor" e "Solicitar Suplementação".
+  * A decisão é registrada na trilha de auditoria (Épico 02), com autor, aprovador, motivo e tela de origem.
+
+#### **HU08.5 — Painel de Urgências por Setor**
+* **Como:** Planejamento/Diretoria
+* **Eu quero:** Ver o percentual do valor que entrou por urgência, no total e por setor
+* **Para que:** A instituição saiba se está contendo a exceção ou apenas contabilizando-a.
+* **Critérios de Aceite:**
+  * Deve exibir valor total, valor por urgência e percentual, por setor.
+  * Setores acima de 20% do valor por urgência devem aparecer sinalizados.
+  * O painel deve indicar a meta institucional (até 10% do ciclo).
+
+#### **HU08.6 — Visibilidade da Posição pelo Requisitante**
+* **Como:** Requisitante
+* **Eu quero:** Ver a posição do meu pedido na fila e a conta que a produziu
+* **Para que:** Eu entenda por que minha demanda vem antes ou depois de outra, sem precisar acionar informalmente o Planejamento.
+* **Critérios de Aceite:**
+  * A posição e o score devem aparecer no acompanhamento do pedido enquanto ele estiver pendente de decisão.
+  * Deve exibir os quatro critérios que compuseram o score.
+  * Se a posição tiver sido ajustada manualmente pelo comitê, o requisitante deve ver essa marca.
+
+---
+
 ## 6. Requisitos Não Funcionais (RNFs)
 
 ### 6.1 Usabilidade
@@ -313,7 +377,7 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 * Aderência à Lei nº 14.133/2021 (Nova Lei de Licitações e Contratos) e às normas internas de compras públicas do CBMDF.
 * Conformidade com a Lei Geral de Proteção de Dados (LGPD) quanto aos dados pessoais de requisitantes (nome, matrícula, setor).
 * Controle de acesso por perfil (requisitante, gestor de tramitação, gestor de contratações, gestor do catálogo e atas, planejamento), hoje inexistente no protótipo e necessário na evolução do produto.
-* Registro de trilha de auditoria para alterações de status de pedido, hoje inexistente no protótipo.
+* Registro de trilha de auditoria para alterações de status de pedido, **implementado**: toda mudança de status passa por um ponto único de mutação que grava estado anterior, estado novo, data, autor, perfil, tela de origem e justificativa. Transições fora do fluxo previsto exigem marcação explícita de excepcionalidade. Pedidos anteriores à implementação recebem uma entrada de gênese marcada como migrada, sem timestamps intermediários fabricados.
 * **RNF — Integração com Sistemas Governamentais:** o sistema deve dispor de APIs REST/Web Services para comunicação bidirecional com o SEI (abertura de processos e envio de minutas), o SIAFI (empenho e liquidação) e o PNCP (envio de dados de contratação e atas).
 * **RNF — Sincronismo de Catálogo:** o catálogo de materiais e serviços deve ser mantido em sincronia com a base oficial do Grifo, garantindo a padronização dos códigos PDM/PDS.
 

@@ -19,6 +19,7 @@
       <div class="actions">
         <a class="btn btn-secondary" href="acompanhe.html" data-profiles="solicitante">Meus pedidos</a>
         <a class="btn btn-secondary" href="status.html" data-profiles="gestor compras">Gestão de demandas</a>
+        <a class="btn btn-secondary" href="governanca.html" data-profiles="gestor compras">Governança</a>
         <a class="btn btn-secondary" href="contratacoes.html" data-profiles="compras">Contratações</a>
         <a class="btn btn-secondary" href="planejamento.html" data-profiles="compras">Planejamento</a>
         <a class="btn btn-secondary" href="orcamento-geral.html" data-profiles="gestor compras">Orçamento</a>
@@ -135,6 +136,37 @@
         <label for="notes">Justificativa / Observações</label>
         <textarea id="notes" rows="4" placeholder="Ex: Do material, indicar uso específico ou unidade solicitante"></textarea>
       </div>
+
+      <fieldset class="priorizacao-fieldset">
+        <legend>Prioridade da demanda</legend>
+        <p class="muted-note">
+          Estas duas respostas entram no cálculo que ordena a fila de contratações. O Planejamento
+          avalia separadamente a obrigatoriedade legal e a prontidão da instrução — ninguém pontua
+          a própria demanda em todos os critérios.
+        </p>
+        <div class="filter-row">
+          <div class="input-group">
+            <label for="criticidadeSelect">Criticidade operacional</label>
+            <select id="criticidadeSelect">
+              <option value="1">1 — Sem impacto operacional imediato</option>
+              <option value="2">2 — Impacto pequeno, contornável</option>
+              <option value="3" selected>3 — Impacto moderado na rotina da unidade</option>
+              <option value="4">4 — Compromete atividade operacional relevante</option>
+              <option value="5">5 — Risco à vida ou à continuidade do socorro</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="riscoSelect">Risco de postergar</label>
+            <select id="riscoSelect">
+              <option value="1">1 — Nenhum risco em postergar</option>
+              <option value="2">2 — Risco baixo</option>
+              <option value="3" selected>3 — Risco moderado de agravamento</option>
+              <option value="4">4 — Risco alto de indisponibilidade</option>
+              <option value="5">5 — Risco iminente de paralisação</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
       <div class="step-actions">
         <button class="btn btn-secondary" type="button" onclick="goToStep(1)">← Voltar</button>
         <button class="btn btn-primary" type="button" onclick="goToStep(3)">Continuar →</button>
@@ -146,6 +178,7 @@
       <div id="reviewItems"></div>
       <div class="summary" id="reviewSummary"></div>
       <p id="reviewNotes" class="muted-note"></p>
+      <p id="reviewPrioridade" class="muted-note"></p>
       <div class="step-actions">
         <button class="btn btn-secondary" type="button" onclick="goToStep(2)">← Voltar</button>
         <button class="btn btn-primary" type="button" onclick="confirmSubmitOrder()">Confirmar solicitação</button>
