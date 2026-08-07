@@ -7,6 +7,7 @@ const products = [
     price: 125.00,
     priority: 'alta',
     tipo: 'MATERIAL',
+    unidade: 'unidade',
     grupoCodigo: '84',
     grupoNome: 'VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS',
     classeCodigo: '8415',
@@ -22,6 +23,7 @@ const products = [
     price: 320.00,
     priority: 'alta',
     tipo: 'MATERIAL',
+    unidade: 'par',
     grupoCodigo: '84',
     grupoNome: 'VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS',
     classeCodigo: '8430',
@@ -37,6 +39,7 @@ const products = [
     price: 490.00,
     priority: 'alta',
     tipo: 'MATERIAL',
+    unidade: 'unidade',
     grupoCodigo: '42',
     grupoNome: 'EQUIPAMENTO PARA COMBATE A INCÊNDIO, RESGATE E SEGURANÇA',
     classeCodigo: '4210',
@@ -52,6 +55,7 @@ const products = [
     price: 158.00,
     priority: 'alta',
     tipo: 'MATERIAL',
+    unidade: 'unidade',
     grupoCodigo: '42',
     grupoNome: 'EQUIPAMENTO PARA COMBATE A INCÊNDIO, RESGATE E SEGURANÇA',
     classeCodigo: '4210',
@@ -67,6 +71,7 @@ const products = [
     price: 220.00,
     priority: 'media',
     tipo: 'MATERIAL',
+    unidade: 'unidade',
     grupoCodigo: '58',
     grupoNome: 'EQUIPAMENTOS DE COMUNICAÇÃO, DETECÇÃO E RADIAÇÃO COERENTE',
     classeCodigo: '5820',
@@ -82,6 +87,7 @@ const products = [
     price: 86.00,
     priority: 'media',
     tipo: 'MATERIAL',
+    unidade: 'unidade',
     grupoCodigo: '62',
     grupoNome: 'LÂMPADAS E ACCSSÓRIOS DE ILUMINAÇÃO',
     classeCodigo: '6230',
@@ -97,6 +103,7 @@ const products = [
     price: 72.50,
     priority: 'media',
     tipo: 'MATERIAL',
+    unidade: 'unidade',
     grupoCodigo: '84',
     grupoNome: 'VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS',
     classeCodigo: '8415',
@@ -112,6 +119,7 @@ const products = [
     price: 135.00,
     priority: 'alta',
     tipo: 'MATERIAL',
+    unidade: 'kit',
     grupoCodigo: '65',
     grupoNome: 'EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO',
     classeCodigo: '6510',
@@ -127,6 +135,7 @@ const products = [
     price: 24.90,
     priority: 'normal',
     tipo: 'MATERIAL',
+    unidade: 'galão',
     grupoCodigo: '79',
     grupoNome: 'EQUIPAMENTOS E MATERIAIS PARA LIMPEZA',
     classeCodigo: '7930',
@@ -142,6 +151,7 @@ const products = [
     price: 245.00,
     priority: 'media',
     tipo: 'MATERIAL',
+    unidade: 'conjunto',
     grupoCodigo: '84',
     grupoNome: 'VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS',
     classeCodigo: '8405',
@@ -157,6 +167,7 @@ const products = [
     price: 6800.00,
     priority: 'alta',
     tipo: 'MATERIAL',
+    unidade: 'unidade',
     grupoCodigo: '65',
     grupoNome: 'EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO',
     classeCodigo: '6515',
@@ -172,6 +183,7 @@ const products = [
     price: 450.00,
     priority: 'alta',
     tipo: 'MATERIAL',
+    unidade: 'unidade',
     grupoCodigo: '42',
     grupoNome: 'EQUIPAMENTO PARA COMBATE A INCÊNDIO, RESGATE E SEGURANÇA',
     classeCodigo: '4240',
@@ -187,6 +199,7 @@ const products = [
     price: 890.00,
     priority: 'alta',
     tipo: 'MATERIAL',
+    unidade: 'unidade',
     grupoCodigo: '42',
     grupoNome: 'EQUIPAMENTO PARA COMBATE A INCÊNDIO, RESGATE E SEGURANÇA',
     classeCodigo: '4240',
@@ -202,6 +215,7 @@ const products = [
     price: 3500.00,
     priority: 'media',
     tipo: 'SERVIÇO',
+    unidade: 'serviço',
     grupoCodigo: '852',
     grupoNome: 'SERVIÇOS DE INVESTIGAÇÃO E SEGURANÇA',
     classeCodigo: '8529',
@@ -220,15 +234,6 @@ function getSavedOrders() {
 
 function saveOrders(orders) {
   localStorage.setItem('cbmdf_orders', JSON.stringify(orders));
-}
-
-function toggleMenu() {
-  const dropdown = document.getElementById('menuDropdown');
-  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-}
-
-function closeMenu() {
-  document.getElementById('menuDropdown').style.display = 'none';
 }
 
 function exportOrdersCsv() {
@@ -275,16 +280,7 @@ function exportOrdersCsv() {
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
-  closeMenu();
 }
-
-document.addEventListener('click', event => {
-  const dropdown = document.getElementById('menuDropdown');
-  const button = document.getElementById('menuButton');
-  if (!dropdown.contains(event.target) && !button.contains(event.target)) {
-    closeMenu();
-  }
-});
 
 function populateUserSelect() {
   const select = document.getElementById('userSelect');
@@ -306,13 +302,62 @@ function renderUser() {
   sector.textContent = `Lotação: ${user.setor}`;
   if (window.CBMDFNav) window.CBMDFNav.setCurrentUserId(user.id);
   renderPersonalization(user);
+  applyFilters();
 }
 
 function formatPrice(value) {
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
-function renderProducts(list) {
+function categoryLabel(category) {
+  const labels = { escritorio: 'Escritório', manutencao: 'Manutenção', higiene: 'Higiene', saude: 'Saúde', seguranca: 'Segurança' };
+  return labels[category] || 'Segurança';
+}
+
+function getProductCode(item) {
+  const prefix = item.tipo === 'SERVIÇO' ? 'CATSER' : 'CATMAT';
+  return `${prefix} ${item.classeCodigo}${String(item.id).padStart(2, '0')}`;
+}
+
+function getFavoritesKey() {
+  const user = window.CBMDFNav ? window.CBMDFNav.getCurrentUser() : null;
+  return `cbmdf_favorites_${user ? user.id : 'guest'}`;
+}
+
+function getFavorites() {
+  const raw = localStorage.getItem(getFavoritesKey());
+  return raw ? JSON.parse(raw) : [];
+}
+
+function toggleFavorite(productId) {
+  const favorites = getFavorites();
+  const index = favorites.indexOf(productId);
+  if (index >= 0) favorites.splice(index, 1); else favorites.push(productId);
+  localStorage.setItem(getFavoritesKey(), JSON.stringify(favorites));
+  applyFilters();
+}
+
+function getGlobalItemCounts() {
+  const counts = {};
+  getSavedOrders().forEach(order => {
+    order.itens.forEach(item => {
+      counts[item.id] = (counts[item.id] || 0) + item.quantidade;
+    });
+  });
+  return counts;
+}
+
+function getItemRecency() {
+  const recency = {};
+  getSavedOrders().forEach((order, index) => {
+    order.itens.forEach(item => {
+      recency[item.id] = index;
+    });
+  });
+  return recency;
+}
+
+function renderProducts(list, favorites) {
   const container = document.getElementById('products');
   container.innerHTML = '';
   if (!list.length) {
@@ -320,6 +365,7 @@ function renderProducts(list) {
     return;
   }
   list.forEach(item => {
+    const isFavorite = favorites.includes(item.id);
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
@@ -327,16 +373,19 @@ function renderProducts(list) {
         <div class="card-icon">${item.category.charAt(0).toUpperCase()}</div>
         <div>
           <h3 class="card-title">${item.name}</h3>
-          <p class="card-subtitle">${item.category === 'escritorio' ? 'Escritório' : item.category === 'manutencao' ? 'Manutenção' : item.category === 'higiene' ? 'Higiene' : item.category === 'saude' ? 'Saúde' : 'Segurança'}</p>
+          <p class="card-subtitle">${categoryLabel(item.category)}</p>
         </div>
+        <button type="button" class="favorite-btn ${isFavorite ? 'is-active' : ''}" onclick="toggleFavorite(${item.id})" aria-label="${isFavorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}" aria-pressed="${isFavorite}">${isFavorite ? '★' : '☆'}</button>
       </div>
-      
+
       <p class="card-description">${item.description}</p>
       <div class="card-meta">
         <span class="chip">${item.tipo}</span>
-        <span class="chip">${item.grupoNome} - ${item.classeNome}</span>
+        <span class="chip">${getProductCode(item)}</span>
+        <span class="chip">Unidade: ${item.unidade}</span>
         <span class="chip">${item.tipoDespesa}</span>
       </div>
+      <p class="card-availability">🟢 Disponível para solicitação</p>
       <div class="card-footer">
         <span class="price">${formatPrice(item.price)}</span>
         <button class="btn btn-primary" onclick="addToCart(${item.id})">Adicionar</button>
@@ -431,6 +480,86 @@ function renderCart() {
   document.getElementById('summaryTotal').textContent = formatPrice(total);
 }
 
+let currentStep = 1;
+
+function updateStepsNav() {
+  document.querySelectorAll('#stepsNav .step').forEach(el => {
+    const step = Number(el.dataset.step);
+    el.classList.toggle('step--active', step === currentStep);
+    el.classList.toggle('step--completed', step < currentStep);
+  });
+}
+
+function goToStep(step) {
+  if (step === 2 && !Object.keys(cart).length) {
+    alert('Adicione pelo menos um material ao pedido antes de continuar.');
+    return;
+  }
+  if (step === 3) {
+    renderReview();
+  }
+  currentStep = step;
+  document.getElementById('stepSelectItems').style.display = step === 1 ? '' : 'none';
+  document.getElementById('stepNecessidade').style.display = step === 2 ? '' : 'none';
+  document.getElementById('stepRevisar').style.display = step === 3 ? '' : 'none';
+  document.getElementById('stepConfirmado').style.display = step === 4 ? '' : 'none';
+  updateStepsNav();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderReview() {
+  const reviewItems = document.getElementById('reviewItems');
+  const notes = document.getElementById('notes').value.trim();
+  let total = 0;
+  let quantity = 0;
+
+  const rows = Object.keys(cart).map(id => {
+    const productId = Number(id);
+    const item = products.find(p => p.id === productId);
+    const count = cart[id].quantity;
+    const lineTotal = item.price * count;
+    total += lineTotal;
+    quantity += count;
+    return `
+      <div class="cart-item">
+        <div class="cart-item-header">
+          <div>
+            <p class="cart-item-title">${item.name}</p>
+            <p class="cart-item-meta">${count} ${item.unidade}(s) × ${formatPrice(item.price)}</p>
+          </div>
+          <strong>${formatPrice(lineTotal)}</strong>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  reviewItems.innerHTML = rows || '<p class="muted-note">Nenhum item selecionado.</p>';
+  document.getElementById('reviewSummary').innerHTML = `
+    <div class="summary-row">
+      <span>Itens</span>
+      <strong>${Object.keys(cart).length}</strong>
+    </div>
+    <div class="summary-row">
+      <span>Quantidade total</span>
+      <strong>${quantity}</strong>
+    </div>
+    <div class="summary-row summary-total">
+      <span>Total estimado</span>
+      <strong>${formatPrice(total)}</strong>
+    </div>
+  `;
+  document.getElementById('reviewNotes').textContent = notes ? `Justificativa: ${notes}` : 'Nenhuma justificativa informada.';
+}
+
+function confirmSubmitOrder() {
+  submitOrder();
+  goToStep(4);
+}
+
+function resetToStep1() {
+  goToStep(1);
+}
+
 function renderPersonalization(user) {
   const topItemsList = document.getElementById('topItemsList');
   const recentOrdersList = document.getElementById('recentOrdersList');
@@ -467,14 +596,29 @@ function renderPersonalization(user) {
 function applyFilters() {
   const search = document.getElementById('searchBox').value.trim().toLowerCase();
   const category = document.getElementById('categorySelect').value;
+  const sort = document.getElementById('sortSelect') ? document.getElementById('sortSelect').value : 'relevancia';
+  const onlyFavorites = document.getElementById('favoritesToggle') ? document.getElementById('favoritesToggle').checked : false;
+  const favorites = getFavorites();
 
-  const filtered = products.filter(item => {
-    const matchesSearch = search ? item.name.toLowerCase().includes(search) || item.description.toLowerCase().includes(search) : true;
+  let filtered = products.filter(item => {
+    const codigo = getProductCode(item).toLowerCase();
+    const matchesSearch = search
+      ? item.name.toLowerCase().includes(search) || item.description.toLowerCase().includes(search) || codigo.includes(search)
+      : true;
     const matchesCategory = category === 'all' ? true : item.category === category;
-    return matchesSearch && matchesCategory;
+    const matchesFavorite = onlyFavorites ? favorites.includes(item.id) : true;
+    return matchesSearch && matchesCategory && matchesFavorite;
   });
 
-  renderProducts(filtered);
+  if (sort === 'popular') {
+    const counts = getGlobalItemCounts();
+    filtered = filtered.slice().sort((a, b) => (counts[b.id] || 0) - (counts[a.id] || 0));
+  } else if (sort === 'recent') {
+    const recency = getItemRecency();
+    filtered = filtered.slice().sort((a, b) => (recency[b.id] ?? -1) - (recency[a.id] ?? -1));
+  }
+
+  renderProducts(filtered, favorites);
 }
 
 function submitOrder() {
@@ -524,7 +668,6 @@ function submitOrder() {
   saveOrders(savedOrders);
 
   console.log('Pedidos armazenados no localStorage:', savedOrders);
-  alert('Pedido registrado.');
   Object.keys(cart).forEach(key => delete cart[key]);
   renderCart();
   document.getElementById('notes').value = '';

@@ -260,6 +260,7 @@ function applyFilters() {
 
 function updateRestoreButton(contratacoes) {
   const button = document.getElementById('restoreGroupsButton');
+  if (!button) return;
   const hasExclusions = (contratacoes.excludedGroups && contratacoes.excludedGroups.length) || (contratacoes.excludedItemKeys && contratacoes.excludedItemKeys.length);
   button.style.display = hasExclusions ? 'block' : 'none';
 }
