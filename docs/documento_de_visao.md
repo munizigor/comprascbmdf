@@ -1,5 +1,5 @@
 # Documento de Visão do Produto
-## CBMDF Marketplace — Plataforma de Gestão Logística e Financeira de Compras e Aquisições
+## CBMDF Marketplace — Camada de Governança e Planejamento Logístico e Financeiro das Contratações e Aquisições
 
 ---
 
@@ -9,7 +9,9 @@
 O propósito deste documento é coletar, analisar e definir as necessidades de alto nível e os recursos fundamentais do **CBMDF Marketplace**. Ele fornece uma visão clara e compartilhada entre os patrocinadores (*stakeholders*), a equipe de desenvolvimento, os setores requisitantes, a área de planejamento/orçamento e a Central de Suprimentos e Material (CESMA) sobre o escopo e o direcionamento do produto.
 
 ### 1.2 Escopo
-O **CBMDF Marketplace** é uma ferramenta de gestão logística e financeira das demandas de compras e aquisições do Corpo de Bombeiros Militar do Distrito Federal (CBMDF). O sistema abrange desde a requisição de materiais e serviços pelos setores operacionais e administrativos, passando pela tramitação processual do pedido (DFD, TR, Nota de Empenho), o agrupamento das demandas em contratações por classe, até a consolidação orçamentária do Plano de Contratações Anual (PCA) e do Projeto de Lei Orçamentária Anual (PLOA), com acompanhamento da execução da despesa (planejado → comprometido → empenhado → liquidado → pago).
+O **CBMDF Marketplace** é a **camada institucional de governança e planejamento logístico e financeiro das contratações e aquisições** do Corpo de Bombeiros Militar do Distrito Federal (CBMDF). O sistema abrange desde a requisição de materiais e serviços pelos setores operacionais e administrativos, passando pela tramitação processual do pedido (DFD, TR, Nota de Empenho), o agrupamento das demandas em contratações por classe, até a consolidação orçamentária do Plano de Contratações Anual (PCA) e do Projeto de Lei Orçamentária Anual (PLOA), com acompanhamento da execução da despesa (planejado → comprometido → empenhado → liquidado → pago).
+
+O produto **recebe, prioriza e planeja** as necessidades e **orquestra** a tramitação até a contratação — ele *planeja e governa* o ciclo de aquisição. A **execução** de cada especialidade permanece no sistema próprio: a **custódia logística** (catálogo, material, estoque e patrimônio) no Grifo e no SISGEPAT, e a **execução financeira e contábil** (empenho, liquidação e pagamento) no SIAFI. Ou seja, o CBMDF Marketplace **não executa a logística nem a contabilidade — ele as orquestra, integra e consolida**. Essa fronteira ("planejar e governar" × "executar") é uma escolha de projeto que distingue a solução de um ERP e é aprofundada no documento [Análise de Escopo — ERP](analise_escopo_erp.md).
 
 ### 1.3 Definições, Acrônimos e Abreviações
 * **CBMDF:** Corpo de Bombeiros Militar do Distrito Federal.
@@ -29,6 +31,7 @@ O **CBMDF Marketplace** é uma ferramenta de gestão logística e financeira das
 * **Comprometido / Empenhado / Liquidado / Pago:** Estágios sucessivos da execução orçamentária de uma despesa pública. `Liquidado` e `Pago` são status reais do pedido (não apenas colunas derivadas dos relatórios de planejamento), atingidos ao final da Etapa 6 (Entrega & Finalização).
 * **Setores:** unidades do CBMDF que originam ou tramitam pedidos, como COMOP, CESMA, DITIC, DIMAT e COMAP.
 * **Grifo:** Sistema corporativo legado/existente do CBMDF utilizado para gestão de materiais, cujo catálogo será reaproveitado pelo CBMDF Marketplace.
+* **SISGEPAT:** Sistema de Gerenciamento de Patrimônio, responsável pela execução da custódia patrimonial (tombamento e controle de bens permanentes). A execução logística permanece nele e no Grifo — o CBMDF Marketplace planeja e orquestra, mas não executa essa custódia.
 * **SEI (Sistema Eletrônico de Informações):** Sistema de gestão de processos e documentos administrativos do Distrito Federal.
 * **SIAFI:** Sistema Integrado de Administração Financeira, utilizado para execução orçamentária e financeira.
 * **PNCP:** Portal Nacional de Contratações Públicas, exigência da Lei nº 14.133/2021.
@@ -64,9 +67,9 @@ Essa causa-raiz orienta a proposta de solução: o CBMDF Marketplace não deve s
 ### 2.4 Declaração de Posição do Produto
 * **Para:** Setores requisitantes do CBMDF, gestores da Central de Suprimentos e Material (CESMA) e a área de Planejamento/Orçamento.
 * **Que:** Precisam requisitar materiais e serviços, tramitar essas demandas até a entrega e manter o controle orçamentário do PCA e do PLOA.
-* **O CBMDF Marketplace:** É uma ferramenta de gestão logística e financeira de compras e aquisições.
-* **Que:** Unifica catálogo de requisição, tramitação de status processual, agrupamento de contratações por classe e consolidação orçamentária automática.
-* **Diferente de:** Controles paralelos em planilhas e ofícios, que exigem atualização e consolidação manuais e não oferecem rastreabilidade ponta a ponta.
+* **O CBMDF Marketplace:** É a camada de governança e planejamento logístico e financeiro das contratações e aquisições.
+* **Que:** Unifica catálogo de requisição, priorização das demandas, tramitação de status processual, agrupamento de contratações por classe e consolidação orçamentária automática — orquestrando os sistemas que executam cada especialidade (Grifo, SISGEPAT, SIAFI, SEI e PNCP) em vez de substituí-los.
+* **Diferente de:** Controles paralelos em planilhas e ofícios, que exigem atualização e consolidação manuais e não oferecem rastreabilidade ponta a ponta; e diferente de um ERP, pois **não é o sistema de registro do patrimônio, do estoque ou da contabilidade** — esses permanecem em seus sistemas próprios.
 * **Nosso produto:** Proporciona rastreabilidade do pedido do início ao recebimento e consolidação automática dos valores planejado, comprometido, empenhado, liquidado e pago — sempre orientado pelo mantra **"comprar melhor"**: lotes otimizados, contratações completas e menos compras pulverizadas.
 
 ---
@@ -96,12 +99,13 @@ Essa causa-raiz orienta a proposta de solução: o CBMDF Marketplace não deve s
 ## 4. Visão Geral do Produto
 
 ### 4.1 Perspectiva do Produto
-A visão de evolução do produto é a de uma aplicação com backend próprio, banco de dados centralizado e autenticação integrada aos usuários do CBMDF, mantendo a mesma lógica de negócio já validada no protótipo: catálogo de materiais/serviços, tramitação de status e consolidação orçamentária.
+A visão de evolução do produto é a de uma aplicação com backend próprio, banco de dados centralizado e integrado à base institucional do CBMDF, autenticação corporativa e Design System do gov.br, mantendo a mesma lógica de negócio já validada no protótipo: catálogo de materiais/serviços, priorização das demandas, tramitação de status e consolidação orçamentária.
 
-Na visão de evolução, o produto deve interoperar com sistemas já usados pelo CBMDF e pelo Distrito Federal:
+Arquiteturalmente, o produto é uma **camada de orquestração** (padrão *Source-to-Pay*): é dono dos domínios de governança e planejamento das contratações e **cliente** dos sistemas que executam cada especialidade. Ele deve interoperar, via APIs/Web Services, com os sistemas já usados pelo CBMDF e pelo Distrito Federal:
 * **Grifo:** fonte primária para carga, padronização e sincronização do catálogo de materiais e serviços.
+* **SISGEPAT:** destino da custódia patrimonial — o tombamento de bens permanentes recebidos permanece nele; o Marketplace planeja a aquisição e registra o encaminhamento, não a custódia.
 * **SEI:** abertura e instrução automática de processos administrativos (DFD e TR), com envio de links e documentos gerados no Marketplace.
-* **SIAFI:** consulta de saldos orçamentários e emissão automática de pré-empenho, empenho, liquidação e registro de pagamento.
+* **SIAFI:** consulta de saldos orçamentários e emissão automática de pré-empenho, empenho, liquidação e registro de pagamento — a execução financeiro-contábil é dele, não do Marketplace.
 * **PNCP:** publicação automatizada do PCA, editais, contratos e Atas de Registro de Preços, conforme a Lei nº 14.133/2021.
 
 ### 4.2 Resumo dos Principais Recursos
