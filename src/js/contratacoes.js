@@ -119,6 +119,7 @@ function groupContratacoesByClasse(orders, contratacoes) {
         key,
         source: 'order',
         protocolo: order.id || '',
+        publicadoPncp: typeof isPublicadoPncp === 'function' ? isPublicadoPncp(order) : false,
         usuario: order.usuario || { nome: 'Desconhecido', matricula: '', setor: '' },
         setor: item.setor || order.usuario?.setor || '',
         pedidoData: order.data || '',
@@ -157,6 +158,9 @@ function buildPcaItens(orders, contratacoes) {
     grupo.dfdsOrigem = Array.from(new Set(
       grupo.items.filter(item => item.source === 'order' && item.protocolo).map(item => item.protocolo)
     ));
+    grupo.dfdsPublicados = new Set(
+      grupo.items.filter(item => item.source === 'order' && item.protocolo && item.publicadoPncp).map(item => item.protocolo)
+    ).size;
   });
 
   return grupos;
@@ -217,6 +221,10 @@ function renderContractGroups(groups) {
     const exercicioLabel = group.exercicioPca != null ? String(group.exercicioPca) : 'não informado';
     const codigo = getCatalogCode(group);
     const classeTitulo = codigo ? `${codigo} — ${group.classeNome}` : group.classeNome;
+    const totalDfds = group.dfdsOrigem.length;
+    const pncpLabel = totalDfds
+      ? `${group.dfdsPublicados}/${totalDfds} DFDs${group.dfdsPublicados === totalDfds && group.dfdsPublicados > 0 ? ' ✅' : ''}`
+      : '—';
 
     const groupCard = document.createElement('div');
     groupCard.className = 'order-card';
@@ -239,7 +247,8 @@ function renderContractGroups(groups) {
           <div><strong>Itens:</strong> ${group.items.length}</div>
           <div><strong>Quantidade total:</strong> ${groupQuantity}</div>
           <div><strong>Valor:</strong> ${formatPrice(groupValue)}</div>
-          <div><strong>DFDs de origem:</strong> ${group.dfdsOrigem.length}</div>
+          <div><strong>DFDs de origem:</strong> ${totalDfds}</div>
+          <div><strong>Publicado no PNCP:</strong> ${pncpLabel}</div>
         </div>
       </div>
       <table class="report-table">

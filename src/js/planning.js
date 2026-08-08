@@ -166,8 +166,14 @@ function renderPlanningAlerts(ordersWithItems) {
     sectorsOverBudget = snapshot.sectors.filter(sector => sector.saldoCusteio < 0 || sector.saldoInvestimento < 0).length;
   }
 
-  const advancedOrders = ordersWithItems.filter(order => getStatusFlags(order.status).includeInTotal).length;
+  const pcaOrders = ordersWithItems.filter(order => getStatusFlags(order.status).includeInTotal);
+  const advancedOrders = pcaOrders.length;
   const advancedPercent = ordersWithItems.length ? Math.round((advancedOrders / ordersWithItems.length) * 100) : 0;
+
+  const pncpPublicados = typeof isPublicadoPncp === 'function'
+    ? pcaOrders.filter(order => isPublicadoPncp(order)).length
+    : 0;
+  const pncpPercent = advancedOrders ? Math.round((pncpPublicados / advancedOrders) * 100) : 0;
 
   const alerts = [];
   if (unclassifiedCount > 0) {
@@ -177,6 +183,10 @@ function renderPlanningAlerts(ordersWithItems) {
     alerts.push({ type: 'warning', text: `${sectorsOverBudget} ${sectorsOverBudget === 1 ? 'unidade ultrapassou' : 'unidades ultrapassaram'} o limite orçamentário previsto.` });
   }
   alerts.push({ type: 'success', text: `${advancedPercent}% das demandas já possuem contratação correspondente em andamento.` });
+  alerts.push({
+    type: pncpPublicados > 0 ? 'success' : 'warning',
+    text: `${pncpPublicados} de ${advancedOrders} ${advancedOrders === 1 ? 'item do PCA publicado' : 'itens do PCA publicados'} no PNCP (${pncpPercent}%).`
+  });
 
   container.innerHTML = alerts.map(alert => `
     <div class="planning-alert planning-alert--${alert.type}">
