@@ -64,6 +64,17 @@ function applyFilters(resetPagination = false) {
   renderOrders(filtered);
 }
 
+// Opções de aprovador = todos os usuários exceto quem está registrando a
+// mudança (a regra aprovador ≠ autor é validada em applyStatusChange).
+function buildAprovadorOptions() {
+  const autor = typeof getAutorAtual === 'function' ? getAutorAtual() : null;
+  const lista = typeof users !== 'undefined' && Array.isArray(users) ? users : [];
+  return lista
+    .filter(user => !autor || user.id !== autor.id)
+    .map(user => `<option value="${escapeAttr(user.id)}">${escapeHtml(user.nome)} (${escapeHtml(user.setor)})</option>`)
+    .join('');
+}
+
 // A mudança de status não é mais imediata: escolher um destino abre o painel
 // de motivo, e só o "Registrar mudança" efetiva — passando por
 // applyStatusChange, o ponto único que grava a trilha.
@@ -81,10 +92,22 @@ function openTransitionPanel(orderId, novoStatus) {
   if (!novoStatus) return;
 
   panel.querySelector('[data-transition-target]').textContent = novoStatus;
+
+  // Gates que exigem um segundo responsável mostram o seletor de aprovador.
+  const precisaAprovador = typeof exigeAprovador === 'function' && exigeAprovador(order.status, novoStatus);
+  const aprovadorBox = panel.querySelector('[data-transition-aprovador]');
+  if (aprovadorBox) {
+    aprovadorBox.hidden = !precisaAprovador;
+    const aprovadorSelect = aprovadorBox.querySelector('[data-aprovador-select]');
+    if (aprovadorSelect) aprovadorSelect.innerHTML = precisaAprovador ? buildAprovadorOptions() : '';
+  }
+
   const hint = panel.querySelector('[data-transition-hint]');
-  hint.textContent = minimo > 0
+  const partes = [minimo > 0
     ? `Motivo obrigatório (mínimo de ${minimo} caracteres).`
-    : 'Motivo opcional — se preenchido, fica registrado na trilha.';
+    : 'Motivo opcional — se preenchido, fica registrado na trilha.'];
+  if (precisaAprovador) partes.push('Exige um aprovador diferente de quem registra a mudança.');
+  hint.textContent = partes.join(' ');
   panel.querySelector('textarea').value = '';
   panel.querySelector('[data-transition-error]').textContent = '';
 }
@@ -95,9 +118,20 @@ function confirmTransition(orderId) {
   if (!select || !panel || !select.value) return;
 
   const excepcional = document.querySelector(`[data-excecao="${CSS.escape(orderId)}"]`)?.checked || false;
+
+  const order = findOrderById(getSavedOrders(), orderId);
+  let aprovador = null;
+  if (order && typeof exigeAprovador === 'function' && exigeAprovador(order.status, select.value)) {
+    const aprovadorId = Number(panel.querySelector('[data-aprovador-select]')?.value);
+    const lista = typeof users !== 'undefined' && Array.isArray(users) ? users : [];
+    const user = lista.find(item => item.id === aprovadorId);
+    aprovador = user ? { id: user.id, nome: user.nome, matricula: user.matricula } : null;
+  }
+
   const resultado = applyStatusChange(orderId, select.value, {
     justificativa: panel.querySelector('textarea').value,
     excepcional,
+    aprovador,
     origem: 'status.html'
   });
 
@@ -237,6 +271,10 @@ function renderOrders(entries) {
         </div>
         <div class="transition-panel" id="transition-panel-${id}" hidden>
           <p class="transition-title">Mudar para <strong data-transition-target></strong></p>
+          <div class="input-group transition-aprovador" data-transition-aprovador hidden>
+            <label for="aprovador-${id}">Aprovador responsável (diferente de quem registra)</label>
+            <select id="aprovador-${id}" data-aprovador-select></select>
+          </div>
           <div class="input-group">
             <label for="justificativa-${id}">Motivo da mudança</label>
             <textarea id="justificativa-${id}" rows="2" placeholder="Descreva o motivo desta mudança de estágio."></textarea>

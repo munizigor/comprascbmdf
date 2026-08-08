@@ -32,9 +32,18 @@ function buildTransicoes() {
     map[status] = lista;
   });
 
-  map['DFD Registrado'] = ['Em Análise Setorial', ARCHIVED_STATUS];
-  map['Em Análise Setorial'] = ['Incluído no PCA', URGENCIA_STATUS, 'Aguardando Suplementação', 'DFD Registrado', ARCHIVED_STATUS];
-  map['Aguardando Suplementação'] = ['Incluído no PCA', 'Em Análise Setorial', ARCHIVED_STATUS];
+  // Sub-fluxo do DFD (alinhado ao PGC): registro → aprovação da unidade →
+  // análise setorial → consolidação em item de PCA → aprovação da autoridade
+  // competente → inclusão no PCA. A rota direta "Em Análise/Aguardando
+  // Suplementação → Incluído no PCA" é preservada porque a aprovação setorial
+  // por orçamento (budget.js) usa esse atalho.
+  map['DFD Registrado'] = ['DFD Aprovado pela Unidade', RETURNED_STATUS, ARCHIVED_STATUS];
+  map['DFD Aprovado pela Unidade'] = ['Em Análise Setorial', RETURNED_STATUS, 'DFD Registrado', ARCHIVED_STATUS];
+  map[RETURNED_STATUS] = ['DFD Registrado', ARCHIVED_STATUS];
+  map['Em Análise Setorial'] = ['Consolidado em Item de PCA', 'Incluído no PCA', URGENCIA_STATUS, 'Aguardando Suplementação', RETURNED_STATUS, ARCHIVED_STATUS];
+  map['Aguardando Suplementação'] = ['Consolidado em Item de PCA', 'Incluído no PCA', 'Em Análise Setorial', ARCHIVED_STATUS];
+  map['Consolidado em Item de PCA'] = ['PCA Aguardando Aprovação', 'Em Análise Setorial', ARCHIVED_STATUS];
+  map['PCA Aguardando Aprovação'] = ['Incluído no PCA', 'Consolidado em Item de PCA', ARCHIVED_STATUS];
   map['Incluído no PCA'] = ['ETP em Elaboração', 'Em Análise Setorial', ARCHIVED_STATUS];
   map[URGENCIA_STATUS] = ['ETP em Elaboração', 'Em Análise Setorial', ARCHIVED_STATUS];
   map['ETP em Elaboração'] = ['Pesquisa de Preços', 'Incluído no PCA', ARCHIVED_STATUS];
@@ -61,8 +70,15 @@ function isRetrocesso(de, para) {
   return getStatusIndex(para) < getStatusIndex(de);
 }
 
-function exigeAprovador(para) {
-  return para === URGENCIA_STATUS;
+// Transições que exigem um segundo responsável (aprovador ≠ autor):
+// - inclusão por urgência;
+// - aprovação do DFD pela autoridade da unidade requisitante;
+// - inclusão no PCA vinda da fila de aprovação (autoridade competente).
+function exigeAprovador(de, para) {
+  if (para === URGENCIA_STATUS) return true;
+  if (para === 'DFD Aprovado pela Unidade') return true;
+  if (de === 'PCA Aguardando Aprovação' && para === 'Incluído no PCA') return true;
+  return false;
 }
 
 function getJustificativaMinima(de, para, excepcional) {
@@ -111,7 +127,7 @@ function applyStatusChange(orderId, novoStatus, contexto = {}) {
   const autor = contexto.por || getAutorAtual();
   let aprovador = contexto.aprovador || null;
 
-  if (exigeAprovador(novoStatus)) {
+  if (exigeAprovador(de, novoStatus)) {
     if (!aprovador || !aprovador.matricula) {
       return { ok: false, motivo: 'A inclusão por urgência exige um aprovador identificado.' };
     }

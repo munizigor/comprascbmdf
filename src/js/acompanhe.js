@@ -221,10 +221,13 @@ function handleRatingClick(event) {
 function renderOrderTimeline(order) {
   if (isBranchStatus(order.status)) {
     const archived = isArchivedStatus(order.status);
-    const variant = archived ? 'archived' : 'rejected';
+    const returned = isReturnedForFixStatus(order.status);
+    const variant = archived ? 'archived' : returned ? 'returned' : 'rejected';
     const message = archived
       ? `Processo arquivado durante a Etapa ${getStatusStage(order.status)} de 6 — ${getStatusStageLabel(order.status)}.`
-      : `Recebimento rejeitado na Etapa ${getStatusStage(order.status)} de 6 — ${getStatusStageLabel(order.status)}. Aguardando substituição pelo fornecedor.`;
+      : returned
+        ? `DFD devolvido para ajuste na Etapa ${getStatusStage(order.status)} de 6 — ${getStatusStageLabel(order.status)}. Revise a demanda e reenvie para nova análise.`
+        : `Recebimento rejeitado na Etapa ${getStatusStage(order.status)} de 6 — ${getStatusStageLabel(order.status)}. Aguardando substituição pelo fornecedor.`;
     return `
       <div class="timeline-branch-alert timeline-branch-alert--${variant}">
         <strong>${order.status}</strong>
