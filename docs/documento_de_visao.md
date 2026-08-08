@@ -1,6 +1,9 @@
 # Documento de Visão do Produto
 ## CBMDF Marketplace — Plataforma de Gestão Logística e Financeira de Compras e Aquisições
 
+> A evolução cronológica das decisões (o *porquê* de cada incremento) é mantida em
+> [registro_de_evolucao.md](registro_de_evolucao.md) — insumo para a consolidação deste documento.
+
 ---
 
 ## 1. Introdução
