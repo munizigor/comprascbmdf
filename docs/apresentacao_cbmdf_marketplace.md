@@ -7,7 +7,7 @@
 
 ## Slide 1 — Capa
 **CBMDF Marketplace**
-Ferramenta de Gestão Logística e Financeira de Compras e Aquisições do CBMDF
+Camada de Governança e Planejamento Logístico e Financeiro das Contratações e Aquisições do CBMDF
 
 Agenda: Problema → Solução → Impacto → Plano de Ação → Termo de Abertura do Projeto
 
@@ -38,9 +38,10 @@ Agenda: Problema → Solução → Impacto → Plano de Ação → Termo de Aber
 ## Slide 4 — A Solução: CBMDF Marketplace
 - Uma plataforma única que cobre **todo o ciclo**: catálogo → carrinho → tramitação → contratações e atas → planejamento orçamentário/financeiro → avaliação do pedido.
 - Mantra institucional: **"comprar melhor"** — reduzir compras pulverizadas, otimizar lotes de contratação, garantir contratações completas.
+- **Planeja e governa; não executa.** O produto orquestra a federação de sistemas do setor público (Grifo, SISGEPAT, SIAFI, SEI, PNCP) em vez de substituí-los — a custódia logística e a execução financeiro-contábil permanecem nos sistemas donos desses registros. Não é um ERP: é a camada que hoje falta entre eles.
 - Não é "um formulário melhor": é o instrumento que sustenta o **processo contínuo de governança das contratações** que hoje falta ao CBMDF.
 
-*Notas do apresentador:* Ponte direta com a causa-raiz do slide anterior.
+*Notas do apresentador:* Ponte direta com a causa-raiz do slide anterior. Reforçar a fronteira "planejar/governar × executar" para prevenir a expectativa de que a solução seja um ERP.
 
 ---
 
@@ -91,9 +92,9 @@ A solução **não depende de tudo pronto para ir ao ar**. Cada Épico do Docume
 - **Nome do projeto:** CBMDF Marketplace · **Patrocinador:** Comando/Direção do CBMDF · **Product Owner:** a definir · **Metodologia:** híbrida PMI + Scrum
 - **Justificativa:** a causa-raiz é a ausência de um sistema institucional de governança contínua das contratações — não a periodicidade do PCA em si.
 - **Objetivo:** implantar uma plataforma que transforme o planejamento em processo contínuo, sob o mantra **"comprar melhor"**.
-- **Escopo incluso:** Épicos 01 a 05 e 07 (catálogo, tramitação, contratações, orçamento/financeiro, atas, avaliação) + integrações com Grifo, SEI, SIAFI e PNCP.
+- **Escopo incluso:** Épicos 01 a 05 e 07 (catálogo, tramitação, contratações, orçamento/financeiro, atas, avaliação) + integrações com Grifo, SISGEPAT, SEI, SIAFI e PNCP.
 - **Escopo incremental/opcional:** Épico 06 — Assistente Virtual/IA, sem bloquear o Go-Live.
-- **Fora de escopo:** módulos de licitação/pregão eletrônico.
+- **Fora de escopo:** módulos de licitação/pregão eletrônico; e a **execução** que permanece nos sistemas donos — custódia logística de estoque/patrimônio (Grifo/SISGEPAT) e execução financeiro-contábil (SIAFI). A solução planeja e orquestra, não executa esses registros.
 
 ## Slide 9 — Governança e Marcos
 | Papel | Responsável |
@@ -113,7 +114,7 @@ A solução **não depende de tudo pronto para ir ao ar**. Cada Épico do Docume
 
 ## Slide 10 — Riscos, Critérios de Sucesso e Aprovação
 **Premissas e restrições:**
-- Acesso à rede/intranet do CBMDF e disponibilidade das integrações Grifo/SEI/SIAFI/PNCP.
+- Acesso à rede/intranet do CBMDF e disponibilidade das integrações Grifo/SISGEPAT/SEI/SIAFI/PNCP.
 - Protótipo atual sem backend/autenticação; aderência à Lei nº 14.133/2021 e à LGPD; IA como componente incremental (Épico 06).
 
 **Riscos preliminares:**
