@@ -362,6 +362,16 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
   * Deve exibir os quatro critérios que compuseram o score.
   * Se a posição tiver sido ajustada manualmente pelo comitê, o requisitante deve ver essa marca.
 
+#### **HU08.7 — Fila e Ciclos por Exercício** *(evolução para produção — fora do protótipo)*
+* **Como:** Comitê de Governança de Contratações / Planejamento
+* **Eu quero:** Que a fila priorizada e os ciclos do PCA sejam escopados pelo **exercício-alvo** (ano do PCA) da demanda
+* **Para que:** Demandas de anos diferentes não concorram na mesma fila — o PCA é anual (o PGC planeja o exercício N+1), e priorizar um pedido de 2027 contra um de 2028 na mesma ordenação distorce a decisão.
+* **Nota de escopo:** No protótipo, o exercício é **capturado** no DFD, é **dimensão de filtro** no Planejamento e nas Contratações e **materializa o Item de PCA** por (exercício × classe), mas a **fila da governança** (`buildFila`) e a **fotografia do ciclo** ainda misturam todos os exercícios (decisão consciente para conter o risco no protótipo).
+* **Critérios de Aceite (produção):**
+  * A fila priorizada deve ser filtrável/segmentada por exercício; o score e o desempate operam dentro de cada exercício.
+  * O ciclo quadrimestral (HU08.3) deve vincular seu `ano`/`quadrimestre` ao exercício-alvo do PCA, e a fotografia congelada deve registrar o exercício de cada demanda.
+  * A janela de revisão (15/set–15/nov) deve condicionar as inclusões por urgência ao exercício em revisão.
+
 ---
 
 ## 6. Requisitos Não Funcionais (RNFs)

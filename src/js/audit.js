@@ -163,6 +163,26 @@ function getHistorico(order) {
   return Array.isArray(order?.historico) ? order.historico : [];
 }
 
+/* ---------- publicação no PNCP ---------- */
+
+const PNCP_PUBLISH_FROM = 'PCA Aguardando Aprovação';
+const PNCP_PUBLISH_TO = 'Incluído no PCA';
+
+// A publicação no PNCP é o marco de transparência: ocorre quando a autoridade
+// competente move o pedido de "PCA Aguardando Aprovação" para "Incluído no
+// PCA". Derivamos da trilha (append-only) — uma vez publicado, permanece
+// publicado mesmo que o pedido avance de estágio. Inclusões pelo atalho
+// setorial (budget.js) não passam por esse gate e, portanto, não constam como
+// publicadas, o que evidencia a diferença entre os dois canais.
+function getPublicacaoPncp(order) {
+  const entry = getHistorico(order).find(item => item.de === PNCP_PUBLISH_FROM && item.para === PNCP_PUBLISH_TO);
+  return entry ? { em: entry.em, por: entry.aprovador || entry.por || null } : null;
+}
+
+function isPublicadoPncp(order) {
+  return getPublicacaoPncp(order) !== null;
+}
+
 function temHistoricoConfiavel(order) {
   const historico = getHistorico(order);
   return historico.length > 0 && !historico.some(entry => entry.migrado);

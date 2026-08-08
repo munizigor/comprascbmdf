@@ -376,6 +376,35 @@ textarea {
 .status-badge--pago { background: #166534; }
 .status-badge--pedido-entregue { background: #14532d; }
 
+.pca-eyebrow {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.pca-eyebrow strong {
+  color: #1d4ed8;
+}
+
+.revisao-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(30, 64, 175, 0.1);
+  border-left: 4px solid #1e40af;
+  color: #1e3a8a;
+  font-size: 0.92rem;
+}
+
+.revisao-banner-icon {
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
 .timeline {
   list-style: none;
   margin: 18px 0 0;

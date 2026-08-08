@@ -44,6 +44,12 @@
           <input id="searchBox" type="text" placeholder="Pesquisar por classe, item, usuário, setor..." oninput="applyFilters()">
         </div>
         <div class="input-group">
+          <label for="exercicioFilter">Exercício</label>
+          <select id="exercicioFilter" onchange="applyFilters()">
+            <option value="all">Todos os exercícios</option>
+          </select>
+        </div>
+        <div class="input-group">
           <label for="classFilter">Classe</label>
           <select id="classFilter" onchange="applyFilters()">
             <option value="all">Todas as classes</option>
@@ -60,7 +66,7 @@
       <h2>Resumo das contratações</h2>
       <div class="stats-grid">
         <div class="stat-card">
-          <span>Grupos de contratação</span>
+          <span>Itens de PCA</span>
           <strong id="groupCount">0</strong>
         </div>
         <div class="stat-card">

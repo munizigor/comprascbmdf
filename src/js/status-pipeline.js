@@ -145,3 +145,19 @@ function renderStatusFilterOptions(selectEl) {
     .concat(STATUS_VALUES.map(value => `<option value="${value}">${value}</option>`))
     .join('');
 }
+
+/* ---------- janela de revisão do PCA ---------- */
+
+// O calendário federal do PGC abre uma janela de revisão do PCA entre
+// 15/set e 15/nov (inclusive) — período em que inclusões extraordinárias
+// entram como "Incluído no PCA (Urgência)". Aceita `date` para testabilidade.
+const JANELA_REVISAO_INICIO = { mes: 9, dia: 15 };  // 15 de setembro
+const JANELA_REVISAO_FIM = { mes: 11, dia: 15 };    // 15 de novembro
+
+function isJanelaRevisao(date = new Date()) {
+  const mes = date.getMonth() + 1;
+  const dia = date.getDate();
+  const depoisDoInicio = mes > JANELA_REVISAO_INICIO.mes || (mes === JANELA_REVISAO_INICIO.mes && dia >= JANELA_REVISAO_INICIO.dia);
+  const antesDoFim = mes < JANELA_REVISAO_FIM.mes || (mes === JANELA_REVISAO_FIM.mes && dia <= JANELA_REVISAO_FIM.dia);
+  return depoisDoInicio && antesDoFim;
+}
