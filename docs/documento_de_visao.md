@@ -374,6 +374,28 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 
 ---
 
+### **ÉPICO 09: Matriz de Dotação de Material (baseline dos pedidos)**
+> **Descrição:** Hoje os pedidos nascem sem referência objetiva — o requisitante pede o que julga necessário, sem um baseline. A Matriz de Dotação fecha essa lacuna: para cada **(setor, item)**, registra quanto a unidade **deveria ter** (dotação prevista, normativa) e quanto **tem** (carga atual). A diferença — a **lacuna** — é a necessidade objetiva que ancora e justifica cada solicitação, reduzindo pedidos avulsos e dando ao planejamento uma fonte de verdade.
+
+#### **HU09.1 — Necessidades da Unidade a partir da Dotação**
+* **Como:** Requisitante
+* **Eu quero:** Ver, ao abrir o catálogo, os itens em que minha unidade está **abaixo** da dotação prevista, com a quantidade que falta
+* **Para que:** Eu solicite a partir de uma referência, não do improviso.
+* **Critérios de Aceite:**
+  * A quantidade sugerida a solicitar desconta o que já está em **pedidos em andamento** do setor (não pedir o que já vem).
+  * O card do item exibe o status de dotação da unidade (atual/prevista e a lacuna).
+  * Na revisão, pedir **acima** da dotação prevista gera um aviso que orienta a justificativa (não bloqueia).
+
+#### **HU09.2 — Painel Gerencial da Matriz de Dotação**
+* **Como:** Gestor / Planejamento
+* **Eu quero:** Ver prevista × atual × lacuna × cobertura por setor e por item, com déficits e excedentes destacados
+* **Para que:** A instituição enxergue o baseline de material e o alimente no PCA; a cobertura da dotação vira indicador no Planejamento.
+
+#### **HU09.3 — Evolução para produção** *(fora do protótipo)*
+* No protótipo, as bases (prevista e carga atual) são **semeadas / somente leitura**. Em produção: (a) edição da matriz pela UI, com trilha de auditoria; (b) integração da carga atual a um sistema de inventário/patrimônio; (c) uso da **lacuna de dotação** como critério explícito na priorização da governança (demanda amparada por baseline pesa mais que demanda avulsa).
+
+---
+
 ## 6. Requisitos Não Funcionais (RNFs)
 
 ### 6.1 Usabilidade

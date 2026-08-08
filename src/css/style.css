@@ -835,3 +835,32 @@ textarea {
 .priorizacao-fieldset .muted-note {
   margin-top: 0;
 }
+
+/* Matriz de Dotação: painel de necessidades e selo no card */
+.dotacao-needs {
+  margin-bottom: 18px;
+}
+
+.card-dotacao {
+  margin: 0 0 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.card-dotacao--deficit {
+  color: #b45309;
+}
+
+.card-dotacao--ok {
+  color: #15803d;
+}
+
+.chip-deficit {
+  border-color: #fecaca;
+  background: #fff1f2;
+  color: #9f1239;
+}
+
+.chip-deficit .chip-count {
+  color: #b91c1c;
+}

@@ -188,6 +188,20 @@ function renderPlanningAlerts(ordersWithItems) {
     text: `${pncpPublicados} de ${advancedOrders} ${advancedOrders === 1 ? 'item do PCA publicado' : 'itens do PCA publicados'} no PNCP (${pncpPercent}%).`
   });
 
+  if (typeof getResumoDotacaoGeral === 'function') {
+    const resumos = getResumoDotacaoGeral();
+    const previstaTotal = resumos.reduce((s, r) => s + r.prevista, 0);
+    const atualCapado = resumos.reduce((s, r) => s + Math.min(r.atual, r.prevista), 0);
+    const deficit = resumos.reduce((s, r) => s + r.deficit, 0);
+    if (previstaTotal > 0) {
+      const cobertura = Math.round((atualCapado / previstaTotal) * 100);
+      alerts.push({
+        type: deficit > 0 ? 'warning' : 'success',
+        text: `Cobertura da dotação dos setores: ${cobertura}% — déficit de ${deficit} ${deficit === 1 ? 'unidade' : 'unidades'} frente à dotação prevista.`
+      });
+    }
+  }
+
   container.innerHTML = alerts.map(alert => `
     <div class="planning-alert planning-alert--${alert.type}">
       <span class="planning-alert-icon" aria-hidden="true">${alert.type === 'warning' ? '⚠️' : '✅'}</span>

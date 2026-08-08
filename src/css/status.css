@@ -1513,3 +1513,25 @@ textarea {
 #coberturaRodape h3 {
   margin-top: 0;
 }
+
+/* Matriz de Dotação: destaque de déficit/excedente na tabela */
+.dotacao-row--deficit td {
+  background: rgba(220, 38, 38, 0.06);
+}
+
+.dotacao-row--excedente td {
+  background: rgba(37, 99, 235, 0.06);
+}
+
+.dotacao-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
+.dotacao-tag--excedente {
+  background: #dbeafe;
+  color: #1e3a8a;
+}

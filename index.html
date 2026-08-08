@@ -56,6 +56,7 @@
     </nav>
 
     <section class="panel personalization" id="personalization" data-profiles="solicitante">
+      <div class="dotacao-needs" id="dotacaoNeeds"></div>
       <div class="personalization-grid">
         <div>
           <h2>Itens mais solicitados pela sua unidade</h2>
@@ -209,6 +210,7 @@
       <div class="summary" id="reviewSummary"></div>
       <p id="reviewNotes" class="muted-note"></p>
       <p id="reviewDfd" class="muted-note"></p>
+      <p id="reviewDotacao" class="muted-note"></p>
       <p id="reviewPrioridade" class="muted-note"></p>
       <div class="step-actions">
         <button class="btn btn-secondary" type="button" onclick="goToStep(2)">← Voltar</button>
@@ -226,12 +228,14 @@
     </section>
   </main>
   <script src="src/js/cbmdf_orders_seed.js"></script>
+  <script src="src/js/cbmdf_dotacao_seed.js"></script>
   <script src="src/js/status-pipeline.js"></script>
   <script src="src/js/core.js"></script>
   <script src="src/js/users.js"></script>
   <script src="src/js/nav.js"></script>
   <script src="src/js/emptystate.js"></script>
   <script src="src/js/audit.js"></script>
+  <script src="src/js/dotacao.js"></script>
   <script src="src/js/script.js"></script>
 </body>
 </html>

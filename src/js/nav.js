@@ -108,8 +108,26 @@
     });
   }
 
+  // Injeta o link "Dotação" (matriz de material) na navegação de todas as
+  // páginas, para gestor/compras — evita editar cada cabeçalho.
+  function renderDotacaoNavLink() {
+    const actions = document.querySelector('.header-inner .actions');
+    if (!actions || actions.querySelector('[data-dotacao-link]')) return;
+    const link = document.createElement('a');
+    link.className = 'btn btn-secondary';
+    link.href = 'dotacao.html';
+    link.textContent = 'Dotação';
+    link.dataset.profiles = 'gestor compras';
+    link.setAttribute('data-dotacao-link', '');
+    const indicadores = Array.from(actions.querySelectorAll('a'))
+      .find(a => /indicadores\.html$/.test(a.getAttribute('href') || ''));
+    if (indicadores && indicadores.nextSibling) actions.insertBefore(link, indicadores.nextSibling);
+    else actions.appendChild(link);
+  }
+
   renderPrototypeBanner();
   renderProfileSwitcher();
+  renderDotacaoNavLink();
   applyProfile();
   renderIdentity();
   renderFeedbackFab();
