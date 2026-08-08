@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matriz de Dotação - Central de Compras CBMDF</title>
+  <link rel="stylesheet" href="src/css/status.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <div class="brand-mark">CB</div>
+        <div class="brand-title">
+          <strong>Central de Compras CBMDF</strong>
+          <span>Aquisições e Serviços</span>
+        </div>
+      </a>
+      <div class="actions">
+        <a class="btn btn-secondary" href="index.html" data-profiles="solicitante">Início</a>
+        <a class="btn btn-secondary" href="acompanhe.html" data-profiles="solicitante">Meus pedidos</a>
+        <a class="btn btn-secondary" href="status.html" data-profiles="gestor compras">Gestão de demandas</a>
+        <a class="btn btn-secondary" href="governanca.html" data-profiles="gestor compras">Governança</a>
+        <a class="btn btn-secondary" href="indicadores.html" data-profiles="gestor compras">Indicadores</a>
+        <a class="btn btn-secondary" href="contratacoes.html" data-profiles="compras">Contratações</a>
+        <a class="btn btn-secondary" href="planejamento.html" data-profiles="compras">Planejamento</a>
+        <a class="btn btn-secondary" href="orcamento-geral.html" data-profiles="gestor compras">Orçamento</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Matriz de Dotação de Material</h1>
+        <p>O que cada unidade <strong>deveria ter</strong> (dotação prevista) versus o que <strong>tem</strong> (carga atual). A lacuna é a necessidade objetiva que ancora os pedidos.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Filtro</h2>
+      <div class="filter-row">
+        <div class="input-group">
+          <label for="setorFilter">Setor</label>
+          <select id="setorFilter" onchange="renderDotacaoPage()">
+            <option value="all">Todos os setores</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel stats-panel">
+      <h2>Resumo</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span>Cobertura média</span>
+          <strong id="kpiCobertura">0%</strong>
+        </div>
+        <div class="stat-card">
+          <span>Déficit total (itens)</span>
+          <strong id="kpiDeficit">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Itens com déficit</span>
+          <strong id="kpiItensDeficit">0</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Dotação por setor</h2>
+      <div id="dotacaoContainer"></div>
+    </section>
+  </main>
+
+  <script src="src/js/cbmdf_orders_seed.js"></script>
+  <script src="src/js/cbmdf_dotacao_seed.js"></script>
+  <script src="src/js/status-pipeline.js"></script>
+  <script src="src/js/core.js"></script>
+  <script src="src/js/users.js"></script>
+  <script src="src/js/nav.js"></script>
+  <script src="src/js/emptystate.js"></script>
+  <script src="src/js/audit.js"></script>
+  <script src="src/js/dotacao.js"></script>
+  <script src="src/js/dotacao-page.js"></script>
+</body>
+</html>

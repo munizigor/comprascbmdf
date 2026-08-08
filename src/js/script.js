@@ -308,6 +308,7 @@ function renderProducts(list, favorites) {
     });
     return;
   }
+  const dotacaoMap = getDotacaoMapAtual();
   list.forEach(item => {
     const isFavorite = favorites.includes(item.id);
     const card = document.createElement('div');
@@ -329,6 +330,7 @@ function renderProducts(list, favorites) {
         <span class="chip">Unidade: ${item.unidade}</span>
         <span class="chip">${item.tipoDespesa}</span>
       </div>
+      ${buildDotacaoBadge(dotacaoMap[item.id])}
       <p class="card-availability">🟢 Disponível para solicitação</p>
       <div class="card-footer">
         <span class="price">${formatPrice(item.price)}</span>
@@ -339,14 +341,42 @@ function renderProducts(list, favorites) {
   });
 }
 
-function addToCart(productId) {
+function addToCart(productId, qtd = 1) {
   const item = products.find(p => p.id === productId);
   if (!item) return;
   if (!cart[productId]) {
     cart[productId] = { quantity: 0, urgency: 'normal' };
   }
-  cart[productId].quantity += 1;
+  cart[productId].quantity += Math.max(1, Number(qtd) || 1);
   renderCart();
+}
+
+// Setor da unidade do usuário selecionado (para a matriz de dotação).
+function getCurrentSetor() {
+  const select = document.getElementById('userSelect');
+  const user = users.find(u => u.id === Number(select && select.value)) || users[0];
+  return user ? user.setor : null;
+}
+
+// Mapa itemId -> linha de dotação do setor atual (vazio se dotacao.js ausente).
+function getDotacaoMapAtual() {
+  const setor = getCurrentSetor();
+  const mapa = {};
+  if (setor && typeof getLacunasSetor === 'function') {
+    getLacunasSetor(setor).forEach(linha => { mapa[linha.itemId] = linha; });
+  }
+  return mapa;
+}
+
+// Selo de dotação exibido no card do produto para a unidade do usuário.
+function buildDotacaoBadge(info) {
+  if (!info) return '';
+  if (info.aSolicitar > 0) {
+    const extra = info.emAtendimento ? ` · ${info.emAtendimento} em pedidos` : '';
+    return `<p class="card-dotacao card-dotacao--deficit">📊 Dotação da unidade: ${info.atual}/${info.prevista} — faltam ${info.aSolicitar}${extra}</p>`;
+  }
+  const rotulo = info.excedente ? 'acima do previsto' : 'atendida';
+  return `<p class="card-dotacao card-dotacao--ok">📊 Dotação da unidade: ${info.atual}/${info.prevista} — ${rotulo}</p>`;
 }
 
 function removeFromCart(productId) {
@@ -523,6 +553,18 @@ function renderReview() {
     reviewDfd.textContent = partes.join(' · ');
   }
 
+  const reviewDotacao = document.getElementById('reviewDotacao');
+  if (reviewDotacao) {
+    const dotacaoMap = getDotacaoMapAtual();
+    const acima = Object.keys(cart)
+      .map(id => ({ info: dotacaoMap[Number(id)], qtd: cart[id].quantity, nome: (products.find(p => p.id === Number(id)) || {}).name }))
+      .filter(x => x.info && x.qtd > x.info.aSolicitar)
+      .map(x => x.nome);
+    reviewDotacao.textContent = acima.length
+      ? `Atenção: ${acima.join(', ')} ${acima.length === 1 ? 'está acima' : 'estão acima'} da dotação prevista da sua unidade — justifique no campo de observações.`
+      : '';
+  }
+
   const criticidade = document.getElementById('criticidadeSelect');
   const risco = document.getElementById('riscoSelect');
   const reviewPrioridade = document.getElementById('reviewPrioridade');
@@ -571,6 +613,26 @@ function renderPersonalization(user) {
         </div>
       `).join('')
     : '<p class="muted-note">Nenhuma solicitação recente da sua unidade.</p>';
+
+  renderDotacaoNeeds(user);
+}
+
+// Necessidades da unidade a partir da dotação: itens abaixo do previsto,
+// com a quantidade que falta (já descontando o que está em pedidos).
+function renderDotacaoNeeds(user) {
+  const container = document.getElementById('dotacaoNeeds');
+  if (!container || !user) return;
+  const necessidades = typeof getLacunasSetor === 'function'
+    ? getLacunasSetor(user.setor).filter(linha => linha.aSolicitar > 0)
+    : [];
+  const titulo = '<h2>Necessidades da sua unidade <span class="muted-note">(dotação prevista)</span></h2>';
+  container.innerHTML = necessidades.length
+    ? `${titulo}
+       <p class="muted-note">Itens abaixo da dotação do setor ${escapeHtml(user.setor)}. Clique para adicionar a quantidade que falta.</p>
+       <div class="chip-list">
+         ${necessidades.map(linha => `<button type="button" class="chip chip-action chip-deficit" data-add-product="${escapeAttr(linha.itemId)}" data-qtd="${escapeAttr(linha.aSolicitar)}">${escapeHtml(linha.nome)} <span class="chip-count">faltam ${linha.aSolicitar}</span></button>`).join('')}
+       </div>`
+    : `${titulo}<p class="muted-note">✅ A dotação prevista da sua unidade está atendida.</p>`;
 }
 
 function applyFilters() {
@@ -665,7 +727,7 @@ function submitOrder() {
 function handlePersonalizationClick(event) {
   const chip = event.target.closest('[data-add-product]');
   if (!chip) return;
-  addToCart(Number(chip.dataset.addProduct));
+  addToCart(Number(chip.dataset.addProduct), Number(chip.dataset.qtd) || 1);
 }
 
 // O PGC planeja o exercício seguinte (N+1); oferecemos do ano atual a N+2 e
