@@ -376,6 +376,17 @@ textarea {
 .status-badge--pago { background: #166534; }
 .status-badge--pedido-entregue { background: #14532d; }
 
+.pca-eyebrow {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.pca-eyebrow strong {
+  color: #1d4ed8;
+}
+
 .timeline {
   list-style: none;
   margin: 18px 0 0;

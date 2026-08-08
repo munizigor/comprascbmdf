@@ -19,7 +19,9 @@ function normalizeItem(item) {
     id: item.id ?? item.itemId ?? Math.random().toString(36).slice(2, 10),
     nome: item.nome || item.name || 'Item sem nome',
     categoria: item.categoria || item.category || 'Sem categoria',
+    grupoCodigo: item.grupoCodigo || '',
     grupoNome: item.grupoNome || item.groupName || 'Sem grupo',
+    classeCodigo: item.classeCodigo || '',
     classeNome: item.classeNome || item.classe || item.className || 'Sem classe',
     tipo: item.tipo || item.type || 'MATERIAL',
     tipoDespesa: item.tipoDespesa || item.expenseType || 'Custeio',
@@ -34,8 +36,32 @@ function normalizeItem(item) {
   };
 }
 
-function createContractId(classeNome) {
-  return `contratacao-${String(classeNome).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+// Um item de PCA é sempre de um exercício específico e de uma classe
+// (CATMAT/CATSER). Quando o código da classe não existe (itens custom ou
+// acrescentados manualmente), cai no nome da classe.
+const SEM_EXERCICIO = 'sem-exercicio';
+
+function getClasseKey(item) {
+  return item.classeCodigo || item.classeNome;
+}
+
+function getExercicioKey(exercicio) {
+  return exercicio == null || exercicio === '' ? SEM_EXERCICIO : String(exercicio);
+}
+
+function getPcaGroupKey(exercicio, item) {
+  return `${getExercicioKey(exercicio)}|||${getClasseKey(item)}`;
+}
+
+function getCatalogCode(item) {
+  if (!item.classeCodigo) return '';
+  const prefixo = item.tipo === 'SERVIÇO' ? 'CATSER' : 'CATMAT';
+  return `${prefixo} ${item.classeCodigo}`;
+}
+
+function createContractId(exercicio, item) {
+  const base = `${getExercicioKey(exercicio)}-${getClasseKey(item)}`;
+  return `contratacao-${base.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
 }
 
 function getOrderItemKey(rawItem) {
@@ -56,10 +82,31 @@ function buildCustomItem(rawItem) {
   };
 }
 
+// Agrupa por (exercício × classe) — a unidade de um item de PCA. A exclusão de
+// grupo segue por `classeNome` (remove a classe em todos os exercícios).
 function groupContratacoesByClasse(orders, contratacoes) {
   const groups = new Map();
   const excludedGroups = new Set(contratacoes.excludedGroups || []);
   const excludedItemKeys = new Set(contratacoes.excludedItemKeys || []);
+
+  const ensureGroup = (exercicio, item) => {
+    const mapKey = getPcaGroupKey(exercicio, item);
+    if (!groups.has(mapKey)) {
+      groups.set(mapKey, {
+        id: createContractId(exercicio, item),
+        exercicioPca: getExercicioKey(exercicio) === SEM_EXERCICIO ? null : exercicio,
+        classeCodigo: item.classeCodigo,
+        classeNome: item.classeNome,
+        grupoCodigo: item.grupoCodigo,
+        grupoNome: item.grupoNome,
+        tipo: item.tipo,
+        tipoDespesa: item.tipoDespesa,
+        naturezaDespesa: item.naturezaDespesa,
+        items: [],
+      });
+    }
+    return groups.get(mapKey);
+  };
 
   orders.forEach(order => {
     (Array.isArray(order.itens) ? order.itens : []).forEach(rawItem => {
@@ -67,22 +114,11 @@ function groupContratacoesByClasse(orders, contratacoes) {
       const key = getOrderItemKey(rawItem);
       if (excludedGroups.has(item.classeNome) || excludedItemKeys.has(key)) return;
 
-      if (!groups.has(item.classeNome)) {
-        groups.set(item.classeNome, {
-          id: createContractId(item.classeNome),
-          classeNome: item.classeNome,
-          grupoNome: item.grupoNome,
-          tipo: item.tipo,
-          tipoDespesa: item.tipoDespesa,
-          naturezaDespesa: item.naturezaDespesa,
-          items: [],
-        });
-      }
-
-      groups.get(item.classeNome).items.push({
+      ensureGroup(order.exercicioPca, item).items.push({
         ...item,
         key,
         source: 'order',
+        protocolo: order.id || '',
         usuario: order.usuario || { nome: 'Desconhecido', matricula: '', setor: '' },
         setor: item.setor || order.usuario?.setor || '',
         pedidoData: order.data || '',
@@ -93,25 +129,42 @@ function groupContratacoesByClasse(orders, contratacoes) {
   (contratacoes.customItems || []).forEach(rawItem => {
     const item = buildCustomItem(rawItem);
     if (excludedGroups.has(item.classeNome) || excludedItemKeys.has(item.key)) return;
-    if (!groups.has(item.classeNome)) {
-      groups.set(item.classeNome, {
-        id: createContractId(item.classeNome),
-        classeNome: item.classeNome,
-        grupoNome: item.grupoNome,
-        tipo: item.tipo,
-        tipoDespesa: item.tipoDespesa,
-        naturezaDespesa: item.naturezaDespesa,
-        items: [],
-      });
-    }
-    groups.get(item.classeNome).items.push(item);
+    ensureGroup(null, item).items.push(item);
   });
 
   return Array.from(groups.values());
 }
 
+// Materializa os itens de PCA: numera o conjunto COMPLETO por (exercício,
+// código de classe) — antes de qualquer filtro, para o número não mudar
+// conforme a busca — e deriva os protocolos de DFD que os originaram.
+function buildPcaItens(orders, contratacoes) {
+  const grupos = groupContratacoesByClasse(orders, contratacoes);
+
+  grupos.sort((a, b) => {
+    const exA = a.exercicioPca == null ? Infinity : Number(a.exercicioPca);
+    const exB = b.exercicioPca == null ? Infinity : Number(b.exercicioPca);
+    if (exA !== exB) return exA - exB;
+    return String(a.classeCodigo || a.classeNome).localeCompare(String(b.classeCodigo || b.classeNome), 'pt-BR');
+  });
+
+  const contadores = new Map();
+  grupos.forEach(grupo => {
+    const exercicioLabel = grupo.exercicioPca == null ? 'SEM' : String(grupo.exercicioPca);
+    const proximo = (contadores.get(exercicioLabel) || 0) + 1;
+    contadores.set(exercicioLabel, proximo);
+    grupo.numero = `PCA-${exercicioLabel}-${String(proximo).padStart(3, '0')}`;
+    grupo.dfdsOrigem = Array.from(new Set(
+      grupo.items.filter(item => item.source === 'order' && item.protocolo).map(item => item.protocolo)
+    ));
+  });
+
+  return grupos;
+}
+
 function getUniqueClasseNames(groups) {
-  return groups.map(group => group.classeNome).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+  return Array.from(new Set(groups.map(group => group.classeNome)))
+    .sort((a, b) => a.localeCompare(b, 'pt-BR'));
 }
 
 function updateFilters(groups) {
@@ -161,6 +214,9 @@ function renderContractGroups(groups) {
   groups.forEach(group => {
     const groupQuantity = group.items.reduce((sum, item) => sum + item.quantidade, 0);
     const groupValue = group.items.reduce((sum, item) => sum + getItemSubtotal(item), 0);
+    const exercicioLabel = group.exercicioPca != null ? String(group.exercicioPca) : 'não informado';
+    const codigo = getCatalogCode(group);
+    const classeTitulo = codigo ? `${codigo} — ${group.classeNome}` : group.classeNome;
 
     const groupCard = document.createElement('div');
     groupCard.className = 'order-card';
@@ -168,7 +224,8 @@ function renderContractGroups(groups) {
       <div class="order-card-header">
         <div class="order-card-title-group">
           <div>
-            <h3 class="order-card-title">Classe: ${escapeHtml(group.classeNome)}</h3>
+            <p class="pca-eyebrow"><strong>Item de PCA nº ${escapeHtml(group.numero)}</strong> · Exercício ${escapeHtml(exercicioLabel)}</p>
+            <h3 class="order-card-title">Classe: ${escapeHtml(classeTitulo)}</h3>
             <div class="order-meta">
               <div><strong>Grupo:</strong> ${escapeHtml(group.grupoNome)}</div>
               <div><strong>Tipo:</strong> ${escapeHtml(group.tipo)}</div>
@@ -182,6 +239,7 @@ function renderContractGroups(groups) {
           <div><strong>Itens:</strong> ${group.items.length}</div>
           <div><strong>Quantidade total:</strong> ${groupQuantity}</div>
           <div><strong>Valor:</strong> ${formatPrice(groupValue)}</div>
+          <div><strong>DFDs de origem:</strong> ${group.dfdsOrigem.length}</div>
         </div>
       </div>
       <table class="report-table">
@@ -219,7 +277,7 @@ function renderContractGroups(groups) {
 function loadContractPage() {
   const orders = getSavedOrders();
   const contratacoes = getSavedContratacoes();
-  const groups = groupContratacoesByClasse(orders, contratacoes);
+  const groups = buildPcaItens(orders, contratacoes);
 
   updateFilters(groups);
   renderSummary(groups);
@@ -233,10 +291,12 @@ function applyFilters() {
   const search = document.getElementById('searchBox').value.trim().toLowerCase();
   const classFilter = document.getElementById('classFilter').value;
 
-  const groups = groupContratacoesByClasse(orders, contratacoes)
+  const groups = buildPcaItens(orders, contratacoes)
     .filter(group => {
       const matchesClass = classFilter === 'all' || group.classeNome === classFilter;
       const searchText = [
+        group.numero,
+        group.classeCodigo,
         group.classeNome,
         group.grupoNome,
         group.tipo,
