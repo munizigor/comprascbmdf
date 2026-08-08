@@ -139,6 +139,35 @@
       </div>
 
       <fieldset class="priorizacao-fieldset">
+        <legend>Caracterização da demanda (DFD)</legend>
+        <p class="muted-note">
+          Dados do Documento de Formalização da Demanda usados no planejamento anual e na
+          consolidação do PCA (Plano de Contratações Anual).
+        </p>
+        <div class="filter-row">
+          <div class="input-group">
+            <label for="exercicioPcaSelect">Exercício do PCA</label>
+            <select id="exercicioPcaSelect"></select>
+          </div>
+          <div class="input-group">
+            <label for="dataPretendidaInput">Data pretendida da contratação</label>
+            <input id="dataPretendidaInput" type="date">
+          </div>
+          <div class="input-group">
+            <label for="servicoContinuadoSelect">Serviço continuado?</label>
+            <select id="servicoContinuadoSelect">
+              <option value="nao" selected>Não</option>
+              <option value="sim">Sim</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="vinculoPlanejamentoInput">Vínculo ao planejamento estratégico</label>
+          <input id="vinculoPlanejamentoInput" type="text" placeholder="Ex: objetivo ou meta do planejamento estratégico relacionado">
+        </div>
+      </fieldset>
+
+      <fieldset class="priorizacao-fieldset">
         <legend>Prioridade da demanda</legend>
         <p class="muted-note">
           Estas duas respostas entram no cálculo que ordena a fila de contratações. O Planejamento
@@ -179,6 +208,7 @@
       <div id="reviewItems"></div>
       <div class="summary" id="reviewSummary"></div>
       <p id="reviewNotes" class="muted-note"></p>
+      <p id="reviewDfd" class="muted-note"></p>
       <p id="reviewPrioridade" class="muted-note"></p>
       <div class="step-actions">
         <button class="btn btn-secondary" type="button" onclick="goToStep(2)">← Voltar</button>
