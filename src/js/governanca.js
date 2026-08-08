@@ -676,7 +676,25 @@ function renderUrgenciaPanel() {
     </div>`;
 }
 
+// Sinaliza a janela de revisão do PCA (15/set–15/nov). Aceita `date` para
+// testabilidade; em produção usa a data corrente.
+function renderRevisaoBanner(date = new Date()) {
+  const container = document.getElementById('revisaoBanner');
+  if (!container) return;
+  if (typeof isJanelaRevisao !== 'function' || !isJanelaRevisao(date)) {
+    container.innerHTML = '';
+    return;
+  }
+  container.innerHTML = `
+    <div class="revisao-banner">
+      <span class="revisao-banner-icon" aria-hidden="true">🗓️</span>
+      <span><strong>Janela de revisão do PCA aberta</strong> (15/set–15/nov): inclusões extraordinárias
+      entram como <em>Incluído no PCA (Urgência)</em> e passam pela contenção abaixo.</span>
+    </div>`;
+}
+
 function renderGovernancaPage() {
+  renderRevisaoBanner();
   renderCicloPanel();
   renderFila();
   renderUrgenciaPanel();

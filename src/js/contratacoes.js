@@ -174,8 +174,20 @@ function getUniqueClasseNames(groups) {
 function updateFilters(groups) {
   const classSelect = document.getElementById('classFilter');
   const classeNames = getUniqueClasseNames(groups);
+  const classePrevio = classSelect.value;
   classSelect.innerHTML = '<option value="all">Todas as classes</option>' +
     classeNames.map(name => `<option value="${escapeAttr(name)}">${escapeHtml(name)}</option>`).join('');
+  if (classePrevio) classSelect.value = classeNames.includes(classePrevio) ? classePrevio : 'all';
+
+  const exercicioSelect = document.getElementById('exercicioFilter');
+  if (exercicioSelect) {
+    const anos = Array.from(new Set(groups.map(group => group.exercicioPca).filter(ano => ano != null)))
+      .sort((a, b) => b - a);
+    const exercicioPrevio = exercicioSelect.value;
+    exercicioSelect.innerHTML = '<option value="all">Todos os exercícios</option>' +
+      anos.map(ano => `<option value="${ano}">${ano}</option>`).join('');
+    if (exercicioPrevio) exercicioSelect.value = (exercicioPrevio === 'all' || anos.some(ano => String(ano) === exercicioPrevio)) ? exercicioPrevio : 'all';
+  }
 }
 
 function calculateContractsSummary(groups) {
@@ -299,10 +311,12 @@ function applyFilters() {
   const contratacoes = getSavedContratacoes();
   const search = document.getElementById('searchBox').value.trim().toLowerCase();
   const classFilter = document.getElementById('classFilter').value;
+  const exercicioFilter = document.getElementById('exercicioFilter')?.value || 'all';
 
   const groups = buildPcaItens(orders, contratacoes)
     .filter(group => {
       const matchesClass = classFilter === 'all' || group.classeNome === classFilter;
+      const matchesExercicio = exercicioFilter === 'all' || String(group.exercicioPca) === exercicioFilter;
       const searchText = [
         group.numero,
         group.classeCodigo,
@@ -314,7 +328,7 @@ function applyFilters() {
         ...group.items.map(item => [item.nome, item.categoria, item.urgencia, item.usuario?.nome, item.usuario?.setor, item.observacoes].join(' '))
       ].join(' ').toLowerCase();
 
-      return matchesClass && (!search || searchText.includes(search));
+      return matchesClass && matchesExercicio && (!search || searchText.includes(search));
     });
 
   renderSummary(groups);

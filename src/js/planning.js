@@ -196,9 +196,33 @@ function renderPlanningAlerts(ordersWithItems) {
   `).join('');
 }
 
+function getExercicioFilter() {
+  return document.getElementById('exercicioFilter')?.value || 'all';
+}
+
+// Popula o filtro com os exercícios distintos presentes nos pedidos (desc),
+// preservando a seleção atual quando possível.
+function populateExercicioFilter(orders) {
+  const select = document.getElementById('exercicioFilter');
+  if (!select) return;
+  const anos = Array.from(new Set(orders.map(order => order.exercicioPca).filter(ano => ano != null)))
+    .sort((a, b) => b - a);
+  const anterior = select.value;
+  select.innerHTML = ['<option value="all">Todos os exercícios</option>']
+    .concat(anos.map(ano => `<option value="${ano}">${ano}</option>`))
+    .join('');
+  if (anterior && (anterior === 'all' || anos.some(ano => String(ano) === anterior))) {
+    select.value = anterior;
+  }
+}
+
 function renderPlanning() {
   const orders = getSavedOrders();
-  const ordersWithItems = orders.filter(order => Array.isArray(order.itens) && order.itens.length);
+  populateExercicioFilter(orders);
+  const exercicioFilter = getExercicioFilter();
+  const ordersWithItems = orders
+    .filter(order => Array.isArray(order.itens) && order.itens.length)
+    .filter(order => exercicioFilter === 'all' || String(order.exercicioPca) === exercicioFilter);
 
   const pcaTypeAggregation = {};
   const pcaAggregation = {};
@@ -481,6 +505,9 @@ window.addEventListener('DOMContentLoaded', () => {
   if (!guardPage(['compras'])) return;
 
   renderPlanning();
+
+  const exercicioFilter = document.getElementById('exercicioFilter');
+  if (exercicioFilter) exercicioFilter.addEventListener('change', renderPlanning);
 
   const exportButton = document.getElementById('exportCsvButton');
   if (exportButton) exportButton.addEventListener('click', exportOrdersCsv);

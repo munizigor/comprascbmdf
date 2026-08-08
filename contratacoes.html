@@ -44,6 +44,12 @@
           <input id="searchBox" type="text" placeholder="Pesquisar por classe, item, usuário, setor..." oninput="applyFilters()">
         </div>
         <div class="input-group">
+          <label for="exercicioFilter">Exercício</label>
+          <select id="exercicioFilter" onchange="applyFilters()">
+            <option value="all">Todos os exercícios</option>
+          </select>
+        </div>
+        <div class="input-group">
           <label for="classFilter">Classe</label>
           <select id="classFilter" onchange="applyFilters()">
             <option value="all">Todas as classes</option>
