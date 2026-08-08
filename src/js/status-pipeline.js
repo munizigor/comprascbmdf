@@ -9,9 +9,13 @@ const STAGE_LABELS = {
 
 const STATUS_PIPELINE = [
   { value: 'DFD Registrado', stage: 1, color: '#7c3aed' },
+  { value: 'DFD Aprovado pela Unidade', stage: 1, color: '#6d28d9' },
+  { value: 'DFD Devolvido para Ajuste', stage: 1, color: '#a855f7', branch: true },
   { value: 'Em Análise Setorial', stage: 2, color: '#334155' },
   { value: 'Aguardando Suplementação', stage: 2, color: '#b45309' },
   { value: 'Arquivado', stage: 2, color: '#6b7280', branch: true },
+  { value: 'Consolidado em Item de PCA', stage: 2, color: '#1d4ed8' },
+  { value: 'PCA Aguardando Aprovação', stage: 2, color: '#1e3a8a' },
   { value: 'Incluído no PCA', stage: 2, color: '#2563eb' },
   { value: 'Incluído no PCA (Urgência)', stage: 2, color: '#1e40af' },
   { value: 'ETP em Elaboração', stage: 3, color: '#0d9488' },
@@ -35,8 +39,16 @@ const STATUS_VALUES = STATUS_PIPELINE.map(entry => entry.value);
 const DEFAULT_STATUS = STATUS_VALUES[0];
 
 const ARCHIVED_STATUS = 'Arquivado';
+const RETURNED_STATUS = 'DFD Devolvido para Ajuste';
 const REJECTED_BRANCH_STATUS = 'Recebimento Rejeitado (Aguardando Substituição)';
-const PENDING_STATUSES = new Set(['DFD Registrado', 'Em Análise Setorial', 'Aguardando Suplementação']);
+// Estágios pré-PCA: a demanda ainda não conta no "planejado" nem no orçamento
+// (getStatusFlags exclui os pendentes do total). Só passa a contar em
+// "Incluído no PCA".
+const PENDING_STATUSES = new Set([
+  'DFD Registrado', 'DFD Aprovado pela Unidade', 'DFD Devolvido para Ajuste',
+  'Em Análise Setorial', 'Aguardando Suplementação',
+  'Consolidado em Item de PCA', 'PCA Aguardando Aprovação'
+]);
 
 const COMPROMETIDO_TRIGGER = 'Reserva Orçamentária Confirmada';
 const EMPENHADO_TRIGGER = 'Nota de Empenho Emitida';
@@ -84,8 +96,15 @@ function isRejectedBranchStatus(status) {
   return normalizeStatusText(status) === REJECTED_BRANCH_STATUS;
 }
 
+function isReturnedForFixStatus(status) {
+  return normalizeStatusText(status) === RETURNED_STATUS;
+}
+
+// Qualquer status marcado como desvio no pipeline (Arquivado, Recebimento
+// Rejeitado e DFD Devolvido para Ajuste). Deriva do flag `branch` do próprio
+// pipeline para não precisar listar cada desvio à mão.
 function isBranchStatus(status) {
-  return isArchivedStatus(status) || isRejectedBranchStatus(status);
+  return Boolean(getStatusMeta(normalizeStatusText(status)).branch);
 }
 
 function isPendingStatus(status) {

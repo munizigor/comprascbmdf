@@ -507,6 +507,22 @@ function renderReview() {
   `;
   document.getElementById('reviewNotes').textContent = notes ? `Justificativa: ${notes}` : 'Nenhuma justificativa informada.';
 
+  const reviewDfd = document.getElementById('reviewDfd');
+  if (reviewDfd) {
+    const exercicio = document.getElementById('exercicioPcaSelect')?.value || '—';
+    const dataPretendida = document.getElementById('dataPretendidaInput')?.value;
+    const servicoContinuado = document.getElementById('servicoContinuadoSelect')?.value === 'sim';
+    const vinculo = document.getElementById('vinculoPlanejamentoInput')?.value.trim();
+    const dataTexto = dataPretendida ? dataPretendida.split('-').reverse().join('/') : 'não informada';
+    const partes = [
+      `Exercício do PCA: ${exercicio}`,
+      `Data pretendida: ${dataTexto}`,
+      `Serviço continuado: ${servicoContinuado ? 'sim' : 'não'}`
+    ];
+    if (vinculo) partes.push(`Vínculo ao planejamento: ${vinculo}`);
+    reviewDfd.textContent = partes.join(' · ');
+  }
+
   const criticidade = document.getElementById('criticidadeSelect');
   const risco = document.getElementById('riscoSelect');
   const reviewPrioridade = document.getElementById('reviewPrioridade');
@@ -599,7 +615,9 @@ function submitOrder() {
       id: productId,
       nome: item.name,
       categoria: item.category,
+      grupoCodigo: item.grupoCodigo,
       grupoNome: item.grupoNome,
+      classeCodigo: item.classeCodigo,
       classeNome: item.classeNome,
       tipo: item.tipo,
       tipoDespesa: item.tipoDespesa,
@@ -615,10 +633,17 @@ function submitOrder() {
   const userId = Number(select.value);
   const user = users.find(item => item.id === userId) || users[0];
 
+  const exercicioSelect = document.getElementById('exercicioPcaSelect');
+  const dataPretendida = document.getElementById('dataPretendidaInput')?.value || '';
+  const servicoContinuado = document.getElementById('servicoContinuadoSelect')?.value === 'sim';
+  const vinculoPlanejamento = document.getElementById('vinculoPlanejamentoInput')?.value.trim() || '';
+
   createOrder({
     usuario: { id: user.id, nome: user.nome, matricula: user.matricula, setor: user.setor },
     itens: items,
     observacoes: notes,
+    exercicioPca: Number(exercicioSelect?.value) || (new Date().getFullYear() + 1),
+    dfd: { dataPretendida, servicoContinuado, vinculoPlanejamento },
     priorizacao: {
       criticidade: Number(document.getElementById('criticidadeSelect')?.value) || 3,
       risco: Number(document.getElementById('riscoSelect')?.value) || 3
@@ -628,6 +653,12 @@ function submitOrder() {
   Object.keys(cart).forEach(key => delete cart[key]);
   renderCart();
   document.getElementById('notes').value = '';
+  const dataPretendidaInput = document.getElementById('dataPretendidaInput');
+  if (dataPretendidaInput) dataPretendidaInput.value = '';
+  const vinculoInput = document.getElementById('vinculoPlanejamentoInput');
+  if (vinculoInput) vinculoInput.value = '';
+  const servicoSelect = document.getElementById('servicoContinuadoSelect');
+  if (servicoSelect) servicoSelect.value = 'nao';
   renderPersonalization(user);
 }
 
@@ -637,9 +668,23 @@ function handlePersonalizationClick(event) {
   addToCart(Number(chip.dataset.addProduct));
 }
 
+// O PGC planeja o exercício seguinte (N+1); oferecemos do ano atual a N+2 e
+// pré-selecionamos N+1.
+function populateExercicioSelect() {
+  const select = document.getElementById('exercicioPcaSelect');
+  if (!select) return;
+  const anoAtual = new Date().getFullYear();
+  const padrao = anoAtual + 1;
+  const anos = [anoAtual, anoAtual + 1, anoAtual + 2];
+  select.innerHTML = anos
+    .map(ano => `<option value="${ano}" ${ano === padrao ? 'selected' : ''}>${ano}</option>`)
+    .join('');
+}
+
 applyFilters();
 renderCart();
 populateUserSelect();
+populateExercicioSelect();
 
 document.getElementById('personalization').addEventListener('click', handlePersonalizationClick);
 

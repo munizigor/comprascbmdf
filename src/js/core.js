@@ -233,6 +233,18 @@ function normalizeOrders(orders) {
       changed = true;
     }
 
+    // Exercício do PCA: pedidos antigos não declaravam — deriva do ano de criação.
+    if (order.exercicioPca == null) {
+      order.exercicioPca = getOrderYear(order);
+      changed = true;
+    }
+
+    // Caracterização do DFD: garante o objeto para pedidos antigos.
+    if (!order.dfd || typeof order.dfd !== 'object') {
+      order.dfd = { dataPretendida: null, servicoContinuado: false, vinculoPlanejamento: '' };
+      changed = true;
+    }
+
     order.itens.forEach((item, index) => {
       if (item && !item.itemUid) {
         item.itemUid = makeItemUid(order.id, index);
@@ -370,7 +382,7 @@ function findOrderIndexById(orders, orderId) {
 
 /* ---------- criação ---------- */
 
-function createOrder({ usuario, itens, observacoes, priorizacao }) {
+function createOrder({ usuario, itens, observacoes, priorizacao, exercicioPca, dfd }) {
   const orders = getSavedOrders();
   const now = new Date();
   const id = nextOrderId(orders, now.getFullYear());
@@ -382,6 +394,15 @@ function createOrder({ usuario, itens, observacoes, priorizacao }) {
     criadoEm,
     status: DEFAULT_STATUS,
     observacoes: observacoes || '',
+    // Exercício-alvo do PCA: declarado pelo requisitante; default é o próximo
+    // ano (o PGC planeja N+1). `normalizeOrders` faz backfill de pedidos antigos.
+    exercicioPca: toNumber(exercicioPca, now.getFullYear() + 1),
+    // Caracterização do DFD (Documento de Formalização da Demanda).
+    dfd: {
+      dataPretendida: dfd?.dataPretendida || null,
+      servicoContinuado: Boolean(dfd?.servicoContinuado),
+      vinculoPlanejamento: dfd?.vinculoPlanejamento || ''
+    },
     usuario,
     itens: (itens || []).map((item, index) => ({ ...item, itemUid: makeItemUid(id, index) })),
     // Criticidade e risco vêm do requisitante; obrigatoriedade legal e
@@ -428,21 +449,25 @@ function exportOrdersCsv() {
   }
 
   const header = [
-    'Protocolo', 'Data', 'Status', 'Etapa', 'Nome', 'Matrícula', 'Setor', 'Observações',
-    'Item ID', 'Item Nome', 'Categoria', 'Grupo', 'Classe', 'Tipo', 'Tipo Despesa',
-    'Natureza Despesa', 'Quantidade', 'Urgência', 'Preço Unitário', 'Subtotal'
+    'Protocolo', 'Data', 'Status', 'Etapa', 'Exercício PCA', 'Data Pretendida',
+    'Serviço Continuado', 'Vínculo Planejamento', 'Nome', 'Matrícula', 'Setor', 'Observações',
+    'Item ID', 'Item Nome', 'Categoria', 'Grupo Código', 'Grupo', 'Classe Código', 'Classe',
+    'Tipo', 'Tipo Despesa', 'Natureza Despesa', 'Quantidade', 'Urgência', 'Preço Unitário', 'Subtotal'
   ];
   const rows = [header];
 
   orders.forEach(order => {
     const items = Array.isArray(order.itens) ? order.itens : [];
     const etapa = typeof getStatusStageLabel === 'function' ? getStatusStageLabel(order.status) : '';
+    const dfd = order.dfd || {};
+    const servicoContinuado = dfd.servicoContinuado ? 'Sim' : 'Não';
 
     if (!items.length) {
       rows.push([
         order.id, order.data, order.status, etapa,
+        order.exercicioPca, dfd.dataPretendida || '', servicoContinuado, dfd.vinculoPlanejamento || '',
         order.usuario?.nome, order.usuario?.matricula, order.usuario?.setor, order.observacoes,
-        '', '(pedido sem itens)', '', '', '', '', '', '', 0, '', 0, 0
+        '', '(pedido sem itens)', '', '', '', '', '', '', '', '', 0, '', 0, 0
       ]);
       return;
     }
@@ -450,8 +475,9 @@ function exportOrdersCsv() {
     items.forEach(item => {
       rows.push([
         order.id, order.data, order.status, etapa,
+        order.exercicioPca, dfd.dataPretendida || '', servicoContinuado, dfd.vinculoPlanejamento || '',
         order.usuario?.nome, order.usuario?.matricula, order.usuario?.setor, order.observacoes,
-        item.id, item.nome, item.categoria, item.grupoNome, item.classeNome,
+        item.id, item.nome, item.categoria, item.grupoCodigo, item.grupoNome, item.classeCodigo, item.classeNome,
         item.tipo, item.tipoDespesa, item.naturezaDespesa,
         getItemQuantity(item), item.urgencia, getItemUnitPrice(item), getItemSubtotal(item)
       ]);

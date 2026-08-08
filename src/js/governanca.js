@@ -112,8 +112,15 @@ function formatScore(value) {
 
 /* ---------- fila priorizada ---------- */
 
+// Só entram na fila de priorização as demandas ainda em decisão (antes de
+// consolidar em item de PCA). "Consolidado em Item de PCA" e "PCA Aguardando
+// Aprovação" seguem pendentes para efeito de orçamento, mas já saíram da fila.
+const STATUS_ELEGIVEIS_FILA = new Set([
+  'DFD Registrado', 'DFD Aprovado pela Unidade', 'Em Análise Setorial', 'Aguardando Suplementação'
+]);
+
 function isElegivelParaFila(order) {
-  return isPendingStatus(order?.status);
+  return STATUS_ELEGIVEIS_FILA.has(String(order?.status || '').trim());
 }
 
 // Desempate declarado: score ↓, depois o mais antigo, depois o protocolo.

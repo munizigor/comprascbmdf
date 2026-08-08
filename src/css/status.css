@@ -351,9 +351,13 @@ textarea {
 }
 
 .status-badge--dfd-registrado { background: #7c3aed; }
+.status-badge--dfd-aprovado-pela-unidade { background: #6d28d9; }
+.status-badge--dfd-devolvido-para-ajuste { background: #a855f7; }
 .status-badge--em-analise-setorial { background: #334155; }
 .status-badge--aguardando-suplementacao { background: #b45309; }
 .status-badge--arquivado { background: #6b7280; }
+.status-badge--consolidado-em-item-de-pca { background: #1d4ed8; }
+.status-badge--pca-aguardando-aprovacao { background: #1e3a8a; }
 .status-badge--incluido-no-pca { background: #2563eb; }
 .status-badge--incluido-no-pca-urgencia { background: #1e40af; }
 .status-badge--etp-em-elaboracao { background: #0d9488; }
@@ -496,6 +500,12 @@ textarea {
   background: rgba(220, 38, 38, 0.08);
   border-left-color: #dc2626;
   color: #7f1d1d;
+}
+
+.timeline-branch-alert--returned {
+  background: rgba(168, 85, 247, 0.1);
+  border-left-color: #a855f7;
+  color: #6b21a8;
 }
 
 .rating-panel {
