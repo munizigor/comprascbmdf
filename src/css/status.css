@@ -63,6 +63,85 @@ header {
   border-bottom: 1px solid #fed7aa;
 }
 
+/* Convite flutuante de feedback (injetado por nav.js em todas as páginas) */
+.feedback-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.feedback-fab-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #1e40af;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(30, 64, 175, 0.35);
+}
+
+.feedback-fab-link:hover {
+  background: #1e3a8a;
+}
+
+.feedback-fab-link:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.feedback-fab-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.feedback-fab-close {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(30, 64, 175, 0.15);
+  color: #1e3a8a;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedback-fab-close:hover {
+  background: rgba(30, 64, 175, 0.3);
+}
+
+.feedback-fab-close:focus-visible {
+  outline: 2px solid #1e40af;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .feedback-fab {
+    animation: feedback-fab-in 0.3s ease-out;
+  }
+  @keyframes feedback-fab-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@media (max-width: 520px) {
+  .feedback-fab-label { display: none; }
+  .feedback-fab-link { padding: 12px; }
+}
+
 .profile-switcher {
   display: flex;
   align-items: center;

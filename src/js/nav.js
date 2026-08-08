@@ -79,10 +79,40 @@
     document.body.insertBefore(banner, document.body.firstChild);
   }
 
+  // Convite flutuante para responder ao formulário de feedback do protótipo.
+  // Injetado aqui para aparecer em todas as páginas (todas carregam nav.js).
+  const FEEDBACK_URL = 'https://forms.gle/zJLS8DBt5azbeci56';
+  const FEEDBACK_HIDDEN_KEY = 'cbmdf_feedback_fab_hidden';
+
+  function renderFeedbackFab() {
+    if (document.querySelector('.feedback-fab')) return;
+    try {
+      if (sessionStorage.getItem(FEEDBACK_HIDDEN_KEY) === '1') return;
+    } catch (error) { /* sessionStorage indisponível: mostra o convite mesmo assim */ }
+
+    const fab = document.createElement('div');
+    fab.className = 'feedback-fab';
+    fab.innerHTML = `
+      <a class="feedback-fab-link" href="${FEEDBACK_URL}" target="_blank" rel="noopener noreferrer"
+         aria-label="Enviar feedback sobre o protótipo (abre em nova aba)">
+        <span class="feedback-fab-icon" aria-hidden="true">💬</span>
+        <span class="feedback-fab-label">Feedback</span>
+      </a>
+      <button type="button" class="feedback-fab-close" aria-label="Ocultar convite de feedback">×</button>
+    `;
+    document.body.appendChild(fab);
+
+    fab.querySelector('.feedback-fab-close').addEventListener('click', () => {
+      try { sessionStorage.setItem(FEEDBACK_HIDDEN_KEY, '1'); } catch (error) { /* segue sem persistir */ }
+      fab.remove();
+    });
+  }
+
   renderPrototypeBanner();
   renderProfileSwitcher();
   applyProfile();
   renderIdentity();
+  renderFeedbackFab();
 
   window.CBMDFNav = { getProfile, setProfile, getCurrentUser, setCurrentUserId };
 })();
