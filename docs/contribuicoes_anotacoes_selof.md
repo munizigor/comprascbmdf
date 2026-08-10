@@ -10,6 +10,10 @@ do protótipo).
 > Integrada de Recursos do CBMDF"). Links internos de trabalho (rascunhos em ferramentas de IA,
 > planilhas, contatos) foram omitidos por não pertencerem à documentação do produto; as referências
 > públicas estão na seção final.
+>
+> A triagem complementar, feita a partir das **atribuições regimentais** da SELOF (Arts. 59, 61 e 69
+> do Regimento Interno), está em
+> [atribuicoes_selof_implementacoes_futuras.md](atribuicoes_selof_implementacoes_futuras.md).
 
 ## Panorama das anotações
 
