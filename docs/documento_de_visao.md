@@ -61,6 +61,31 @@ Os efeitos dessa lacuna se refletem em:
 
 Essa causa-raiz orienta a proposta de solução: o CBMDF Marketplace não deve ser apenas uma ferramenta de requisição, mas o instrumento que sustenta um **processo contínuo de governança das contratações**, e não apenas um repositório atualizado uma vez por ano.
 
+#### Evidência de campo
+
+A causa-raiz acima foi validada por uma **pesquisa com 20 servidores** — ponta operacional,
+unidades de apoio e a própria estrutura de logística e contratação —, consolidada em
+[pesquisa_servidores_2026.md](pesquisa_servidores_2026.md). Os resultados confirmam os cinco
+efeitos e acrescentam três leituras que orientam o backlog:
+
+* **A indefinição de recursos é a dor dominante:** citada por **75% da amostra**. O GPRAM descreve
+  seu efeito prático — sem teto conhecido, o PCA vira uma *"lista de papai noel"*: o grupamento
+  *"não chegou a executar 10 milhões no último ano [e] costuma ter um PARF de 50"*.
+* **A desarticulação entre atores é direcional, não geral.** A comunicação com o planejamento foi
+  avaliada em **2,85 de 5**, e a nota cai conforme a distância ao centro de contratação: as
+  unidades da ponta (1º GBM, 6º GBM, PODON, GPRAM) ficam em 1–2; as internas à estrutura de
+  logística (COMAP, Gaeph, SELOG, DICOA) em 4–5.
+* **O Épico 08 foi validado de forma independente.** O SELOG/COMOP relata já usar *"a Matriz GUT
+  com adaptações [colocando] a maturidade do processo também como um peso"* — que é o score deste
+  produto, incluindo o critério de prontidão da instrução. O SELOF, por sua vez, nomeia o problema
+  que os pesos institucionais fixos resolvem: com a GUT preenchida por cada unidade, *"tudo fica
+  priorizado ou fica muito diferente de demandante pra demandante"*.
+
+A pesquisa também aponta que os três dados mais pedidos pelo requisitante — teto orçamentário da
+unidade, dotação prevista e prazo esperado — **já são calculados pelo sistema, mas só são exibidos
+aos perfis de gestão**. As lacunas identificadas estão detalhadas na §5 daquele documento e ainda
+**não** foram incorporadas como épicos.
+
 ### 2.3 Declaração do Problema
 | **O problema de** | Falta de visibilidade centralizada sobre o andamento dos pedidos de compra e ausência de um processo contínuo de governança das contratações. |
 | **afeta** | Setores requisitantes, a Central de Suprimentos e Material (CESMA), a área de Planejamento/Orçamento e a Direção do CBMDF. |
