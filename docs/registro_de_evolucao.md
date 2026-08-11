@@ -35,8 +35,8 @@ Log cronológico das melhorias do protótipo e — principalmente — do **porqu
 | 2026-08-08 | Seed enriquecido + ciclo fechado | [#9](https://github.com/munizigor/comprascbmdf/pull/9) | Substituir por ~33 pedidos (25 status); dados canônicos |
 | 2026-08-08 | FAB de feedback | [#10](https://github.com/munizigor/comprascbmdf/pull/10) | FAB (vs banner); dispensável por sessão; injeção via nav.js |
 | 2026-08-08 | Matriz de Dotação de Material | [#11](https://github.com/munizigor/comprascbmdf/pull/11) | Por item; entrega completa; semeado/read-only; desconto do "em atendimento" |
-| 2026-08-11 | Auditoria de coerência do protótipo | branch `claude/prototipo-ideias-conflitantes-nqanuo` | Funcionalidade × jornada × evidência; vereditos FICA / EXPOR / RESOLVER (C1–C6) / MIGRA — proposta, nada implementado |
-| 2026-08-11 | Triagem das 18 issues do GitHub | branch `claude/prototipo-ideias-conflitantes-nqanuo` | Backlog oficial passa a ser o Documento de Visão; 10 viram HUs/épicos, 5 duplicadas, 2 decisões institucionais, 1 desmembrada; issues comentadas e fechadas |
+| 2026-08-11 | Auditoria de coerência do protótipo | [#36](https://github.com/munizigor/comprascbmdf/pull/36) | Funcionalidade × jornada × evidência; vereditos FICA / EXPOR / RESOLVER (C1–C6) / MIGRA — proposta, nada implementado |
+| 2026-08-11 | Triagem das 18 issues do GitHub | [#36](https://github.com/munizigor/comprascbmdf/pull/36) | Backlog oficial passa a ser o Documento de Visão; 10 viram HUs/épicos, 5 duplicadas, 2 decisões institucionais, 1 desmembrada; issues comentadas e fechadas |
 
 ## Antecedentes (antes desta trilha)
 
@@ -149,7 +149,7 @@ em `prd_manutencao_ux.md`, `fase5_pipeline_status.md` e `fases6-9_governanca_con
 - **Verificação:** Chromium headless — derivações (incl. desconto do em atendimento), necessidades,
   selo, aviso de excedente, página gerencial e `guardPage`; 10 páginas sem erro de JS.
 
-### 2026-08-11 — Auditoria de coerência do protótipo — branch `claude/prototipo-ideias-conflitantes-nqanuo`
+### 2026-08-11 — Auditoria de coerência do protótipo — PR [#36](https://github.com/munizigor/comprascbmdf/pull/36)
 - **Motivação:** o protótipo ficou "parrudo e incoerente" — engenharia disciplinada, mas
   acumulando ideias que ora se sobrepõem, ora se contrapõem (percepção do usuário validada pela
   análise do código e dos docs).
@@ -164,7 +164,7 @@ em `prd_manutencao_ux.md`, `fase5_pipeline_status.md` e `fases6-9_governanca_con
 - **Verificação:** inventário conferido contra as 10 páginas e módulos JS; toda funcionalidade
   recebeu exatamente um veredito.
 
-### 2026-08-11 — Triagem das 18 issues do GitHub — branch `claude/prototipo-ideias-conflitantes-nqanuo`
+### 2026-08-11 — Triagem das 18 issues do GitHub — PR [#36](https://github.com/munizigor/comprascbmdf/pull/36)
 - **Motivação:** 18 issues abertas acumuladas no mesmo ritmo que tornou o protótipo incoerente;
   era preciso decidir o que entra para o backlog e o que é descartado, com critério.
 - **Decisão (do usuário):** triagem em quatro filtros (fronteira ERP → duplicidade → natureza →
