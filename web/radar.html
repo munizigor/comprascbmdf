@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Radar de Vigência — CBMDF Marketplace</title>
+  <link rel="stylesheet" href="radar.css">
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <span class="eyebrow">CBMDF Marketplace · Governança de contratações</span>
+      <h1>Radar de Vigência</h1>
+      <p class="sub">Atas de registro de preços e contratos vigentes do CBMDF, ordenados pelo
+        que vence primeiro. Cada vencimento é uma janela de recontratação com prazo conhecido —
+        e a perda dela é o que gera a contratação emergencial.</p>
+      <div class="meta">
+        <span>Dado de <b id="gerado">—</b> <span id="idade"></span></span>
+        <span id="fonte">—</span>
+        <span>Fonte: PNCP</span>
+      </div>
+    </header>
+
+    <div id="erro"></div>
+
+    <section id="atas">
+      <div class="sec-head">
+        <h2>Atas de registro de preços</h2>
+        <span class="count" data-slot="count">carregando…</span>
+      </div>
+      <div class="faixas" data-slot="faixas"></div>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Vence em</th>
+              <th scope="col">Prazo</th>
+              <th scope="col">Faixa</th>
+              <th scope="col">Objeto</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p class="vazio" data-slot="vazio" hidden>Nenhuma ata nesta faixa.</p>
+      </div>
+    </section>
+
+    <section id="contratos">
+      <div class="sec-head">
+        <h2>Contratos</h2>
+        <span class="count" data-slot="count">carregando…</span>
+      </div>
+      <div class="faixas" data-slot="faixas"></div>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Vence em</th>
+              <th scope="col">Prazo</th>
+              <th scope="col">Faixa</th>
+              <th scope="col">Objeto</th>
+              <th scope="col">Valor</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p class="vazio" data-slot="vazio" hidden>Nenhum contrato nesta faixa.</p>
+      </div>
+    </section>
+
+    <footer>
+      Os valores não são somados de propósito: o PNCP replica o valor total do credenciamento em
+      cada contrato individual e publica R$ 1,00 quando não há valor definido — um agregado ingênuo
+      seria 85% artefato. Contratos afetados vêm marcados. Ver docs/integracao_pncp_estudo.md §5.
+    </footer>
+
+  </div>
+  <script src="radar.js"></script>
+</body>
+</html>

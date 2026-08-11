@@ -1,3 +1,10 @@
 /CBMDF Marketplace.html
 /CBMDF Marketplace_files
 /pedidos.csv
+
+# Python
+__pycache__/
+*.py[cod]
+
+# cache local do cliente PNCP — regenerável, não versionar
+tools/pncp/.cache/
