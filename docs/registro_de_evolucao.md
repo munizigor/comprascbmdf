@@ -35,6 +35,8 @@ Log cronológico das melhorias do protótipo e — principalmente — do **porqu
 | 2026-08-08 | Seed enriquecido + ciclo fechado | [#9](https://github.com/munizigor/comprascbmdf/pull/9) | Substituir por ~33 pedidos (25 status); dados canônicos |
 | 2026-08-08 | FAB de feedback | [#10](https://github.com/munizigor/comprascbmdf/pull/10) | FAB (vs banner); dispensável por sessão; injeção via nav.js |
 | 2026-08-08 | Matriz de Dotação de Material | [#11](https://github.com/munizigor/comprascbmdf/pull/11) | Por item; entrega completa; semeado/read-only; desconto do "em atendimento" |
+| 2026-08-11 | Auditoria de coerência do protótipo | branch `claude/prototipo-ideias-conflitantes-nqanuo` | Funcionalidade × jornada × evidência; vereditos FICA / EXPOR / RESOLVER (C1–C6) / MIGRA — proposta, nada implementado |
+| 2026-08-11 | Triagem das 18 issues do GitHub | branch `claude/prototipo-ideias-conflitantes-nqanuo` | Backlog oficial passa a ser o Documento de Visão; 10 viram HUs/épicos, 5 duplicadas, 2 decisões institucionais, 1 desmembrada; issues comentadas e fechadas |
 
 ## Antecedentes (antes desta trilha)
 
@@ -146,6 +148,38 @@ em `prd_manutencao_ux.md`, `fase5_pipeline_status.md` e `fases6-9_governanca_con
   (ÉPICO 09).
 - **Verificação:** Chromium headless — derivações (incl. desconto do em atendimento), necessidades,
   selo, aviso de excedente, página gerencial e `guardPage`; 10 páginas sem erro de JS.
+
+### 2026-08-11 — Auditoria de coerência do protótipo — branch `claude/prototipo-ideias-conflitantes-nqanuo`
+- **Motivação:** o protótipo ficou "parrudo e incoerente" — engenharia disciplinada, mas
+  acumulando ideias que ora se sobrepõem, ora se contrapõem (percepção do usuário validada pela
+  análise do código e dos docs).
+- **Decisão:** mapear **cada funcionalidade × jornada de perfil × evidência** (pesquisa +
+  causa-raiz) com veredito proposto: FICA (38), FICA+EXPOR (2), RESOLVER (conflitos C1–C6) e
+  MIGRA (5, viram HUs). O critério jornada+evidência passa a ser o **gate de admissão** para
+  ideias novas. Nada foi implementado ou removido — proposta para decisão, no rito da §7 da
+  pesquisa.
+- **Alternativas descartadas:** podar direto no código (queimaria a etapa de decisão do usuário);
+  organizar por página em vez de por jornada (não revela o que nenhuma jornada usa).
+- **Entregue:** `docs/auditoria_coerencia_prototipo.md`.
+- **Verificação:** inventário conferido contra as 10 páginas e módulos JS; toda funcionalidade
+  recebeu exatamente um veredito.
+
+### 2026-08-11 — Triagem das 18 issues do GitHub — branch `claude/prototipo-ideias-conflitantes-nqanuo`
+- **Motivação:** 18 issues abertas acumuladas no mesmo ritmo que tornou o protótipo incoerente;
+  era preciso decidir o que entra para o backlog e o que é descartado, com critério.
+- **Decisão (do usuário):** triagem em quatro filtros (fronteira ERP → duplicidade → natureza →
+  critério de admissão da auditoria), **comentar + fechar todas as issues** e incorporar as
+  aprovadas como HUs — **o backlog oficial do produto passa a ser o Documento de Visão**, não a
+  lista de issues. Resultado: 10 BACKLOG (HU04.4–04.9, HU05.3, Épicos 10 e 11, RNF §6.3),
+  5 duplicadas (refinamentos absorvidos nas HUs canônicas), 2 decisões institucionais (§7.3:
+  P1–P3) e 1 desmembrada (#30).
+- **Alternativas descartadas:** manter as issues abertas como backlog paralelo (duas fontes de
+  verdade); descartar as duplicatas sem absorver os refinamentos (perderia a janela de 12 meses
+  da #27, o PPA/LOA da #25 e emendas/convênios da #31).
+- **Entregue:** `docs/triagem_issues.md`, `docs/documento_de_visao.md` (HUs novas, Épicos 10–11,
+  RNF, §7.3), comentários e fechamento das 18 issues no GitHub.
+- **Verificação:** tabela cobre as 18 issues com exatamente um veredito cada; toda issue BACKLOG
+  tem HU correspondente; `list_issues(OPEN)` retorna 0 após a execução.
 
 ---
 
