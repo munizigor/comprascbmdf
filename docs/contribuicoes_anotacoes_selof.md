@@ -100,6 +100,13 @@ As anotações trazem um catálogo pronto (objetivo + fórmula + unidade + meta)
 - **Custo/eficiência:** custo por ocorrência, por militar, por habitante (para prestação de contas).
 - **Risco/conformidade:** % de processos com apontamento de auditoria, itens **pagos e não entregues**.
 
+> **Absorvido e formalizado.** Este catálogo de fórmulas foi consolidado em
+> [catalogo_indicadores_okr.md](catalogo_indicadores_okr.md), que acrescenta a cada indicador o que
+> faltava aqui — origem normativa, linha de base, prazo, responsável e **estado de calculabilidade**
+> contra o dado que o sistema já coleta — e o organiza junto aos indicadores do PLANES, do PPA e das
+> matrizes do TCU. Os itens estratégicos desta lista (PLOA × LOA e cumprimento de metas do PLANES)
+> viraram os KR1.4 e KR8.3; os de tempo, o KR6.3; os logísticos, o KR7.4.
+
 ### 2.8 Alertas e gestão por exceção
 - **Ideia:** níveis de alerta (amarelo/vermelho) para saldo crítico, demora no empenho/pagamento,
   execução acima da distribuição **duodecimal**, previsão estourando o teto em > 30%, comprometimentos
@@ -138,7 +145,7 @@ Relevantes como **contexto e roadmap institucional**, mas não são o protótipo
 | Classificação Verde/Amarelo/Vermelho da demanda | Alta | Médio | Usa dotação + orçamento + status |
 | Demanda reprimida → próximo PCA | Alta | Baixo/Médio | Usa exercício + `Arquivado`/pendentes |
 | Estado/essencialidade na Matriz de Dotação | Alta | Baixo | Estende o objeto de dotação |
-| Indicadores do catálogo SELOF em `indicadores.html` | Alta | Médio | Fórmulas prontas |
+| Indicadores do catálogo SELOF em `indicadores.html` | Alta | Médio | Fórmulas prontas — consolidadas em [catalogo_indicadores_okr.md](catalogo_indicadores_okr.md); a onda 1 é só cálculo sobre dado existente |
 | Prazos retroativos + indicadores de tempo | Média/Alta | Médio | Estende SLA e `dataPretendida` |
 | Fonte de recurso como dimensão | Média | Médio | Nova coluna em PCA/PLOA |
 | Limite por classe/CSO + declaração de saldo | Média | Médio/Alto | Estende `budget.js` + gate no pedido |

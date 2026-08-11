@@ -39,6 +39,12 @@ O produto **recebe, prioriza e planeja** as necessidades e **orquestra** a trami
 * **SIAFI:** Sistema Integrado de Administração Financeira, utilizado para execução orçamentária e financeira.
 * **PNCP:** Portal Nacional de Contratações Públicas, exigência da Lei nº 14.133/2021.
 * **ARP:** Ata de Registro de Preços.
+* **PLANES:** Planejamento Estratégico do CBMDF, ciclo 2025–2030. Estabelece doze objetivos estratégicos, cada um com indicadores e metas numéricas oficiais — quatro deles (governança, infraestrutura logística, governança digital e finanças) são diretamente afetados pelo ciclo de contratações.
+* **PPA:** Plano Plurianual — instrumento de planejamento orçamentário de quatro anos, ao qual o exercício anual (LDO/LOA) deve ser compatível.
+* **PARF:** Plano Anual de Recursos Financeiros, que reúne o PCA e as despesas de pessoal e custeio da folha; tratado internamente como a "LOA interna" do CBMDF.
+* **iGG / iESGo:** Índice Integrado de Governança e Gestão públicas e Índice de Governança e Sustentabilidade, ambos aferidos pelo **TCU**. As matrizes que os auditam definem quais evidências comprovam boa governança em contratações e orçamento.
+* **OKR (Objetivo e Resultado-Chave):** Estrutura de organização de metas em que um **Objetivo** declara o resultado institucional pretendido e cada **Resultado-Chave** é um indicador com meta numérica, prazo e fonte que evidencia o avanço. É a estrutura que o PLANES já pratica sob outra nomenclatura (Objetivo Estratégico → Indicador → Meta).
+* **Catálogo de Indicadores:** Registro curado e versionado dos indicadores institucionais que o produto monitora, com origem normativa, fórmula, meta e estado de calculabilidade. Fechado na interface — o usuário não cria indicador — e extensível por curadoria. Ver [catalogo_indicadores_okr.md](catalogo_indicadores_okr.md).
 
 ---
 
@@ -428,6 +434,85 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 
 ---
 
+### **ÉPICO 10: Catálogo Institucional de Indicadores e OKRs** *(implementação futura — fora do protótipo)*
+> **Descrição:** Os cinco KPIs da §8 medem o sucesso deste produto. Este épico trata do outro conjunto: os indicadores que a **instituição** precisa cumprir — metas do **PLANES 2025–2030**, execução do **PPA/LOA** e práticas de governança auditadas pelo **TCU** — cuja matéria-prima nasce no ciclo de contratações que o produto orquestra. O instrumento é um **catálogo curado**: fechado na interface (o usuário não cria indicador) e extensível por curadoria, para receber o que a instituição vier a exigir nos ciclos seguintes. O catálogo completo, com as fichas e os nove objetivos, está em [catalogo_indicadores_okr.md](catalogo_indicadores_okr.md).
+
+#### **HU10.1 — Painel de OKRs Institucionais**
+* **Como:** Planejamento / SELOF / Alto Comando
+* **Eu quero:** Ver os indicadores institucionais organizados por objetivo, filtráveis pela origem (PLANES, PPA/PARF, TCU, produto)
+* **Para que:** A Corporação acompanhe, num só lugar, o que é cobrado dela por fora — e não apenas o que este sistema mede por dentro.
+* **Critérios de Aceite:**
+  * Cada indicador deve exibir a **origem normativa** (número do indicador do PLANES, prática do TCU ou dispositivo do Regimento Interno).
+  * O painel deve manter a apresentação da §8: **valor atual, linha de base e meta lado a lado**.
+  * O filtro por origem deve permitir isolar o recorte que interessa a cada instância (o PLANES para o Comando, as práticas do TCU para a auditoria).
+
+#### **HU10.2 — Catálogo Fechado e Curado**
+* **Como:** SELOF / DEALF (curadoria)
+* **Eu quero:** Que o conjunto de indicadores seja uma lista fechada e versionada, e não um campo que qualquer usuário preenche
+* **Para que:** Todo indicador tenha origem, dono, meta e série comparável — sem isso ele não é cobrável nem serve como evidência ao controle externo.
+* **Critérios de Aceite:**
+  * A interface **não** deve oferecer a ação "criar indicador"; deve oferecer **filtrar, ativar e desativar**.
+  * A inclusão de indicador novo deve se dar por alteração versionada do catálogo, com registro de quem solicitou, quem aprovou e a partir de quando vale.
+  * A curadoria deve verificar duplicidade com indicador existente, aderência à fronteira do produto e viabilidade da fonte do dado.
+  * Um indicador com ficha incompleta (sem meta numérica, prazo ou fonte) deve ficar registrado como **proposto** e **não** subir ao painel.
+
+#### **HU10.3 — Vínculo da Demanda ao Objetivo Estratégico do PLANES**
+* **Como:** Requisitante e Planejamento
+* **Eu quero:** Indicar, no DFD, a qual objetivo estratégico do PLANES a demanda se vincula, escolhendo de uma **lista fechada** dos objetivos vigentes
+* **Para que:** A Corporação possa afirmar quanto do que compra está de fato a serviço da estratégia — hoje o campo de vínculo ao planejamento é texto livre e não permite nenhuma consolidação.
+* **Critérios de Aceite:**
+  * A seleção deve vir do ciclo do PLANES **vigente**, não de uma lista fixa no código — ao mudar o ciclo, muda a lista.
+  * O planejamento deve conseguir consolidar demandas e valor por objetivo estratégico.
+  * Demandas registradas antes da mudança não devem ter vínculo fabricado: ficam marcadas como sem vínculo declarado.
+
+#### **HU10.4 — Declaração de Calculabilidade e Cobertura**
+* **Como:** Planejamento / auditoria
+* **Eu quero:** Que cada indicador declare se é calculável hoje e, quando não for, o que exatamente falta
+* **Para que:** A lacuna vire item de roadmap em vez de número inventado — a mesma disciplina já adotada na §8.3.
+* **Critérios de Aceite:**
+  * Cada indicador exibe um dos estados: calculável hoje; dado coletado com cálculo ausente; requer atributo novo; requer integração externa; ou indicador de contexto aferido fora do sistema.
+  * Indicador não calculável aparece com o **motivo declarado**, nunca com valor estimado.
+  * Indicadores de contexto (como o iGG, aferido pelo TCU) aparecem identificados como tal, com o produto declarado na condição de fonte de evidência.
+
+#### **HU10.5 — Índice de Efetividade de Compras ("Compra boa")**
+* **Como:** SELOF / DEALF
+* **Eu quero:** Apurar o **IND. 5.4 do PLANES** a partir da avaliação do pedido e da trilha de auditoria
+* **Para que:** A Corporação meça se está comprando **melhor**, e não apenas se está comprando — que é a pergunta que o PLANES faz e a que o produto nasceu para responder.
+* **Critérios de Aceite:**
+  * A dimensão *Qualidade* deve ser derivada do formulário de avaliação do pedido (escala 1–5), normalizada conforme o PLANES.
+  * A dimensão *Tempo* deve reusar o cálculo de lead time já existente, com a normalização e o teto definidos no PLANES.
+  * Enquanto as dimensões de redução percentual e de punições não existirem, o índice composto deve ser declarado **não reportável**, e as dimensões já disponíveis exibidas isoladamente.
+
+#### **HU10.6 — Evidência Exportável para Prestação de Contas**
+* **Como:** SELOF
+* **Eu quero:** Exportar, por exercício, o valor de cada indicador com sua fórmula, fonte e limites de cobertura
+* **Para que:** O dado alimente o Relatório de Gestão, a resposta a diligências e a pontuação no iGG sem redigitação.
+* **Critérios de Aceite:**
+  * A exportação deve trazer a ficha do indicador junto do número — um valor sem definição operacional não é evidência.
+  * Deve declarar a cobertura da base no período, como já faz o rodapé metodológico da tela de Indicadores.
+
+#### **HU10.7 — Solicitação de Inclusão de Indicador**
+* **Como:** Qualquer área (SELOF, DEALF, EMG, Comando, unidade requisitante)
+* **Eu quero:** Solicitar a inclusão de um indicador novo pela própria plataforma, preenchendo os campos da ficha
+* **Para que:** O catálogo cresça conforme a instituição precisar — sem que isso signifique abrir digitação livre de indicadores.
+* **Critérios de Aceite:**
+  * A solicitação entra como **proposta** e segue para curadoria; **nunca** vira indicador ativo diretamente.
+  * A curadoria classifica a proposta como **resultado-chave** (evidencia o avanço de um objetivo, tem meta e prazo) ou como **indicador de acompanhamento** (monitor temático, com vigência própria e sem objetivo por trás) — nem toda necessidade legítima de monitoramento é um OKR, e forçá-la a sê-lo produz objetivos artificiais.
+  * O solicitante acompanha a situação do seu pedido, como acompanha um pedido de material.
+  * A proposta pode ser registrada mesmo sem meta ou fonte definidas — permanece proposta até a ficha fechar.
+  * A recusa deve vir com motivo registrado (duplicidade, fora da fronteira do produto, ou fonte inviável).
+
+#### **HU10.8 — Ciclo de Vida do Indicador**
+* **Como:** SELOF / DEALF (curadoria)
+* **Eu quero:** Marcar indicadores como suspensos ou aposentados ao fim de cada ciclo normativo, mantendo a série histórica
+* **Para que:** O catálogo envelheça junto com o PLANES e o PPA sem perder a memória — a comparação entre ciclos é o que dá sentido ao indicador.
+* **Critérios de Aceite:**
+  * Indicador **aposentado** sai do painel e **permanece** no catálogo com sua série e o vínculo para o indicador que o sucedeu.
+  * Indicador **suspenso** (fonte indisponível no período) deve ser declarado como tal, e não exibir o último valor conhecido como se fosse atual.
+  * Ao fim de cada ciclo do PLANES, do PPA ou do exercício do PCA, a curadoria revalida, suspende, sucede ou aposenta cada entrada.
+
+---
+
 ## 6. Requisitos Não Funcionais (RNFs)
 
 ### 6.1 Usabilidade
@@ -444,6 +529,7 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 * Registro de trilha de auditoria para alterações de status de pedido, **implementado**: toda mudança de status passa por um ponto único de mutação que grava estado anterior, estado novo, data, autor, perfil, tela de origem e justificativa. Transições fora do fluxo previsto exigem marcação explícita de excepcionalidade. Pedidos anteriores à implementação recebem uma entrada de gênese marcada como migrada, sem timestamps intermediários fabricados.
 * **RNF — Integração com Sistemas Governamentais:** o sistema deve dispor de APIs REST/Web Services para comunicação bidirecional com o SEI (abertura de processos e envio de minutas), o SIAFI (empenho e liquidação) e o PNCP (envio de dados de contratação e atas).
 * **RNF — Sincronismo de Catálogo:** o catálogo de materiais e serviços deve ser mantido em sincronia com a base oficial do Grifo, garantindo a padronização dos códigos PDM/PDS.
+* **RNF — Integridade do Catálogo de Indicadores:** o catálogo de indicadores institucionais (§8.4) deve ser uma **lista fechada e versionada**, sem entrada livre pela interface — a tela permite filtrar, ativar e desativar, nunca criar. A inclusão de indicador novo se dá por curadoria registrada, com rastro de quem solicitou, quem aprovou e a partir de quando o indicador vale. Nenhum valor pode ser exibido quando a fonte do dado não existe: o indicador é apresentado como não reportável, com o motivo declarado.
 
 ### 6.4 Confiabilidade e Disponibilidade
 * Disponibilidade compatível com um sistema administrativo interno, com backup periódico dos dados de pedidos, contratações e planejamento uma vez implementado o backend com banco de dados.
@@ -456,6 +542,7 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 * **Técnica (estado atual):** O protótipo atual não possui backend nem banco de dados — os pedidos são armazenados apenas no `localStorage` do navegador de cada usuário, sem autenticação. A evolução do produto requer a implementação de um backend com banco de dados centralizado e autenticação corporativa.
 * **Legal:** Os dados e classificações orçamentárias (tipo de despesa, natureza de despesa, grupo/classe) devem seguir os padrões orçamentários públicos vigentes e a Lei nº 14.133/2021.
 * **Organizacional:** A nomenclatura de status do pedido — organizada nas 6 macro-etapas descritas na seção 4.2 (item 2): Ideação & Necessidade, Validação & PCA, Estruturação no Processo (ETP/TR), Edital & Seleção, Aquisição & Fabricação, Entrega & Finalização — deve continuar refletindo o fluxo real de tramitação do CBMDF.
+* **Indicadores de fonte externa:** parte dos indicadores institucionais do catálogo (§8.4) depende de dados que não nascem neste sistema — execução no SIAFI, publicações do PNCP, carga de inventário, apontamentos de órgãos de controle. Enquanto as integrações previstas na §6.3 não existirem, esses indicadores permanecem no catálogo marcados como não calculáveis, com a dependência nomeada. O sistema não estima o que não mede.
 * **IA como componente incremental:** o desenvolvimento dos recursos baseados em Inteligência Artificial para sugestões avançadas de compras (Épico 06) é opcional/incremental. A primeira versão operacional (Go-Live) do CBMDF Marketplace deve funcionar plenamente com regras de negócio determinísticas (kits correlatos pré-configurados e validação por regras), garantindo que a entrega principal não fique refém do módulo de IA.
 
 ### 7.2 Suposições
@@ -467,6 +554,8 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 ## 8. Métricas de Sucesso do Produto (KPIs)
 
 Um indicador só é cobrável quando tem **linha de base**, **meta numérica**, **prazo** e **fonte do dado**. As versões anteriores desta seção declaravam metas na forma "reduzir" ou "aumentar", que não permitem afirmar sucesso nem fracasso. A tabela abaixo fixa os quatro elementos para cada KPI.
+
+Os cinco KPIs desta seção medem **o sucesso deste produto**. Existe um segundo conjunto, voltado para fora — os indicadores institucionais que o CBMDF precisa cumprir independentemente deste sistema, oriundos do **PLANES**, do **PPA/LOA** e das matrizes do **TCU** — e cuja matéria-prima nasce, em boa parte, no ciclo de contratações que o produto orquestra. Esse segundo conjunto é tratado na §8.4 e detalhado em [catalogo_indicadores_okr.md](catalogo_indicadores_okr.md).
 
 | # | KPI | Definição operacional | Linha de base | Meta | Prazo | Fonte do dado |
 | :-- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -516,5 +605,19 @@ Duas limitações declaradas:
 
 * A segunda metade da meta do KPI 5 (≥ 70% do valor institucional) exige o total empenhado pelo CBMDF, que só vem da **integração com o SIAFI** (RNF da §6.3). O painel calcula a adoção por unidades e marca a parcela de valor como não calculável.
 * O KPI 4 mede o valor que entrou por urgência **dentro da plataforma**. Contratações conduzidas inteiramente fora dela não aparecem, e o KPI 5 é justamente o indicador que mede essa lacuna de cobertura.
+
+### 8.4 Catálogo institucional de indicadores e OKRs *(implementação futura)*
+
+Os cinco KPIs acima são do produto. Os indicadores que o **CBMDF** precisa cumprir são outros, e existem antes deste sistema: as metas do **PLANES 2025–2030**, a execução do **PPA/LOA**, e as práticas de governança auditadas pelo **TCU** na metodologia do **iGG/iESGo**. O produto não os substitui — ele passa a ser a **fonte de dado** de boa parte deles, porque é no ciclo de contratações que esses números nascem.
+
+O instrumento é o **Catálogo de Indicadores**: um registro curado em que cada indicador recebe uma ficha com origem normativa, definição operacional, fórmula, meta, prazo, fonte do dado, responsável e limites de cobertura. A maior parte deles é organizada como **Resultado-Chave** vinculado a um **Objetivo** — nove objetivos cobrem o conjunto, do "executar o orçamento que foi planejado" ao "ligar a compra à estratégia e ao plurianual". O catálogo admite ainda **indicadores de acompanhamento**: monitores temáticos que alguém precisa enxergar sem que exista objetivo estratégico por trás, com vigência própria. O catálogo completo está em [catalogo_indicadores_okr.md](catalogo_indicadores_okr.md).
+
+**O catálogo é uma lista fechada — e não é uma lista congelada.** Fechada na interface: a tela oferece filtrar, ativar e desativar indicadores, nunca criá-los. Um indicador digitado livremente não tem origem normativa, não tem responsável e não tem série comparável entre ciclos — não atende a nenhum dos quatro requisitos que abrem esta seção, e não serve como evidência perante o controle externo. Extensível no tempo: o catálogo existe justamente para receber os indicadores que a instituição vier a exigir depois — o ciclo do PLANES que suceder 2030, cada novo PPA, determinações de órgãos de controle, novos normativos, pedidos do Comando, e indicadores nascidos da própria operação quando a série coletada revelar algo que valha monitorar. A extensão entra por **curadoria versionada** (SELOF, DEALF e Planejamento), não por digitação em tela.
+
+Cada entrada declara seu **estado de calculabilidade** contra os dados que o sistema coleta: **calculável hoje**; **dado coletado, cálculo ausente**; **requer novo atributo** (sempre de lista fechada); **requer integração externa** (SIAFI, PNCP, inventário); ou **indicador de contexto**, aferido fora do sistema, em que o produto é insumo e o painel exibe sem calcular — caso do próprio iGG. Um indicador não calculável **entra no catálogo assim mesmo**, com a dependência nomeada: declarar a lacuna é o que transforma "não temos esse dado" em item de roadmap, e é a mesma disciplina da §8.3.
+
+Cada entrada tem ainda **ciclo de vida** — proposto, vigente, suspenso, aposentado. Indicador cujo ciclo normativo se encerrou é aposentado, sai do painel e **permanece no catálogo com sua série histórica**: apagá-lo destruiria a única base de comparação entre ciclos.
+
+O achado que justifica a prioridade deste tema: o indicador oficial mais aderente ao produto em todo o PLANES — o **IND. 5.4, "Indicador de efetividade de compras e contratações"** (meta: índice "Compra boa" em pelo menos 80% das compras) — é composto por quatro dimensões, e o sistema **já coleta duas delas sem usá-las**: a dimensão *Qualidade* é exatamente o formulário de avaliação do pedido, em escala de 1 a 5, e a dimensão *Tempo* é o lead time já calculado sobre a trilha de auditoria. Faltam a redução percentual entre valor estimado e homologado e o registro de apontamentos dos órgãos de controle.
 
 ---

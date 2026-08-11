@@ -63,12 +63,17 @@ fundamentar a proposta"* e priorização por ordem de chegada. É o mesmo proble
 
 | Oportunidade (origem no TCU) | Aderência | Nota |
 |---|---|---|
-| Indicadores formais de **execução/economia** e **restos a pagar** (4412/4414) | Alta | Estende a tela de Indicadores |
-| **Critérios de priorização** documentados e auditáveis (4421/4422) | Alta | Já temos o score; falta expor "por quê" como evidência exportável |
+| Indicadores formais de **execução/economia** e **restos a pagar** (4412/4414) | Alta | Estende a tela de Indicadores — vira o **O1** do [catálogo de indicadores](catalogo_indicadores_okr.md) (KR1.1 a KR1.4) |
+| **Critérios de priorização** documentados e auditáveis (4421/4422) | Alta | Já temos o score; falta expor "por quê" como evidência exportável — **KR4.4** |
 | **Gestão de riscos** de contratação estruturada (4350) | Média | Formalizar risco por contratação, além do pedido |
-| **Desempenho de fornecedor/contratação** (4360) | Média | Reaproveita as avaliações já coletadas |
+| **Desempenho de fornecedor/contratação** (4360) | Média | Reaproveita as avaliações já coletadas — é a dimensão *Qualidade* do IND. 5.4 do PLANES (**KR2.2**) |
 | **Sustentabilidade** nas contratações (4370) | Baixa | Novo atributo de item/critério |
-| **Alinhamento estratégico** formal (4413) | Média | Ligar "vínculo ao planejamento" ao PLANES |
+| **Alinhamento estratégico** formal (4413) | Média | Ligar "vínculo ao planejamento" ao PLANES — **O8**, com âncora no campo já existente do DFD |
+
+As práticas **4310** (integridade/segregação) e **4330** (planejamento das contratações) também já
+rendem indicador direto: percentual de transições excepcionais com aprovador distinto (**KR4.3**) e
+percentual de itens de PCA publicados no PNCP (**KR4.2**), ambos calculáveis sobre dado que o sistema
+já registra.
 
 ## Conexão com a SELOF e referências
 

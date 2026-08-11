@@ -147,6 +147,45 @@ em `prd_manutencao_ux.md`, `fase5_pipeline_status.md` e `fases6-9_governanca_con
 - **Verificação:** Chromium headless — derivações (incl. desconto do em atendimento), necessidades,
   selo, aviso de excedente, página gerencial e `guardPage`; 10 páginas sem erro de JS.
 
+### 2026-08-10 — Catálogo institucional de indicadores e OKRs (documentação)
+- **Motivação:** o material institucional já estava no repositório e **desconectado** — o PDF do
+  PLANES 2025-2030 não era citado por nenhum documento, o catálogo de fórmulas da SELOF (§2.7) não
+  tinha linha de base nem responsável, e o vínculo com o PLANES existia só como item F6 de backlog.
+  Faltava o elo entre "o que a instituição é cobrada a cumprir" e "o dado que o sistema já coleta".
+- **Decisão (do usuário):** entrega **somente documental** (nenhuma linha de código); vocabulário
+  **OKR explícito** (Objetivo + Resultado-Chave), com o indicador oficial citado como origem de cada
+  KR; catálogo em **documento separado**, mantendo a §8 do Documento de Visão enxuta.
+- **Por que lista fechada e não campo livre:** um indicador digitado pelo usuário não tem origem
+  normativa, responsável nem série comparável entre ciclos — não atende aos quatro requisitos da §8
+  ("linha de base, meta numérica, prazo e fonte") e não serve como evidência ao controle externo. A
+  interface oferece filtrar, ativar e desativar; nunca criar.
+- **Por que isso não congela a lista:** a extensibilidade foi tratada como parte do desenho, não como
+  ressalva. O catálogo tem uma categoria de origem **superveniente** (próximo ciclo do PLANES, novo
+  PPA, determinações de controle, pedidos do Comando, indicadores nascidos da operação), um **rito de
+  inclusão** por curadoria versionada, e **ciclo de vida** por entrada (proposto → vigente → suspenso
+  → aposentado). Indicador aposentado sai do painel mas permanece no catálogo com sua série — apagá-lo
+  destruiria a comparação entre ciclos.
+- **Por que documento separado da §8:** os cinco KPIs da §8 medem o sucesso *do produto*; o catálogo
+  reúne indicadores *da instituição*, que existem independentemente dele e mudam em outro calendário
+  (PLANES, PPA). Misturá-los na mesma seção confundiria as duas cobranças e engordaria a §8 em três
+  vezes. Mesmo padrão já usado com os anexos do TCU e as contribuições da SELOF.
+- **Achado que orientou a priorização:** o IND. 5.4 do PLANES ("Compra boa", ≥ 80%) é o indicador
+  oficial mais aderente ao produto, e **duas de suas quatro dimensões já são coletadas sem uso** — a
+  dimensão *Qualidade* é o formulário de avaliação do pedido (escala 1–5) e a dimensão *Tempo* é o
+  lead time já calculado sobre a trilha. Daí a "onda 1" do faseamento: indicador institucional sem
+  nenhuma integração e sem pedir campo novo ao usuário.
+- **Alternativas descartadas:** manter o vocabulário institucional puro sem nomear OKR (decisão do
+  usuário foi pelo OKR explícito); embutir o catálogo na §8; implementar já a lista fechada em
+  `indicadores.js` (adiado — a prioridade era constar como implementação futura e na Visão).
+- **Entregue:** `catalogo_indicadores_okr.md` (novo), `documento_de_visao.md` (§1.3, §8, nova §8.4,
+  **ÉPICO 10** com HU10.1–HU10.8, RNF de integridade do catálogo na §6.3, restrição na §7.1),
+  `atribuicoes_selof_implementacoes_futuras.md` (F6 reescrito + backlog em duas ondas),
+  `contribuicoes_anotacoes_selof.md` (§2.7 absorvida), `tcu_matrizes_relevancia_para_o_produto.md`
+  (lacunas apontando para os OKRs), `docs/indicadores/planes_cbmdf_2025_2030.pdf` (renomeado).
+- **Verificação:** rastreabilidade de cada KR à sua origem (IND. do PLANES com página, prática do TCU
+  com código) e de cada estado ● / ◐ a campo ou função real do protótipo; links relativos resolvidos;
+  `git diff --stat` confirmando que nenhum arquivo de `src/` ou `*.html` foi tocado.
+
 ---
 
 ## Decisões transversais (valem para toda a trilha)
@@ -171,3 +210,8 @@ em `prd_manutencao_ux.md`, `fase5_pipeline_status.md` e `fases6-9_governanca_con
   ser área sensível; escopo leve entregue na Etapa 5.*
 - **Consolidação do Documento de Visão:** passar a limpo incorporando os épicos novos (PGC, Dotação)
   e as HUs de evolução. *Este registro é o insumo.*
+- **Catálogo de indicadores no protótipo** (ÉPICO 10): implementar a lista fechada em
+  `indicadores.js` e renderizar também os indicadores não calculáveis com o motivo declarado.
+  *Adiado por decisão de escopo — a rodada de 2026-08-10 foi documental. A "onda 1" do
+  [catálogo](catalogo_indicadores_okr.md) §11 é o ponto de entrada natural: só cálculo sobre dado
+  que já existe.*

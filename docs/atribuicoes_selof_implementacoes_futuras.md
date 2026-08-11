@@ -123,8 +123,19 @@ Em ordem de aderência ao propósito do produto:
   consolidadas por exercício/fonte/programa para Relatório de Gestão, TCA e Relatório de Atividades
   (Art. 61-IX/X), e **exportação no leiaute do E-PACC**. O produto alimenta os documentos; não os
   redige.
-- **F6 · Vínculo com o PLANES** — objetivo estratégico como atributo do item de PCA e indicador de
-  grau de cumprimento (Art. 61-V, Art. 69-X); soma-se ao catálogo de indicadores já mapeado.
+- **F6 · Catálogo institucional de indicadores e vínculo com o PLANES** — este item foi desdobrado em
+  documento próprio: [catalogo_indicadores_okr.md](catalogo_indicadores_okr.md), que organiza em nove
+  OKRs os indicadores do **PLANES**, do **PPA/LOA**, das matrizes do **TCU** e do próprio produto,
+  cada um com origem normativa, fórmula, meta e **estado de calculabilidade** contra o dado já
+  coletado. O catálogo é fechado na interface (o usuário não cria indicador) e extensível por
+  curadoria, com rito de inclusão e ciclo de vida definidos — ver §8.4 e **Épico 10** do
+  [Documento de Visão](documento_de_visao.md). O vínculo com o PLANES propriamente dito (Art. 61-V,
+  Art. 69-X) tem âncora concreta: o campo **vínculo ao planejamento** já existe no DFD, hoje em texto
+  livre; convertê-lo em lista fechada dos objetivos estratégicos vigentes destrava de uma vez a
+  consolidação por objetivo e o indicador de grau de cumprimento.
+  *Nota de sequenciamento:* a **onda 1** do catálogo (indicadores que já são calculáveis sobre dado
+  existente, como os prazos entre marcos financeiros e as dimensões do IND. 5.4 do PLANES) **não
+  depende** do vínculo ao PLANES nem de qualquer integração — é entregável isoladamente.
 - **F7 · Transparência ativa** — exportação/API de dados abertos do planejamento e execução das
   contratações para o Sítio de Transparência do CBMDF.
 - **F8 · Aderência do pipeline a obras** — verificação (spike) de que as 6 macro-etapas e SLAs
@@ -158,13 +169,17 @@ itens repetidos lá não são duplicados aqui.
 | F1 · Horizonte plurianual (PPA) | Alta | Médio | Estende a dimensão exercício; casa com "demanda reprimida → próximo PCA" |
 | F4 · Caderno de Emendas a partir do banco de demandas | Alta | Médio | Depende da dimensão fonte de recurso (backlog §2.4) |
 | F5 · Exportações de prestação de contas + leiaute E-PACC | Alta | Baixo/Médio | Consolida dados que já existem; formato é o trabalho |
-| F6 · Vínculo com o PLANES | Média | Baixo/Médio | Novo atributo + indicador |
+| F6 · Catálogo de indicadores — **onda 1** (só cálculo sobre dado existente) | Alta | Baixo | Nenhuma coleta nova, nenhuma integração. Ver [catalogo_indicadores_okr.md](catalogo_indicadores_okr.md) §11 |
+| F6 · Catálogo de indicadores — **onda 2** (vínculo ao PLANES e demais atributos) | Alta | Baixo/Médio | Converte o vínculo ao planejamento em lista fechada; destrava a consolidação por objetivo estratégico |
 | F2 · Programa/ação do PPA como dimensão | Média | Médio | Mesmo padrão da dimensão fonte |
 | F7 · Transparência ativa (dados abertos) | Média | Baixo/Médio | Exportação inicial; API na evolução com backend |
 | F8 · Spike de aderência a obras | Média | Baixo | Verificação de pipeline/SLA, não construção |
 
 **Recomendação de entrada:** **F3 (PARF)** é a lacuna regimental mais importante que o produto pode
 fechar — é a atribuição da SELOF (Art. 61-IV/VII) sem nenhum instrumento sistêmico hoje e com âncora
-direta no orçamento setorial existente. **F5 (E-PACC + prestação de contas)** é o melhor custo ×
-benefício imediato: elimina redigitação com esforço baixo. Os demais itens seguem a ordem da tabela,
-condicionados à dimensão *fonte de recurso* (F4/F7) e ao horizonte plurianual (F1/F2).
+direta no orçamento setorial existente. Para entrega imediata, porém, dois itens têm custo × benefício
+melhor: a **onda 1 do F6** — indicadores institucionais calculáveis sobre dado que o sistema já
+coleta, sem integração e sem campo novo, incluindo duas das quatro dimensões do IND. 5.4 do PLANES —
+e **F5 (E-PACC + prestação de contas)**, que elimina redigitação com esforço baixo. Os demais itens
+seguem a ordem da tabela, condicionados à dimensão *fonte de recurso* (F4/F7) e ao horizonte
+plurianual (F1/F2).
