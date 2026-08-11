@@ -263,6 +263,62 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
   * Deve ser possível cadastrar um limite financeiro por setor e período.
   * O sistema deve alertar quando o valor Comprometido/Empenhado de um setor se aproximar do limite definido.
   * O status Liquidado/Pago de cada pedido deve refletir, via integração com o SIAFI, o cronograma de desembolso real.
+  * *Refinamento (triagem de issues, [#30](https://github.com/munizigor/comprascbmdf/issues/30)):* os limites devem poder ser definidos também **por natureza/finalidade** (ex.: cota da DIREP para diárias e passagens, separadas por curso/operação/representação). Ressalva de fronteira: naturezas não-contratuais (diárias/passagens) entram apenas como **cota financeira** monitorada — nunca como pedido no fluxo de compras.
+
+#### **HU04.4 — Custeio via ARP com Cronograma de Desembolso pelo Duodécimo** *(evolução para produção — origem: issue [#16](https://github.com/munizigor/comprascbmdf/issues/16))*
+* **Como:** Planejamento/Orçamento
+* **Eu quero:** Planejar as despesas de custeio como ARPs e acompanhar um cronograma de desembolso mensal ancorado no duodécimo
+* **Para que:** A execução seja distribuída ao longo do ano (empenho um pouco acima do duodécimo/mês), aproveitando saldo disponível sem estourar o teto.
+* **Critérios de Aceite:**
+  * É possível marcar contratações de custeio como "executáveis via ARP".
+  * O painel financeiro mostra o previsto mensal (duodécimo) × empenhado × liquidado × pago.
+  * Alerta quando o ritmo mensal de empenho diverge do planejado (acima/abaixo).
+* **Pré-condição de negócio:** a diretriz "todos os custeios como ARP" precisa ser confirmada com o Planejamento **antes** de esta HU virar requisito fechado.
+
+#### **HU04.5 — KPI de Aging: Dias entre Empenho e Liquidação** *(evolução para produção — origem: issue [#17](https://github.com/munizigor/comprascbmdf/issues/17))*
+* **Como:** Planejamento/Diretoria
+* **Eu quero:** Ver há quantos dias cada despesa empenhada está sem liquidação, e a distribuição desse tempo por setor/natureza
+* **Para que:** Eu identifique empenhos "parados" e atue antes que virem restos a pagar ou devolução de recurso.
+* **Critérios de Aceite:**
+  * Indicador de dias médios entre "Nota de Empenho Emitida" e "Liquidado", calculado sobre o `historico[]` (a trilha já existe).
+  * Lista de empenhos acima de um limite de dias (ex.: > 60 dias sem liquidar).
+  * Recorte por setor e por natureza de despesa.
+
+#### **HU04.6 — Planejamento de Despesas Continuadas** *(evolução para produção — origem: issues [#18](https://github.com/munizigor/comprascbmdf/issues/18), [#28](https://github.com/munizigor/comprascbmdf/issues/28) e parte da [#30](https://github.com/munizigor/comprascbmdf/issues/30))*
+* **Como:** Planejamento/Orçamento
+* **Eu quero:** Cadastrar e planejar despesas continuadas recorrentes (água, luz, combustível, pneu etc.) com projeção anual, incluindo o custeio continuado no PARF
+* **Para que:** O PCA/PLOA já contemple o gasto recorrente sem depender de o setor lembrar de requisitar item a item.
+* **Critérios de Aceite:**
+  * Marcação de itens/classes como despesa continuada (reaproveita o campo `servicoContinuado` do DFD).
+  * Projeção anual estimada a partir do histórico/consumo médio.
+  * Esses itens entram automaticamente na consolidação do PCA/PLOA do exercício.
+
+#### **HU04.7 — Projeção Orçamentária por GND com Janela Móvel** *(evolução para produção — origem: issues [#19](https://github.com/munizigor/comprascbmdf/issues/19) e [#27](https://github.com/munizigor/comprascbmdf/issues/27))*
+* **Como:** Planejamento/Diretoria
+* **Eu quero:** Visualizar a projeção orçamentária agregada por Grupo de Natureza de Despesa (GND) e por classe CATMAT/CATSER
+* **Para que:** Eu tenha a visão do PLOA no formato de GND exigido pelo processo orçamentário e enxergue o gasto projetado à frente, não apenas o exercício corrente.
+* **Critérios de Aceite:**
+  * Relatório PLOA agrega valores por GND, além da natureza de despesa detalhada, com as colunas Planejado/Comprometido/Empenhado/Liquidado/Pago/Saldo.
+  * Projeção em **janela móvel de 12 meses**, independente do exercício financeiro (refinamento da #27).
+  * Exportável (CSV) junto ao relatório atual.
+
+#### **HU04.8 — Indicadores de Vínculo ao Planejamento Estratégico e ao PPA/LOA** *(evolução para produção — origem: issues [#20](https://github.com/munizigor/comprascbmdf/issues/20) e [#25](https://github.com/munizigor/comprascbmdf/issues/25))*
+* **Como:** Direção / Planejamento
+* **Eu quero:** Medir quanto das contratações está vinculado a objetivos/metas do planejamento estratégico do CBMDF e aos indicadores do PPA/LOA
+* **Para que:** A Direção enxergue o alinhamento entre o que se compra e a estratégia institucional.
+* **Critérios de Aceite:**
+  * O painel de indicadores mostra % (e valor) de demandas com `vinculoPlanejamento` preenchido — o campo já é capturado no DFD; esta HU fecha o laço.
+  * Recorte por objetivo/meta estratégica, por indicador do PPA/LOA e por setor.
+  * Demandas sem vínculo declarado são sinalizadas.
+
+#### **HU04.9 — Reserva de Contingência no Planejamento** *(evolução para produção — origem: issues [#22](https://github.com/munizigor/comprascbmdf/issues/22) e parte da [#24](https://github.com/munizigor/comprascbmdf/issues/24))*
+* **Como:** Planejamento/Orçamento
+* **Eu quero:** Registrar uma reserva de contingência (e o suprimento de fundos) no planejamento do PCA, por setorial
+* **Para que:** O planejado não consuma 100% do teto e exista folga declarada para o imprevisto — reduzindo a pressão por inclusões de urgência.
+* **Critérios de Aceite:**
+  * O planejamento por setorial comporta os campos de reserva de contingência e suprimento de fundos, deduzidos do saldo alocável.
+  * Os relatórios PCA/PLOA exibem a reserva separada do valor planejado em demandas.
+* **Pré-condição de negócio:** os **percentuais** por setorial são decisão do Comitê/EMG (ver §7.3, P2) — o software materializa os campos, não a política.
 
 ---
 
@@ -285,6 +341,15 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
   * Cada item do catálogo vinculado a uma ARP deve exibir o saldo disponível na ata.
   * Ao vincular um pedido a uma ARP, o saldo consumido deve ser debitado automaticamente.
   * O sistema deve impedir o consumo de saldo acima do disponível na ata.
+
+#### **HU05.3 — Alerta de ARP Próxima do Vencimento** *(evolução para produção — origem: issue [#15](https://github.com/munizigor/comprascbmdf/issues/15))*
+* **Como:** Gestor do Catálogo e Atas / Gestor de Contratações
+* **Eu quero:** Ser alertado quando uma Ata de Registro de Preços se aproximar do fim da vigência (e ao esgotar saldo)
+* **Para que:** Eu inicie a demanda de reposição **antes** de a ata vencer, evitando ruptura de fornecimento e contratação emergencial.
+* **Critérios de Aceite:**
+  * Cada ARP exibe dias restantes de vigência e saldo disponível.
+  * O sistema sinaliza atas a vencer dentro de uma janela configurável (ex.: 90/60/30 dias).
+  * A partir do alerta, é possível abrir uma nova demanda já pré-vinculada à classe/itens da ata.
 
 ---
 
@@ -434,6 +499,7 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 
 ---
 
+<<<<<<< HEAD
 ### **ÉPICO 10: Catálogo Institucional de Indicadores e OKRs** *(implementação futura — fora do protótipo)*
 > **Descrição:** Os cinco KPIs da §8 medem o sucesso deste produto. Este épico trata do outro conjunto: os indicadores que a **instituição** precisa cumprir — metas do **PLANES 2025–2030**, execução do **PPA/LOA** e práticas de governança auditadas pelo **TCU** — cuja matéria-prima nasce no ciclo de contratações que o produto orquestra. O instrumento é um **catálogo curado**: fechado na interface (o usuário não cria indicador) e extensível por curadoria, para receber o que a instituição vier a exigir nos ciclos seguintes. O catálogo completo, com as fichas e os nove objetivos, está em [catalogo_indicadores_okr.md](catalogo_indicadores_okr.md).
 
@@ -510,6 +576,56 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
   * Indicador **aposentado** sai do painel e **permanece** no catálogo com sua série e o vínculo para o indicador que o sucedeu.
   * Indicador **suspenso** (fonte indisponível no período) deve ser declarado como tal, e não exibir o último valor conhecido como se fosse atual.
   * Ao fim de cada ciclo do PLANES, do PPA ou do exercício do PCA, a curadoria revalida, suspende, sucede ou aposenta cada entrada.
+=======
+### **ÉPICO 10: Fontes de Recurso e Fundos** *(estrutural — evolução para produção)*
+> **Descrição:** Hoje o modelo de dados conhece `tipoDespesa` e `naturezaDespesa`, mas **não a
+> origem do recurso**. Este épico introduz a dimensão **fonte de recurso / fundo** (FUSP, FISP,
+> duodécimo/tesouro, emendas parlamentares, convênios) em todo o ciclo — do pedido aos
+> relatórios —, permitindo governar não só *quanto* se gasta, mas *de onde* sai e *o que cada
+> fonte exige* como justificativa. Origem: triagem de issues
+> ([#21](https://github.com/munizigor/comprascbmdf/issues/21) canônica;
+> [#26](https://github.com/munizigor/comprascbmdf/issues/26) e
+> [#31](https://github.com/munizigor/comprascbmdf/issues/31) absorvidas). Por alterar o esquema
+> de dados e as integrações (SIAFI), é **estrutural**: avaliar impacto antes de qualquer HU
+> dependente.
+
+#### **HU10.1 — Dimensão Fonte de Recurso no Modelo e nos Relatórios**
+* **Como:** Planejamento/Orçamento
+* **Eu quero:** Registrar a fonte de recurso/fundo de cada demanda (FUSP, FISP, duodécimo/tesouro, emenda parlamentar, convênio)
+* **Para que:** Os relatórios PCA/PLOA e o acompanhamento financeiro reflitam a origem do recurso, não só a natureza da despesa.
+* **Critérios de Aceite:**
+  * O item/pedido passa a ter um campo "fonte de recurso/fundo".
+  * PCA/PLOA e o painel financeiro permitem recorte e subtotais por fonte/fundo — incluindo **emendas e convênios** (refinamento da #31).
+  * Alertas de teto/saldo passam a considerar a fonte, quando aplicável.
+
+#### **HU10.2 — Justificativa de Compra por Indicador de Fundo**
+* **Como:** Planejamento/Orçamento
+* **Eu quero:** Vincular produtos/contratações a indicadores do fundo que os financia (ex.: indicadores do FUSP)
+* **Para que:** A compra nasça com a justificativa que o fundo exige, e a prestação de contas do fundo seja derivada do próprio sistema.
+* **Critérios de Aceite:**
+  * Um item/contratação com fonte "fundo" pode declarar o(s) indicador(es) do fundo que a compra atende.
+  * Relatório de prestação de contas por fundo: valor executado × indicadores atendidos.
+
+---
+
+### **ÉPICO 11: Adoção e Carga Inicial via PNCP** *(estratégia de implantação — evolução para produção)*
+> **Descrição:** O sistema não pode depender de input manual para ter valor no primeiro
+> exercício — em 2026, por exemplo, não haverá registro de demandas pela plataforma. A
+> estratégia de partida é **consumir dados que já existem**: as compras realizadas publicadas no
+> PNCP e o que está pendente no PCA vigente. Assim a plataforma nasce povoada com a realidade da
+> instituição, e o input manual entra gradualmente. Origem: triagem de issues
+> ([#35](https://github.com/munizigor/comprascbmdf/issues/35)). Conecta-se ao KPI 5 (adoção) e
+> ao RNF de integração com o PNCP (§6.3).
+
+#### **HU11.1 — Bootstrap da Base com Compras Realizadas e PCA Pendente**
+* **Como:** Planejamento/Diretoria
+* **Eu quero:** Importar do PNCP as contratações já realizadas pelo CBMDF e carregar o PCA vigente (itens pendentes), sem depender de registro manual
+* **Para que:** A plataforma opere desde o primeiro dia com a fotografia real — o realizado e o pendente — e as análises (consolidação, indicadores, projeções) tenham base histórica.
+* **Critérios de Aceite:**
+  * Importação das contratações do CBMDF publicadas no PNCP (dado público), mapeadas para o modelo do produto (classe, natureza, valores, datas).
+  * Carga do PCA vigente com os itens pendentes de execução, distinguíveis dos pedidos nascidos na plataforma.
+  * Pedidos importados são marcados como **migrados** (mesmo padrão da trilha de auditoria: gênese migrada, sem timestamps fabricados) e declarados nos rodapés de cobertura dos indicadores.
+>>>>>>> a9f864ba5a6b168b1b70c309bc4d263a6c49fb51
 
 ---
 
@@ -529,7 +645,11 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 * Registro de trilha de auditoria para alterações de status de pedido, **implementado**: toda mudança de status passa por um ponto único de mutação que grava estado anterior, estado novo, data, autor, perfil, tela de origem e justificativa. Transições fora do fluxo previsto exigem marcação explícita de excepcionalidade. Pedidos anteriores à implementação recebem uma entrada de gênese marcada como migrada, sem timestamps intermediários fabricados.
 * **RNF — Integração com Sistemas Governamentais:** o sistema deve dispor de APIs REST/Web Services para comunicação bidirecional com o SEI (abertura de processos e envio de minutas), o SIAFI (empenho e liquidação) e o PNCP (envio de dados de contratação e atas).
 * **RNF — Sincronismo de Catálogo:** o catálogo de materiais e serviços deve ser mantido em sincronia com a base oficial do Grifo, garantindo a padronização dos códigos PDM/PDS.
+<<<<<<< HEAD
 * **RNF — Integridade do Catálogo de Indicadores:** o catálogo de indicadores institucionais (§8.4) deve ser uma **lista fechada e versionada**, sem entrada livre pela interface — a tela permite filtrar, ativar e desativar, nunca criar. A inclusão de indicador novo se dá por curadoria registrada, com rastro de quem solicitou, quem aprovou e a partir de quando o indicador vale. Nenhum valor pode ser exibido quando a fonte do dado não existe: o indicador é apresentado como não reportável, com o motivo declarado.
+=======
+* **RNF — Dependência externa: códigos CATMAT/CATSER na base de inventário** *(origem: issue [#29](https://github.com/munizigor/comprascbmdf/issues/29))*: a integração da carga atual da Matriz de Dotação (HU09.3) e a consolidação por classe dependem de a base de inventário/patrimônio (Grifo/SISGEPAT) carregar os códigos CATMAT/CATSER de cada item. É débito técnico **da base externa** — fora da fronteira do produto como funcionalidade, mas registrado aqui como pré-requisito de integração a ser articulado com os donos daqueles sistemas.
+>>>>>>> a9f864ba5a6b168b1b70c309bc4d263a6c49fb51
 
 ### 6.4 Confiabilidade e Disponibilidade
 * Disponibilidade compatível com um sistema administrativo interno, com backup periódico dos dados de pedidos, contratações e planejamento uma vez implementado o backend com banco de dados.
@@ -548,6 +668,16 @@ Abaixo, apresentamos os Épicos estratégicos da plataforma com suas respectivas
 ### 7.2 Suposições
 * Os setores requisitantes possuem acesso à rede/intranet do CBMDF para utilização da ferramenta.
 * A Central de Suprimentos e Material (CESMA) e a área de Planejamento/Orçamento validarão a correspondência entre os status do sistema e as etapas reais do processo de aquisição.
+
+### 7.3 Decisões institucionais pendentes (insumos do Comitê — não são requisitos ainda)
+
+O padrão é o da lacuna G da [pesquisa com servidores](pesquisa_servidores_2026.md): *tornar
+visível é função do software; decidir é função do Comitê*. As pendências abaixo vieram da
+[triagem de issues](triagem_issues.md) e só viram requisito depois de decididas:
+
+* **P1 — Matriz operacional × administrativa** (issues [#23](https://github.com/munizigor/comprascbmdf/issues/23) e parte da [#30](https://github.com/munizigor/comprascbmdf/issues/30)): definir o eixo área-fim × área-meio — inclusive se área-meio terá cota protegida — e como o custeio de operações se enquadra. Quando decidido, candidato a critério/eixo no score do Épico 08.
+* **P2 — Percentuais de suprimento de fundos e reserva de contingência por setorial** (issue [#24](https://github.com/munizigor/comprascbmdf/issues/24)): a HU04.9 prevê os campos; os percentuais são política orçamentária do Comitê/EMG.
+* **P3 — CSOs (máximo 5) e subportfólios** (issue [#30](https://github.com/munizigor/comprascbmdf/issues/30)): definição organizacional da estrutura de portfólio de contratações; depois de definida, candidata a dimensão estrutural de agrupamento.
 
 ---
 
