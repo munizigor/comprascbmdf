@@ -1,100 +1,96 @@
-# CLAUDE.md — [NOME DO PROJETO]
+# CLAUDE.md — CBMDF Marketplace
 
-<!--
-TEMPLATE — Instruções de preenchimento (apagar este bloco ao finalizar):
+## Contexto de Negócio
 
-- Este arquivo é gerado no gate da Fase 3 (design aprovado), conforme o
-  CLAUDE.md global. Ele ESPECIALIZA o global — não repita nada que já
-  está lá (contrato de pareamento, ciclo de fases, TDD, gates, /clear).
-  Instrução duplicada consome atenção do modelo e cria conflito de versão.
-- Regra de ouro: aqui entra apenas o que é ESPECÍFICO deste projeto e
-  ESTÁVEL entre sessões. Decisão de iteração vai em .claude/PLANO.md;
-  documentação extensa vai em ./docs/ (referencie, não cole).
-- Mantenha enxuto: o mais importante no topo. Se passar de ~120 linhas,
-  mova conteúdo para ./docs/ e deixe só o ponteiro.
-- O arquivo cresce organicamente: durante a construção, use `#` no início
-  de uma mensagem para gravar correções aqui sem editar na mão.
--->
+Camada de governança e planejamento logístico-financeiro das contratações do
+CBMDF. Orquestra as bases públicas de governança — hoje o PNCP (Plano de
+Contratações Anual e Contratos) — para dar visibilidade contínua sobre o que foi
+planejado, contratado e está por vencer. Usuários: SELOF, DEALF, gestores
+setoriais (GSO) e unidades requisitantes.
 
-## Contexto de Negócio (3 linhas, máximo)
+## Stack Travada (decidida no gate da Fase 3)
 
-<!-- Se o projeto passou pelo modo descoberta, preencher a partir do POV e
-     da persona registrados em .claude/DESCOBERTA.md. -->
-
-[O que o sistema faz, para quem, e qual problema resolve. Ex.: "API de
-interoperabilidade entre centrais de despacho 193 (CBMDF) e 192 (SAMU/DF).
-Usuários: operadores de despacho. Restrições: LGPD, contrato FHIR R4."]
-
-## Stack Travada (sem alternativas — decidida no gate da Fase 3)
-
-- Runtime: [ex.: Node.js 22 LTS + TypeScript 5.x, `strict: true`]
-- Backend: [ex.: NestJS 11]
-- Banco: [ex.: PostgreSQL 16 + Prisma 6]
-- Cache/filas: [ex.: Redis 7 — ou remover linha se não usar]
-- Mensageria: [ex.: RabbitMQ — ou remover linha se não usar]
-- Testes: [ex.: Jest + Supertest; testcontainers para integração]
-- Lint/format: [ex.: ESLint + Prettier, config no repo]
-- Ambiente: [ex.: Docker Compose (`compose.yaml` na raiz)]
+- **Coletor/regras:** Python 3 — **somente biblioteca padrão**. Sem `pip install`,
+  sem `requirements.txt`, sem ambiente virtual.
+- **HTTP:** `subprocess` + `curl` do Windows (ver "Lições Aprendidas").
+- **Testes:** `unittest` da stdlib.
+- **Página:** HTML + CSS + JavaScript puro. Sem framework, sem bundler, sem CDN.
+- **Dados:** JSON versionado no repositório, gerado por script. **Sem backend,
+  sem banco, sem job agendado.**
 
 Desvio desta stack = parar e consultar o Navegador. Não sugerir troca.
 
+O princípio que sustenta a escolha: **a regra de negócio mora no Python, a página
+é um renderizador burro.** O JSON commitado não é despejo bruto da API — é o
+resultado já calculado. Assim o TDD incide sobre funções puras e sobra pouca
+lógica no JS.
+
 ## Comandos
 
-<!-- O modelo usa exatamente estes comandos. Se o projeto usa make,
-     pnpm, poetry etc., ajuste aqui E no settings.json (allow). -->
-
-- `npm run test` — suíte completa com cobertura
-- `npm run test:watch` — TDD loop
-- `npm run check` — lint + type-check + testes (gate antes de commit)
-- `npm run dev` — sobe ambiente local
-- `npx prisma migrate dev --name <nome>` — nova migração
+- `python -m unittest discover tests -v` — suíte completa (gate antes de commit)
+- `python tools/pncp/gerar_radar.py` — regera `data/radar_vigencia.json` do PNCP
+- Abrir `web/radar.html` no navegador — não precisa de servidor
 
 ## Arquitetura e Estrutura
 
-<!-- Resumo em ~10 linhas. O desenho completo vive em ./docs/arquitetura.md -->
-
 ```
-src/
-├── domain/          # entidades e regras de negócio puras (sem I/O)
-├── application/     # casos de uso; orquestram domain + ports
-├── infrastructure/  # Prisma, Redis, filas — implementações de ports
-└── api/             # controllers, DTOs, validação de entrada
+tools/pncp/   # coletor e regras de negócio (Python, stdlib)
+  cliente.py      # GET ao PNCP com retry e cache em disco
+  radar.py        # REGRAS PURAS — sem I/O, sem data do sistema
+  gerar_radar.py  # CLI: coleta -> aplica regras -> grava JSON
+tests/        # unittest das regras puras
+data/         # JSON versionado, consumido pela página
+web/          # HTML/CSS/JS que apenas renderiza o JSON
+docs/         # documentação viva do sistema
+_archive/     # material histórico — NÃO é fonte; protótipo aposentado aqui
 ```
 
-- Dependências apontam para dentro: `api → application → domain`.
-  `domain` não importa nada das outras camadas.
-- Detalhes: ver `./docs/arquitetura.md` e `./docs/modelo-dados.md`.
+Dependências apontam numa direção só: `gerar_radar → (cliente, radar)`.
+`radar.py` não importa `cliente.py` nem faz I/O.
+
+## As três APIs do PNCP
+
+| API | Base | Uso | Rate limit |
+| :-- | :-- | :-- | :-- |
+| PNCP | `/api/pncp/v1` | dado granular por órgão/ano/sequencial | não observado |
+| Busca | `/api/search/` | universo do CBMDF (índice do portal, não documentado) | não observado |
+| Consulta | `/api/consulta/v1` | sincronização por período | **429, janela ~60s** |
+
+Identificadores: PCA sob CNPJ `08977914000119` (unidade 24104); contratações sob
+o órgão superior FCDF `05448380000145`, UASG `170394` (id de unidade `5541` na
+busca). Detalhes e medições em [docs/integracao_pncp_estudo.md](../docs/integracao_pncp_estudo.md).
 
 ## Convenções Específicas do Projeto
 
-<!-- Só o que difere do óbvio ou do global. Exemplos comuns: -->
+- Nomes de domínio e de arquivo em **pt-BR** (`radar.py`, `faixa_vencimento`,
+  `dias_restantes`). Comentários e commits em pt-BR.
+- **Regra pura nunca lê o relógio.** `hoje` é sempre parâmetro — `date.today()`
+  só em `gerar_radar.py`. É o que torna o teste determinístico.
+- Todo dado exibido carrega a data em que foi coletado (`gerado_em`).
+- Datas do PNCP vêm ISO com fuso; truncar para `date` na fronteira do coletor.
 
-- Nomes de domínio em pt-BR (`Ocorrencia`, `Despacho`); resto do código em inglês.
-- Timestamps de domínio sempre em `America/Sao_Paulo`; persistência em UTC.
-- Erros de negócio: exceções tipadas de `src/domain/errors/`; nunca `throw new Error(string)`.
-- DTOs de entrada validados com [ex.: class-validator/Zod]; nada entra em `application` sem validação.
-- [Regra de integração externa, se houver. Ex.: "Payloads FHIR validados
-  contra o profile em ./docs/contratos/ antes de enviar."]
+## O que NUNCA fazer neste projeto
 
-## Estratégia de Testes (metas deste projeto)
-
-- `domain`: unit puros, sem I/O — cobertura mínima [95]%
-- `application`: unit com fakes/mocks de ports — [90]%
-- `infrastructure`: integração com banco real via testcontainers
-- `api`: contract tests contra o schema OpenAPI
-- CI bloqueia merge com cobertura global < [85]% ou suíte vermelha
-
-## O que NUNCA fazer (específico deste projeto)
-
-- Não editar migrações já aplicadas; sempre criar nova migração.
-- Não usar `any` ou `@ts-ignore` sem comentário justificando em uma linha.
-- Não criar endpoint sem atualizar o contrato OpenAPI e o teste de contrato.
-- [Adicionar proibições descobertas durante a construção — via `#`]
+- **Não somar `valor_global` de contratos.** O PNCP replica o valor total do
+  credenciamento em cada contrato individual (R$ 74,3 mi em 23 registros) e usa
+  R$ 1,00 em outros 221 — 85% de um agregado ingênuo é artefato. Exibir por
+  contrato e sinalizar o suspeito.
+- **Não usar `status=todos`** na busca. `status` é obrigatório e um valor
+  inválido é *silenciosamente ignorado*, devolvendo a base inteira. Funciona
+  hoje, quebra quando o PNCP corrigir a validação. Usar `vigente`.
+- **Não calcular execução do PCA por similaridade de descrição.** Não existe
+  chave entre item do PCA e item contratado; inferir por texto produz execuções
+  de 12.030%. Ver §4 do estudo.
+- Não tratar `_archive/` como fonte de verdade — é histórico.
+- Não adicionar dependência externa sem passar pelo Navegador.
 
 ## Lições Aprendidas
 
-<!-- Seção alimentada pelo atalho `#` durante as sessões. Podar
-     periodicamente: o que virou convenção sobe para a seção acima;
-     o que ficou obsoleto sai. -->
-
-- [vazio no início do projeto]
+- O `curl` do Git/mingw **falha no handshake TLS** com o PNCP (rc 56); o do
+  Windows (`C:\Windows\System32\curl.exe`) funciona. Sempre usar caminho absoluto.
+- Com `--retry`, o curl **concatena respostas parciais no stdout** e corrompe o
+  JSON. Escrever em arquivo (`-o`), nunca capturar de stdout.
+- Nomes de arquivo de cache devem ser hash: o caminho do projeto já é longo e o
+  Windows corta em 260 caracteres, gerando `FileNotFoundError` enganoso.
+- `python -c` que reatribui `sys.stdout` depois de importar um módulo que já o
+  reatribuiu fecha o stream e quebra com `I/O operation on closed file`.
