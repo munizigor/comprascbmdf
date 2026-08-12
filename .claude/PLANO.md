@@ -50,6 +50,10 @@ uma função pura e testada, para que o erro apareça no teste e não no ato pú
       categoria por elemento, mês → `dataDesejada`, unidade de fornecimento
       extraída da descrição, item bloqueado, numeração por plano
 
+Duas exceções ao elemento de despesa, ambas com fundamento e com teste:
+seção 1 do CATSER (grupos 111–183) → Soluções de TIC; manutenção empenhada em
+4490.51 → Serviços de Engenharia, não Obra (Lei 14.133/2021, art. 6º, XII).
+
 Critério de aceitação: **91 testes verdes**; nenhuma função de regra lê o relógio
 ou faz I/O; ano sempre parâmetro.
 

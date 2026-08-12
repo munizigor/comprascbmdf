@@ -64,6 +64,20 @@ class TestResolverClasse(unittest.TestCase):
         r = catalogo.resolver("5412", "44905100", "CONSTRUÇÃO DE GRUPAMENTO", TABELAS)
         self.assertEqual(r["categoria"], 3)
 
+    def test_manutencao_em_obras_e_servico_de_engenharia(self):
+        # Lei 14.133/2021 art. 6º, XII: obra é construção, reforma, recuperação
+        # ou ampliação — manutenção é serviço de engenharia
+        r = catalogo.resolver("5412", "44905100", "MANUTENÇÃO DE ELEVADOR", TABELAS)
+        self.assertEqual(r["categoria"], 4)
+
+    def test_reforma_continua_sendo_obra(self):
+        r = catalogo.resolver("5412", "44905100", "16º GBM - Remanescente de obra de reforma", TABELAS)
+        self.assertEqual(r["categoria"], 3)
+
+    def test_manutencao_fora_de_obras_nao_vira_engenharia(self):
+        r = catalogo.resolver("9290", "33903948", "MANUTENÇÃO DE VEÍCULOS", TABELAS)
+        self.assertEqual(r["categoria"], 2)
+
     def test_secao_de_tic_do_catser_vira_solucao_de_tic(self):
         # grupos 111 a 183 do CATSER são a seção de TIC
         tabelas = {"CATMAT": {}, "CATSER": {

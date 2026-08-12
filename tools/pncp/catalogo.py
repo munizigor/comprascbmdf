@@ -19,9 +19,15 @@ import os
 import re
 
 # categorias do PNCP (GET /v1/categoriaItemPcas)
-MATERIAL, SERVICO, OBRA, TIC = 1, 2, 3, 5
+MATERIAL, SERVICO, OBRA, ENGENHARIA, TIC = 1, 2, 3, 4, 5
 
 CATEGORIA_POR_ELEMENTO = {"30": MATERIAL, "52": MATERIAL, "39": SERVICO, "51": OBRA}
+
+# Lei 14.133/2021, art. 6º, XII: obra é construção, reforma, fabricação,
+# recuperação ou ampliação. Manutenção e conservação são serviço de engenharia,
+# ainda que a despesa esteja empenhada em 4490.51.
+MANUTENCAO = re.compile(r"manuten[çc][ãa]o|conserva[çc][ãa]o|reparo|"
+                        r"assist[êe]ncia t[ée]cnica", re.I)
 
 # Os 22 itens que chegam sem classe utilizável. A sugestão é explícita e vira
 # pendência no relatório — a área confirma ou corrige depois por PATCH.
@@ -78,15 +84,20 @@ def _sugerir(classe, descricao):
     return None
 
 
-def _categoria(classe, catalogo, elemento, tabelas):
+def _categoria(classe, catalogo, elemento, descricao, tabelas):
     """Categoria do item no PNCP.
 
-    A seção 1 do CATSER (grupos 111 a 183) é a de TIC — desenvolvimento de
-    software, nuvem, telecom, outsourcing de impressão, licenciamento. O PNCP
-    tem categoria própria para ela, e o PGC já a usa nesta UASG.
+    Duas exceções ao elemento de despesa, ambas com fundamento:
+
+    - A seção 1 do CATSER (grupos 111 a 183) é a de TIC — software, nuvem,
+      telecom, outsourcing de impressão, licenciamento. O PNCP tem categoria
+      própria para ela, e o PGC já a usa nesta UASG.
+    - Manutenção empenhada em 4490.51 é serviço de engenharia, não obra.
     """
     if catalogo == "CATSER" and str(tabelas["CATSER"][classe].get("grupo", "")).startswith("1"):
         return TIC
+    if elemento == "51" and MANUTENCAO.search(descricao or ""):
+        return ENGENHARIA
     return CATEGORIA_POR_ELEMENTO.get(
         elemento, MATERIAL if catalogo == "CATMAT" else SERVICO)
 
@@ -109,7 +120,7 @@ def resolver(classe, gnd, descricao, tabelas):
         if classe not in tabelas.get(catalogo, {}):
             return None
 
-    categoria = categoria_forcada or _categoria(classe, catalogo, elemento, tabelas)
+    categoria = categoria_forcada or _categoria(classe, catalogo, elemento, descricao, tabelas)
 
     return {
         "classe": classe,
