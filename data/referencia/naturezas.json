@@ -1,0 +1,286 @@
+{
+  "fonte": "CBMDF - Rol de Demandas 2027 - _GERAL.csv",
+  "coletado_em": "2026-08-12",
+  "total_detalhadas": 68,
+  "observacao": "A coluna DESCRIÇÃO GND descreve o subitem (8 dígitos). O rótulo do elemento (6 dígitos) não existe na planilha e vem de naturezas.ELEMENTOS, com a nomenclatura da Portaria Conjunta STN/SOF.",
+  "elementos": {
+    "339030": "Material de Consumo",
+    "339039": "Outros Serviços de Terceiros PJ",
+    "449051": "Obras e Instalações",
+    "449052": "Equipamento e Material Permanente"
+  },
+  "detalhadas": {
+    "33903001": {
+      "descricao": "COMBUSTIVEIS E LUBRIFICANTES AUTOMOTIVOS",
+      "elemento": "339030"
+    },
+    "33903004": {
+      "descricao": "GAS E OUTROS MATERIAIS ENGARRAFADOS",
+      "elemento": "339030"
+    },
+    "33903006": {
+      "descricao": "ALIMENTOS PARA ANIMAIS",
+      "elemento": "339030"
+    },
+    "33903009": {
+      "descricao": "MATERIAL FARMACOLOGICO",
+      "elemento": "339030"
+    },
+    "33903011": {
+      "descricao": "MATERIAL QUIMICO",
+      "elemento": "339030"
+    },
+    "33903016": {
+      "descricao": "MATERIAL DE EXPEDIENTE",
+      "elemento": "339030"
+    },
+    "33903017": {
+      "descricao": "MATERIAL DE TIC - MATERIAL DE CONSUMO",
+      "elemento": "339030"
+    },
+    "33903019": {
+      "descricao": "MATERIAL DE ACONDICIONAMENTO E EMBALAGEM",
+      "elemento": "339030"
+    },
+    "33903021": {
+      "descricao": "MATERIAL DE COPA E COZINHA",
+      "elemento": "339030"
+    },
+    "33903022": {
+      "descricao": "MATERIAL DE LIMPEZA E PROD. DE HIGIENIZACAO",
+      "elemento": "339030"
+    },
+    "33903023": {
+      "descricao": "UNIFORMES, TECIDOS E AVIAMENTOS",
+      "elemento": "339030"
+    },
+    "33903024": {
+      "descricao": "MATERIAL P/ MANUT.DE BENS IMOVEIS/INSTALACOES",
+      "elemento": "339030"
+    },
+    "33903025": {
+      "descricao": "MATERIAL P/ MANUTENCAO DE BENS MOVEIS",
+      "elemento": "339030"
+    },
+    "33903026": {
+      "descricao": "MATERIAL ELETRICO E ELETRONICO",
+      "elemento": "339030"
+    },
+    "33903027": {
+      "descricao": "MATERIAL DE MANOBRA E PATRULHAMENTO",
+      "elemento": "339030"
+    },
+    "33903028": {
+      "descricao": "MATERIAL DE PROTECAO E SEGURANCA",
+      "elemento": "339030"
+    },
+    "33903029": {
+      "descricao": "MATERIAL P/ AUDIO, VIDEO E FOTO",
+      "elemento": "339030"
+    },
+    "33903032": {
+      "descricao": "SUPRIMENTO DE AVIACAO",
+      "elemento": "339030"
+    },
+    "33903035": {
+      "descricao": "MATERIAL LABORATORIAL",
+      "elemento": "339030"
+    },
+    "33903036": {
+      "descricao": "MATERIAL HOSPITALAR",
+      "elemento": "339030"
+    },
+    "33903039": {
+      "descricao": "MATERIAL P/ MANUTENCAO DE VEICULOS",
+      "elemento": "339030"
+    },
+    "33903042": {
+      "descricao": "FERRAMENTAS",
+      "elemento": "339030"
+    },
+    "33903045": {
+      "descricao": "MATERIAL TECNICO P/ SELECAO E TREINAMENTO",
+      "elemento": "339030"
+    },
+    "33903046": {
+      "descricao": "MATERIAL BIBLIOGRAFICO",
+      "elemento": "339030"
+    },
+    "33903099": {
+      "descricao": "OUTROS MATERIAIS DE CONSUMO",
+      "elemento": "339030"
+    },
+    "33903905": {
+      "descricao": "SERVICOS TECNICOS PROFISSIONAIS",
+      "elemento": "339039"
+    },
+    "33903912": {
+      "descricao": "LOCACAO DE MAQUINAS E EQUIPAMENTOS",
+      "elemento": "339039"
+    },
+    "33903914": {
+      "descricao": "LOCACAO BENS MOV. OUT.NATUREZAS E INTANGIVEIS",
+      "elemento": "339039"
+    },
+    "33903917": {
+      "descricao": "MANUT. E CONSERV. DE MAQUINAS E EQUIPAMENTOS",
+      "elemento": "339039"
+    },
+    "33903920": {
+      "descricao": "MANUT.E CONS.DE B.MOVEIS DE OUTRAS NATUREZAS",
+      "elemento": "339039"
+    },
+    "33903944": {
+      "descricao": "SERVICOS DE AGUA, ESGOTO E RESIDUOS SOLIDOS",
+      "elemento": "339039"
+    },
+    "33903948": {
+      "descricao": "SERVICO DE SELECAO E TREINAMENTO",
+      "elemento": "339039"
+    },
+    "33903950": {
+      "descricao": "SERV.MEDICO-HOSPITAL.,ODONTOL.E LABORATORIAIS",
+      "elemento": "339039"
+    },
+    "33903958": {
+      "descricao": "SERVICOS DE TELECOMUNICACOES",
+      "elemento": "339039"
+    },
+    "33903963": {
+      "descricao": "SERVICOS GRAFICOS E EDITORIAIS",
+      "elemento": "339039"
+    },
+    "33903969": {
+      "descricao": "SEGUROS EM GERAL",
+      "elemento": "339039"
+    },
+    "33903974": {
+      "descricao": "FRETES E TRANSPORTES DE ENCOMENDAS",
+      "elemento": "339039"
+    },
+    "33903977": {
+      "descricao": "VIGILANCIA OSTENSIVA/MONITORADA/RASTREAMENTO",
+      "elemento": "339039"
+    },
+    "33903978": {
+      "descricao": "LIMPEZA E CONSERVACAO",
+      "elemento": "339039"
+    },
+    "33903979": {
+      "descricao": "SERV. DE APOIO ADMIN., TECNICO E OPERACIONAL",
+      "elemento": "339039"
+    },
+    "33903983": {
+      "descricao": "SERVICOS DE COPIAS E REPRODUCAO DE DOCUMENTOS",
+      "elemento": "339039"
+    },
+    "33903999": {
+      "descricao": "OUTROS SERVICOS DE TERCEIROS-PESSOA JURIDICA",
+      "elemento": "339039"
+    },
+    "44905100": {
+      "descricao": "OBRAS E INSTALACOES",
+      "elemento": "449051"
+    },
+    "44905192": {
+      "descricao": "INSTALACOES",
+      "elemento": "449051"
+    },
+    "44905202": {
+      "descricao": "AERONAVES",
+      "elemento": "449052"
+    },
+    "44905204": {
+      "descricao": "APARELHOS DE MEDICAO E ORIENTACAO",
+      "elemento": "449052"
+    },
+    "44905206": {
+      "descricao": "APARELHOS E EQUIPAMENTOS DE COMUNICACAO",
+      "elemento": "449052"
+    },
+    "44905208": {
+      "descricao": "APAR.EQUIP.UTENS.MED.,ODONT,LABOR.HOSPIT.",
+      "elemento": "449052"
+    },
+    "44905210": {
+      "descricao": "APARELHOS E EQUIP. P/ ESPORTES E DIVERSOES",
+      "elemento": "449052"
+    },
+    "44905212": {
+      "descricao": "APARELHOS E UTENSILIOS DOMESTICOS",
+      "elemento": "449052"
+    },
+    "44905220": {
+      "descricao": "EMBARCACOES",
+      "elemento": "449052"
+    },
+    "44905224": {
+      "descricao": "EQUIPAMENTO DE PROTECAO, SEGURANCA E SOCORRO",
+      "elemento": "449052"
+    },
+    "44905228": {
+      "descricao": "MAQUINAS E EQUIPAMENTOS DE NATUREZA INDUSTRIAL",
+      "elemento": "449052"
+    },
+    "44905233": {
+      "descricao": "EQUIPAMENTOS PARA AUDIO, VIDEO E FOTO",
+      "elemento": "449052"
+    },
+    "44905234": {
+      "descricao": "MAQUINAS, UTENSILIOS E EQUIPAMENTOS DIVERSOS",
+      "elemento": "449052"
+    },
+    "44905235": {
+      "descricao": "MATERIAL DE TIC (PERMANENTE)",
+      "elemento": "449052"
+    },
+    "44905237": {
+      "descricao": "EQUIPAMENTOS DE TIC - ATIVOS DE REDE",
+      "elemento": "449052"
+    },
+    "44905238": {
+      "descricao": "MAQ., FERRAMENTAS E UTENSILIOS DE OFICINA",
+      "elemento": "449052"
+    },
+    "44905240": {
+      "descricao": "MAQUINAS E EQUIPAMENTOS AGRIC. E RODOVIARIOS",
+      "elemento": "449052"
+    },
+    "44905241": {
+      "descricao": "EQUIPAMENTOS DE TIC - COMPUTADORES",
+      "elemento": "449052"
+    },
+    "44905242": {
+      "descricao": "MOBILIARIO EM GERAL",
+      "elemento": "449052"
+    },
+    "44905245": {
+      "descricao": "EQUIPAMENTOS DE TIC - IMPRESSORAS",
+      "elemento": "449052"
+    },
+    "44905252": {
+      "descricao": "VEICULOS DE TRACAO MECANICA",
+      "elemento": "449052"
+    },
+    "44905256": {
+      "descricao": "EQUIPAMENTOS, PECAS E ACES.DE PROTECAO AO VOO",
+      "elemento": "449052"
+    },
+    "44905257": {
+      "descricao": "ACESSORIOS PARA VEICULOS",
+      "elemento": "449052"
+    },
+    "44905258": {
+      "descricao": "EQUIPAMENTOS DE MERGULHO E SALVAMENTO",
+      "elemento": "449052"
+    },
+    "44905260": {
+      "descricao": "EQUIPAMENTOS, PECAS E ACESSORIOS MARITIMOS",
+      "elemento": "449052"
+    },
+    "44905283": {
+      "descricao": "EQUIPAMENTOS E SISTEMA DE PROT.VIG.AMBIENTAL",
+      "elemento": "449052"
+    }
+  }
+}

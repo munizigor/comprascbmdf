@@ -29,24 +29,31 @@ lógica no JS.
 
 - `python -m unittest discover tests -v` — suíte completa (gate antes de commit)
 - `python tools/pncp/gerar_radar.py` — regera `data/radar_vigencia.json` do PNCP
-- Abrir `web/radar.html` no navegador — não precisa de servidor
+- `python tools/pgc/gerar_saude.py [arquivo...]` — regera `data/saude_pca.json`
+  dos extratos de DFD em `data/_bruto/`
+- `python -m http.server 8000` e abrir `web/radar.html` ou `web/pca.html`
 
 ## Arquitetura e Estrutura
 
 ```
-tools/pncp/   # coletor e regras de negócio (Python, stdlib)
+tools/pncp/   # coletor e regras do radar de vigência (Python, stdlib)
   cliente.py      # GET ao PNCP com retry e cache em disco
   radar.py        # REGRAS PURAS — sem I/O, sem data do sistema
   gerar_radar.py  # CLI: coleta -> aplica regras -> grava JSON
+tools/pgc/    # saneamento e indicadores do PCA
+  saude.py        # REGRAS PURAS — saneia a PII e agrega os indicadores
+  gerar_saude.py  # CLI: lê data/_bruto/*.json -> aplica -> grava JSON
 tests/        # unittest das regras puras
-data/         # JSON versionado, consumido pela página
+data/         # JSON versionado, consumido pelas páginas
+  _bruto/         # extratos do PGC — FORA do git, contêm CPF
 web/          # HTML/CSS/JS que apenas renderiza o JSON
 docs/         # documentação viva do sistema
 _archive/     # material histórico — NÃO é fonte; protótipo aposentado aqui
 ```
 
-Dependências apontam numa direção só: `gerar_radar → (cliente, radar)`.
-`radar.py` não importa `cliente.py` nem faz I/O.
+Dependências apontam numa direção só: `gerar_radar → (cliente, radar)` e
+`gerar_saude → saude`. Os módulos de regra não fazem I/O nem leem o relógio.
+`web/pca.html` reaproveita `radar.css` para os tokens e acrescenta `pca.css`.
 
 ## As três APIs do PNCP
 
@@ -81,6 +88,13 @@ busca). Detalhes e medições em [docs/integracao_pncp_estudo.md](../docs/integr
 - **Não calcular execução do PCA por similaridade de descrição.** Não existe
   chave entre item do PCA e item contratado; inferir por texto produz execuções
   de 12.030%. Ver §4 do estudo.
+- **Não versionar extrato bruto do PGC.** `loginOperacao` é o **CPF** do
+  operador. `data/_bruto/` está no `.gitignore`; o CPF morre em `saude.sanear` e
+  não existe em `data/saude_pca.json`. Qualquer campo novo vindo do PGC passa
+  por essa fronteira antes de chegar ao JSON publicado.
+- **Não somar `valor` de DFDs sem exibir a decomposição.** No PCA 2027, um único
+  DFD (2 helicópteros, R$ 77,7 mi) responde por 82% do agregado. O painel
+  sinaliza com `valores.concentrado`; a soma sozinha não descreve o conjunto.
 - Não tratar `_archive/` como fonte de verdade — é histórico.
 - Não adicionar dependência externa sem passar pelo Navegador.
 

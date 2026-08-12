@@ -8,3 +8,15 @@ __pycache__/
 
 # cache local do cliente PNCP — regenerável, não versionar
 tools/pncp/.cache/
+
+# extratos brutos do PGC — carregam CPF do operador (LGPD), nunca versionar.
+# Só o derivado saneado (data/saude_pca.json) entra no repositório.
+data/_bruto/
+**/_bruto/
+
+# credencial do PNCP — só variável de ambiente, nunca no repositório
+.env
+*.env
+
+# trilha de auditoria das requisições de escrita no PNCP
+data/_log/

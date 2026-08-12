@@ -13,8 +13,8 @@ from datetime import date
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-import cliente  # noqa: E402
-import radar  # noqa: E402
+import _archive.prototipo_paineis_saude_arp_contratos.tools.pncp.cliente as cliente  # noqa: E402
+import _archive.prototipo_paineis_saude_arp_contratos.tools.pncp.radar as radar  # noqa: E402
 
 # id da unidade CBMDF (UASG 170394) no indice de busca do portal
 UNIDADE_CBMDF = "5541"

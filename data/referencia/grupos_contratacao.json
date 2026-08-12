@@ -1,0 +1,1382 @@
+{
+ "criterio": "um grupo por (classe do catálogo, natureza de despesa), a partir de 300",
+ "total": 172,
+ "grupos": {
+  "1111|339039": {
+   "codigo": "300",
+   "nome": "Contratação de serviços de desenvolvimento de software e ou manutenção evolutiva de software (ND 339039)",
+   "classe": "1111",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 2
+  },
+  "1112|339039": {
+   "codigo": "301",
+   "nome": "Contratação de serviços de manutenção evolutiva de software (ND 339039)",
+   "classe": "1112",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 2
+  },
+  "1141|339039": {
+   "codigo": "302",
+   "nome": "Contratação de serviços de engenharia de requisitos de software (ND 339039)",
+   "classe": "1141",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "1313|339039": {
+   "codigo": "303",
+   "nome": "Contratação de software como serviço - saas (ND 339039)",
+   "classe": "1313",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 3
+  },
+  "1411|339039": {
+   "codigo": "304",
+   "nome": "Contratação de serviços de telefonia fixa comutada (stfc) (ND 339039)",
+   "classe": "1411",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 2
+  },
+  "1414|339039": {
+   "codigo": "305",
+   "nome": "Contratação de serviços de telecomunicações satelitais (ND 339039)",
+   "classe": "1414",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "1423|339039": {
+   "codigo": "306",
+   "nome": "Contratação de serviços de links via satélite (ND 339039)",
+   "classe": "1423",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "1510|449052": {
+   "codigo": "307",
+   "nome": "Aquisição de aeronaves de asas fixas (ND 449052)",
+   "classe": "1510",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "1520|449052": {
+   "codigo": "308",
+   "nome": "Aquisição de aeronaves de asa rotativas (ND 449052)",
+   "classe": "1520",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "1522|339039": {
+   "codigo": "309",
+   "nome": "Contratação de outsourcing de impressão - locação - páginas impressas (ND 339039)",
+   "classe": "1522",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "1550|449052": {
+   "codigo": "310",
+   "nome": "Aquisição de aeronaves teleguiadas (ND 449052)",
+   "classe": "1550",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 4
+  },
+  "1611|339039": {
+   "codigo": "311",
+   "nome": "Contratação de serviços especializados de instalação, transição, configu-ração / customização de software (ND 339039)",
+   "classe": "1611",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "1661|339039": {
+   "codigo": "312",
+   "nome": "Contratação de serviços de manutenção e instalação de equipamentos de tic (ND 339039)",
+   "classe": "1661",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 11
+  },
+  "1674|339039": {
+   "codigo": "313",
+   "nome": "Contratação de serviços de emissão de outros tipos de certificados digitais (ND 339039)",
+   "classe": "1674",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "1680|339030": {
+   "codigo": "314",
+   "nome": "Aquisição de acessorios e componentes diversos de aeronaves (ND 339030)",
+   "classe": "1680",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "1682|339039": {
+   "codigo": "315",
+   "nome": "Contratação de serviços de digitalização/ indexação de documentos e conver-são de arquivos digitais - ocr (ND 339039)",
+   "classe": "1682",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "1741|339039": {
+   "codigo": "316",
+   "nome": "Contratação de serviços de projetos em tecnologia da informação e comunica-ção (tic) (ND 339039)",
+   "classe": "1741",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "1821|339039": {
+   "codigo": "317",
+   "nome": "Contratação de licenciamento de direitos permanentes sobre programas decomputador e locação de software (ND 339039)",
+   "classe": "1821",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 4
+  },
+  "1940|449052": {
+   "codigo": "318",
+   "nome": "Aquisição de embarcações pequenas (ND 449052)",
+   "classe": "1940",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "2010|449052": {
+   "codigo": "319",
+   "nome": "Aquisição de equipamentos de propulsão de navios e embarcações (ND 449052)",
+   "classe": "2010",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "2310|449052": {
+   "codigo": "320",
+   "nome": "Aquisição de veículos motorizados de passageiros (ND 449052)",
+   "classe": "2310",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "2320|449052": {
+   "codigo": "321",
+   "nome": "Aquisição de veículos sobre rodas (ND 449052)",
+   "classe": "2320",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 5
+  },
+  "2330|449052": {
+   "codigo": "322",
+   "nome": "Aquisição de reboques (ND 449052)",
+   "classe": "2330",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "2540|449052": {
+   "codigo": "323",
+   "nome": "Aquisição de equipamento e acessórios para veículos (ND 449052)",
+   "classe": "2540",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "2590|339030": {
+   "codigo": "324",
+   "nome": "Aquisição de componentes diversos para veículos (ND 339030)",
+   "classe": "2590",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "2610|339030": {
+   "codigo": "325",
+   "nome": "Aquisição de pneus e câmaras de ar, exceto os de aeronaves (ND 339030)",
+   "classe": "2610",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3220|449052": {
+   "codigo": "326",
+   "nome": "Aquisição de máquinas para trabalhos em madeira (ND 449052)",
+   "classe": "3220",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3230|449052": {
+   "codigo": "327",
+   "nome": "Aquisição de ferramentas e acessórios de máquinas para trabalho em madeira (ND 449052)",
+   "classe": "3230",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 7
+  },
+  "3415|449052": {
+   "codigo": "328",
+   "nome": "Aquisição de máquinas retificadoras (ND 449052)",
+   "classe": "3415",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3426|449052": {
+   "codigo": "329",
+   "nome": "Aquisição de equipamentos para acabamento em metal (ND 449052)",
+   "classe": "3426",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3431|449052": {
+   "codigo": "330",
+   "nome": "Aquisição de equipamento para solda a arco voltaico (ND 449052)",
+   "classe": "3431",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3432|449052": {
+   "codigo": "331",
+   "nome": "Aquisição de equipamento para solda a resistência elétrica (ND 449052)",
+   "classe": "3432",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3439|339030": {
+   "codigo": "332",
+   "nome": "Aquisição de suprimentos e acessórios para soldas diversas, fracas e fortes (ND 339030)",
+   "classe": "3439",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "3455|449052": {
+   "codigo": "333",
+   "nome": "Aquisição de ferramentas de cortar para máquinas ferramenta (ND 449052)",
+   "classe": "3455",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "3460|449052": {
+   "codigo": "334",
+   "nome": "Aquisição de acessórios para máquinas-ferramentas (ND 449052)",
+   "classe": "3460",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3510|449052": {
+   "codigo": "335",
+   "nome": "Aquisição de equipamentos de lavanderia e lavagem a seco (ND 449052)",
+   "classe": "3510",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3590|449052": {
+   "codigo": "336",
+   "nome": "Aquisição de equipamentos diversos para serviços profissionais e comerciais (ND 449052)",
+   "classe": "3590",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "3611|449052": {
+   "codigo": "337",
+   "nome": "Aquisição de máquinas industriais para marcação (ND 449052)",
+   "classe": "3611",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3620|449052": {
+   "codigo": "338",
+   "nome": "Aquisição de máquinas para trabalhos em borracha e plástico (ND 449052)",
+   "classe": "3620",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3750|449052": {
+   "codigo": "339",
+   "nome": "Aquisição de implementos e ferramentas de jardinagem (ND 449052)",
+   "classe": "3750",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3920|449052": {
+   "codigo": "340",
+   "nome": "Aquisição de equipamentos não autopropulsionado para movimentação de materiais (ND 449052)",
+   "classe": "3920",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3960|449052": {
+   "codigo": "341",
+   "nome": "Aquisição de elevadores e escadas rolantes (ND 449052)",
+   "classe": "3960",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "3990|449052": {
+   "codigo": "342",
+   "nome": "Aquisição de equipamentos diversos para movimentação de materiais (ND 449052)",
+   "classe": "3990",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "4030|339030": {
+   "codigo": "343",
+   "nome": "Aquisição de acessórios para cordas, cabos e correntes (ND 339030)",
+   "classe": "4030",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "4110|449052": {
+   "codigo": "344",
+   "nome": "Aquisição de equipamento para refrigeração (ND 449052)",
+   "classe": "4110",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 9
+  },
+  "4120|449052": {
+   "codigo": "345",
+   "nome": "Aquisição de equipamento de ar condicionado (ND 449052)",
+   "classe": "4120",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 4
+  },
+  "4130|449052": {
+   "codigo": "346",
+   "nome": "Aquisição de componentes de equipamentos para refrigeração e ar condicionado (ND 449052)",
+   "classe": "4130",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "4140|449052": {
+   "codigo": "347",
+   "nome": "Aquisição de ventiladores, circuladores de ar e ventoinhas (ND 449052)",
+   "classe": "4140",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "4210|449052": {
+   "codigo": "348",
+   "nome": "Aquisição de equipamentos para combate a incêndio (ND 449052)",
+   "classe": "4210",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 4
+  },
+  "4220|449052": {
+   "codigo": "349",
+   "nome": "Aquisição de equipamento para mergulho e salvamento marítimo (ND 449052)",
+   "classe": "4220",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 38
+  },
+  "4230|449052": {
+   "codigo": "350",
+   "nome": "Aquisição de equipamento para descontaminação e impregnação (ND 449052)",
+   "classe": "4230",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 17
+  },
+  "4235|449052": {
+   "codigo": "351",
+   "nome": "Aquisição de recipientes para coleta de materiais perigosos, materiais e equipamentos de limpeza (ND 449052)",
+   "classe": "4235",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "4240|449052": {
+   "codigo": "352",
+   "nome": "Aquisição de equipamento para segurança e salvamento (ND 449052)",
+   "classe": "4240",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 107
+  },
+  "4320|449052": {
+   "codigo": "353",
+   "nome": "Aquisição de bombas manuais e mecânicas (ND 449052)",
+   "classe": "4320",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "4430|449052": {
+   "codigo": "354",
+   "nome": "Aquisição de fornalhas, fornos e estufas industriais (ND 449052)",
+   "classe": "4430",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "4610|449052": {
+   "codigo": "355",
+   "nome": "Aquisição de equipamentos para purificação de água (ND 449052)",
+   "classe": "4610",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "4910|449052": {
+   "codigo": "356",
+   "nome": "Aquisição de equipamento especializado para oficina de manutenção e reparo de veículos motorizados (ND 449052)",
+   "classe": "4910",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "4920|449052": {
+   "codigo": "357",
+   "nome": "Aquisição de equipamento especializado para oficina de manutenção e repa-ro de aeronaves (ND 449052)",
+   "classe": "4920",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 16
+  },
+  "4940|449052": {
+   "codigo": "358",
+   "nome": "Aquisição de equipamento especializado diversos para oficina de manutenção e reparo (ND 449052)",
+   "classe": "4940",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 7
+  },
+  "5130|339030": {
+   "codigo": "359",
+   "nome": "Aquisição de ferramentas manuais acionadas por força motriz (ND 339030)",
+   "classe": "5130",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "5210|449052": {
+   "codigo": "360",
+   "nome": "Aquisição de instrumentos de medição para artífices (ND 449052)",
+   "classe": "5210",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "5340|339030": {
+   "codigo": "361",
+   "nome": "Aquisição de ferragens diversas (ND 339030)",
+   "classe": "5340",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 5
+  },
+  "5412|449051": {
+   "codigo": "362",
+   "nome": "Contratação de serviços gerais de construção dos edifícios não residênciais (ND 449051)",
+   "classe": "5412",
+   "natureza": "449051",
+   "catalogo": "CATSER",
+   "itens": 16
+  },
+  "5429|449051": {
+   "codigo": "363",
+   "nome": "Contratação de serviços gerais de construção de outras obras de engenharia n.c.p (ND 449051)",
+   "classe": "5429",
+   "natureza": "449051",
+   "catalogo": "CATSER",
+   "itens": 2
+  },
+  "5450|339030": {
+   "codigo": "364",
+   "nome": "Aquisição de estruturas pré-fabricadas diversas (ND 339030)",
+   "classe": "5450",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "5461|449051": {
+   "codigo": "365",
+   "nome": "Contratação de serviços de instalação elétrica, de cabos, alarmes, antenas e outros dispositivos elétricos (ND 449051)",
+   "classe": "5461",
+   "natureza": "449051",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "5479|449051": {
+   "codigo": "366",
+   "nome": "Contratação de outros serviços de acabamento e finalização de edifícios (ND 449051)",
+   "classe": "5479",
+   "natureza": "449051",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "5650|339030": {
+   "codigo": "367",
+   "nome": "Aquisição de materiais para telhados e revestimento de paredes (ND 339030)",
+   "classe": "5650",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "5660|339030": {
+   "codigo": "368",
+   "nome": "Aquisição de cercas, grades e portões (ND 339030)",
+   "classe": "5660",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "5680|": {
+   "codigo": "369",
+   "nome": "Aquisição de materiais diversos para construção (ND não informada)",
+   "classe": "5680",
+   "natureza": "",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "5680|339030": {
+   "codigo": "370",
+   "nome": "Aquisição de materiais diversos para construção (ND 339030)",
+   "classe": "5680",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 35
+  },
+  "5805|449052": {
+   "codigo": "371",
+   "nome": "Aquisição de equipamento telefônico e telegráfico (ND 449052)",
+   "classe": "5805",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "5826|449052": {
+   "codigo": "372",
+   "nome": "Aquisição de equipamentos para radionavegação de aeronaves (ND 449052)",
+   "classe": "5826",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "5835|449052": {
+   "codigo": "373",
+   "nome": "Aquisição de equipamentos para gravação e reprodução de som (ND 449052)",
+   "classe": "5835",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "5836|449052": {
+   "codigo": "374",
+   "nome": "Aquisição de equipamentos para gravação e reprodução de vídeo (ND 449052)",
+   "classe": "5836",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 11
+  },
+  "5855|449052": {
+   "codigo": "375",
+   "nome": "Aquisição de equipamentos para visão noturna, por radiação emitida e refletida (ND 449052)",
+   "classe": "5855",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "5895|449052": {
+   "codigo": "376",
+   "nome": "Aquisição de equipamentos diversos para comunicações (ND 449052)",
+   "classe": "5895",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 4
+  },
+  "5905|339030": {
+   "codigo": "377",
+   "nome": "Aquisição de resistores (ND 339030)",
+   "classe": "5905",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "5915|339030": {
+   "codigo": "378",
+   "nome": "Aquisição de filtros e redes (ND 339030)",
+   "classe": "5915",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "5935|339030": {
+   "codigo": "379",
+   "nome": "Aquisição de conectores elétricos (ND 339030)",
+   "classe": "5935",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "5965|339030": {
+   "codigo": "380",
+   "nome": "Aquisição de fones, microfones e alto-falantes (ND 339030)",
+   "classe": "5965",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "5975|339030": {
+   "codigo": "381",
+   "nome": "Aquisição de ferragens e suprimentos de eletricidade (ND 339030)",
+   "classe": "5975",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 25
+  },
+  "5977|339030": {
+   "codigo": "382",
+   "nome": "Aquisição de escovas de contato elétrico e eletrodos (ND 339030)",
+   "classe": "5977",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "5999|339030": {
+   "codigo": "383",
+   "nome": "Aquisição de componentes elétricos e eletrônicos diversos (ND 339030)",
+   "classe": "5999",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 9
+  },
+  "6140|339030": {
+   "codigo": "384",
+   "nome": "Aquisição de baterias recarregáveis (ND 339030)",
+   "classe": "6140",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "6230|339030": {
+   "codigo": "385",
+   "nome": "Aquisição de equipamentos de iluminação elétrica manual e portátil (ND 339030)",
+   "classe": "6230",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "6240|339030": {
+   "codigo": "386",
+   "nome": "Aquisição de lâmpadas elétricas (ND 339030)",
+   "classe": "6240",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "6260|339030": {
+   "codigo": "387",
+   "nome": "Aquisição de equipamentos de iluminação não elétricos (ND 339030)",
+   "classe": "6260",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "6330|449052": {
+   "codigo": "388",
+   "nome": "Aquisição de sistemas de sinalização e alarme para ferrovias (ND 449052)",
+   "classe": "6330",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "6505|339030": {
+   "codigo": "389",
+   "nome": "Aquisição de drogas e medicamentos (ND 339030)",
+   "classe": "6505",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 112
+  },
+  "6510|339030": {
+   "codigo": "390",
+   "nome": "Aquisição de materiais cirúrgicos para curativos (ND 339030)",
+   "classe": "6510",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "6515|449052": {
+   "codigo": "391",
+   "nome": "Aquisição de instrumentos, equipamentos e suprimentos médicos e cirúrgicos (ND 449052)",
+   "classe": "6515",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 91
+  },
+  "6520|449052": {
+   "codigo": "392",
+   "nome": "Aquisição de instrumentos, equipamentos e suprimentos dentários (ND 449052)",
+   "classe": "6520",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 494
+  },
+  "6525|449052": {
+   "codigo": "393",
+   "nome": "Aquisição de equipamentos e suprimentos de raios-x de uso médico, dentário e veterinário (ND 449052)",
+   "classe": "6525",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "6530|449052": {
+   "codigo": "394",
+   "nome": "Aquisição de mobiliário, equipamentos, utensílios e suprimentos hospitalares (ND 449052)",
+   "classe": "6530",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 408
+  },
+  "6532|339030": {
+   "codigo": "395",
+   "nome": "Aquisição de vestuário hospitalar e cirúrgico e itens correlatos de finalidades especiais (ND 339030)",
+   "classe": "6532",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 22
+  },
+  "6625|449052": {
+   "codigo": "396",
+   "nome": "Aquisição de instrumento de teste e de medição de propriedades elétricas e eletrônicas (ND 449052)",
+   "classe": "6625",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "6640|339030": {
+   "codigo": "397",
+   "nome": "Aquisição de equipamentos e artigos de laboratório (ND 339030)",
+   "classe": "6640",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 112
+  },
+  "6695|449052": {
+   "codigo": "398",
+   "nome": "Aquisição de instrumentos combinados diversos (ND 449052)",
+   "classe": "6695",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "6720|449052": {
+   "codigo": "399",
+   "nome": "Aquisição de câmaras fotográficas (ND 449052)",
+   "classe": "6720",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "6730|449052": {
+   "codigo": "400",
+   "nome": "Aquisição de equipamento para projeção fotográfica (ND 449052)",
+   "classe": "6730",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "6750|339030": {
+   "codigo": "401",
+   "nome": "Aquisição de suprimentos fotográficos (ND 339030)",
+   "classe": "6750",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "6760|449052": {
+   "codigo": "402",
+   "nome": "Aquisição de equipamento fotográfico e acessórios (ND 449052)",
+   "classe": "6760",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "6779|339039": {
+   "codigo": "403",
+   "nome": "Contratação de outros suportes e serviços para o transporte aéreo ou espacial (ND 339039)",
+   "classe": "6779",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 4
+  },
+  "6830|339030": {
+   "codigo": "404",
+   "nome": "Aquisição de gases comprimidos e liquefeitos (ND 339030)",
+   "classe": "6830",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "6850|339030": {
+   "codigo": "405",
+   "nome": "Aquisição de especialidades químicas diversas (ND 339030)",
+   "classe": "6850",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 4
+  },
+  "6910|339030": {
+   "codigo": "406",
+   "nome": "Aquisição de acessórios para treinamento (ND 339030)",
+   "classe": "6910",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 25
+  },
+  "6940|339030": {
+   "codigo": "407",
+   "nome": "Aquisição de acessórios para treinamento de comunicações (ND 339030)",
+   "classe": "6940",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "7010|449052": {
+   "codigo": "408",
+   "nome": "Aquisição de computadores (ND 449052)",
+   "classe": "7010",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 4
+  },
+  "7020|449052": {
+   "codigo": "409",
+   "nome": "Aquisição de impressoras (ND 449052)",
+   "classe": "7020",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "7050|449052": {
+   "codigo": "410",
+   "nome": "Aquisição de equipamentos de rede de tic - local e remota (ND 449052)",
+   "classe": "7050",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "7060|449052": {
+   "codigo": "411",
+   "nome": "Aquisição de peças e acessórios para computadores (ND 449052)",
+   "classe": "7060",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "7070|449052": {
+   "codigo": "412",
+   "nome": "Aquisição de peças e acessórios para impressoras (ND 449052)",
+   "classe": "7070",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "7080|449052": {
+   "codigo": "413",
+   "nome": "Aquisição de peças, acessórios e ferramentas para redes de tic (ND 449052)",
+   "classe": "7080",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "7090|339030": {
+   "codigo": "414",
+   "nome": "Aquisição de suprimentos de informática - tic (ND 339030)",
+   "classe": "7090",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "7105|449052": {
+   "codigo": "415",
+   "nome": "Aquisição de mobiliário doméstico (ND 449052)",
+   "classe": "7105",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "7110|": {
+   "codigo": "416",
+   "nome": "Aquisição de mobiliário para escritório (ND não informada)",
+   "classe": "7110",
+   "natureza": "",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "7110|449052": {
+   "codigo": "417",
+   "nome": "Aquisição de mobiliário para escritório (ND 449052)",
+   "classe": "7110",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 64
+  },
+  "7131|339039": {
+   "codigo": "418",
+   "nome": "Contratação de serviços de seguros de vida e de pensões(exceto serviços de reseguro) (ND 339039)",
+   "classe": "7131",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "7195|": {
+   "codigo": "419",
+   "nome": "Aquisição de mobiliários diversos e acessórios (ND não informada)",
+   "classe": "7195",
+   "natureza": "",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "7195|449052": {
+   "codigo": "420",
+   "nome": "Aquisição de mobiliários diversos e acessórios (ND 449052)",
+   "classe": "7195",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 8
+  },
+  "7210|449052": {
+   "codigo": "421",
+   "nome": "Aquisição de utensílios domésticos (ND 449052)",
+   "classe": "7210",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 18
+  },
+  "7230|449052": {
+   "codigo": "422",
+   "nome": "Aquisição de tapeçarias, cortinas e persianas (ND 449052)",
+   "classe": "7230",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "7310|449052": {
+   "codigo": "423",
+   "nome": "Aquisição de equipamentos para cozinhar, assar e servir alimentos (ND 449052)",
+   "classe": "7310",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 6
+  },
+  "7312|339039": {
+   "codigo": "424",
+   "nome": "Contratação de serviços de leasing ou aluguel de outros tipos de maquinariae equipamento sem operador (ND 339039)",
+   "classe": "7312",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "7320|449052": {
+   "codigo": "425",
+   "nome": "Aquisição de equipamentos e aparelhos de cozinha (ND 449052)",
+   "classe": "7320",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 21
+  },
+  "7330|339030": {
+   "codigo": "426",
+   "nome": "Aquisição de utensílios e ferramentas manuais de cozinha (ND 339030)",
+   "classe": "7330",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "7339|339039": {
+   "codigo": "427",
+   "nome": "Contratação de assinatura de banco de dados de inforações comerciais / cada (ND 339039)",
+   "classe": "7339",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 2
+  },
+  "7350|339030": {
+   "codigo": "428",
+   "nome": "Aquisição de louça e artigos de mesa (ND 339030)",
+   "classe": "7350",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "7510|339030": {
+   "codigo": "429",
+   "nome": "Aquisição de artigos para escritório (ND 339030)",
+   "classe": "7510",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 13
+  },
+  "7610|339030": {
+   "codigo": "430",
+   "nome": "Aquisição de livros e folhetos (ND 339030)",
+   "classe": "7610",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 6
+  },
+  "7690|339030": {
+   "codigo": "431",
+   "nome": "Aquisição de impressos diversos (ND 339030)",
+   "classe": "7690",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "7820|449052": {
+   "codigo": "432",
+   "nome": "Aquisição de jogos, brinquedos e artigos correlatos com rodas (ND 449052)",
+   "classe": "7820",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "7910|449052": {
+   "codigo": "433",
+   "nome": "Aquisição de enceradeiras e aspiradores de pó (ND 449052)",
+   "classe": "7910",
+   "natureza": "449052",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "7920|339030": {
+   "codigo": "434",
+   "nome": "Aquisição de vassouras, escovas, rodos, esponjas e esfregões (ND 339030)",
+   "classe": "7920",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 20
+  },
+  "7930|339030": {
+   "codigo": "435",
+   "nome": "Aquisição de compostos e preparados para limpeza e polimento (ND 339030)",
+   "classe": "7930",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 27
+  },
+  "8105|339030": {
+   "codigo": "436",
+   "nome": "Aquisição de sacos e bolsas (ND 339030)",
+   "classe": "8105",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 8
+  },
+  "8110|339030": {
+   "codigo": "437",
+   "nome": "Aquisição de tambores e latas (ND 339030)",
+   "classe": "8110",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "8115|339030": {
+   "codigo": "438",
+   "nome": "Aquisição de caixas, caixotes e engradados (ND 339030)",
+   "classe": "8115",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 7
+  },
+  "8120|339030": {
+   "codigo": "439",
+   "nome": "Aquisição de cilindros comerciais e industriais para gases (ND 339030)",
+   "classe": "8120",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "8135|339030": {
+   "codigo": "440",
+   "nome": "Aquisição de materiais a granel para acondicionamento e embalagem (ND 339030)",
+   "classe": "8135",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 11
+  },
+  "8316|339039": {
+   "codigo": "441",
+   "nome": "Contratação de serviços de manutenção de sistemas (ND 339039)",
+   "classe": "8316",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "8319|339039": {
+   "codigo": "442",
+   "nome": "Contratação de outros serviços de gerência/gestão, exceto os de projetos deconstrução (ND 339039)",
+   "classe": "8319",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "8340|339030": {
+   "codigo": "443",
+   "nome": "Aquisição de barracas e encerados (ND 339030)",
+   "classe": "8340",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "8399|339039": {
+   "codigo": "444",
+   "nome": "Contratação de todos os outros serviços de negócios técnicos e profissionais (ND 339039)",
+   "classe": "8399",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 2
+  },
+  "8413|339039": {
+   "codigo": "445",
+   "nome": "Contratação de serviços de telecomunicações móveis (ND 339039)",
+   "classe": "8413",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "8415|339030": {
+   "codigo": "446",
+   "nome": "Aquisição de vestuário para fins especiais (ND 339030)",
+   "classe": "8415",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 4
+  },
+  "8422|339039": {
+   "codigo": "447",
+   "nome": "Contratação de serviços de acesso à internet (ND 339039)",
+   "classe": "8422",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 2
+  },
+  "8430|339030": {
+   "codigo": "448",
+   "nome": "Aquisição de calçados masculinos (ND 339030)",
+   "classe": "8430",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 5
+  },
+  "8451|339039": {
+   "codigo": "449",
+   "nome": "Contratação de serviços de biblioteca (ND 339039)",
+   "classe": "8451",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 2
+  },
+  "8465|339030": {
+   "codigo": "450",
+   "nome": "Aquisição de equipamentos individuais (ND 339030)",
+   "classe": "8465",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 13
+  },
+  "8470|339030": {
+   "codigo": "451",
+   "nome": "Aquisição de roupas de proteção contra projéteis (ND 339030)",
+   "classe": "8470",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 5
+  },
+  "8510|339030": {
+   "codigo": "452",
+   "nome": "Aquisição de perfumes, artigos para toalete e toucador (ND 339030)",
+   "classe": "8510",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "8525|339039": {
+   "codigo": "453",
+   "nome": "Contratação de serviços de proteção (ND 339039)",
+   "classe": "8525",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "8530|339030": {
+   "codigo": "454",
+   "nome": "Aquisição de artigos para higiene pessoal (ND 339030)",
+   "classe": "8530",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "8533|339039": {
+   "codigo": "455",
+   "nome": "Contratação de serviços gerais de limpeza (ND 339039)",
+   "classe": "8533",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 2
+  },
+  "8599|339039": {
+   "codigo": "456",
+   "nome": "Contratação de outros serviços de suporte n.c.p (ND 339039)",
+   "classe": "8599",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 17
+  },
+  "8715|339039": {
+   "codigo": "457",
+   "nome": "Contratação de serviços de manutenção e reparo de outras maquinarias e equipamentos (ND 339039)",
+   "classe": "8715",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 3
+  },
+  "8729|339039": {
+   "codigo": "458",
+   "nome": "Contratação de serviços de manutenção e reparo de outros produtos n.c.p (ND 339039)",
+   "classe": "8729",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 15
+  },
+  "8912|339039": {
+   "codigo": "459",
+   "nome": "Contratação de serviços de impressão e de reprodução por meios de gravação,comissionado ou por contrato (ND 339039)",
+   "classe": "8912",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "8970|339030": {
+   "codigo": "460",
+   "nome": "Aquisição de rações embaladas (ND 339030)",
+   "classe": "8970",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 1
+  },
+  "9130|339030": {
+   "codigo": "461",
+   "nome": "Aquisição de combustíveis e propelentes líquidos à base de petróleo (ND 339030)",
+   "classe": "9130",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 3
+  },
+  "9140|339030": {
+   "codigo": "462",
+   "nome": "Aquisição de óleos combustíveis (ND 339030)",
+   "classe": "9140",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "9290|339039": {
+   "codigo": "463",
+   "nome": "Contratação de outros serviços de educação e treinamento (ND 339039)",
+   "classe": "9290",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 231
+  },
+  "9311|339039": {
+   "codigo": "464",
+   "nome": "Contratação de serviços hospitalares (ND 339039)",
+   "classe": "9311",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 5
+  },
+  "9312|339039": {
+   "codigo": "465",
+   "nome": "Contratação de servicos medicos e odontologicos (ND 339039)",
+   "classe": "9312",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 5
+  },
+  "9319|339039": {
+   "codigo": "466",
+   "nome": "Contratação de outros serviços de saúde humana (ND 339039)",
+   "classe": "9319",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "9321|339039": {
+   "codigo": "467",
+   "nome": "Contratação de serviços de veterinária (ND 339039)",
+   "classe": "9321",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 2
+  },
+  "9411|339039": {
+   "codigo": "468",
+   "nome": "Contratação de serviços de tratamento de esgoto (ND 339039)",
+   "classe": "9411",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "9621|339039": {
+   "codigo": "469",
+   "nome": "Contratação de serviços de promoção e apresentação relacionados as artes cê (ND 339039)",
+   "classe": "9621",
+   "natureza": "339039",
+   "catalogo": "CATSER",
+   "itens": 1
+  },
+  "9905|339030": {
+   "codigo": "470",
+   "nome": "Aquisição de cartazes, mostruários e placas de identificação (ND 339030)",
+   "classe": "9905",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 2
+  },
+  "9999|339030": {
+   "codigo": "471",
+   "nome": "Aquisição de itens diversos (ND 339030)",
+   "classe": "9999",
+   "natureza": "339030",
+   "catalogo": "CATMAT",
+   "itens": 6
+  }
+ }
+}

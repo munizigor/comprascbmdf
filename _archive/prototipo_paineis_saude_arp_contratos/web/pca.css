@@ -1,0 +1,93 @@
+/* Saúde do PCA — acréscimos sobre radar.css.
+   Os tokens de cor, a tipografia, a tabela e os chips vêm de lá; aqui só entram
+   os elementos que o radar não tem: KPIs, barras de preenchimento e listas. */
+
+/* ---------- seletor de ano ---------- */
+.anos { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+/* ---------- cartões de indicador ---------- */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: .8rem;
+}
+
+.kpi {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--rule-strong);
+  border-radius: 6px;
+  padding: .8rem .9rem;
+  display: flex; flex-direction: column; gap: .15rem;
+}
+.kpi .rot {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.kpi .val {
+  font-family: var(--mono); font-size: 1.5rem; font-weight: 700;
+  font-variant-numeric: tabular-nums; line-height: 1.2;
+}
+.kpi .pe { font-size: .78rem; color: var(--ink-soft); }
+
+.kpi[data-tom="alerta"] { border-left-color: var(--f090); }
+.kpi[data-tom="alerta"] .val { color: var(--f090); }
+.kpi[data-tom="grave"] { border-left-color: var(--vencido); }
+.kpi[data-tom="grave"] .val { color: var(--vencido); }
+.kpi[data-tom="bom"] { border-left-color: var(--fmais); }
+
+/* ---------- blocos lado a lado ---------- */
+.colunas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1.5rem;
+}
+.bloco { display: flex; flex-direction: column; gap: .8rem; min-width: 0; }
+
+/* ---------- barras de preenchimento ---------- */
+.barras { display: flex; flex-direction: column; gap: .65rem; }
+
+.barra { display: grid; grid-template-columns: 8rem 1fr 4.5rem; align-items: center; gap: .7rem; }
+.barra .nome { font-size: .85rem; color: var(--ink-soft); }
+.barra .trilho {
+  height: .55rem; background: var(--surface-alt);
+  border: 1px solid var(--rule); border-radius: 999px; overflow: hidden;
+}
+.barra .preenche { height: 100%; background: var(--primary); border-radius: 999px; }
+.barra[data-tom="alerta"] .preenche { background: var(--f090); }
+.barra[data-tom="grave"] .preenche { background: var(--vencido); }
+.barra .n {
+  font-family: var(--mono); font-size: .76rem; color: var(--ink-faint);
+  font-variant-numeric: tabular-nums; text-align: right;
+}
+
+/* ---------- listas simples ---------- */
+.lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .4rem; }
+.lista li {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 4px;
+  padding: .45rem .75rem; font-size: .87rem;
+}
+.lista .n { font-family: var(--mono); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* ---------- tabela de DFDs ---------- */
+td.casca { color: var(--ink-faint); font-style: italic; }
+tr[data-casca="true"] { background: var(--surface-alt); }
+
+.campos {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .12em;
+  color: var(--ink-faint); white-space: nowrap;
+}
+.campos b { color: var(--primary); font-weight: 700; }
+
+.marca-maior {
+  display: block; font-family: var(--mono); font-size: .68rem;
+  color: var(--f090); margin-top: .1rem;
+}
+
+/* ---------- notas de rodapé de bloco ---------- */
+.nota {
+  margin: 0; background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 6px; padding: .75rem .9rem; font-size: .85rem; color: var(--ink-soft);
+}
+.nota.codigo { font-family: var(--mono); font-size: .74rem; line-height: 1.9; word-break: break-word; }

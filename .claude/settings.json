@@ -1,5 +1,14 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(PYTHONIOENCODING=utf-8 python -c ' *)",
+      "Bash(python -c \"import py_compile;py_compile.compile\\(r'tools/pncp/_spike_treina.py',doraise=True\\);print\\('compila ok'\\)\")",
+      "Bash(PYTHONIOENCODING=utf-8 python tools/pncp/_spike_treina.py --help)",
+      "Bash(PYTHONIOENCODING=utf-8 python -m unittest discover tests -v)",
+      "Bash(PYTHONIOENCODING=utf-8 python tools/pncp/gerar_pca.py)",
+      "Bash(PYTHONIOENCODING=utf-8 python -m unittest discover tests)"
+    ],
     "deny": [
       "Read(./_archive/**)",
       "Glob(./_archive/**)",

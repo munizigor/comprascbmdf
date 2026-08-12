@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Saúde do PCA — CBMDF Marketplace</title>
+  <!-- radar.css carrega os tokens e a tipografia do produto; pca.css só acrescenta -->
+  <link rel="stylesheet" href="radar.css">
+  <link rel="stylesheet" href="pca.css">
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <span class="eyebrow">CBMDF Marketplace · Governança de contratações</span>
+      <h1>Saúde do PCA</h1>
+      <p class="sub">Estado dos Documentos de Formalização de Demanda no PGC, antes de virarem
+        contratação e antes de irem ao PNCP. O radar de vigência olha o que já foi publicado;
+        aqui se olha o que está sendo escrito — e o que está em branco.</p>
+      <div class="meta">
+        <span>Dado de <b id="gerado">—</b> <span id="idade"></span></span>
+        <span id="fonte">—</span>
+        <span>Fonte: PGC / Compras.gov.br</span>
+      </div>
+    </header>
+
+    <div id="erro"></div>
+
+    <nav class="anos" id="anos" hidden aria-label="Ano do PCA"></nav>
+
+    <section id="painel" hidden>
+
+      <div class="kpis" id="kpis"></div>
+
+      <div class="colunas">
+        <div class="bloco">
+          <div class="sec-head"><h2>Preenchimento</h2>
+            <span class="count">campos essenciais do DFD</span></div>
+          <div class="barras" id="completude"></div>
+        </div>
+
+        <div class="bloco">
+          <div class="sec-head"><h2>Situação</h2>
+            <span class="count" id="fase">—</span></div>
+          <ul class="lista" id="status"></ul>
+        </div>
+      </div>
+
+      <div class="colunas">
+        <div class="bloco">
+          <div class="sec-head"><h2>Por área técnica</h2>
+            <span class="count" id="areas-count">—</span></div>
+          <div class="scroll">
+            <table>
+              <thead><tr>
+                <th scope="col">Área</th><th scope="col">DFDs</th>
+                <th scope="col">Cascas</th><th scope="col">Valor informado</th>
+              </tr></thead>
+              <tbody id="areas"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bloco">
+          <div class="sec-head"><h2>Quem está escrevendo</h2>
+            <span class="count" id="resp-count">—</span></div>
+          <div class="scroll">
+            <table>
+              <thead><tr><th scope="col">Responsável</th><th scope="col">DFDs</th></tr></thead>
+              <tbody id="responsaveis"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="bloco">
+        <div class="sec-head">
+          <h2>Documentos de Formalização de Demanda</h2>
+          <span class="count" id="itens-count">—</span>
+        </div>
+        <div class="faixas" id="filtros"></div>
+        <div class="scroll">
+          <table>
+            <thead><tr>
+              <th scope="col">Nº</th>
+              <th scope="col">Situação</th>
+              <th scope="col">Área</th>
+              <th scope="col">Objeto</th>
+              <th scope="col">Responsável</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Campos</th>
+            </tr></thead>
+            <tbody id="itens"></tbody>
+          </table>
+          <p class="vazio" id="vazio" hidden>Nenhum DFD nesta área.</p>
+        </div>
+      </div>
+
+      <div class="colunas">
+        <div class="bloco">
+          <div class="sec-head"><h2>Lacunas na numeração</h2>
+            <span class="count" id="cobertura">—</span></div>
+          <p class="nota" id="numeracao">—</p>
+        </div>
+        <div class="bloco">
+          <div class="sec-head"><h2>Campos vazios em 100% dos DFDs</h2>
+            <span class="count" id="mortos-count">—</span></div>
+          <p class="nota codigo" id="mortos">—</p>
+        </div>
+      </div>
+
+    </section>
+
+    <footer>
+      O CPF do operador vem no extrato do PGC e é descartado no saneamento — não existe no JSON
+      publicado. O extrato bruto fica em <code>data/_bruto/</code>, fora do versionamento.
+      Valores são exibidos por DFD e o maior é sinalizado: um único documento pode responder pela
+      maior parte do agregado, e aí a soma deixa de descrever o conjunto.
+      Regerar com <code>python tools/pgc/gerar_saude.py</code>.
+    </footer>
+
+  </div>
+  <script src="pca.js"></script>
+</body>
+</html>

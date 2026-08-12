@@ -4,8 +4,15 @@ Camada de governança e planejamento logístico-financeiro das contratações do
 CBMDF. Orquestra as bases públicas de governança — hoje o **PNCP** — para dar
 visibilidade contínua sobre o que foi planejado, contratado e está por vencer.
 
-O que está no ar agora: o **Radar de Vigência**, que lista atas de registro de
-preços e contratos vigentes ordenados pelo que vence primeiro.
+O que está no ar agora:
+
+- **Radar de Vigência** — atas de registro de preços e contratos vigentes,
+  ordenados pelo que vence primeiro. Fonte: PNCP.
+- **Saúde do PCA** — estado dos Documentos de Formalização de Demanda (DFD)
+  antes de virarem contratação: quanto está preenchido, quem escreveu, onde a
+  demanda se concentra. Fonte: PGC / Compras.gov.br.
+
+Um olha o que já foi publicado; o outro, o que ainda está sendo escrito.
 
 ## Pré-requisitos
 
@@ -41,13 +48,43 @@ O JSON é versionado no repositório, então **este passo é opcional** — a p�
 funciona com o dado da última geração. Rode quando quiser atualizar; a tela
 avisa em vermelho quando o dado passa de 7 dias.
 
-### 2. Abrir a página
+### 2. Atualizar o painel de saúde do PCA
+
+O PGC não tem API pública aberta como o PNCP — o extrato sai da tela do
+Compras.gov.br e é salvo como JSON. Coloque o arquivo em `data/_bruto/` e rode:
+
+```bash
+python tools/pgc/gerar_saude.py
+```
+
+Sem argumentos, lê **todos** os `.json` da pasta e agrupa por ano de PCA — o ano
+vem do campo `anoPCA` de cada registro, não do nome do arquivo. Para acrescentar
+outro exercício, basta jogar mais um extrato na pasta e rodar de novo; DFDs
+repetidos entre lotes são descartados. Também aceita caminhos explícitos:
+
+```bash
+python tools/pgc/gerar_saude.py caminho/para/extrato.json
+```
+
+```
+  pgc_170394_pca2027.json                    41 DFDs
+
+Gravado em .../data/saude_pca.json
+  PCA 2027 |  41 DFDs |  21 cascas | R$ 94,389,710.00 (concentrado: DFD 54 = 82.3%)
+```
+
+> 🔒 **`data/_bruto/` está no `.gitignore` e deve continuar assim.** O extrato do
+> PGC traz o **CPF** do operador em `loginOperacao`. O saneamento descarta esse
+> campo, então só o derivado (`data/saude_pca.json`) vai para o repositório.
+
+### 3. Abrir as páginas
 
 ```bash
 python -m http.server 8000
 ```
 
-E acesse **<http://localhost:8000/web/radar.html>**.
+E acesse **<http://localhost:8000/web/radar.html>** ou
+**<http://localhost:8000/web/pca.html>**.
 
 > ⚠️ **Não abra o arquivo com duplo clique.** Por `file://` o navegador bloqueia
 > a leitura do JSON e a página aparece vazia. O servidor acima existe só para
@@ -55,7 +92,7 @@ E acesse **<http://localhost:8000/web/radar.html>**.
 
 Para encerrar, `Ctrl+C` no terminal do servidor.
 
-### 3. Rodar os testes
+### 4. Rodar os testes
 
 ```bash
 python -m unittest discover tests -v
@@ -68,12 +105,16 @@ despejo bruto da API — é o radar **já calculado**. Por isso os testes incide
 sobre funções puras e sobra pouca lógica no JavaScript.
 
 ```
-tools/pncp/       coletor e regras (Python, só stdlib)
+tools/pncp/       coletor e regras do radar (Python, só stdlib)
   cliente.py        GET ao PNCP com retry e cache
   radar.py          regras puras — sem rede, sem relógio
   gerar_radar.py    único ponto que toca rede e data do sistema
+tools/pgc/        saneamento e indicadores do PCA
+  saude.py          regras puras — saneia a PII e agrega
+  gerar_saude.py    único ponto que toca disco e data do sistema
 tests/            unittest das regras puras
-data/             JSON versionado, consumido pela página
+data/             JSON versionado, consumido pelas páginas
+  _bruto/           extratos do PGC — fora do git (contêm CPF)
 web/              HTML/CSS/JS que apenas renderiza
 docs/             documentação viva
 _archive/         material histórico (protótipo aposentado)

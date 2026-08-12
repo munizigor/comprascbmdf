@@ -1,0 +1,3298 @@
+{
+ "catalogo": "CATMAT",
+ "fonte": "https://dadosabertos.compras.gov.br/modulo-material/2_consultarClasseMaterial",
+ "coletado_em": "2026-08-12",
+ "total": 658,
+ "classes": {
+  "1005": {
+   "nome": "ARMAS DE FOGO DE CALIBRE ATÉ 120MM",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1010": {
+   "nome": "ARMAS DE FOGO DE CALIBRE ACIMA DE 30MM ATÉ 75MM",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1015": {
+   "nome": "ARMAS DE FOGO DE CALIBRE ACIMA DE 75MM ATÉ 125MM",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1020": {
+   "nome": "ARMAS DE FOGO DE CALIBRE ACIMA DE 125MM ATÉ 150MM",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1025": {
+   "nome": "ARMAS DE FOGO DE CALIBRE ACIMA DE 150MM ATÉ 200MM",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1030": {
+   "nome": "ARMAS DE FOGO DE CALIBRE ACIMA DE 200MM ATÉ 300MM",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1035": {
+   "nome": "ARMAS DE FOGO DE CALIBRE ACIMA DE 300MM",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1040": {
+   "nome": "ARMAMENTO E EQUIPAMENTOS DE GUERRA QUÍMICA",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1045": {
+   "nome": "LANÇADORES DE TORPEDOS E DE BOMBAS DE PROFUNDIDADE",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1055": {
+   "nome": "LANÇADORES DE FOGUETES E PIROTÉCNICOS",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1070": {
+   "nome": "REDES SUBMARINAS DE DEFESA DE PORTOS",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1075": {
+   "nome": "EQUIPAMENTOS DE DESMAGNETIZAÇÃO E DE VARREDURA DE MINAS",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1080": {
+   "nome": "EQUIPAMENTOS DE CAMUFLAGEM E DE DISSIMULAÇÃO",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1090": {
+   "nome": "CONJUNTOS INTERCAMBIÁVEIS DE DUAS OU MAIS CLASSES",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1095": {
+   "nome": "ARMAMENTOS DIVERSOS",
+   "grupo": "10",
+   "nomeGrupo": "ARMAMENTO"
+  },
+  "1105": {
+   "nome": "BOMBAS NUCLEARES",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1110": {
+   "nome": "PROJÉTEIS NUCLEARES",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1115": {
+   "nome": "OGIVAS NUCLEARES E SEÇÕES DE OGIVAS NUCLEARES",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1120": {
+   "nome": "BOMBAS NUCLEARES DE PROFUNDIDADE",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1125": {
+   "nome": "CARGAS NUCLEARES DE DEMOLIÇÃO",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1127": {
+   "nome": "FOGUETES NUCLEARES",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1130": {
+   "nome": "CONJUNTOS DE CONVERSÃO PARA ARMAMENTO NUCLEAR",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1135": {
+   "nome": "DISPOSITIVOS DE DETONAÇÃO E DISPARO DE ARMAMENTO",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1140": {
+   "nome": "COMPONENTES NUCLEARES",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1145": {
+   "nome": "COMPONENTES EXPLOSIVOS E PIROTÉCNICOS DE ARMAMENTO NUCLEAR",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1190": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO DE MANUSEIO E ENSAIO DE  ARMAMENTONUCLEAR",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1195": {
+   "nome": "MATERIAL BÉLICO NUCLEAR DIVERSOS",
+   "grupo": "11",
+   "nomeGrupo": "MATERIAIS BÉLICOS NUCLEARES"
+  },
+  "1210": {
+   "nome": "DIRETORAS DE CONTROLE DE TIRO",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1220": {
+   "nome": "DISPOSITIVOS E CORRETORES DE CONTROLE DE TIRO",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1230": {
+   "nome": "SISTEMAS COMPLETOS DE CONTROLE DE TIRO",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1240": {
+   "nome": "EQUIPAMENTOS ÓTICOS DE VISADA E MEDIÇÃO DE DISTÂNCIA",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1250": {
+   "nome": "MECANISMOS DE ESTABILIZAÇÃO E CONTROLE DE TIRO",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1260": {
+   "nome": "EQUIPAMENTO DE DESIGNAÇÃO E INDICAÇÃO DE CONTROLE DE TIRO",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1265": {
+   "nome": "EQUIPAMENTO DE RECEPÇÃO E TRANSMISSÃO DE  CONTROLE  DE  TIRO(EXCETO DE AERONAVE)",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1270": {
+   "nome": "COMPONENTES DE CONTROLE DE TIRO DE AERONAVES",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1280": {
+   "nome": "COMPONENTES DE CONTROLE DE TIRO EM AERONAVES DE BOMBARDEIO",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1285": {
+   "nome": "EQUIPAMENTO RADAR DE CONTROLE DE TIRO (EXCETO DE AERONAVES)",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1287": {
+   "nome": "EQUIPAMENTO SONAR DE CONTROLE DE TIRO",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1290": {
+   "nome": "EQUIPAMENTOS DIVERSOS DE CONTROLE DE TIRO",
+   "grupo": "12",
+   "nomeGrupo": "EQUIPAMENTOS DE TIRO"
+  },
+  "1305": {
+   "nome": "MUNIÇÃO DE CALIBRE ATÉ 30 MM",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1310": {
+   "nome": "MUNIÇÃO DE CALIBRE ACIMA DE 30 MM ATÉ 75 MM",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1315": {
+   "nome": "MUNIÇÃO DE CALIBRE ACIMA DE 75MM ATÉE 125MM",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1320": {
+   "nome": "MUNIÇÃO DE CALIBRE ACIMA DE 125 MM",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1325": {
+   "nome": "BOMBAS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1330": {
+   "nome": "GRANADAS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1336": {
+   "nome": "OGIVAS E COMPONENTES EXPLOSIVOS DE MISSEIS GUIADOS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1337": {
+   "nome": "UNIDADES DE PROPULSAO EXPLOSIVA A COMBUSTIVEL SOLIDO DE VEICULOS ESPACIAIS E MISSEIS GUIADOS E SEUS COMPONENTES",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1338": {
+   "nome": "UNIDADES DE PROPULSAO INERTES A COMBUSTIVEL SOLIDO DE VEICULOS ESPACIAIS E MISSEIS GUIADOS E SEUS COMPONENTES",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1340": {
+   "nome": "ROJÕES, FOGUETES, MUNIÇÃO E COMPONENTES",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1345": {
+   "nome": "MINAS TERRESTRES",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1346": {
+   "nome": "MUNIÇÕES DE CONTROLE À DISTÂNCIA",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1350": {
+   "nome": "COMPONENTES INERTES DE MINA SUBMARINA",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1351": {
+   "nome": "COMPONENTES EXPLOSIVOS DE MINAS SUBMARINAS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1352": {
+   "nome": "DISPOSITIVOS INERTES DE MINAS SUBAQUÁTICAS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1353": {
+   "nome": "DISPOSITIVOS EXPLOSIVOS DE MINAS SUBAQUÁTICAS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1355": {
+   "nome": "COMPONENTES INERTES DE TORPEDOS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1356": {
+   "nome": "COMPONENTES EXPLOSIVOS DE TORPEDOS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1360": {
+   "nome": "COMPONENTES INERTES DE CARGAS DE PROFUNDIDADE",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1361": {
+   "nome": "COMPONENTES EXPLOSIVOS DE BOMBAS DE PROFUNDIDADE",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1365": {
+   "nome": "PRODUTOS QUIMICOS DE USO MILITAR",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1367": {
+   "nome": "CONJUNTOS E EQUIPAMENTOS TÁTICOS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1370": {
+   "nome": "PIROTECNICOS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1375": {
+   "nome": "MATERIAIS DE DEMOLIÇÃO",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1376": {
+   "nome": "EXPLOSIVOS A GRANEL",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1377": {
+   "nome": "DISPOSITIVOS ACIONADOS POR PROPELENTES E CARTUCHOS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1380": {
+   "nome": "AGENTES BIOLOGICOS DE USO MILITAR",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1385": {
+   "nome": "EQUIPAMENTOS E FERRAMENTAS PARA MANUSEIO DE EXPLOSIVO NA SU-PERFÍCIE",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1386": {
+   "nome": "EQUIPAMENTOS E FERRAMENTAS PARA MANUSEIO DE  EXPLOSIVO  SUB-MERSO",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1390": {
+   "nome": "ESPOLETAS E ESTOPILHAS",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1395": {
+   "nome": "COMPONENTES DIVERSOS DE MUNIÇÃO",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1398": {
+   "nome": "EQUIPAMENTOS ESPECIALIZADOS PARA MANUSEIO E CONSERVACAO DE MUNICAO",
+   "grupo": "13",
+   "nomeGrupo": "MUNIÇÕES E EXPLOSIVOS"
+  },
+  "1410": {
+   "nome": "MÍSSEIS GUIADOS",
+   "grupo": "14",
+   "nomeGrupo": "MÍSSEIS GUIADOS"
+  },
+  "1420": {
+   "nome": "COMPONENTES DE MÍSSEIS GUIADOS",
+   "grupo": "14",
+   "nomeGrupo": "MÍSSEIS GUIADOS"
+  },
+  "1425": {
+   "nome": "SISTEMAS COMPLETOS DE MÍSSEIS GUIADOS",
+   "grupo": "14",
+   "nomeGrupo": "MÍSSEIS GUIADOS"
+  },
+  "1427": {
+   "nome": "SUBSISTEMAS DE MÍSSEIS GUIADOS",
+   "grupo": "14",
+   "nomeGrupo": "MÍSSEIS GUIADOS"
+  },
+  "1430": {
+   "nome": "SISTEMA DE CONTROLE REMOTO DE MÍSSEIS GUIADOS",
+   "grupo": "14",
+   "nomeGrupo": "MÍSSEIS GUIADOS"
+  },
+  "1440": {
+   "nome": "LANÇADORES DE MÍSSEIS GUIADOS",
+   "grupo": "14",
+   "nomeGrupo": "MÍSSEIS GUIADOS"
+  },
+  "1450": {
+   "nome": "EQUIPAMENTO PARA MANUSEIO DE MANUTENÇÃO DE MÍSSEIS GUIADOS",
+   "grupo": "14",
+   "nomeGrupo": "MÍSSEIS GUIADOS"
+  },
+  "1510": {
+   "nome": "AERONAVES DE ASAS FIXAS",
+   "grupo": "15",
+   "nomeGrupo": "AERONAVES E SEUS COMPONENTES ESTRUTURAIS"
+  },
+  "1520": {
+   "nome": "AERONAVES DE ASA ROTATIVAS",
+   "grupo": "15",
+   "nomeGrupo": "AERONAVES E SEUS COMPONENTES ESTRUTURAIS"
+  },
+  "1540": {
+   "nome": "PLANADORES",
+   "grupo": "15",
+   "nomeGrupo": "AERONAVES E SEUS COMPONENTES ESTRUTURAIS"
+  },
+  "1550": {
+   "nome": "AERONAVES TELEGUIADAS",
+   "grupo": "15",
+   "nomeGrupo": "AERONAVES E SEUS COMPONENTES ESTRUTURAIS"
+  },
+  "1560": {
+   "nome": "COMPONENTES ESTRUTURAIS DE AERONAVES",
+   "grupo": "15",
+   "nomeGrupo": "AERONAVES E SEUS COMPONENTES ESTRUTURAIS"
+  },
+  "1610": {
+   "nome": "HELICES DE AERONAVES",
+   "grupo": "16",
+   "nomeGrupo": "COMPONENTES E ACESSORIOS DE AERONAVES"
+  },
+  "1615": {
+   "nome": "PÁS DE ROTOR DE HELICOPTERO, MECANISMOS DE TRANSMISSÃO E    COMPONENTES",
+   "grupo": "16",
+   "nomeGrupo": "COMPONENTES E ACESSORIOS DE AERONAVES"
+  },
+  "1620": {
+   "nome": "COMPONENTES DE TREM DE POUSO DE AERONAVE",
+   "grupo": "16",
+   "nomeGrupo": "COMPONENTES E ACESSORIOS DE AERONAVES"
+  },
+  "1630": {
+   "nome": "SISTEMAS DE RODAS E DE FREIO DE AERONAVES",
+   "grupo": "16",
+   "nomeGrupo": "COMPONENTES E ACESSORIOS DE AERONAVES"
+  },
+  "1650": {
+   "nome": "COMPONENTES DOS SISTEMAS HIDRÁULICOS,DE VÁCUO E DEGELO      DE AERONAVES",
+   "grupo": "16",
+   "nomeGrupo": "COMPONENTES E ACESSORIOS DE AERONAVES"
+  },
+  "1660": {
+   "nome": "EQUIPAMENTOS DE AR CONCICIONADO, AQUECIMENTO E PRESSURIZAÇÃODE AERONAVES",
+   "grupo": "16",
+   "nomeGrupo": "COMPONENTES E ACESSORIOS DE AERONAVES"
+  },
+  "1670": {
+   "nome": "PÁRA-QUEDAS,SISTEMAS DE COLETA, LANÇAMENTO E RESGATE AÉREO  E EQUIPAMENTOS DE AMARRAÇÃO DE CARGAS",
+   "grupo": "16",
+   "nomeGrupo": "COMPONENTES E ACESSORIOS DE AERONAVES"
+  },
+  "1680": {
+   "nome": "ACESSORIOS E COMPONENTES DIVERSOS DE AERONAVES",
+   "grupo": "16",
+   "nomeGrupo": "COMPONENTES E ACESSORIOS DE AERONAVES"
+  },
+  "1710": {
+   "nome": "EQUIPAMENTOS PARA POUSO DE AERONAVES",
+   "grupo": "17",
+   "nomeGrupo": "EQUIPAMENTOS PARA LANCAMENTOS, POUSO E MANOBRA DE AERONAVES"
+  },
+  "1720": {
+   "nome": "EQUIPAMENTOS PARA LANÇAMENTO DE AERONAVES",
+   "grupo": "17",
+   "nomeGrupo": "EQUIPAMENTOS PARA LANCAMENTOS, POUSO E MANOBRA DE AERONAVES"
+  },
+  "1730": {
+   "nome": "EQUIPAMENTOS DE SERVICOS EM TERRA DE AERONAVES",
+   "grupo": "17",
+   "nomeGrupo": "EQUIPAMENTOS PARA LANCAMENTOS, POUSO E MANOBRA DE AERONAVES"
+  },
+  "1740": {
+   "nome": "TRATORES E REBOQUES ESPECIALIZADOS PARA AEROPORTOS",
+   "grupo": "17",
+   "nomeGrupo": "EQUIPAMENTOS PARA LANCAMENTOS, POUSO E MANOBRA DE AERONAVES"
+  },
+  "1810": {
+   "nome": "VEÍCULOS ESPACIAIS",
+   "grupo": "18",
+   "nomeGrupo": "VEICULOS ESPACIAIS (ASTRONAVES)"
+  },
+  "1820": {
+   "nome": "COMPONENTES DE VEICULOS ESPACIAIS",
+   "grupo": "18",
+   "nomeGrupo": "VEICULOS ESPACIAIS (ASTRONAVES)"
+  },
+  "1830": {
+   "nome": "SISTEMAS DE CONTROLE REMOTO DE VEICULOS ESPACIAIS",
+   "grupo": "18",
+   "nomeGrupo": "VEICULOS ESPACIAIS (ASTRONAVES)"
+  },
+  "1840": {
+   "nome": "LANCADORES DE VEICULOS ESPACIAIS",
+   "grupo": "18",
+   "nomeGrupo": "VEICULOS ESPACIAIS (ASTRONAVES)"
+  },
+  "1850": {
+   "nome": "EQUIPAMENTOS DE SERVICOS E MANUSEIO DE VEICULOS ESPACIAIS",
+   "grupo": "18",
+   "nomeGrupo": "VEICULOS ESPACIAIS (ASTRONAVES)"
+  },
+  "1860": {
+   "nome": "EQUIPAMENTOS DE SOBREVIVÊNCIA ESPACIAL",
+   "grupo": "18",
+   "nomeGrupo": "VEICULOS ESPACIAIS (ASTRONAVES)"
+  },
+  "1905": {
+   "nome": "NAVIOS DE GUERRA E EMBARCACOES DE DESEMBARQUE",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "1910": {
+   "nome": "NAVIOS PARA TRANSPORTE DE PASSAGEIRO E DE TROPA",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "1915": {
+   "nome": "NAVIOS TANQUES E CARGUEIROS",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "1920": {
+   "nome": "NAVIOS PESQUEIROS",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "1925": {
+   "nome": "NAVIOS DE SERVICOS ESPECIAIS",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "1930": {
+   "nome": "BATELOES E CHATAS PARA CARGAS",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "1935": {
+   "nome": "BATELOES E CHATAS PARA FINS ESPECIAIS",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "1940": {
+   "nome": "EMBARCAÇÕES PEQUENAS",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "1945": {
+   "nome": "PONTÕES E DOCAS FLUTUANTES",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "1950": {
+   "nome": "DIQUES FLUTUANTES",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "1955": {
+   "nome": "DRAGAS",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "1990": {
+   "nome": "EMBARCACOES DIVERSAS",
+   "grupo": "19",
+   "nomeGrupo": "NAVIOS, PEQUENAS EMBARCACOES, PONTOES E DIQUES FLUTUANTES"
+  },
+  "2010": {
+   "nome": "EQUIPAMENTOS DE PROPULSÃO DE NAVIOS E EMBARCAÇÕES",
+   "grupo": "20",
+   "nomeGrupo": "EQUIPAMENTOS PARA NAVIOS E EMBARCACOES"
+  },
+  "2020": {
+   "nome": "CORDAMES E EQUIPAMENTOS CORRELATOS",
+   "grupo": "20",
+   "nomeGrupo": "EQUIPAMENTOS PARA NAVIOS E EMBARCACOES"
+  },
+  "2030": {
+   "nome": "MAQUINARIA DE CONVES",
+   "grupo": "20",
+   "nomeGrupo": "EQUIPAMENTOS PARA NAVIOS E EMBARCACOES"
+  },
+  "2040": {
+   "nome": "FERRAGENS DE MARINHARIA E ITENS DE CASCO",
+   "grupo": "20",
+   "nomeGrupo": "EQUIPAMENTOS PARA NAVIOS E EMBARCACOES"
+  },
+  "2050": {
+   "nome": "BOIAS",
+   "grupo": "20",
+   "nomeGrupo": "EQUIPAMENTOS PARA NAVIOS E EMBARCACOES"
+  },
+  "2060": {
+   "nome": "EQUIPAMENTO COMERCIAL DE PESCA",
+   "grupo": "20",
+   "nomeGrupo": "EQUIPAMENTOS PARA NAVIOS E EMBARCACOES"
+  },
+  "2090": {
+   "nome": "EQUIPAMENTOS DIVERSOS PARA NAVIOS E MARINHARIA",
+   "grupo": "20",
+   "nomeGrupo": "EQUIPAMENTOS PARA NAVIOS E EMBARCACOES"
+  },
+  "2210": {
+   "nome": "LOCOMOTIVAS",
+   "grupo": "22",
+   "nomeGrupo": "EQUIPAMENTOS FERROVIÁRIOS"
+  },
+  "2220": {
+   "nome": "VAGÕES FERROVIÁRIOS",
+   "grupo": "22",
+   "nomeGrupo": "EQUIPAMENTOS FERROVIÁRIOS"
+  },
+  "2230": {
+   "nome": "EQUIPAMENTO DE CONSTRUÇAO E MANUTENÇAO DE LEITO DE FERROVIA",
+   "grupo": "22",
+   "nomeGrupo": "EQUIPAMENTOS FERROVIÁRIOS"
+  },
+  "2240": {
+   "nome": "ACESSÓRIOS E COMPONENTES DE LOCOMOTIVAS E DE VAGÕES FERROVI-ÁRIOS",
+   "grupo": "22",
+   "nomeGrupo": "EQUIPAMENTOS FERROVIÁRIOS"
+  },
+  "2250": {
+   "nome": "MATERIAIS DE FERROVIA",
+   "grupo": "22",
+   "nomeGrupo": "EQUIPAMENTOS FERROVIÁRIOS"
+  },
+  "2305": {
+   "nome": "VEÍCULOS DE EFEITO-SOLO",
+   "grupo": "23",
+   "nomeGrupo": "VEíCULOS"
+  },
+  "2310": {
+   "nome": "VEÍCULOS MOTORIZADOS DE PASSAGEIROS",
+   "grupo": "23",
+   "nomeGrupo": "VEíCULOS"
+  },
+  "2320": {
+   "nome": "VEÍCULOS SOBRE RODAS",
+   "grupo": "23",
+   "nomeGrupo": "VEíCULOS"
+  },
+  "2330": {
+   "nome": "REBOQUES",
+   "grupo": "23",
+   "nomeGrupo": "VEíCULOS"
+  },
+  "2340": {
+   "nome": "MOTOCICLETAS, MOTONETAS E BICICLETAS",
+   "grupo": "23",
+   "nomeGrupo": "VEíCULOS"
+  },
+  "2350": {
+   "nome": "VEÍCULOS TÁTICOS SOBRE LAGARTAS",
+   "grupo": "23",
+   "nomeGrupo": "VEíCULOS"
+  },
+  "2410": {
+   "nome": "TRATORES DE BAIXA VELOCIDADE SOBRE LAGARTA",
+   "grupo": "24",
+   "nomeGrupo": "TRATORES"
+  },
+  "2420": {
+   "nome": "TRATORES SOBRE RODAS",
+   "grupo": "24",
+   "nomeGrupo": "TRATORES"
+  },
+  "2430": {
+   "nome": "TRATORES DE ALTA VELOCIDADE SOBRE LAGARTAS",
+   "grupo": "24",
+   "nomeGrupo": "TRATORES"
+  },
+  "2510": {
+   "nome": "COMPONENTES DE CABINE, CARROCERIA E CHASSIS DE VEÍCULOS",
+   "grupo": "25",
+   "nomeGrupo": "COMPONENTES DE VEÍCULOS"
+  },
+  "2520": {
+   "nome": "COMPONENTES DE TRANSMISSÃO DE VEÍCULOS",
+   "grupo": "25",
+   "nomeGrupo": "COMPONENTES DE VEÍCULOS"
+  },
+  "2530": {
+   "nome": "COMPONENTES DE FREIO, DIREÇÃO, EIXO, RODA E LAGARTA  DE  VEÍCULOS",
+   "grupo": "25",
+   "nomeGrupo": "COMPONENTES DE VEÍCULOS"
+  },
+  "2540": {
+   "nome": "EQUIPAMENTO E ACESSÓRIOS PARA VEÍCULOS",
+   "grupo": "25",
+   "nomeGrupo": "COMPONENTES DE VEÍCULOS"
+  },
+  "2541": {
+   "nome": "ACESSÓRIOS VEICULARES ESPECÍFICOS PARA SISTEMAS DE ARMAS",
+   "grupo": "25",
+   "nomeGrupo": "COMPONENTES DE VEÍCULOS"
+  },
+  "2590": {
+   "nome": "COMPONENTES DIVERSOS PARA VEÍCULOS",
+   "grupo": "25",
+   "nomeGrupo": "COMPONENTES DE VEÍCULOS"
+  },
+  "2610": {
+   "nome": "PNEUS E CÂMARAS DE AR, EXCETO OS DE AERONAVES",
+   "grupo": "26",
+   "nomeGrupo": "PNEUS E CÂMARAS DE AR"
+  },
+  "2620": {
+   "nome": "PNEUS E CÂMARAS DE AR DE AERONAVES",
+   "grupo": "26",
+   "nomeGrupo": "PNEUS E CÂMARAS DE AR"
+  },
+  "2630": {
+   "nome": "PNEUS MACIÇO E DE BAIXA PRESSÃO",
+   "grupo": "26",
+   "nomeGrupo": "PNEUS E CÂMARAS DE AR"
+  },
+  "2640": {
+   "nome": "MATERIAL PARA REFORMA E REPARO DE PNEUS E CÂMARAS DE AR",
+   "grupo": "26",
+   "nomeGrupo": "PNEUS E CÂMARAS DE AR"
+  },
+  "2805": {
+   "nome": "MOTORES A GASOLINA E COMPONENTES, EXCETO  OS DE AERONAVES",
+   "grupo": "28",
+   "nomeGrupo": "MOTORES, TURBINAS E SEUS COMPONENTES"
+  },
+  "2810": {
+   "nome": "MOTORES A GASOLINA PARA AERONAVES E COMPONENTES",
+   "grupo": "28",
+   "nomeGrupo": "MOTORES, TURBINAS E SEUS COMPONENTES"
+  },
+  "2815": {
+   "nome": "MOTORES DIESEL E COMPONENTES",
+   "grupo": "28",
+   "nomeGrupo": "MOTORES, TURBINAS E SEUS COMPONENTES"
+  },
+  "2820": {
+   "nome": "MÁQUINAS ALTERNATIVAS A VAPOR E COMPONENTES",
+   "grupo": "28",
+   "nomeGrupo": "MOTORES, TURBINAS E SEUS COMPONENTES"
+  },
+  "2825": {
+   "nome": "TURBINAS A VAPOR E COMPONENTES",
+   "grupo": "28",
+   "nomeGrupo": "MOTORES, TURBINAS E SEUS COMPONENTES"
+  },
+  "2830": {
+   "nome": "TURBINAS E RODAS D'ÁGUA E COMPONENTES",
+   "grupo": "28",
+   "nomeGrupo": "MOTORES, TURBINAS E SEUS COMPONENTES"
+  },
+  "2835": {
+   "nome": "TURBINAS A GÁS E MOTORES A JATO E COMPONENTES, EXCETO OS  DEAERONAVE",
+   "grupo": "28",
+   "nomeGrupo": "MOTORES, TURBINAS E SEUS COMPONENTES"
+  },
+  "2840": {
+   "nome": "TURBINAS A GÁS E MOTORES A JATO DE AERONAVES E COMPONENTES",
+   "grupo": "28",
+   "nomeGrupo": "MOTORES, TURBINAS E SEUS COMPONENTES"
+  },
+  "2845": {
+   "nome": "MOTORES DE FOGUETES E COMPONENTES",
+   "grupo": "28",
+   "nomeGrupo": "MOTORES, TURBINAS E SEUS COMPONENTES"
+  },
+  "2850": {
+   "nome": "MOTORES ROTATIVOS A GASOLINA E COMPONENTES",
+   "grupo": "28",
+   "nomeGrupo": "MOTORES, TURBINAS E SEUS COMPONENTES"
+  },
+  "2895": {
+   "nome": "MOTORES DIVERSOS E COMPONENTES",
+   "grupo": "28",
+   "nomeGrupo": "MOTORES, TURBINAS E SEUS COMPONENTES"
+  },
+  "2910": {
+   "nome": "COMPONENTES DO SISTEMA DE COMBUSTÍVEL DE  MOTORES, EXCETO OSDE AERONAVES",
+   "grupo": "29",
+   "nomeGrupo": "ACESSÓRIOS DE MOTORES"
+  },
+  "2915": {
+   "nome": "COMPONENTES DO SISTEMA DE COMBUSTÍVEL DE MOTORES  DE  AERONAVES",
+   "grupo": "29",
+   "nomeGrupo": "ACESSÓRIOS DE MOTORES"
+  },
+  "2920": {
+   "nome": "COMPONENTES DO SISTEMA ELÉTRICO DE MOTORES, EXCETO OS DE AE-RONAVES",
+   "grupo": "29",
+   "nomeGrupo": "ACESSÓRIOS DE MOTORES"
+  },
+  "2925": {
+   "nome": "COMPONENTES DO SISTEMA ELÉTRICO DE MOTORES DE AERONAVES",
+   "grupo": "29",
+   "nomeGrupo": "ACESSÓRIOS DE MOTORES"
+  },
+  "2930": {
+   "nome": "COMPONENTES DO SISTEMA DE  RESFRIAMENTO  (ARREFECIMENTO)  DEMOTORES, EXCETO DE AERONAVES",
+   "grupo": "29",
+   "nomeGrupo": "ACESSÓRIOS DE MOTORES"
+  },
+  "2935": {
+   "nome": "COMPONENTES DO SISTEMA DE  RESFRIAMENTO  (ARREFECIMENTO)  DEMOTORES DE AERONAVES",
+   "grupo": "29",
+   "nomeGrupo": "ACESSÓRIOS DE MOTORES"
+  },
+  "2940": {
+   "nome": "FILTROS DE AR E DE ÓLEO, ELEMENTOS FILTRANTES E PURIFICADO- RES DE MOTORES, EXCETO DE AERONAVES",
+   "grupo": "29",
+   "nomeGrupo": "ACESSÓRIOS DE MOTORES"
+  },
+  "2945": {
+   "nome": "FILTROS DE AR E DE ÓLEO; ELEMENTOS FILTRANTES PURIFICADORES DE MOTORES DE AERONAVES.",
+   "grupo": "29",
+   "nomeGrupo": "ACESSÓRIOS DE MOTORES"
+  },
+  "2950": {
+   "nome": "TURBO- SUPERCOMPRESSORES",
+   "grupo": "29",
+   "nomeGrupo": "ACESSÓRIOS DE MOTORES"
+  },
+  "2990": {
+   "nome": "ACESSÓRIOS DIVERSOS DE MOTORES, EXCETO OS DE AERONAVES",
+   "grupo": "29",
+   "nomeGrupo": "ACESSÓRIOS DE MOTORES"
+  },
+  "2995": {
+   "nome": "ACESSÓRIOS DIVERSOS DE MOTORES DE AERONAVES",
+   "grupo": "29",
+   "nomeGrupo": "ACESSÓRIOS DE MOTORES"
+  },
+  "3010": {
+   "nome": "CONVERSORES DE TORQUE E CÂMBIOS DE VELOCIDADE",
+   "grupo": "30",
+   "nomeGrupo": "EQUIPAMENTOS DE TRANSMISSÃO DE FORÇA MECÂNICA"
+  },
+  "3020": {
+   "nome": "ENGRENAGENS, POLIAS, COROAS DENTADAS E  CORRENTES  DE  TRANSMISSÃO",
+   "grupo": "30",
+   "nomeGrupo": "EQUIPAMENTOS DE TRANSMISSÃO DE FORÇA MECÂNICA"
+  },
+  "3030": {
+   "nome": "CORREAME, CORREIAS DE TRANSMISSÃO, CORREIAS DOS VENTILADORESE ACESSÓRIOS",
+   "grupo": "30",
+   "nomeGrupo": "EQUIPAMENTOS DE TRANSMISSÃO DE FORÇA MECÂNICA"
+  },
+  "3040": {
+   "nome": "EQUIPAMENTOS DIVERSOS DE TRANSMISSÃO DE FORÇA",
+   "grupo": "30",
+   "nomeGrupo": "EQUIPAMENTOS DE TRANSMISSÃO DE FORÇA MECÂNICA"
+  },
+  "3110": {
+   "nome": "ROLAMENTOS ANTIFRICÇÃO NÃO MONTADOS",
+   "grupo": "31",
+   "nomeGrupo": "ROLAMENTOS E MANCAIS"
+  },
+  "3120": {
+   "nome": "MANCAIS NÃO MONTADOS",
+   "grupo": "31",
+   "nomeGrupo": "ROLAMENTOS E MANCAIS"
+  },
+  "3130": {
+   "nome": "ROLAMENTOS E MANCAIS MONTADOS",
+   "grupo": "31",
+   "nomeGrupo": "ROLAMENTOS E MANCAIS"
+  },
+  "3210": {
+   "nome": "MÁQUINAS PARA SERRARIA E PREPARO DE MADEIRA",
+   "grupo": "32",
+   "nomeGrupo": "MÁQUINAS E EQUIPAMENTOS PARA TRABALHOS EM MADEIRA"
+  },
+  "3220": {
+   "nome": "MÁQUINAS PARA TRABALHOS EM MADEIRA",
+   "grupo": "32",
+   "nomeGrupo": "MÁQUINAS E EQUIPAMENTOS PARA TRABALHOS EM MADEIRA"
+  },
+  "3230": {
+   "nome": "FERRAMENTAS E ACESSÓRIOS DE MÁQUINAS PARA TRABALHO EM  MADEIRA",
+   "grupo": "32",
+   "nomeGrupo": "MÁQUINAS E EQUIPAMENTOS PARA TRABALHOS EM MADEIRA"
+  },
+  "3405": {
+   "nome": "MÁQUINAS DE SERRAR E LIMAR",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3408": {
+   "nome": "MÁQUINAS DE FUNÇÕES MÚLTIPLAS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3410": {
+   "nome": "MÁQUINAS DE DESBASTAR, ELÉTRICAS E ULTRA-SÔNICAS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3411": {
+   "nome": "MÁQUINAS DE BROCAR",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3412": {
+   "nome": "MÁQUINAS DE MANDRILAR",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3413": {
+   "nome": "MÁQUINAS DE FURAR E ABRIR ROSCAS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3414": {
+   "nome": "MÁQUINAS PARA CORTE E ACABAMENTO DE ENGRENAGENS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3415": {
+   "nome": "MÁQUINAS RETIFICADORAS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3416": {
+   "nome": "TORNOS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3417": {
+   "nome": "MÁQUINAS DE FRESAR",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3418": {
+   "nome": "MÁQUINAS DE APLAINAR E TALHAR",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3419": {
+   "nome": "MÁQUINAS-FERRAMENTA DIVERSAS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3422": {
+   "nome": "MÁQUINAS DE LAMINAR E TREFILAR",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3424": {
+   "nome": "EQUIPAMENTO DE TRATAMENTO TÉRMICO E NÃO TÉRMICO DE METAIS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3426": {
+   "nome": "EQUIPAMENTOS PARA ACABAMENTO EM METAL",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3431": {
+   "nome": "EQUIPAMENTO PARA SOLDA A ARCO VOLTAICO",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3432": {
+   "nome": "EQUIPAMENTO PARA SOLDA A RESISTÊNCIA ELÉTRICA",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3433": {
+   "nome": "EQUIPAMENTO PARA SOLDA A GÁS, CORTE POR AQUECIMENTO E DE  METALIZAÇÃO",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3436": {
+   "nome": "POSICIONADORES E MANIPULADORES DE SOLDA",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3438": {
+   "nome": "EQUIPAMENTOS DIVERSOS DE SOLDA",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3439": {
+   "nome": "SUPRIMENTOS E ACESSÓRIOS PARA SOLDAS DIVERSAS, FRACAS E  FORTES",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3441": {
+   "nome": "MÁQUINAS DE DOBRAR E DE MODELAR",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3442": {
+   "nome": "PRENSAS HIDRÁULICAS E PNEUMÁTICAS ACIONADAS POR ENERGIA",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3443": {
+   "nome": "PRENSAS MECÂNICAS ACIONADAS POR ENERGIA",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3444": {
+   "nome": "PRENSAS MANUAIS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3445": {
+   "nome": "MÁQUINAS DE PUNCIONAR E CORTAR",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3446": {
+   "nome": "FORJAS MECÂNICAS E MARTELOS PARA FORJAS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3447": {
+   "nome": "MÁQUINAS DE MODELAR FIOS E FITAS DE METAL",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3448": {
+   "nome": "MÁQUINAS DE REBITAR",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3449": {
+   "nome": "MÁQUINAS AUXILIARES PARA MODELAGEM E CORTE DE METAL",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3450": {
+   "nome": "MÁQUINAS-FERRAMENTA PORTÁTEIS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3455": {
+   "nome": "FERRAMENTAS DE CORTAR PARA MÁQUINAS FERRAMENTA",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3456": {
+   "nome": "FERRAMENTAS DE CORTE E MODELAGEM DE PEÇAS DE MÁQUINAS.",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3460": {
+   "nome": "ACESSÓRIOS PARA MÁQUINAS-FERRAMENTAS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3461": {
+   "nome": "ACESSÓRIOS PARA MÁQUINAS AUXILIARES PARA TRABALHO EM METAIS",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3465": {
+   "nome": "GABARITOS E MOLDES DE PRODUÇÃO",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3470": {
+   "nome": "CONJUNTOS, JOGOS E ACESSÓRIOS PARA OFICINA MECÂNICA",
+   "grupo": "34",
+   "nomeGrupo": "MAQUINAS PARA TRABALHO EM METAIS"
+  },
+  "3510": {
+   "nome": "EQUIPAMENTOS DE LAVANDERIA E LAVAGEM A SECO",
+   "grupo": "35",
+   "nomeGrupo": "EQUIPAMENTOS COMERCIAIS E DE SERVIÇOS"
+  },
+  "3520": {
+   "nome": "EQUIPAMENTOS PARA CONSERTO DE CALÇADOS",
+   "grupo": "35",
+   "nomeGrupo": "EQUIPAMENTOS COMERCIAIS E DE SERVIÇOS"
+  },
+  "3530": {
+   "nome": "MÁQUINAS DE COSTURA INDUSTRIAL E OFICINAS MÓVEIS  DE  CONSERTOS EM TECIDOS",
+   "grupo": "35",
+   "nomeGrupo": "EQUIPAMENTOS COMERCIAIS E DE SERVIÇOS"
+  },
+  "3540": {
+   "nome": "MÁQUINAS DE EMBALAR E EMPACOTAR",
+   "grupo": "35",
+   "nomeGrupo": "EQUIPAMENTOS COMERCIAIS E DE SERVIÇOS"
+  },
+  "3550": {
+   "nome": "MÁQUINAS REGISTRADORAS AUTOMÁTICAS E MÁQUINAS ACIONADAS  COMFICHAS",
+   "grupo": "35",
+   "nomeGrupo": "EQUIPAMENTOS COMERCIAIS E DE SERVIÇOS"
+  },
+  "3590": {
+   "nome": "EQUIPAMENTOS DIVERSOS PARA SERVIÇOS PROFISSIONAIS E  COMERCIAIS",
+   "grupo": "35",
+   "nomeGrupo": "EQUIPAMENTOS COMERCIAIS E DE SERVIÇOS"
+  },
+  "3605": {
+   "nome": "MÁQUINAS E EQUIPAMENTOS PARA PRODUTOS ALIMENTÍCIOS",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3610": {
+   "nome": "EQUIPAMENTO PARA IMPRESSÃO, DUPLICAÇÃO E ENCADERNAÇÃO",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3611": {
+   "nome": "MÁQUINAS INDUSTRIAIS PARA MARCAÇÃO",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3615": {
+   "nome": "MÁQUINAS PARA INDÚSTRIA DE POLPA E DE PAPEL",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3620": {
+   "nome": "MÁQUINAS PARA TRABALHOS EM BORRACHA E PLÁSTICO",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3625": {
+   "nome": "MÁQUINAS PARA INDÚSTRIAS TÊXTEIS",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3630": {
+   "nome": "MÁQUINAS PARA INDÚSTRIAS DE PRODUTOS DE ARGILA E CONCRETO",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3635": {
+   "nome": "MÁQUINAS PARA INDÚSTRIAS DE CRISTAL E VIDRO",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3640": {
+   "nome": "MÁQUINAS PARA INDÚSTRIAS DE TABACO",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3645": {
+   "nome": "MÁQUINAS PARA INDÚSTRIAS DE COURO E DE CURTUMES",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3650": {
+   "nome": "MÁQUINAS PARA INDÚSTRIAS DE PRODUTOS QUÍMICOS  E  FARMACÊUTICOS",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3655": {
+   "nome": "SISTEMAS DE GERAÇÃO E DISTRIBUIÇÃO DE GÁS, FIXOS OU MÓVEIS",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3660": {
+   "nome": "MAQUINARIA PARA REDUÇÃO INDUSTRIAL DE TAMANHO",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3670": {
+   "nome": "MÁQUINAS ESPECIALIZADAS PARA FABRICAÇÃO  DE  SEMICONDUTORES,CIRCUITOS MICROELETRÔNICOS E PLACAS DE CIRCUITOS IMPRESSOS",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3680": {
+   "nome": "MÁQUINAS PARA FUNDIÇÃO, EQUIPAMENTOS E  SUPRIMENTOS  CORRELATOS",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3685": {
+   "nome": "MÁQUINAS ESPECIALIZADAS PARA FABRICAÇÃO DE RECIPIENTES  METÁLICOS E EQUIPAMENTOS CORRELATOS",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3690": {
+   "nome": "MÁQUINARIA ESPECIALIZADA PARA ARMAMENTO E MUNIÇÃO  E  EQUIPAMENTOS CORRELATOS",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3693": {
+   "nome": "MAQUINARIA INDUSTRIL PARA MONTAGEM",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3694": {
+   "nome": "EQUIPAMENTOS E INSTALAÇÕES PARA SANEAMENTO AMBIENTAL",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3695": {
+   "nome": "MÁQUINAS DIVERSAS PARA INDÚSTRIAS ESPECIALIZADAS",
+   "grupo": "36",
+   "nomeGrupo": "MÁQUINAS PARA INDÚSTRIAS ESPECIALIZADAS"
+  },
+  "3710": {
+   "nome": "EQUIPAMENTO PARA PREPARAÇÃO DO SOLO",
+   "grupo": "37",
+   "nomeGrupo": "MÁQUINAS E EQUIPAMENTOS AGRÍCOLAS"
+  },
+  "3720": {
+   "nome": "EQUIPAMENTO DE COLHEITA",
+   "grupo": "37",
+   "nomeGrupo": "MÁQUINAS E EQUIPAMENTOS AGRÍCOLAS"
+  },
+  "3730": {
+   "nome": "EQUIPAMENTO DE LATICÍNIOS, AVICULTURA E PECUÁRIA",
+   "grupo": "37",
+   "nomeGrupo": "MÁQUINAS E EQUIPAMENTOS AGRÍCOLAS"
+  },
+  "3740": {
+   "nome": "EQUIPAMENTO PARA CONTROLE DE PRAGAS, DOENÇAS E GEADAS",
+   "grupo": "37",
+   "nomeGrupo": "MÁQUINAS E EQUIPAMENTOS AGRÍCOLAS"
+  },
+  "3750": {
+   "nome": "IMPLEMENTOS E FERRAMENTAS DE JARDINAGEM",
+   "grupo": "37",
+   "nomeGrupo": "MÁQUINAS E EQUIPAMENTOS AGRÍCOLAS"
+  },
+  "3770": {
+   "nome": "SELARIA, ARREAMENTO, CHICOTE E ACESSÓRIOS CORRELATOS PARA   ANIMAIS",
+   "grupo": "37",
+   "nomeGrupo": "MÁQUINAS E EQUIPAMENTOS AGRÍCOLAS"
+  },
+  "3805": {
+   "nome": "EQUIPAMENTOS PARA MOVIMENTAÇÃO E ESCAVAÇÃO DE TERRA",
+   "grupo": "38",
+   "nomeGrupo": "EQUIPAMENTOS PARA CONSTRUÇÃO, MINERAÇÃO, TERRAPLENAGEM E MA-NUTENÇÃO DE ESTRADAS"
+  },
+  "3810": {
+   "nome": "GUINDASTES E ESCAVADEIRAS",
+   "grupo": "38",
+   "nomeGrupo": "EQUIPAMENTOS PARA CONSTRUÇÃO, MINERAÇÃO, TERRAPLENAGEM E MA-NUTENÇÃO DE ESTRADAS"
+  },
+  "3815": {
+   "nome": "ACESSÓRIOS PARA GUINDASTES E ESCAVADEIRAS",
+   "grupo": "38",
+   "nomeGrupo": "EQUIPAMENTOS PARA CONSTRUÇÃO, MINERAÇÃO, TERRAPLENAGEM E MA-NUTENÇÃO DE ESTRADAS"
+  },
+  "3820": {
+   "nome": "EQUIPAMENTOS PARA MINERAÇÃO, PERFURAÇÃO DE ROCHAS, TERRA  E CORRELATOS",
+   "grupo": "38",
+   "nomeGrupo": "EQUIPAMENTOS PARA CONSTRUÇÃO, MINERAÇÃO, TERRAPLENAGEM E MA-NUTENÇÃO DE ESTRADAS"
+  },
+  "3825": {
+   "nome": "EQUIPAMENTO DE DESOBSTRUÇÃO E LIMPEZA DE ESTRADAS",
+   "grupo": "38",
+   "nomeGrupo": "EQUIPAMENTOS PARA CONSTRUÇÃO, MINERAÇÃO, TERRAPLENAGEM E MA-NUTENÇÃO DE ESTRADAS"
+  },
+  "3830": {
+   "nome": "ACESSÓRIOS PARA CAMINHÕES E TRATORES",
+   "grupo": "38",
+   "nomeGrupo": "EQUIPAMENTOS PARA CONSTRUÇÃO, MINERAÇÃO, TERRAPLENAGEM E MA-NUTENÇÃO DE ESTRADAS"
+  },
+  "3835": {
+   "nome": "EQUIPAMENTO PARA PRODUÇÃO E DISTRIBUIÇÃO DE PETRÓLEO",
+   "grupo": "38",
+   "nomeGrupo": "EQUIPAMENTOS PARA CONSTRUÇÃO, MINERAÇÃO, TERRAPLENAGEM E MA-NUTENÇÃO DE ESTRADAS"
+  },
+  "3895": {
+   "nome": "EQUIPAMENTOS DIVERSOS PARA CONSTRUÇÃO",
+   "grupo": "38",
+   "nomeGrupo": "EQUIPAMENTOS PARA CONSTRUÇÃO, MINERAÇÃO, TERRAPLENAGEM E MA-NUTENÇÃO DE ESTRADAS"
+  },
+  "3910": {
+   "nome": "TRANSPORTADORES",
+   "grupo": "39",
+   "nomeGrupo": "EQUIPAMENTOS PARA MANUSEIO DE MATERIAL"
+  },
+  "3915": {
+   "nome": "EQUIPAMENTOS ALIMENTADORES DE MATERIAIS-PRIMAS",
+   "grupo": "39",
+   "nomeGrupo": "EQUIPAMENTOS PARA MANUSEIO DE MATERIAL"
+  },
+  "3920": {
+   "nome": "EQUIPAMENTOS NÃO AUTOPROPULSIONADO PARA MOVIMENTAÇÃO  DE  MATERIAIS",
+   "grupo": "39",
+   "nomeGrupo": "EQUIPAMENTOS PARA MANUSEIO DE MATERIAL"
+  },
+  "3930": {
+   "nome": "VEÍCULOS AUTOPROPULSIONADOS PARA ARMAZÉM",
+   "grupo": "39",
+   "nomeGrupo": "EQUIPAMENTOS PARA MANUSEIO DE MATERIAL"
+  },
+  "3940": {
+   "nome": "POLEAMES, TALHAS, MOITÕES, MASSAMES E LINGAS",
+   "grupo": "39",
+   "nomeGrupo": "EQUIPAMENTOS PARA MANUSEIO DE MATERIAL"
+  },
+  "3950": {
+   "nome": "GUINCHOS, IÇADORES, GUINDASTES E CÁBREAS",
+   "grupo": "39",
+   "nomeGrupo": "EQUIPAMENTOS PARA MANUSEIO DE MATERIAL"
+  },
+  "3960": {
+   "nome": "ELEVADORES E ESCADAS ROLANTES",
+   "grupo": "39",
+   "nomeGrupo": "EQUIPAMENTOS PARA MANUSEIO DE MATERIAL"
+  },
+  "3990": {
+   "nome": "EQUIPAMENTOS DIVERSOS PARA MOVIMENTAÇÃO DE MATERIAIS",
+   "grupo": "39",
+   "nomeGrupo": "EQUIPAMENTOS PARA MANUSEIO DE MATERIAL"
+  },
+  "4010": {
+   "nome": "CORRENTES E CABOS DE AÇO",
+   "grupo": "40",
+   "nomeGrupo": "CORDAS, CABOS, CORRENTES E SEUS ACESSÓRIOS"
+  },
+  "4020": {
+   "nome": "CABOS DE FIBRA, CORDOALHAS E BARBANTES",
+   "grupo": "40",
+   "nomeGrupo": "CORDAS, CABOS, CORRENTES E SEUS ACESSÓRIOS"
+  },
+  "4030": {
+   "nome": "ACESSÓRIOS PARA CORDAS, CABOS E CORRENTES",
+   "grupo": "40",
+   "nomeGrupo": "CORDAS, CABOS, CORRENTES E SEUS ACESSÓRIOS"
+  },
+  "4110": {
+   "nome": "EQUIPAMENTO PARA REFRIGERAÇÃO",
+   "grupo": "41",
+   "nomeGrupo": "EQUIPAMENTOS PARA REFRIGERAÇÃO, AR CONDICIONADO E CIRCULAÇÃODE AR"
+  },
+  "4120": {
+   "nome": "EQUIPAMENTO DE AR CONDICIONADO",
+   "grupo": "41",
+   "nomeGrupo": "EQUIPAMENTOS PARA REFRIGERAÇÃO, AR CONDICIONADO E CIRCULAÇÃODE AR"
+  },
+  "4130": {
+   "nome": "COMPONENTES DE EQUIPAMENTOS PARA REFRIGERAÇÃO E AR  CONDICIONADO",
+   "grupo": "41",
+   "nomeGrupo": "EQUIPAMENTOS PARA REFRIGERAÇÃO, AR CONDICIONADO E CIRCULAÇÃODE AR"
+  },
+  "4140": {
+   "nome": "VENTILADORES, CIRCULADORES DE AR E VENTOINHAS",
+   "grupo": "41",
+   "nomeGrupo": "EQUIPAMENTOS PARA REFRIGERAÇÃO, AR CONDICIONADO E CIRCULAÇÃODE AR"
+  },
+  "4150": {
+   "nome": "TUBOS DE TURBILHONAMENTO E OUTROS TUBOS  RELACIONADOS  À  REFRIGERAÇÃO",
+   "grupo": "41",
+   "nomeGrupo": "EQUIPAMENTOS PARA REFRIGERAÇÃO, AR CONDICIONADO E CIRCULAÇÃODE AR"
+  },
+  "4210": {
+   "nome": "EQUIPAMENTOS PARA COMBATE A INCÊNDIO",
+   "grupo": "42",
+   "nomeGrupo": "EQUIPAMENTO PARA COMBATE A INCÊNDIO, RESGATE E SEGURANÇA"
+  },
+  "4220": {
+   "nome": "EQUIPAMENTO PARA MERGULHO E SALVAMENTO MARÍTIMO",
+   "grupo": "42",
+   "nomeGrupo": "EQUIPAMENTO PARA COMBATE A INCÊNDIO, RESGATE E SEGURANÇA"
+  },
+  "4230": {
+   "nome": "EQUIPAMENTO  PARA DESCONTAMINAÇÃO E IMPREGNAÇÃO",
+   "grupo": "42",
+   "nomeGrupo": "EQUIPAMENTO PARA COMBATE A INCÊNDIO, RESGATE E SEGURANÇA"
+  },
+  "4235": {
+   "nome": "RECIPIENTES PARA COLETA DE MATERIAIS PERIGOSOS, MATERIAIS E EQUIPAMENTOS DE LIMPEZA",
+   "grupo": "42",
+   "nomeGrupo": "EQUIPAMENTO PARA COMBATE A INCÊNDIO, RESGATE E SEGURANÇA"
+  },
+  "4240": {
+   "nome": "EQUIPAMENTO PARA SEGURANÇA E SALVAMENTO",
+   "grupo": "42",
+   "nomeGrupo": "EQUIPAMENTO PARA COMBATE A INCÊNDIO, RESGATE E SEGURANÇA"
+  },
+  "4250": {
+   "nome": "EQUIPAMENTO PARA RECICLAGEM E RECUPERAÇÃO",
+   "grupo": "42",
+   "nomeGrupo": "EQUIPAMENTO PARA COMBATE A INCÊNDIO, RESGATE E SEGURANÇA"
+  },
+  "4310": {
+   "nome": "BOMBAS E COMPRESSORES A VÁCUO",
+   "grupo": "43",
+   "nomeGrupo": "BOMBAS E COMPRESSORES"
+  },
+  "4320": {
+   "nome": "BOMBAS MANUAIS E MECÂNICAS",
+   "grupo": "43",
+   "nomeGrupo": "BOMBAS E COMPRESSORES"
+  },
+  "4330": {
+   "nome": "CENTRIFUGADORES, SEPARADORES E FILTROS DE PRESSÃO E A VÁCUO",
+   "grupo": "43",
+   "nomeGrupo": "BOMBAS E COMPRESSORES"
+  },
+  "4410": {
+   "nome": "CALDEIRAS INDUSTRIAIS",
+   "grupo": "44",
+   "nomeGrupo": "FORNOS, CENTRAIS DE VAPOR E EQUIPAMENTOS DE SECAGEM,  REATO-RES NUCLEARES"
+  },
+  "4420": {
+   "nome": "TROCADORES DE CALOR E CONDENSADORES DE VAPOR",
+   "grupo": "44",
+   "nomeGrupo": "FORNOS, CENTRAIS DE VAPOR E EQUIPAMENTOS DE SECAGEM,  REATO-RES NUCLEARES"
+  },
+  "4430": {
+   "nome": "FORNALHAS, FORNOS E ESTUFAS INDUSTRIAIS",
+   "grupo": "44",
+   "nomeGrupo": "FORNOS, CENTRAIS DE VAPOR E EQUIPAMENTOS DE SECAGEM,  REATO-RES NUCLEARES"
+  },
+  "4440": {
+   "nome": "SECADORES, DESIDRATADORES E ANTI-HIDRATADORES",
+   "grupo": "44",
+   "nomeGrupo": "FORNOS, CENTRAIS DE VAPOR E EQUIPAMENTOS DE SECAGEM,  REATO-RES NUCLEARES"
+  },
+  "4460": {
+   "nome": "EQUIPAMENTOS PARA PURIFICAÇÃO DE AR",
+   "grupo": "44",
+   "nomeGrupo": "FORNOS, CENTRAIS DE VAPOR E EQUIPAMENTOS DE SECAGEM,  REATO-RES NUCLEARES"
+  },
+  "4470": {
+   "nome": "REATORES NUCLEARES",
+   "grupo": "44",
+   "nomeGrupo": "FORNOS, CENTRAIS DE VAPOR E EQUIPAMENTOS DE SECAGEM,  REATO-RES NUCLEARES"
+  },
+  "4510": {
+   "nome": "DISPOSITIVOS E ACESSÓRIOS PARA INSTALAÇÕES HIDRÁULICAS",
+   "grupo": "45",
+   "nomeGrupo": "EQUIPAMENTO DE INSTALAÇÕES HIDRÁULICAS E DE AQUECIMENTO"
+  },
+  "4520": {
+   "nome": "EQUIPAMENTOS PARA CALEFAÇÃO E AQUECEDORES DOMÉSTICOS DE ÁGUA",
+   "grupo": "45",
+   "nomeGrupo": "EQUIPAMENTO DE INSTALAÇÕES HIDRÁULICAS E DE AQUECIMENTO"
+  },
+  "4530": {
+   "nome": "EQUIPAMENTOS PARA QUEIMA DE COMBUSTIVEL",
+   "grupo": "45",
+   "nomeGrupo": "EQUIPAMENTO DE INSTALAÇÕES HIDRÁULICAS E DE AQUECIMENTO"
+  },
+  "4540": {
+   "nome": "EQUIPAMENTOS DIVERSOS DE INSTALAÇÕES HIDRÁULICAS, SANITÁRIASE DE CALEFAÇÃO",
+   "grupo": "45",
+   "nomeGrupo": "EQUIPAMENTO DE INSTALAÇÕES HIDRÁULICAS E DE AQUECIMENTO"
+  },
+  "4610": {
+   "nome": "EQUIPAMENTOS PARA PURIFICAÇÃO DE ÁGUA",
+   "grupo": "46",
+   "nomeGrupo": "EQUIPAMENTOS PARA PURIFICAÇÃO DE ÁGUAS E TRATAMENTO DE ESGO-TOS"
+  },
+  "4620": {
+   "nome": "EQUIPAMENTOS PARA DESTILAÇÃO DE ÁGUA, PARA  USO  MARÍTIMO E INDUSTRIAL",
+   "grupo": "46",
+   "nomeGrupo": "EQUIPAMENTOS PARA PURIFICAÇÃO DE ÁGUAS E TRATAMENTO DE ESGO-TOS"
+  },
+  "4630": {
+   "nome": "EQUIPAMENTOS PARA TRATAMENTO DE ESGOTOS",
+   "grupo": "46",
+   "nomeGrupo": "EQUIPAMENTOS PARA PURIFICAÇÃO DE ÁGUAS E TRATAMENTO DE ESGO-TOS"
+  },
+  "4710": {
+   "nome": "CANOS E TUBOS",
+   "grupo": "47",
+   "nomeGrupo": "CANOS, TUBOS, MANGUEIRAS E ACESSÓRIOS"
+  },
+  "4720": {
+   "nome": "MANGUEIRAS E TUBULAÇÕES FLEXÍVEIS",
+   "grupo": "47",
+   "nomeGrupo": "CANOS, TUBOS, MANGUEIRAS E ACESSÓRIOS"
+  },
+  "4730": {
+   "nome": "ACESSÓRIOS E FERRAGENS ESPECIAIS PARA  MANGUEIRAS, CANOS  E TUBOS",
+   "grupo": "47",
+   "nomeGrupo": "CANOS, TUBOS, MANGUEIRAS E ACESSÓRIOS"
+  },
+  "4810": {
+   "nome": "VÁLVULAS ACIONADAS POR FORÇA MOTRIZ",
+   "grupo": "48",
+   "nomeGrupo": "VÁLVULAS"
+  },
+  "4820": {
+   "nome": "VÁLVULAS NÃO ACIONADAS POR FORÇA MOTRIZ",
+   "grupo": "48",
+   "nomeGrupo": "VÁLVULAS"
+  },
+  "4910": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO PARA OFICINA DE MANUTENÇÃO E  REPARO DE VEÍCULOS MOTORIZADOS",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4920": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO PARA OFICINA DE MANUTENÇÃO E REPA-RO DE AERONAVES",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4921": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO PARA MANUTENÇÃO, REPARO E INSPEÇÃODE TORPEDOS",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4923": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO PARA MANUTENÇÃO,REPARO E INSPEÇÃO DE MINAS SUBMARINAS E BOMBAS DE PROFUNDIDADE",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4925": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO PARA MANUTENÇÃO,REPARO E INSPEÇÃO DE MUNIÇÃO",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4927": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO PARA MANUTENÇÃO,REPARO E INSPEÇÃO DE FOGUETES",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4930": {
+   "nome": "EQUIPAMENTO PARA ABASTECIMENTO DE COMBUSTÍVEL E LUBRIFICAÇÃO",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4931": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO PARA OFICINA DE MANUTENÇÃO E  REPARO DE MATERIAL DE CONTROLE DE TIRO",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4933": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO PARA OFICINA DE MANUTENÇÃO E  REPARO DE ARMAMENTO",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4935": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO PARA MANUTENÇÃO,REPARO E INSPEÇÃO DE MÍSSEIS GUIADOS",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4940": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO DIVERSOS PARA OFICINA  DE  MANUTENÇÃO E REPARO",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4960": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO PARA MANUTENÇÃO, REPARO E INSPEÇÃODE VEÍCULOS ESPACIAIS",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "4970": {
+   "nome": "EQUIPAMENTO ESPECIALIZADO PARA MANUTENÇÃO E REPARO DE ARMAS MÚLTIPLAS GUIADAS",
+   "grupo": "49",
+   "nomeGrupo": "EQUIPAMENTOS PARA OFICINAS DE MANUTENÇÃO E REPAROS"
+  },
+  "5110": {
+   "nome": "FERRAMENTAS MANUAIS DE CORTE, NÃO ACIONADAS POR FORÇA MOTRIZ",
+   "grupo": "51",
+   "nomeGrupo": "FERRAMENTAS MANUAIS"
+  },
+  "5120": {
+   "nome": "FERRAMENTAS MANUAIS SEM CORTE, NÃO ACIONADAS  POR  FORÇA  MOTRIZ",
+   "grupo": "51",
+   "nomeGrupo": "FERRAMENTAS MANUAIS"
+  },
+  "5130": {
+   "nome": "FERRAMENTAS MANUAIS ACIONADAS POR FORÇA MOTRIZ",
+   "grupo": "51",
+   "nomeGrupo": "FERRAMENTAS MANUAIS"
+  },
+  "5133": {
+   "nome": "BROCAS, ALARGADORES, ESCARIADORES, MANUAIS E PARA USO EM  MÁQUINAS",
+   "grupo": "51",
+   "nomeGrupo": "FERRAMENTAS MANUAIS"
+  },
+  "5136": {
+   "nome": "MACHOS, MATRIZES E MANDRIS, MANUAIS E MECÂNICOS",
+   "grupo": "51",
+   "nomeGrupo": "FERRAMENTAS MANUAIS"
+  },
+  "5140": {
+   "nome": "CAIXAS PARA FERRAMENTAS E FERRAGENS",
+   "grupo": "51",
+   "nomeGrupo": "FERRAMENTAS MANUAIS"
+  },
+  "5180": {
+   "nome": "JOGOS E CONJUNTOS DE FERRAMENTAS MANUAIS",
+   "grupo": "51",
+   "nomeGrupo": "FERRAMENTAS MANUAIS"
+  },
+  "5210": {
+   "nome": "INSTRUMENTOS DE MEDIÇÃO PARA ARTÍFICES",
+   "grupo": "52",
+   "nomeGrupo": "INSTRUMENTOS DE MEDIÇÃO"
+  },
+  "5220": {
+   "nome": "CALIBRES DE INSPEÇÃO E FERRAMENTAS DE PRECISÃO",
+   "grupo": "52",
+   "nomeGrupo": "INSTRUMENTOS DE MEDIÇÃO"
+  },
+  "5280": {
+   "nome": "JOGOS E CONJUNTOS DE INSTRUMENTOS DE MEDIÇÃO",
+   "grupo": "52",
+   "nomeGrupo": "INSTRUMENTOS DE MEDIÇÃO"
+  },
+  "5305": {
+   "nome": "PARAFUSOS SEM PORCA",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5306": {
+   "nome": "PARAFUSOS COM PORCA",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5307": {
+   "nome": "PRISIONEIROS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5310": {
+   "nome": "PORCAS E ARRUELAS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5315": {
+   "nome": "PREGOS, CHAVETAS E PINOS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5320": {
+   "nome": "REBITES",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5325": {
+   "nome": "DISPOSITIVOS PARA FIXAÇÃO",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5330": {
+   "nome": "GAXETAS E OUTROS MATERIAIS PARA VEDAÇÃO",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5331": {
+   "nome": "ANÉIS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5335": {
+   "nome": "TELAS METÁLICAS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5340": {
+   "nome": "FERRAGENS DIVERSAS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5341": {
+   "nome": "CANTONEIRAS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5342": {
+   "nome": "FERRAGENS DE PEÇA DE SISTEMAS DE ARMAS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5345": {
+   "nome": "DISCOS E PEDRAS ABRASIVOS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5350": {
+   "nome": "MATERIAIS ABRASIVOS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5355": {
+   "nome": "BOTÕES E PONTEIROS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5360": {
+   "nome": "MOLAS DE ARAME, PLANAS E HELICOIDAIS",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5365": {
+   "nome": "ANÉIS, BUCHAS E ESPAÇADORES",
+   "grupo": "53",
+   "nomeGrupo": "FERRAGENS E ABRASIVOS"
+  },
+  "5410": {
+   "nome": "EDIFICAÇÕES PRÉ-FABRICADAS E PORTÁTEIS",
+   "grupo": "54",
+   "nomeGrupo": "ESTRUTURAS E ANDAIMES PRÉ-FABRICADOS"
+  },
+  "5411": {
+   "nome": "ABRIGOS DE PAREDE RÍGIDA",
+   "grupo": "54",
+   "nomeGrupo": "ESTRUTURAS E ANDAIMES PRÉ-FABRICADOS"
+  },
+  "5419": {
+   "nome": "CONSTRUÇÕES COLETIVAS MODULARES DE APOIO",
+   "grupo": "54",
+   "nomeGrupo": "ESTRUTURAS E ANDAIMES PRÉ-FABRICADOS"
+  },
+  "5420": {
+   "nome": "PONTES FIXAS E FLUTUANTES",
+   "grupo": "54",
+   "nomeGrupo": "ESTRUTURAS E ANDAIMES PRÉ-FABRICADOS"
+  },
+  "5430": {
+   "nome": "TANQUES DE ARMAZENAGEM",
+   "grupo": "54",
+   "nomeGrupo": "ESTRUTURAS E ANDAIMES PRÉ-FABRICADOS"
+  },
+  "5440": {
+   "nome": "EQUIPAMENTOS PARA MONTAGEM DE ANDAIME E FORMAS DE CONCRETO",
+   "grupo": "54",
+   "nomeGrupo": "ESTRUTURAS E ANDAIMES PRÉ-FABRICADOS"
+  },
+  "5445": {
+   "nome": "ESTRUTURAS DE TORRES PRÉ-FABRICADAS",
+   "grupo": "54",
+   "nomeGrupo": "ESTRUTURAS E ANDAIMES PRÉ-FABRICADOS"
+  },
+  "5450": {
+   "nome": "ESTRUTURAS PRÉ-FABRICADAS DIVERSAS",
+   "grupo": "54",
+   "nomeGrupo": "ESTRUTURAS E ANDAIMES PRÉ-FABRICADOS"
+  },
+  "5510": {
+   "nome": "TÁBUAS E ARTIGOS CORRELATOS À BASE DE MADEIRA",
+   "grupo": "55",
+   "nomeGrupo": "TÁBUAS, ESQUADRIAS, COMPENSADOS E FOLHEADOS DE MADEIRA"
+  },
+  "5520": {
+   "nome": "ESQUADRIAS",
+   "grupo": "55",
+   "nomeGrupo": "TÁBUAS, ESQUADRIAS, COMPENSADOS E FOLHEADOS DE MADEIRA"
+  },
+  "5530": {
+   "nome": "COMPENSADOS E FOLHEADOS",
+   "grupo": "55",
+   "nomeGrupo": "TÁBUAS, ESQUADRIAS, COMPENSADOS E FOLHEADOS DE MADEIRA"
+  },
+  "5610": {
+   "nome": "MATERIAIS DE ORIGEM MINERAL PARA CONSTRUÇÃO, A GRANEL",
+   "grupo": "56",
+   "nomeGrupo": "MATERIAIS PARA CONSTRUÇÃO"
+  },
+  "5620": {
+   "nome": "VIDROS, TELHAS, TIJOLOS E BLOCOS PARA CONSTRUÇÃO",
+   "grupo": "56",
+   "nomeGrupo": "MATERIAIS PARA CONSTRUÇÃO"
+  },
+  "5630": {
+   "nome": "TUBOS E CONDUTOS, NÃO METÁLICOS, PARA CONSTRUÇÃO",
+   "grupo": "56",
+   "nomeGrupo": "MATERIAIS PARA CONSTRUÇÃO"
+  },
+  "5640": {
+   "nome": "PAINEL DE PAPELÃO,PAPEL EMPREGADO EM CONSTRUÇÃO E MATERIAIS DE ISOLAMENTO TÉRMICO",
+   "grupo": "56",
+   "nomeGrupo": "MATERIAIS PARA CONSTRUÇÃO"
+  },
+  "5650": {
+   "nome": "MATERIAIS PARA TELHADOS E REVESTIMENTO DE PAREDES",
+   "grupo": "56",
+   "nomeGrupo": "MATERIAIS PARA CONSTRUÇÃO"
+  },
+  "5660": {
+   "nome": "CERCAS, GRADES E PORTÕES",
+   "grupo": "56",
+   "nomeGrupo": "MATERIAIS PARA CONSTRUÇÃO"
+  },
+  "5670": {
+   "nome": "COMPONENTES PRÉ-FABRICADOS PARA CONSTRUÇÃO",
+   "grupo": "56",
+   "nomeGrupo": "MATERIAIS PARA CONSTRUÇÃO"
+  },
+  "5675": {
+   "nome": "MATERIAL DE CONSTRUÇÃO SINTÉTICO E ARTIGOS CORRELATOS",
+   "grupo": "56",
+   "nomeGrupo": "MATERIAIS PARA CONSTRUÇÃO"
+  },
+  "5680": {
+   "nome": "MATERIAIS DIVERSOS PARA CONSTRUÇÃO",
+   "grupo": "56",
+   "nomeGrupo": "MATERIAIS PARA CONSTRUÇÃO"
+  },
+  "5805": {
+   "nome": "EQUIPAMENTO TELEFÔNICO E TELEGRÁFICO",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5810": {
+   "nome": "EQUIPAMENTOS E COMPONENTES PARA SEGURANÇA DE COMUNICAÇÕES",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5811": {
+   "nome": "OUTROS EQUIPAMENTOS CRIPTOLÓGICOS E COMPONENTES",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5815": {
+   "nome": "EQUIPAMENTOS DE TELETIPO E FAC-SÍMILE",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5820": {
+   "nome": "EQUIPAMENTOS PARA COMUNICAÇÃO POR RÁDIO E TELEVISÃO, EXCETO OS DE AERONAVES",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5821": {
+   "nome": "EQUIPAMENTOS PARA COMUNICACÃO POR RÁDIO E TELEVISÃO, PARA A-ERONAVES",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5825": {
+   "nome": "EQUIPAMENTOS DE RADIONAVEGAÇÃO, EXCETO OS DE AERONAVES",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5826": {
+   "nome": "EQUIPAMENTOS PARA RADIONAVEGAÇÃO DE AERONAVES",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5830": {
+   "nome": "SISTEMAS DE INTERCOMUNICAÇÃO E AMPLIFICAÇÃO DE  VOZ,  EXCETOOS DE AERONAVES",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5831": {
+   "nome": "SISTEMAS PARA INTERCOMUNICAÇÃO E AMPLIFICAÇÃO DE VOZ, DE  AERONAVES",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5835": {
+   "nome": "EQUIPAMENTOS PARA GRAVAÇÃO E REPRODUÇÃO DE SOM",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5836": {
+   "nome": "EQUIPAMENTOS PARA GRAVAÇÃO E REPRODUÇÃO DE VÍDEO",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5840": {
+   "nome": "EQUIPAMENTOS DE RADAR, EXCETO OS DE AERONAVES",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5841": {
+   "nome": "EQUIPAMENTOS DE RADAR PARA AERONAVES",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5845": {
+   "nome": "EQUIPAMENTOS SUBMARINO DE SOM",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5850": {
+   "nome": "EQUIPAMENTOS PARA COMUNICAÇÃO COM LUZ VISÍVEL E INVISÍVEL",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5855": {
+   "nome": "EQUIPAMENTOS PARA VISÃO NOTURNA, POR RADIAÇÃO EMITIDA  E  REFLETIDA",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5860": {
+   "nome": "DISPOSITIVOS DE RADIAÇÃO COERENTE ESTIMULADA, SEUS  COMPONENTES E ACESSÓRIOS",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5865": {
+   "nome": "EQUIPAMENTOS PARA CONTRAMEDIDAS ELETRÔNICAS,   CONTRA-CONTRAMEDIDAS E DE CAPACIDADE DE REAÇÃO RÁPIDA",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5895": {
+   "nome": "EQUIPAMENTOS DIVERSOS PARA COMUNICAÇÕES",
+   "grupo": "58",
+   "nomeGrupo": "EQUIPAMENTOS DE COMUNICAÇÕES, DETEÇÃO E RADIAÇÃO COERENTE"
+  },
+  "5905": {
+   "nome": "RESISTORES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5910": {
+   "nome": "CAPACITORES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5915": {
+   "nome": "FILTROS E REDES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5920": {
+   "nome": "FUSÍVEIS INTERRUPTORES, ISOLANTES E PROTETORES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5925": {
+   "nome": "DISJUNTORES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5930": {
+   "nome": "CHAVES ELÉTRICAS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5935": {
+   "nome": "CONECTORES ELÉTRICOS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5940": {
+   "nome": "BORNES, TERMINAIS E LÂMINAS TERMINAIS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5945": {
+   "nome": "RELÉS E SOLENÓIDES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5950": {
+   "nome": "BOBINAS E TRANSFORMADORES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5955": {
+   "nome": "CRISTAIS OSCILADORES E PIEZOELÉTRICOS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5960": {
+   "nome": "VÁLVULAS ELETRÔNICAS E FERRAGENS CORRELATAS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5961": {
+   "nome": "DISPOSITIVOS A SEMICONDUTOR E PLACAS ASSOCIADAS (CIRCUITOS)",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5962": {
+   "nome": "MICROCIRCUITOS ELETRÔNICOS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5963": {
+   "nome": "MÓDULOS ELETRÔNICOS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5965": {
+   "nome": "FONES, MICROFONES E ALTO-FALANTES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5970": {
+   "nome": "ISOLADORES ELÉTRICOS E MATERIAIS ISOLANTES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5975": {
+   "nome": "FERRAGENS E SUPRIMENTOS DE ELETRICIDADE",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5977": {
+   "nome": "ESCOVAS DE CONTATO ELÉTRICO E ELETRODOS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5980": {
+   "nome": "DISPOSITIVOS OPTOELETRÔNICOS E ITENS CORRELATOS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5985": {
+   "nome": "ANTENAS, GUIAS DE ONDA E ITENS CORRELATOS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5990": {
+   "nome": "SINCRONIZADORES E ANALISADORES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5995": {
+   "nome": "CONJUNTOS DE CABOS, CORDÕES E FIOS ELÉTRICOS PARA  EQUIPAMENTOS DE COMUNICAÇÕES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5996": {
+   "nome": "AMPLIFICADORES",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5998": {
+   "nome": "CONJUNTOS ELÉTRICOS E ELETRÔNICOS, PLACAS, CARTÕES  E  ITENSCORRELATOS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "5999": {
+   "nome": "COMPONENTES ELÉTRICOS E ELETRÔNICOS DIVERSOS",
+   "grupo": "59",
+   "nomeGrupo": "COMPONENTES DE EQUIPAMENTOS ELÉTRICOS E ELETRÔNICOS"
+  },
+  "6004": {
+   "nome": "JUNTAS ROTATIVAS",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6005": {
+   "nome": "ACOPLADORES , ISOLADORES E MISTURADORES",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6006": {
+   "nome": "ATENUADORES",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6007": {
+   "nome": "FILTROS",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6008": {
+   "nome": "MULTIPLEXADORES E DEMULTIPLEXADORES",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6010": {
+   "nome": "CONDUTORES DE FIBRA ÓTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6015": {
+   "nome": "CABOS DE FIBRA ÓTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6020": {
+   "nome": "CONJUNTOS MONTADOS DE CABOS DE FOBRA ÓTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6021": {
+   "nome": "INTERRUPTORES DE FIBRA ÓTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6025": {
+   "nome": "TRANSMISSORES DE FIBRA OTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6026": {
+   "nome": "RECEPTORES DE FIBRA OTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6029": {
+   "nome": "REPETIDORES OTICOS",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6030": {
+   "nome": "DISPOSITIVOS DE FIBRA ÓTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6031": {
+   "nome": "CIRCUITOS OTICOS INTEGRADOS",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6032": {
+   "nome": "FONTES DE LUZ DE FIBRA ÓTICA E FOTODETETORES",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6033": {
+   "nome": "FOTO DETETORES DE FIBRA OTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6034": {
+   "nome": "MODULADORES E DEMODULADORES DE FIBRA OTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6035": {
+   "nome": "DISPOSITIVOS DE TRANSFERÊNCIA DE LUZ E DE IMAGEM DE FIBRA  ÓTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6050": {
+   "nome": "DISPOSITIVOS PASSIVOS DE FIBRA OTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6060": {
+   "nome": "INTERCONECTORES E SUPRIMENTOS DE FIBRA ÓTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6070": {
+   "nome": "ACESSÓRIOS E MATERIAIS DE FIBRAS ÓTICAS",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6080": {
+   "nome": "JOGOS E CONJUNTOS DE FIBRAS ÓTICAS",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6099": {
+   "nome": "COMPONENTES DIVERSOS DE FIBRA ÓTICA",
+   "grupo": "60",
+   "nomeGrupo": "MATERIAIS, COMPONENTES, CONJUNTOS E ACESSÓRIOS DE FIBRAS  Ó-TICAS"
+  },
+  "6105": {
+   "nome": "MOTORES ELÉTRICOS",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6110": {
+   "nome": "EQUIPAMENTOS DE CONTROLE ELÉTRICO",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6115": {
+   "nome": "GERADORES E CONJUNTOS GERADORES ELÉTRICOS",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6116": {
+   "nome": "UNIDADES DE FORÇA DE CÉLULA DE  COMBUSTÍVEL,  COMPONENTES E ACESSÓRIOS",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6117": {
+   "nome": "SISTEMA DE ENERGIA ELÉTRICA SOLAR",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6120": {
+   "nome": "TRANSFORMADORES PARA ESTAÇÃO DE FORÇA E DE DISTRIBUIÇÃO",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6125": {
+   "nome": "CONVERSORES ELÉTRICOS ROTATIVOS",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6130": {
+   "nome": "CONVERSORES ELÉTRICOS ESTÁTICOS",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6135": {
+   "nome": "BATERIAS NAO RECARREGÁVEIS",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6140": {
+   "nome": "BATERIAS RECARREGÁVEIS",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6145": {
+   "nome": "FIOS E CABOS ELÉTRICOS",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6150": {
+   "nome": "EQUIPAMENTOS DIVERSOS PARA GERAÇÃO E DISTRIBUIÇÃO DE ENERGIA",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6160": {
+   "nome": "ACESSÓRIOS E REVESTIMENTOS DIVERSOS PARA BATERIAS",
+   "grupo": "61",
+   "nomeGrupo": "CONDUTORES ELÉTRICOS E EQUIPAMENTOS PARA GERAÇÃO  E  DISTRI-BUIÇÃO DE ENERGIA"
+  },
+  "6210": {
+   "nome": "APARELHOS DE ILUMINAÇÃO ELÉTRICA DE USO INTERNO E EXTERNO",
+   "grupo": "62",
+   "nomeGrupo": "EQUIPAMENTOS DE ILUMINAÇÃO E LÂMPADAS"
+  },
+  "6220": {
+   "nome": "LUZES E EQUIPAMENTOS DE ILUMINAÇÃO ELÉTRICA PARA VEÍCULOS",
+   "grupo": "62",
+   "nomeGrupo": "EQUIPAMENTOS DE ILUMINAÇÃO E LÂMPADAS"
+  },
+  "6230": {
+   "nome": "EQUIPAMENTOS DE ILUMINAÇÃO ELÉTRICA MANUAL E PORTÁTIL",
+   "grupo": "62",
+   "nomeGrupo": "EQUIPAMENTOS DE ILUMINAÇÃO E LÂMPADAS"
+  },
+  "6240": {
+   "nome": "LÂMPADAS ELÉTRICAS",
+   "grupo": "62",
+   "nomeGrupo": "EQUIPAMENTOS DE ILUMINAÇÃO E LÂMPADAS"
+  },
+  "6250": {
+   "nome": "LUSTRES, SUPORTES PARA LÂMPADAS E ELEMENTOS DE PARTIDA",
+   "grupo": "62",
+   "nomeGrupo": "EQUIPAMENTOS DE ILUMINAÇÃO E LÂMPADAS"
+  },
+  "6260": {
+   "nome": "EQUIPAMENTOS DE ILUMINAÇÃO NÃO ELÉTRICOS",
+   "grupo": "62",
+   "nomeGrupo": "EQUIPAMENTOS DE ILUMINAÇÃO E LÂMPADAS"
+  },
+  "6310": {
+   "nome": "SISTEMA DE SINALIZAÇÃO DE TRÁFEGO E TRÂNSITO",
+   "grupo": "63",
+   "nomeGrupo": "SISTEMAS DE ALARME, SINALIZAÇÃO E DETECÇÃO PARA SEGURANÇA"
+  },
+  "6320": {
+   "nome": "SISTEMAS DE SINALIZAÇÃO E ALARME DE EMBARCAÇÕES",
+   "grupo": "63",
+   "nomeGrupo": "SISTEMAS DE ALARME, SINALIZAÇÃO E DETECÇÃO PARA SEGURANÇA"
+  },
+  "6330": {
+   "nome": "SISTEMAS DE SINALIZAÇÃO E ALARME PARA FERROVIAS",
+   "grupo": "63",
+   "nomeGrupo": "SISTEMAS DE ALARME, SINALIZAÇÃO E DETECÇÃO PARA SEGURANÇA"
+  },
+  "6340": {
+   "nome": "SISTEMAS DE SINALIZAÇÃO E ALARME PARA AERONAVES",
+   "grupo": "63",
+   "nomeGrupo": "SISTEMAS DE ALARME, SINALIZAÇÃO E DETECÇÃO PARA SEGURANÇA"
+  },
+  "6350": {
+   "nome": "SISTEMAS DIVERSOS DE SINALIZAÇÃO, ALARME E DETECÇÃO PARA  SEGURANÇA",
+   "grupo": "63",
+   "nomeGrupo": "SISTEMAS DE ALARME, SINALIZAÇÃO E DETECÇÃO PARA SEGURANÇA"
+  },
+  "6505": {
+   "nome": "DROGAS E MEDICAMENTOS",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6508": {
+   "nome": "COSMÉTICOS E ARTIGOS DE TOUCADOR DE NATUREZA MEDICINAL",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6509": {
+   "nome": "DROGAS E PRODUTOS BIOLÓGICOS DE USO VETERINÁRIO",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6510": {
+   "nome": "MATERIAIS CIRÚRGICOS PARA CURATIVOS",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6515": {
+   "nome": "INSTRUMENTOS, EQUIPAMENTOS E SUPRIMENTOS MÉDICOS  E  CIRÚRGICOS",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6520": {
+   "nome": "INSTRUMENTOS, EQUIPAMENTOS E SUPRIMENTOS DENTÁRIOS",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6525": {
+   "nome": "EQUIPAMENTOS E SUPRIMENTOS DE RAIOS-X DE USO  MÉDICO,  DENTÁRIO E VETERINÁRIO",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6530": {
+   "nome": "MOBILIÁRIO, EQUIPAMENTOS, UTENSÍLIOS E  SUPRIMENTOS  HOSPITALARES",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6532": {
+   "nome": "VESTUÁRIO HOSPITALAR E CIRÚRGICO E ITENS CORRELATOS DE  FINALIDADES ESPECIAIS",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6540": {
+   "nome": "EQUIPAMENTOS, INSTRUMENTOS E SUPRIMENTOS OFTALMOLÓGICOS",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6545": {
+   "nome": "JOGOS E CONJUNTOS MÉDICOS",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6550": {
+   "nome": "SUBSTÂNCIAS PARA DIAGNÓSTICO \"IN VITRO\",  REAGENTES,  CONJUNTOS E JOGOS PARA TESTE",
+   "grupo": "65",
+   "nomeGrupo": "EQUIPAMENTOS E ARTIGOS PARA USO MÉDICO, DENTÁRIO E VETERINÁRIO"
+  },
+  "6605": {
+   "nome": "INSTRUMENTOS DE NAVEGAÇÃO",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6610": {
+   "nome": "INSTRUMENTOS DE VÔO",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6615": {
+   "nome": "MECANISMOS DE PILOTO AUTOMÁTICO E  COMPONENTES GIROSCÓPICOS DE AERONAVES",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6620": {
+   "nome": "INSTRUMENTOS DE MOTOR",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6625": {
+   "nome": "INSTRUMENTO DE TESTE E DE MEDIÇÃO DE PROPRIEDADES ELÉTRICAS E ELETRÔNICAS",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6630": {
+   "nome": "INSTRUMENTOS PARA ANÁLISES QUÍMICAS",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6635": {
+   "nome": "EQUIPAMENTOS PARA TESTES DE PROPRIEDADES FÍSICAS",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6636": {
+   "nome": "CÂMARAS DE CONTROLE AMBIENTAL E EQUIPAMENTOS CORRELATOS",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6640": {
+   "nome": "EQUIPAMENTOS E ARTIGOS DE LABORATÓRIO",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6645": {
+   "nome": "INSTRUMENTOS PARA MEDIÇÃO DE TEMPO",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6650": {
+   "nome": "INSTRUMENTOS ÓTICOS, EQUIPAMENTOS DE TESTE, COMPONENTES  E ACESSÓRIOS",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6655": {
+   "nome": "INSTRUMENTOS GEOFÍSICOS",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6660": {
+   "nome": "INSTRUMENTOS E APARELHOS METEOROLÓGICOS",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6665": {
+   "nome": "INSTRUMENTOS E APARELHOS DE DETECÇÃO DE PERIGO",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6670": {
+   "nome": "ESCALAS E BALANÇAS",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6675": {
+   "nome": "INSTRUMENTOS DE DESENHO, TOPOGRAFIA E CARTOGRAFIA",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6680": {
+   "nome": "INSTRUMENTOS PARA MEDIÇÃO DE FLUXO DE LÍQUIDO E  GÁS, NÍVEL DE LÍQUIDOS E DE MOVIMENTOS MECÂNICOS",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6685": {
+   "nome": "INSTRUMENTOS PARA MEDIÇÃO E CONTROLE DE PRESSÃO,TEMPERATURA E UMIDADE",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6695": {
+   "nome": "INSTRUMENTOS COMBINADOS DIVERSOS",
+   "grupo": "66",
+   "nomeGrupo": "INSTRUMENTOS E EQUIPAMENTOS DE LABORATÓRIO"
+  },
+  "6710": {
+   "nome": "CÂMARAS CINEMATOGRÁFICAS",
+   "grupo": "67",
+   "nomeGrupo": "EQUIPAMENTOS FOTOGRÁFICOS"
+  },
+  "6720": {
+   "nome": "CÂMARAS FOTOGRÁFICAS",
+   "grupo": "67",
+   "nomeGrupo": "EQUIPAMENTOS FOTOGRÁFICOS"
+  },
+  "6730": {
+   "nome": "EQUIPAMENTO PARA PROJEÇÃO FOTOGRÁFICA",
+   "grupo": "67",
+   "nomeGrupo": "EQUIPAMENTOS FOTOGRÁFICOS"
+  },
+  "6740": {
+   "nome": "EQUIPAMENTO PARA REVELAÇÃO E ACABAMENTO FOTOGRÁFICO",
+   "grupo": "67",
+   "nomeGrupo": "EQUIPAMENTOS FOTOGRÁFICOS"
+  },
+  "6750": {
+   "nome": "SUPRIMENTOS FOTOGRÁFICOS",
+   "grupo": "67",
+   "nomeGrupo": "EQUIPAMENTOS FOTOGRÁFICOS"
+  },
+  "6760": {
+   "nome": "EQUIPAMENTO FOTOGRÁFICO E ACESSÓRIOS",
+   "grupo": "67",
+   "nomeGrupo": "EQUIPAMENTOS FOTOGRÁFICOS"
+  },
+  "6770": {
+   "nome": "FILMES REVELADOS",
+   "grupo": "67",
+   "nomeGrupo": "EQUIPAMENTOS FOTOGRÁFICOS"
+  },
+  "6780": {
+   "nome": "JOGOS E CONJUNTOS FOTOGRÁFICOS",
+   "grupo": "67",
+   "nomeGrupo": "EQUIPAMENTOS FOTOGRÁFICOS"
+  },
+  "6810": {
+   "nome": "PRODUTOS QUÍMICOS",
+   "grupo": "68",
+   "nomeGrupo": "SUBSTÂNCIAS E PRODUTOS QUÍMICOS"
+  },
+  "6820": {
+   "nome": "CORANTES",
+   "grupo": "68",
+   "nomeGrupo": "SUBSTÂNCIAS E PRODUTOS QUÍMICOS"
+  },
+  "6830": {
+   "nome": "GASES COMPRIMIDOS E LIQUEFEITOS",
+   "grupo": "68",
+   "nomeGrupo": "SUBSTÂNCIAS E PRODUTOS QUÍMICOS"
+  },
+  "6840": {
+   "nome": "PESTICIDAS E DESINFETANTES",
+   "grupo": "68",
+   "nomeGrupo": "SUBSTÂNCIAS E PRODUTOS QUÍMICOS"
+  },
+  "6850": {
+   "nome": "ESPECIALIDADES QUÍMICAS DIVERSAS",
+   "grupo": "68",
+   "nomeGrupo": "SUBSTÂNCIAS E PRODUTOS QUÍMICOS"
+  },
+  "6910": {
+   "nome": "ACESSÓRIOS PARA TREINAMENTO",
+   "grupo": "69",
+   "nomeGrupo": "APARELHOS E ACESSÓRIOS PARA TREINAMENTO"
+  },
+  "6920": {
+   "nome": "ACESSÓRIOS PARA TREINAMENTO DE ARMAMENTO",
+   "grupo": "69",
+   "nomeGrupo": "APARELHOS E ACESSÓRIOS PARA TREINAMENTO"
+  },
+  "6930": {
+   "nome": "ACESSÓRIOS PARA TREINAMENTO OPERACIONAL",
+   "grupo": "69",
+   "nomeGrupo": "APARELHOS E ACESSÓRIOS PARA TREINAMENTO"
+  },
+  "6940": {
+   "nome": "ACESSÓRIOS PARA TREINAMENTO DE COMUNICAÇÕES",
+   "grupo": "69",
+   "nomeGrupo": "APARELHOS E ACESSÓRIOS PARA TREINAMENTO"
+  },
+  "7010": {
+   "nome": "COMPUTADORES",
+   "grupo": "70",
+   "nomeGrupo": "INFORMÁTICA - EQUIPAMENTOS,  PEÇAS, ACESSÓRIOS E SUPRIMENTOSDE TIC"
+  },
+  "7020": {
+   "nome": "IMPRESSORAS",
+   "grupo": "70",
+   "nomeGrupo": "INFORMÁTICA - EQUIPAMENTOS,  PEÇAS, ACESSÓRIOS E SUPRIMENTOSDE TIC"
+  },
+  "7030": {
+   "nome": "EQUIPAMENTOS DE ARMAZENAMENTO DE DADOS",
+   "grupo": "70",
+   "nomeGrupo": "INFORMÁTICA - EQUIPAMENTOS,  PEÇAS, ACESSÓRIOS E SUPRIMENTOSDE TIC"
+  },
+  "7040": {
+   "nome": "EQUIPAMENTOS DE ENTRADA DE DADOS",
+   "grupo": "70",
+   "nomeGrupo": "INFORMÁTICA - EQUIPAMENTOS,  PEÇAS, ACESSÓRIOS E SUPRIMENTOSDE TIC"
+  },
+  "7050": {
+   "nome": "EQUIPAMENTOS DE REDE DE TIC - LOCAL E REMOTA",
+   "grupo": "70",
+   "nomeGrupo": "INFORMÁTICA - EQUIPAMENTOS,  PEÇAS, ACESSÓRIOS E SUPRIMENTOSDE TIC"
+  },
+  "7060": {
+   "nome": "PEÇAS E ACESSÓRIOS PARA COMPUTADORES",
+   "grupo": "70",
+   "nomeGrupo": "INFORMÁTICA - EQUIPAMENTOS,  PEÇAS, ACESSÓRIOS E SUPRIMENTOSDE TIC"
+  },
+  "7070": {
+   "nome": "PEÇAS E ACESSÓRIOS PARA IMPRESSORAS",
+   "grupo": "70",
+   "nomeGrupo": "INFORMÁTICA - EQUIPAMENTOS,  PEÇAS, ACESSÓRIOS E SUPRIMENTOSDE TIC"
+  },
+  "7080": {
+   "nome": "PEÇAS, ACESSÓRIOS E FERRAMENTAS PARA REDES DE TIC",
+   "grupo": "70",
+   "nomeGrupo": "INFORMÁTICA - EQUIPAMENTOS,  PEÇAS, ACESSÓRIOS E SUPRIMENTOSDE TIC"
+  },
+  "7090": {
+   "nome": "SUPRIMENTOS DE INFORMÁTICA - TIC",
+   "grupo": "70",
+   "nomeGrupo": "INFORMÁTICA - EQUIPAMENTOS,  PEÇAS, ACESSÓRIOS E SUPRIMENTOSDE TIC"
+  },
+  "7095": {
+   "nome": "UNIDADES PARA MANUSEIO DE CARTÕES",
+   "grupo": "70",
+   "nomeGrupo": "INFORMÁTICA - EQUIPAMENTOS,  PEÇAS, ACESSÓRIOS E SUPRIMENTOSDE TIC"
+  },
+  "7105": {
+   "nome": "MOBILIÁRIO DOMÉSTICO",
+   "grupo": "71",
+   "nomeGrupo": "MOBILIÁRIOS"
+  },
+  "7110": {
+   "nome": "MOBILIÁRIO PARA ESCRITÓRIO",
+   "grupo": "71",
+   "nomeGrupo": "MOBILIÁRIOS"
+  },
+  "7125": {
+   "nome": "ARMÁRIOS E ESTANTES",
+   "grupo": "71",
+   "nomeGrupo": "MOBILIÁRIOS"
+  },
+  "7195": {
+   "nome": "MOBILIÁRIOS DIVERSOS E ACESSÓRIOS",
+   "grupo": "71",
+   "nomeGrupo": "MOBILIÁRIOS"
+  },
+  "7210": {
+   "nome": "UTENSÍLIOS DOMÉSTICOS",
+   "grupo": "72",
+   "nomeGrupo": "UTENSILIOS E UTILIDADES DE USO DOMESTICO E COMERCIAL"
+  },
+  "7220": {
+   "nome": "REVESTIMENTOS PARA PISOS",
+   "grupo": "72",
+   "nomeGrupo": "UTENSILIOS E UTILIDADES DE USO DOMESTICO E COMERCIAL"
+  },
+  "7230": {
+   "nome": "TAPEÇARIAS, CORTINAS E PERSIANAS",
+   "grupo": "72",
+   "nomeGrupo": "UTENSILIOS E UTILIDADES DE USO DOMESTICO E COMERCIAL"
+  },
+  "7240": {
+   "nome": "RECEPIENTES PARA USO DOMÉSTICO E COMERCIAL",
+   "grupo": "72",
+   "nomeGrupo": "UTENSILIOS E UTILIDADES DE USO DOMESTICO E COMERCIAL"
+  },
+  "7290": {
+   "nome": "UTENSÍLIOS COMERCIAIS E DOMÉSTICOS DIVERSOS",
+   "grupo": "72",
+   "nomeGrupo": "UTENSILIOS E UTILIDADES DE USO DOMESTICO E COMERCIAL"
+  },
+  "7310": {
+   "nome": "EQUIPAMENTOS PARA COZINHAR, ASSAR E SERVIR ALIMENTOS",
+   "grupo": "73",
+   "nomeGrupo": "EQUIPAMENTOS PARA PREPARAR E SERVIR ALIMENTOS"
+  },
+  "7320": {
+   "nome": "EQUIPAMENTOS E APARELHOS DE COZINHA",
+   "grupo": "73",
+   "nomeGrupo": "EQUIPAMENTOS PARA PREPARAR E SERVIR ALIMENTOS"
+  },
+  "7330": {
+   "nome": "UTENSÍLIOS E FERRAMENTAS MANUAIS DE COZINHA",
+   "grupo": "73",
+   "nomeGrupo": "EQUIPAMENTOS PARA PREPARAR E SERVIR ALIMENTOS"
+  },
+  "7340": {
+   "nome": "CUTELARIA E TALHERES",
+   "grupo": "73",
+   "nomeGrupo": "EQUIPAMENTOS PARA PREPARAR E SERVIR ALIMENTOS"
+  },
+  "7350": {
+   "nome": "LOUÇA E ARTIGOS DE MESA",
+   "grupo": "73",
+   "nomeGrupo": "EQUIPAMENTOS PARA PREPARAR E SERVIR ALIMENTOS"
+  },
+  "7360": {
+   "nome": "JOGOS, CONJUNTOS  E  EQUIPAMENTOS PARA PREPARAR E SERVIR ALIMENTOS",
+   "grupo": "73",
+   "nomeGrupo": "EQUIPAMENTOS PARA PREPARAR E SERVIR ALIMENTOS"
+  },
+  "7420": {
+   "nome": "MÁQUINAS DE CONTABILIDADE E DE CALCULAR",
+   "grupo": "74",
+   "nomeGrupo": "MÁQUINAS PARA ESCRITÓRIO, SISTEMAS DE PROCESSAMENTO DE  TEX-TO E FICHÁRIOS DE CLASSIFICAÇÃO VISÍVEL"
+  },
+  "7430": {
+   "nome": "MÁQUINAS DE ESCREVER E DE COMPOSIÇÃO PARA ESCRITÓRIO",
+   "grupo": "74",
+   "nomeGrupo": "MÁQUINAS PARA ESCRITÓRIO, SISTEMAS DE PROCESSAMENTO DE  TEX-TO E FICHÁRIOS DE CLASSIFICAÇÃO VISÍVEL"
+  },
+  "7435": {
+   "nome": "EQUIPAMENTOS DE SISTEMAS DE INFORMAÇÕES PARA ESCRITÓRIO",
+   "grupo": "74",
+   "nomeGrupo": "MÁQUINAS PARA ESCRITÓRIO, SISTEMAS DE PROCESSAMENTO DE  TEX-TO E FICHÁRIOS DE CLASSIFICAÇÃO VISÍVEL"
+  },
+  "7450": {
+   "nome": "MÁQUINAS DE GRAVAÇÃO E REPRODUÇÃO DE SOM PARA  USO  EM ESCRITÓRIO",
+   "grupo": "74",
+   "nomeGrupo": "MÁQUINAS PARA ESCRITÓRIO, SISTEMAS DE PROCESSAMENTO DE  TEX-TO E FICHÁRIOS DE CLASSIFICAÇÃO VISÍVEL"
+  },
+  "7460": {
+   "nome": "ARQUIVOS VISUAIS",
+   "grupo": "74",
+   "nomeGrupo": "MÁQUINAS PARA ESCRITÓRIO, SISTEMAS DE PROCESSAMENTO DE  TEX-TO E FICHÁRIOS DE CLASSIFICAÇÃO VISÍVEL"
+  },
+  "7490": {
+   "nome": "MÁQUINAS DIVERSAS PARA ESCRITÓRIO",
+   "grupo": "74",
+   "nomeGrupo": "MÁQUINAS PARA ESCRITÓRIO, SISTEMAS DE PROCESSAMENTO DE  TEX-TO E FICHÁRIOS DE CLASSIFICAÇÃO VISÍVEL"
+  },
+  "7510": {
+   "nome": "ARTIGOS PARA ESCRITÓRIO",
+   "grupo": "75",
+   "nomeGrupo": "UTENSÍLIOS DE ESCRITÓRIO E MATERIAL DE EXPEDIENTE"
+  },
+  "7520": {
+   "nome": "ACESSÓRIOS E DISPOSITIVOS PARA ESCRITÓRIO",
+   "grupo": "75",
+   "nomeGrupo": "UTENSÍLIOS DE ESCRITÓRIO E MATERIAL DE EXPEDIENTE"
+  },
+  "7530": {
+   "nome": "FORMULÁRIOS OFICIAIS",
+   "grupo": "75",
+   "nomeGrupo": "UTENSÍLIOS DE ESCRITÓRIO E MATERIAL DE EXPEDIENTE"
+  },
+  "7540": {
+   "nome": "FORMULÁRIOS PADRONIZADOS",
+   "grupo": "75",
+   "nomeGrupo": "UTENSÍLIOS DE ESCRITÓRIO E MATERIAL DE EXPEDIENTE"
+  },
+  "7610": {
+   "nome": "LIVROS E FOLHETOS",
+   "grupo": "76",
+   "nomeGrupo": "LIVROS, MAPAS E OUTRAS PUBLICAÇÕES"
+  },
+  "7630": {
+   "nome": "JORNAIS E PERIÓDICOS",
+   "grupo": "76",
+   "nomeGrupo": "LIVROS, MAPAS E OUTRAS PUBLICAÇÕES"
+  },
+  "7640": {
+   "nome": "MAPAS, CARTAS E GLOBOS GEOGRÁFICOS",
+   "grupo": "76",
+   "nomeGrupo": "LIVROS, MAPAS E OUTRAS PUBLICAÇÕES"
+  },
+  "7641": {
+   "nome": "MAPAS AERONÁUTICOS, CARTAS E PRODUTOS GEODÉSICOS",
+   "grupo": "76",
+   "nomeGrupo": "LIVROS, MAPAS E OUTRAS PUBLICAÇÕES"
+  },
+  "7642": {
+   "nome": "MAPAS HIDROGRÁFICOS, CARTAS E PRODUTOS GEODÉSICOS",
+   "grupo": "76",
+   "nomeGrupo": "LIVROS, MAPAS E OUTRAS PUBLICAÇÕES"
+  },
+  "7643": {
+   "nome": "MAPAS TOPOGRÁFICOS, CARTAS E PRODUTOS GEODÉSICOS",
+   "grupo": "76",
+   "nomeGrupo": "LIVROS, MAPAS E OUTRAS PUBLICAÇÕES"
+  },
+  "7644": {
+   "nome": "MAPAS DIGITAIS, CARTAS E PRODUTOS GEODÉSICOS",
+   "grupo": "76",
+   "nomeGrupo": "LIVROS, MAPAS E OUTRAS PUBLICAÇÕES"
+  },
+  "7650": {
+   "nome": "DESENHOS E ESPECIFICAÇÕES",
+   "grupo": "76",
+   "nomeGrupo": "LIVROS, MAPAS E OUTRAS PUBLICAÇÕES"
+  },
+  "7660": {
+   "nome": "FOLHAS E LIVROS DE MÚSICA",
+   "grupo": "76",
+   "nomeGrupo": "LIVROS, MAPAS E OUTRAS PUBLICAÇÕES"
+  },
+  "7670": {
+   "nome": "MICROFILMES REVELADOS",
+   "grupo": "76",
+   "nomeGrupo": "LIVROS, MAPAS E OUTRAS PUBLICAÇÕES"
+  },
+  "7690": {
+   "nome": "IMPRESSOS DIVERSOS",
+   "grupo": "76",
+   "nomeGrupo": "LIVROS, MAPAS E OUTRAS PUBLICAÇÕES"
+  },
+  "7710": {
+   "nome": "INSTRUMENTOS MUSICAIS",
+   "grupo": "77",
+   "nomeGrupo": "INSTRUMENTOS MUSICAIS, FONÓGRAFOS E RÁDIOS DOMÉSTICOS"
+  },
+  "7720": {
+   "nome": "PEÇAS E ACESSÓRIOS DE INSTRUMENTOS MUSICAIS",
+   "grupo": "77",
+   "nomeGrupo": "INSTRUMENTOS MUSICAIS, FONÓGRAFOS E RÁDIOS DOMÉSTICOS"
+  },
+  "7730": {
+   "nome": "FONÓGRAFOS, RÁDIOS E TELEVISORES DE TIPO DOMÉSTICO",
+   "grupo": "77",
+   "nomeGrupo": "INSTRUMENTOS MUSICAIS, FONÓGRAFOS E RÁDIOS DOMÉSTICOS"
+  },
+  "7740": {
+   "nome": "DISCOS PARA FONÓGRAFO",
+   "grupo": "77",
+   "nomeGrupo": "INSTRUMENTOS MUSICAIS, FONÓGRAFOS E RÁDIOS DOMÉSTICOS"
+  },
+  "7810": {
+   "nome": "EQUIPAMENTO PARA ATLETISMO E DESPORTO",
+   "grupo": "78",
+   "nomeGrupo": "EQUIPAMENTOS PARA RECREAÇÃO E DESPORTOS"
+  },
+  "7820": {
+   "nome": "JOGOS, BRINQUEDOS E ARTIGOS CORRELATOS COM RODAS",
+   "grupo": "78",
+   "nomeGrupo": "EQUIPAMENTOS PARA RECREAÇÃO E DESPORTOS"
+  },
+  "7830": {
+   "nome": "EQUIPAMENTO PARA GINÁSTICA E RECREAÇÃO",
+   "grupo": "78",
+   "nomeGrupo": "EQUIPAMENTOS PARA RECREAÇÃO E DESPORTOS"
+  },
+  "7910": {
+   "nome": "ENCERADEIRAS E ASPIRADORES DE PÓ",
+   "grupo": "79",
+   "nomeGrupo": "EQUIPAMENTOS E MATERIAIS PARA LIMPEZA"
+  },
+  "7920": {
+   "nome": "VASSOURAS, ESCOVAS, RODOS, ESPONJAS E ESFREGÕES",
+   "grupo": "79",
+   "nomeGrupo": "EQUIPAMENTOS E MATERIAIS PARA LIMPEZA"
+  },
+  "7930": {
+   "nome": "COMPOSTOS E PREPARADOS PARA LIMPEZA E POLIMENTO",
+   "grupo": "79",
+   "nomeGrupo": "EQUIPAMENTOS E MATERIAIS PARA LIMPEZA"
+  },
+  "8010": {
+   "nome": "TINTAS, VERNIZES E PRODUTOS CORRELATOS",
+   "grupo": "80",
+   "nomeGrupo": "PINCÉIS, TINTAS, VEDANTES E ADESIVOS"
+  },
+  "8020": {
+   "nome": "PINCEL PARA ARTISTAS E PINTORES",
+   "grupo": "80",
+   "nomeGrupo": "PINCÉIS, TINTAS, VEDANTES E ADESIVOS"
+  },
+  "8030": {
+   "nome": "COMPOSTOS PRESERVATIVOS E VEDANTES",
+   "grupo": "80",
+   "nomeGrupo": "PINCÉIS, TINTAS, VEDANTES E ADESIVOS"
+  },
+  "8040": {
+   "nome": "ADESIVOS",
+   "grupo": "80",
+   "nomeGrupo": "PINCÉIS, TINTAS, VEDANTES E ADESIVOS"
+  },
+  "8105": {
+   "nome": "SACOS E BOLSAS",
+   "grupo": "81",
+   "nomeGrupo": "RECIPIENTES E MATERIAIS PARA ACONDICIONAMENTO E EMBALAGEM"
+  },
+  "8110": {
+   "nome": "TAMBORES E LATAS",
+   "grupo": "81",
+   "nomeGrupo": "RECIPIENTES E MATERIAIS PARA ACONDICIONAMENTO E EMBALAGEM"
+  },
+  "8115": {
+   "nome": "CAIXAS, CAIXOTES E ENGRADADOS",
+   "grupo": "81",
+   "nomeGrupo": "RECIPIENTES E MATERIAIS PARA ACONDICIONAMENTO E EMBALAGEM"
+  },
+  "8120": {
+   "nome": "CILINDROS COMERCIAIS E INDUSTRIAIS PARA GASES",
+   "grupo": "81",
+   "nomeGrupo": "RECIPIENTES E MATERIAIS PARA ACONDICIONAMENTO E EMBALAGEM"
+  },
+  "8125": {
+   "nome": "GARRAFAS E JARROS",
+   "grupo": "81",
+   "nomeGrupo": "RECIPIENTES E MATERIAIS PARA ACONDICIONAMENTO E EMBALAGEM"
+  },
+  "8130": {
+   "nome": "CARRETÉIS E BOBINAS",
+   "grupo": "81",
+   "nomeGrupo": "RECIPIENTES E MATERIAIS PARA ACONDICIONAMENTO E EMBALAGEM"
+  },
+  "8135": {
+   "nome": "MATERIAIS A GRANEL PARA ACONDICIONAMENTO E EMBALAGEM",
+   "grupo": "81",
+   "nomeGrupo": "RECIPIENTES E MATERIAIS PARA ACONDICIONAMENTO E EMBALAGEM"
+  },
+  "8140": {
+   "nome": "CAIXAS, RECIPIENTES E EMBALAGENS  ESPECIAIS  PARA ARMAMENTO NUCLEAR E MUNIÇÃO",
+   "grupo": "81",
+   "nomeGrupo": "RECIPIENTES E MATERIAIS PARA ACONDICIONAMENTO E EMBALAGEM"
+  },
+  "8145": {
+   "nome": "RECIPIENTES ESPECIALIZADOS PARA TRANSPORTE E ARMAZENAGEM",
+   "grupo": "81",
+   "nomeGrupo": "RECIPIENTES E MATERIAIS PARA ACONDICIONAMENTO E EMBALAGEM"
+  },
+  "8305": {
+   "nome": "TECIDOS",
+   "grupo": "83",
+   "nomeGrupo": "TECIDOS, COUROS, PELES, AVIAMENTOS, BARRACAS E BANDEIRAS"
+  },
+  "8310": {
+   "nome": "FIOS E LINHAS",
+   "grupo": "83",
+   "nomeGrupo": "TECIDOS, COUROS, PELES, AVIAMENTOS, BARRACAS E BANDEIRAS"
+  },
+  "8315": {
+   "nome": "MIUDEZAS E AVIAMENTOS PARA COSTURA",
+   "grupo": "83",
+   "nomeGrupo": "TECIDOS, COUROS, PELES, AVIAMENTOS, BARRACAS E BANDEIRAS"
+  },
+  "8320": {
+   "nome": "MATERIAIS PARA ESTOFAMENTO E ACOLCHOAMENTO",
+   "grupo": "83",
+   "nomeGrupo": "TECIDOS, COUROS, PELES, AVIAMENTOS, BARRACAS E BANDEIRAS"
+  },
+  "8325": {
+   "nome": "PELES",
+   "grupo": "83",
+   "nomeGrupo": "TECIDOS, COUROS, PELES, AVIAMENTOS, BARRACAS E BANDEIRAS"
+  },
+  "8330": {
+   "nome": "COUROS",
+   "grupo": "83",
+   "nomeGrupo": "TECIDOS, COUROS, PELES, AVIAMENTOS, BARRACAS E BANDEIRAS"
+  },
+  "8335": {
+   "nome": "MATERIAIS PARA CALÇADOS",
+   "grupo": "83",
+   "nomeGrupo": "TECIDOS, COUROS, PELES, AVIAMENTOS, BARRACAS E BANDEIRAS"
+  },
+  "8340": {
+   "nome": "BARRACAS E ENCERADOS",
+   "grupo": "83",
+   "nomeGrupo": "TECIDOS, COUROS, PELES, AVIAMENTOS, BARRACAS E BANDEIRAS"
+  },
+  "8345": {
+   "nome": "BANDEIRAS, FLAMULAS E PAVILHOES",
+   "grupo": "83",
+   "nomeGrupo": "TECIDOS, COUROS, PELES, AVIAMENTOS, BARRACAS E BANDEIRAS"
+  },
+  "8405": {
+   "nome": "VESTUÁRIO EXTERNO MASCULINO",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8410": {
+   "nome": "VESTUÁRIO EXTERNO FEMININO",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8415": {
+   "nome": "VESTUÁRIO PARA FINS ESPECIAIS",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8420": {
+   "nome": "ROUPAS ÍNTIMAS E PARA DORMIR, MASCULINAS",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8425": {
+   "nome": "ROUPAS ÍNTIMAS E PARA DORMIR, FEMININAS",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8430": {
+   "nome": "CALÇADOS MASCULINOS",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8435": {
+   "nome": "CALÇADOS FEMININOS",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8440": {
+   "nome": "MEIAS, LUVAS E OUTROS COMPLEMENTOS DO VESTUARIO MASCULINO",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8445": {
+   "nome": "MEIAS, LUVAS E OUTROS COMPLEMENTOS DO VESTUÁRIO FEMININO",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8450": {
+   "nome": "VESTUÁRIO INFANTO-JUVENIL E COMPLEMENTOS",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8455": {
+   "nome": "DISTINTIVOS E INSÍGNIAS",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8460": {
+   "nome": "BAGAGENS",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8465": {
+   "nome": "EQUIPAMENTOS INDIVIDUAIS",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8470": {
+   "nome": "ROUPAS DE PROTEÇÃO CONTRA PROJÉTEIS",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8475": {
+   "nome": "VESTUÁRIO ESPECIALIZADO PARA VÔO E ACESSÓRIOS",
+   "grupo": "84",
+   "nomeGrupo": "VESTUÁRIOS, EQUIPAMENTOS INDIVIDUAIS E INSÍGNIAS"
+  },
+  "8510": {
+   "nome": "PERFUMES, ARTIGOS PARA TOALETE E TOUCADOR",
+   "grupo": "85",
+   "nomeGrupo": "ARTIGOS DE HIGIENE"
+  },
+  "8520": {
+   "nome": "SABONETES, ARTIGOS PARA BARBEAR E DENTIFRÍCIOS",
+   "grupo": "85",
+   "nomeGrupo": "ARTIGOS DE HIGIENE"
+  },
+  "8530": {
+   "nome": "ARTIGOS PARA HIGIENE PESSOAL",
+   "grupo": "85",
+   "nomeGrupo": "ARTIGOS DE HIGIENE"
+  },
+  "8540": {
+   "nome": "ARTIGOS DE PAPEL PARA HIGIENE",
+   "grupo": "85",
+   "nomeGrupo": "ARTIGOS DE HIGIENE"
+  },
+  "8710": {
+   "nome": "FORRAGENS E ALIMENTOS",
+   "grupo": "87",
+   "nomeGrupo": "SUPRIMENTOS AGRÍCOLAS"
+  },
+  "8720": {
+   "nome": "FERTILIZANTES",
+   "grupo": "87",
+   "nomeGrupo": "SUPRIMENTOS AGRÍCOLAS"
+  },
+  "8730": {
+   "nome": "SEMENTES E MUDAS DE PLANTAS",
+   "grupo": "87",
+   "nomeGrupo": "SUPRIMENTOS AGRÍCOLAS"
+  },
+  "8810": {
+   "nome": "ANIMAIS VIVOS, CRIADOS PARA ALIMENTAÇÃO",
+   "grupo": "88",
+   "nomeGrupo": "ANIMAIS VIVOS"
+  },
+  "8820": {
+   "nome": "ANIMAIS VIVOS, NÃO CRIADOS PARA ALIMENTAÇÃO",
+   "grupo": "88",
+   "nomeGrupo": "ANIMAIS VIVOS"
+  },
+  "8905": {
+   "nome": "CARNES, AVES E PEIXES",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8910": {
+   "nome": "OVOS E LATICÍNIOS",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8915": {
+   "nome": "FRUTAS, VERDURAS E LEGUMES",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8920": {
+   "nome": "PRODUTOS DE PANIFICAÇÃO E CEREAIS",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8925": {
+   "nome": "AÇÚCAR, CONFEITOS, CASTANHAS, NOZES E SIMILARES",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8930": {
+   "nome": "GELEIAS, CONSERVAS E GELATINAS",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8935": {
+   "nome": "SOPAS E CALDOS",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8940": {
+   "nome": "ALIMENTOS ESPECIAIS DIETÉTICOS E PREPARADOS ALIMENTÍCIOS",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8945": {
+   "nome": "ÓLEOS E GORDURAS COMESTÍVEIS",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8950": {
+   "nome": "CONDIMENTOS E PRODUTOS CORRELATOS",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8955": {
+   "nome": "CAFÉ, CHÁ E CHOCOLATE",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8960": {
+   "nome": "BEBIDAS NÃO ALCOÓLICAS",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8965": {
+   "nome": "BEBIDAS ALCOÓLICAS",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8970": {
+   "nome": "RAÇÕES EMBALADAS",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "8975": {
+   "nome": "PRODUTOS DE TABACO",
+   "grupo": "89",
+   "nomeGrupo": "SUBSISTÊNCIA"
+  },
+  "9110": {
+   "nome": "COMBUSTÍVEIS SÓLIDOS",
+   "grupo": "91",
+   "nomeGrupo": "COMBUSTÍVEIS, LUBRIFICANTES, ÓLEOS E CERAS"
+  },
+  "9130": {
+   "nome": "COMBUSTÍVEIS E PROPELENTES LÍQUIDOS À BASE DE PETRÓLEO",
+   "grupo": "91",
+   "nomeGrupo": "COMBUSTÍVEIS, LUBRIFICANTES, ÓLEOS E CERAS"
+  },
+  "9135": {
+   "nome": "COMBUSTÍVEIS PROPELENTES LÍQUIDOS E OXIDANTES Á BASE QUÍMICA",
+   "grupo": "91",
+   "nomeGrupo": "COMBUSTÍVEIS, LUBRIFICANTES, ÓLEOS E CERAS"
+  },
+  "9140": {
+   "nome": "ÓLEOS COMBUSTÍVEIS",
+   "grupo": "91",
+   "nomeGrupo": "COMBUSTÍVEIS, LUBRIFICANTES, ÓLEOS E CERAS"
+  },
+  "9150": {
+   "nome": "ÓLEOS E GRAXAS PARA CORTE, LUBRIFICAÇÃO E SISTEMAS  HIDRÁULICOS",
+   "grupo": "91",
+   "nomeGrupo": "COMBUSTÍVEIS, LUBRIFICANTES, ÓLEOS E CERAS"
+  },
+  "9160": {
+   "nome": "CERAS, ÓLEOS E GORDURAS DIVERSOS",
+   "grupo": "91",
+   "nomeGrupo": "COMBUSTÍVEIS, LUBRIFICANTES, ÓLEOS E CERAS"
+  },
+  "9310": {
+   "nome": "PAPÉIS E PAPELÕES",
+   "grupo": "93",
+   "nomeGrupo": "MATERIAIS MANUFATURADOS, NÃO METÁLICOS"
+  },
+  "9320": {
+   "nome": "ARTIGOS DE BORRACHA",
+   "grupo": "93",
+   "nomeGrupo": "MATERIAIS MANUFATURADOS, NÃO METÁLICOS"
+  },
+  "9330": {
+   "nome": "ARTIGOS DE PLÁSTICO",
+   "grupo": "93",
+   "nomeGrupo": "MATERIAIS MANUFATURADOS, NÃO METÁLICOS"
+  },
+  "9340": {
+   "nome": "ARTIGOS DE VIDRO",
+   "grupo": "93",
+   "nomeGrupo": "MATERIAIS MANUFATURADOS, NÃO METÁLICOS"
+  },
+  "9350": {
+   "nome": "MATERIAIS REFRATÁRIOS E DE ACABAMENTO SUPERFICIAL CONTRA  FOGO",
+   "grupo": "93",
+   "nomeGrupo": "MATERIAIS MANUFATURADOS, NÃO METÁLICOS"
+  },
+  "9390": {
+   "nome": "PRODUTOS DIVERSOS NÃO METÁLICOS",
+   "grupo": "93",
+   "nomeGrupo": "MATERIAIS MANUFATURADOS, NÃO METÁLICOS"
+  },
+  "9410": {
+   "nome": "MATÉRIAS-PRIMAS DE ORIGEM VEGETAL",
+   "grupo": "94",
+   "nomeGrupo": "MATÉRIAS-PRIMAS NAO METÁLICAS"
+  },
+  "9420": {
+   "nome": "FIBRAS VEGETAIS, ANIMAIS E SINTÉTICAS",
+   "grupo": "94",
+   "nomeGrupo": "MATÉRIAS-PRIMAS NAO METÁLICAS"
+  },
+  "9430": {
+   "nome": "MATÉRIAS-PRIMAS DIVERSAS DE ORIGEM ANIMAL, NÃO COMESTÍVEIS",
+   "grupo": "94",
+   "nomeGrupo": "MATÉRIAS-PRIMAS NAO METÁLICAS"
+  },
+  "9440": {
+   "nome": "MATÉRIAS-PRIMAS DIVERSAS, FLORESTAIS E AGRÍCOLAS",
+   "grupo": "94",
+   "nomeGrupo": "MATÉRIAS-PRIMAS NAO METÁLICAS"
+  },
+  "9450": {
+   "nome": "RESÍDUOS NAO METÁLICOS, EXCETO OS TÊXTEIS",
+   "grupo": "94",
+   "nomeGrupo": "MATÉRIAS-PRIMAS NAO METÁLICAS"
+  },
+  "9505": {
+   "nome": "ARAMES DE FERRO E DE AÇO, NÃO UTILIZÁVEIS EM ELETRICIDADE",
+   "grupo": "95",
+   "nomeGrupo": "BARRAS, CHAPAS E PERFILADOS METÁLICOS"
+  },
+  "9510": {
+   "nome": "BARRAS E VERGALHÕES DE FERRO E DE AÇO",
+   "grupo": "95",
+   "nomeGrupo": "BARRAS, CHAPAS E PERFILADOS METÁLICOS"
+  },
+  "9515": {
+   "nome": "PLACAS, CHAPAS, FITAS E LAMINADOS FINOS DE FERRO E DE AÇO",
+   "grupo": "95",
+   "nomeGrupo": "BARRAS, CHAPAS E PERFILADOS METÁLICOS"
+  },
+  "9520": {
+   "nome": "PERFIS ESTRUTURAIS DE FERRO E AÇO",
+   "grupo": "95",
+   "nomeGrupo": "BARRAS, CHAPAS E PERFILADOS METÁLICOS"
+  },
+  "9525": {
+   "nome": "ARAMES DE METAL NÃO FERROSO, NÃO UTILIZÁVEIS EM ELETRICIDADE",
+   "grupo": "95",
+   "nomeGrupo": "BARRAS, CHAPAS E PERFILADOS METÁLICOS"
+  },
+  "9530": {
+   "nome": "BARRAS E VERGALHÕES DE METAIS NÃO FERROSOS",
+   "grupo": "95",
+   "nomeGrupo": "BARRAS, CHAPAS E PERFILADOS METÁLICOS"
+  },
+  "9535": {
+   "nome": "PLACAS, CHAPAS, FITAS E LAMINADOS FINOS DE METAIS NÃO  FERROSOS",
+   "grupo": "95",
+   "nomeGrupo": "BARRAS, CHAPAS E PERFILADOS METÁLICOS"
+  },
+  "9540": {
+   "nome": "PERFIS ESTRUTURAIS DE METAIS NÃO FERROSOS",
+   "grupo": "95",
+   "nomeGrupo": "BARRAS, CHAPAS E PERFILADOS METÁLICOS"
+  },
+  "9545": {
+   "nome": "PLACAS, CHAPAS, FITAS E LAMINADOS FINOS DE METAIS PRECIOSOS",
+   "grupo": "95",
+   "nomeGrupo": "BARRAS, CHAPAS E PERFILADOS METÁLICOS"
+  },
+  "9610": {
+   "nome": "MINÉRIOS",
+   "grupo": "96",
+   "nomeGrupo": "MINÉRIOS, MINERAIS E SEUS PRODUTOS PRIMÁRIOS"
+  },
+  "9620": {
+   "nome": "MINERAIS NATURAIS E SINTÉTICOS",
+   "grupo": "96",
+   "nomeGrupo": "MINÉRIOS, MINERAIS E SEUS PRODUTOS PRIMÁRIOS"
+  },
+  "9630": {
+   "nome": "ADITIVOS METÁLICOS E LIGAS BÁSICAS",
+   "grupo": "96",
+   "nomeGrupo": "MINÉRIOS, MINERAIS E SEUS PRODUTOS PRIMÁRIOS"
+  },
+  "9640": {
+   "nome": "PRODUTOS SEMI-ACABADOS E PRODUTOS PRIMÁRIOS DE  FERRO  E DE AÇO",
+   "grupo": "96",
+   "nomeGrupo": "MINÉRIOS, MINERAIS E SEUS PRODUTOS PRIMÁRIOS"
+  },
+  "9650": {
+   "nome": "REFINADOS E PRODUTOS SEMI-ACABADOS DE  METAIS  BÁSICOS  NÃO FERROSOS",
+   "grupo": "96",
+   "nomeGrupo": "MINÉRIOS, MINERAIS E SEUS PRODUTOS PRIMÁRIOS"
+  },
+  "9660": {
+   "nome": "METAIS PRECIOSOS EM SUAS FORMAS PRIMÁRIAS",
+   "grupo": "96",
+   "nomeGrupo": "MINÉRIOS, MINERAIS E SEUS PRODUTOS PRIMÁRIOS"
+  },
+  "9670": {
+   "nome": "SUCATA DE FERRO E DE AÇO",
+   "grupo": "96",
+   "nomeGrupo": "MINÉRIOS, MINERAIS E SEUS PRODUTOS PRIMÁRIOS"
+  },
+  "9680": {
+   "nome": "SUCATA DE METAIS NÃO FERROSOS",
+   "grupo": "96",
+   "nomeGrupo": "MINÉRIOS, MINERAIS E SEUS PRODUTOS PRIMÁRIOS"
+  },
+  "9905": {
+   "nome": "CARTAZES, MOSTRUÁRIOS E PLACAS DE IDENTIFICAÇÃO",
+   "grupo": "99",
+   "nomeGrupo": "DIVERSOS"
+  },
+  "9910": {
+   "nome": "ARTIGOS DE JOALHERIA",
+   "grupo": "99",
+   "nomeGrupo": "DIVERSOS"
+  },
+  "9915": {
+   "nome": "ARTIGOS PARA COLECIONADORES E/OU HISTÓRICOS",
+   "grupo": "99",
+   "nomeGrupo": "DIVERSOS"
+  },
+  "9920": {
+   "nome": "ARTIGOS PARA FUMANTES",
+   "grupo": "99",
+   "nomeGrupo": "DIVERSOS"
+  },
+  "9925": {
+   "nome": "EQUIPAMENTOS E ARTIGOS RELIGIOSOS",
+   "grupo": "99",
+   "nomeGrupo": "DIVERSOS"
+  },
+  "9930": {
+   "nome": "EQUIPAMENTOS E ARTIGOS MORTUÁRIOS E DE CEMITÉRIO",
+   "grupo": "99",
+   "nomeGrupo": "DIVERSOS"
+  },
+  "9997": {
+   "nome": "PEDIDOS DE CATALOGAÇÃO DO ESTADO DE SÃO PAULO - PARA USO EXCLUSIVO DO ESTADO DE SÃO PAULO",
+   "grupo": "99",
+   "nomeGrupo": "DIVERSOS"
+  },
+  "9998": {
+   "nome": "SERVICO",
+   "grupo": "99",
+   "nomeGrupo": "DIVERSOS"
+  },
+  "9999": {
+   "nome": "ITENS DIVERSOS",
+   "grupo": "99",
+   "nomeGrupo": "DIVERSOS"
+  }
+ }
+}
